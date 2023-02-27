@@ -1,0 +1,104 @@
+/* campi variabili in base al font */
+.width-3em {
+	width: 3em;
+}
+
+.width-8em {
+	width: 8em;
+}
+
+.width-15em {
+	width: 15em;
+}
+
+/* aree fisse in px, (il layout esterno è fisso a 1000px e come pure label quasi tutti i campi) */
+.width-50px {
+	width: 50px;
+}
+
+.width-480px {
+	width: 480px;
+}
+
+/* inizio LP PG210130 */
+.width-18px {
+	width: 18px;
+}
+
+.width-30px {
+	width: 30px;
+}
+
+.width-55px {
+	width: 55px;
+}
+
+.width-60px {
+	width: 60px;
+}
+
+.width-80px {
+	width: 80px;
+}
+
+.width-95px {
+	width: 95px;
+}
+
+.width-100px {
+	width: 100px;
+}
+
+.width-150px {
+	width: 150px;
+}
+
+.width-195px {
+	width: 195px;
+}
+
+.width-200px {
+	width: 200px;
+}
+
+/* fine LP PG210130 */
+
+.width-100perc {
+	width: 100%;
+}
+
+.width-227px {
+	width: 227px;
+}
+
+.btnIndietro {
+	float: left;
+	margin-left: 407px;
+}
+
+.btnDiscarico {
+    width: 80px;   
+    height: 26px;
+    background-image: url(../../shared/img/bkngButton.png);  
+    background-repeat: repeat-x;
+    border: 1px solid #7a8a99;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+	float: right;
+	margin-right: 389px;
+}
+.btnSalvaDiscarico {
+    width: 80px;   
+    height: 26px;
+    background-image: url(../../shared/img/bkngButton.png);  
+    background-repeat: repeat-x;
+    border: 1px solid #7a8a99;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+	float: right;
+	margin-right: 429px;
+}

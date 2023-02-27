@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <screen name="monitoraggiowis" template="default">
+    <parameter key="pagetitle" value="title.monitoraggiowis" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggiowis/include/monitoraggiowis.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+  
+  <screen name="dettagliocomunicazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggiowis" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggiowis/include/dettagliocomunicazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+
+  
+</templates>

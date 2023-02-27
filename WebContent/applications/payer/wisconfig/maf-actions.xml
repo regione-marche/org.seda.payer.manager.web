@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+		<regexset>
+			
+			<regex name="descrizione100_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione256_regex">
+				<pattern>^[\d\w\t\/ \?+().àèéòùì\-',]{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione128_regex">
+				<pattern>^[\d\w\t\/ \?+().àèéòùì\-',]{1,128}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="email_regex">
+				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}+[\s]{0,99}$]]></pattern>
+				<description>Indirizzo di email</description>
+			</regex>
+			<regex name="descrizione256_ragionesociale_regex">
+ 				<pattern><![CDATA[^[\d\w\t\/ \?+().àèéòùì\-',\& %]{1,256}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+			
+		</regexset>
+	</global-ruleset>
+	
+	<action url="home.do" screen="home.screen" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.configurazione.actions.HomeAction</action-class>
+	</action>
+ 	
+	<action url="ritorna.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.configurazione.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.RitornaFlowAction">
+           	<result value="impostaSoggiornoTipologiaSoggetti_search" screen="ImpostaSoggiornoTipologiaSoggettiSearch.do" />
+            <result value="impostasoggiornoTipologiaStrutture_search" screen="tipologiastrutture.do" />
+            <result value="impostaSoggiornoAnagStruttura_search" screen="ImpostaSoggiornoAnagStrutturaSearch.do" />
+            <result value="impostaSoggiornoConfigurazioneImposta_search" screen="ImpostaSoggiornoConfigurazioneImpostaSearch.do" />
+        </flow>
+    </action> 
+
+
+	<action url="ritornaD.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.configurazione.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.VistaFlowAction">
+           	<result value="impostaSoggiornoTariffa_search" screen="ImpostaSoggiornoTariffaSearch.do" />
+        </flow>
+    </action>
+
+
+    
+	<!-- IMPOSTA DI SOGGIORNO INIZIO -->
+		<action url="ImpostaSoggiornoTipologiaSoggettiSearch.do" screen="impostaSoggiornoTipologiaSoggetti_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaSoggettiSearch</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="search" screen="impostaSoggiornoTipologiaSoggetti_search.screen" />
+           	<result value="add" screen="ImpostaSoggiornoTipologiaSoggettoAdd.do" />
+           	<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+        </flow>
+        <ruleset>
+ 			<rule name="descrizioneComune" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+ 			<rule name="descrizioneSoggetto" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+        </ruleset>
+    </action>
+    <action url="ImpostaSoggiornoTipologiaSoggettoAdd.do" screen="impostaSoggiornoTipologiaSoggetto_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaSoggettoAdd</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="add" screen="impostaSoggiornoTipologiaSoggetto_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+    
+	<action url="ImpostaSoggiornoTipologiaSoggettoEdit.do" screen="impostaSoggiornoTipologiaSoggetto_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaSoggettoEdit</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="edit" screen="impostaSoggiornoTipologiaSoggetto_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+     
+	<action url="ImpostaSoggiornoTipologiaSoggettoCancel.do" screen="impostaSoggiornoTipologiaSoggetto_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaSoggettoCancel</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="cancel" screen="impostaSoggiornoTipologiaSoggetto_cancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+    
+
+	<action url="tipologiastrutture.do" screen="impostasoggiornoTipologiaStrutture_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaStruttureSearchAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+			<result value="search" screen="impostasoggiornoTipologiaStrutture_search.screen" />
+			<result value="add" screen="tipologiastruttureAdd.do" />
+			<result value="richiestacanc" screen="impostasoggiornoTipologiaStrutture_richiestacanc.screen" />
+			<result value="cancel" screen="impostasoggiornoTipologiaStrutture_canc.screen" />
+			<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+		</flow>
+	</action>
+
+     <action url="tipologiastruttureAdd.do" screen="impostasoggiornoTipologiaStrutture_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaStruttureAddAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="add" screen="impostasoggiornoTipologiaStrutture_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>  
+
+	<action url="tipologiastruttureEdit.do" screen="impostasoggiornoTipologiaStrutture_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaStruttureEditAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="edit" screen="impostasoggiornoTipologiaStrutture_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+     
+	<action url="tipologiastruttureCancel.do" screen="impostasoggiornoTipologiaStrutture_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTipologiaStruttureCancelAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="cancel" screen="impostasoggiornoTipologiaStrutture_cancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+    <action url="ImpostaSoggiornoAnagStrutturaSearch.do" screen="impostaSoggiornoAnagStruttura_search.screen" flow="true">
+		  <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoAnagStrutturaSearchAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="search" screen="impostaSoggiornoAnagStruttura_search.screen" />
+           	<result value="add" screen="ImpostaSoggiornoAnagStrutturaAdd.do" />
+           	<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+        </flow>
+        <ruleset>
+ 			<rule name="descrizioneComune" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+ 			<rule name="numeroAutorizzazione" regex="descrizione100_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+ 			<rule name="codFiscale" regex="descrizione100_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+ 			<rule name="descrizioneInsegna" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+        </ruleset>
+    </action>
+    <action url="ImpostaSoggiornoAnagStrutturaAdd.do" screen="impostaSoggiornoAnagStruttura_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="add" screen="impostaSoggiornoAnagStruttura_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+        <ruleset>
+			<rule name="tx_mail" regex="email_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+			<rule name="tx_mailPec" regex="email_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+        </ruleset>
+    </action>
+    
+	<action url="ImpostaSoggiornoAnagStrutturaEdit.do" screen="impostaSoggiornoAnagStruttura_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="edit" screen="impostaSoggiornoAnagStruttura_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+     
+	<action url="ImpostaSoggiornoAnagStrutturaCancel.do" screen="impostaSoggiornoAnagStruttura_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoAnagStrutturaCancel</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="cancel" screen="impostaSoggiornoAnagStruttura_cancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+    <!-- CONFIG IMPOSTA -->
+    <action url="ImpostaSoggiornoConfigurazioneImpostaSearch.do" screen="impostaSoggiornoConfigurazioneImposta_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoConfigurazioneImpostaSearch</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="search" screen="impostaSoggiornoConfigurazioneImposta_search.screen" />
+           	<result value="add" screen="ImpostaSoggiornoConfigurazioneImpostaAdd.do" />
+        </flow>
+        <ruleset>
+ 			<rule name="descrizioneComune" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+        </ruleset>
+    </action>
+    <action url="ImpostaSoggiornoConfigurazioneImpostaAdd.do" screen="impostaSoggiornoConfigurazioneImposta_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoConfigurazioneImpostaAdd</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="add" screen="impostaSoggiornoConfigurazioneImposta_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+    
+	<action url="ImpostaSoggiornoConfigurazioneImpostaEdit.do" screen="impostaSoggiornoConfigurazioneImposta_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoConfigurazioneImpostaEdit</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="edit" screen="impostaSoggiornoConfigurazioneImposta_var.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+     
+	<action url="ImpostaSoggiornoConfigurazioneImpostaCancel.do" screen="impostaSoggiornoConfigurazioneImposta_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoConfigurazioneImpostaCancel</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+           	<result value="cancel" screen="impostaSoggiornoConfigurazioneImposta_cancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+
+<!--  TARIFFE -->
+
+		<action url="ImpostaSoggiornoTariffaSearchM.do" screen="ImpostaSoggiornoTariffaSearch.do" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.AvanzaAction</action-class>
+		</action>
+		
+		<action url="ImpostaSoggiornoTariffaSearch.do" screen="impostaTariffa2_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTariffaSearch</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GenericFlowManager">
+			<result value="default" screen="impostaTariffa2_search.screen" />
+			<result value="ricerca" screen="impostaTariffa2_search.screen" />
+			<result value="aggiungi" screen="ImpostaSoggiornoTariffaInsUpd.do" />
+			<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+        </flow>
+        <ruleset>
+ 			<rule name="descrizioneComune" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+ 			<rule name="descrizioneTipologia" regex="descrizione256_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+        </ruleset>
+    </action>
+
+     
+    <action url="ImpostaSoggiornoTariffaInsUpd.do" screen="impostaSoggiornoTariffa_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<!-- <action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTariffaInsUpd</action-class> -->
+		<action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GenericFlowManager">
+           	<result value="default" screen="impostaSoggiornoTariffa_var.screen" />
+           	<result value="aggiungi" screen="impostaSoggiornoTariffa_var.screen" />
+           	<result value="aggiungiEnd" screen="impostaSoggiornoTariffa_var.screen" />
+           	<result value="edit" screen="impostaSoggiornoTariffa_var.screen" />
+           	<result value="editEnd" screen="impostaSoggiornoTariffa_var.screen" />
+			<result value="combo" screen="impostaSoggiornoTariffa_var.screen" />
+           	<result value="ritorna" screen="ritornaD.do" />
+        </flow>
+    </action>
+
+	<action url="ImpostaSoggiornoTariffaCancel.do" screen="impostaSoggiornoTariffa_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoTariffaCancel</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GenericFlowManager">
+           	<result value="default" screen="impostaSoggiornoTariffa_cancel.screen" />
+           	<result value="delete" screen="impostaSoggiornoTariffa_cancel.screen" />
+           	<result value="deleteEnd" screen="impostaSoggiornoTariffa_cancel.screen" />
+           	<result value="ritorna" screen="ritornaD.do" />
+        </flow>
+    </action>
+
+<!-- inizio LP PG1800XX_016 -->
+	<action url="ritornaF.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.configurazione.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.actions.RitornaFlowAction">
+           	<result value="impostaSoggiornoTariffa_var" screen="ImpostaSoggiornoTariffaInsUpd.do" />
+        </flow>
+    </action>
+    
+    <action url="ImpostaSoggiornoFasciaTariffaInsUpd.do" screen="impostaSoggiornoFasciaTariffa_var.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoFasciaTariffaInsUpd</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GenericFlowManager">
+           	<result value="default" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+           	<result value="aggiungi" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+           	<result value="aggiungiEnd" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+           	<result value="edit" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+           	<result value="editEnd" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+			<result value="combo" screen="impostaSoggiornoFasciaTariffa_var.screen" />
+           	<result value="ritorna" screen="ritornaF.do" />
+        </flow>
+    </action>
+
+	<action url="ImpostaSoggiornoFasciaTariffaCancel.do" screen="impostaSoggiornoFasciaTariffa_cancel.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.wisconfig.actions.ImpostaSoggiornoFasciaTariffaCancel</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GenericFlowManager">
+           	<result value="default" screen="impostaSoggiornoFasciaTariffa_cancel.screen" />
+           	<result value="delete" screen="impostaSoggiornoFasciaTariffa_cancel.screen" />
+           	<result value="deleteEnd" screen="impostaSoggiornoFasciaTariffa_cancel.screen" />
+           	<result value="ritorna" screen="ritornaF.do" />
+        </flow>
+    </action>
+<!-- fine LP PG1800XX_016 -->
+
+</actions-mapping>

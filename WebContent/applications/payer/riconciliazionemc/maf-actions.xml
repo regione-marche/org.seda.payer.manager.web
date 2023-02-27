@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="codice5char_regex">
+ 				<pattern>^\w{1,5}|\s{1,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice12char_regex">
+ 				<pattern>^\w{1,12}|\s{1,12}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice16char_regex">
+ 				<pattern>^\w{1,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice20char_regex">
+ 				<pattern>^\w{1,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="descrizione20_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+
+    <action url="riconciliazioneTransazioni.do" screen="riconciliazioneTransazioni.screen" flow="true">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.RiconciliazioneTransazioniAction</action-class>
+        <flow class="org.seda.payer.manager.riconciliazione.flows.RiconciliazioneTransazioniFlow">
+        	<result value="ricerca" screen="riconciliazioneTransazioni.screen"/>
+			<result value="stampa" writer="pdfMovimenti" content-type="application/pdf" inScope="false" attach="pdfMovimenti" />
+        </flow>
+          <ruleset>
+			<rule name="codiceAbi" regex="codice5char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="codiceSia" regex="codice5char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="ccb" regex="codice12char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="nomeSupporto" regex="descrizione20_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+<!-- 
+			<rule name="importo_da" regex="num15_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="importo_a" regex="num15_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+ -->
+           	<rule name="importo_da">
+        		<validation>numberIT;maxlength=15</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="importo_a">
+        		<validation>numberIT;maxlength=15</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  	
+        </ruleset> 	
+        		
+    </action>
+
+    <action url="riconciliazioneManualeTransazioni.do" screen="riconciliazioneManualeTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.RiconciliazioneManualeTransazioniAction</action-class>
+		<ruleset>
+        	<rule name="codiceTransazione" regex="descrizione64_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+			<rule name="codiceAbi" regex="codice5char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="codiceSia" regex="codice5char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="ccb" regex="codice12char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+			<rule name="nomeSupporto" regex="descrizione20_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset>
+    </action>
+
+	<action url="ritorna.do" flow="true">
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.riconciliazione.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.riconciliazione.flows.RitornaFlowManager">
+           	<result value="riconciliazionemanualetransazioni" screen="riconciliazioneManualeTransazioni.do" />
+        </flow>
+    </action>  
+    
+    <action url="associaTransazione.do" screen="riconciliazioneManualeTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.AssociaTransazioneAction</action-class>
+    </action>
+    
+    <action url="eliminaAssociazione.do" screen="riconciliazioneManualeTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.EliminaAssociazioneAction</action-class>
+    </action>
+
+    <action url="forzaChiusuraQuadratura.do" screen="riconciliazioneTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.ForzaChiusuraQuadraturaAction</action-class>
+    </action>
+<!-- 
+    <action url="impostaMovimentoRiferimento.do" screen="impostaMovimentoRiferimento.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.ImpostaMovimentoRiferimentoAction</action-class>
+    </action>
+
+    <action url="ricercaListaMovimenti.do" screen="ricercaListaMovimenti.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.RicercaListaMovimentiAction</action-class>
+    </action>
+
+    <action url="ricercaListaTransazioni.do" screen="ricercaListaTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.RicercaListaTransazioniAction</action-class>
+    </action>
+ -->
+
+    <action url="scaricaMovimento.do"  writer="true">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.ScaricaMovimentoAction</action-class>
+		<!-- writer id="flussoCBI" content-type="plain/txt" inScope="true" attach="flussoCBI.txt"/ -->
+		<writer id="flussoCBI" content-type="plain/txt" inScope="false" attach="flussoCBID"/>
+    </action>
+
+    <action url="dettaglioTransazione.do" screen="dettaglioTransazione.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazione.actions.DettaglioTransazioneAction</action-class>
+    </action>
+
+    
+</actions-mapping>   

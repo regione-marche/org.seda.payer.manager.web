@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  <template name="errori">
+	<url>/applications/templates/default/error_template.jsp</url>
+  </template>
+
+  <screen name="privacy" template="default">
+	<parameter key="pagetitle" value="sitoistituzionale.privacy.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/bolzano/header.jsp" />
+    <parameter key="main" value="/applications/payer/sitoistituzionale/bolzano/include/privacy.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp" />
+  </screen>
+
+</templates>

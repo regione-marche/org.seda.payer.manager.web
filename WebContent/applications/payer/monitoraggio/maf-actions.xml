@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="idTransAtm_regex">
+ 				<pattern><![CDATA[^[0-9a-zA-Z\-]]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+    
+    <action url="monitoraggioTransazioni.do" screen="monitoraggioTransazioni.screen" flow="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.MonitoraggioTransazioniAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggio.flows.MonitoraggioTransazioniFlow">
+        	<result value="ricerca" screen="monitoraggioTransazioni.screen"/>
+			<result value="download" writer="sinteticoTransazioniCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+			<result value="stampa" writer="stampa" content-type="application/pdf" inScope="false" attach="filename"/>
+        </flow>
+		<ruleset>
+        	<rule name="tx_codice_transazione" regex="descrizione64_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_indirizzo_ip" regex="ip_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_user_email" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_user_sms" regex="numcell_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_id_bollettino">
+        		<validation>maxlength=128</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_importo_da">
+        		<validation>numberIT;maxlength=15</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="tx_importo_a">
+        		<validation>numberIT;maxlength=15</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        </ruleset> 
+    </action>
+
+    <action url="modificaEmailSms.do" screen="modificaEmailSms.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.ModificaEmailSmsAction</action-class>
+		<ruleset>
+        	<rule name="newUserEmail" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="newUserSms" regex="numcell_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        </ruleset> 
+    </action>
+    
+    <action url="dettaglioTransazione.do" screen="dettaglioTransazione.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.DettaglioTransazioneAction</action-class>
+    </action>
+    
+    <action url="dettaglioTransazioneViewRT.do"  writer="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.DettaglioTransazioneAction</action-class>
+		<writer id="pathFileToDownload" content-type="application/pdf" inScope="false" attach="nome_file_pdf"/>
+    </action>
+	
+    <action url="dettaglioTransazioneJson.do"  writer="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.DettaglioTransazioneJsonAction</action-class>
+		<writer id="dettaglioTransazioneJson" content-type="application/json" inScope="true" />
+    </action>
+
+    <action url="forzaAllineamentoTransazione.do" screen="forzaAllineamentoTransazione.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.ForzaAllineamentoTransazioneAction</action-class>
+    </action>
+
+    <action url="allineaManualmenteTransazione.do" flow="true">
+    	<action-class>org.seda.payer.manager.monitoraggio.actions.AllineaManualmenteTransazioneAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggio.flows.MonitoraggioTransazioniFlow">
+        	<result value="allinea" screen="monitoraggioTransazioni.do"/>
+        </flow>
+    </action>
+
+    <action url="inviaNotificaAmministratore.do" screen="monitoraggioTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.InviaNotificaAmministratoreAction</action-class>
+    </action>
+
+    <action url="inviaNotificaContribuente.do" screen="monitoraggioTransazioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.InviaNotificaContribuenteAction</action-class>
+    </action>
+
+    <action url="eliminaTransazione.do" flow="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.EliminaTransazioneAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggio.flows.MonitoraggioTransazioniFlow">
+        	<result value="elimina" screen="monitoraggioTransazioni.do"/>
+        </flow>
+    </action>    
+    <action url="sendPdfMavTransazione.do" flow="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.SendPdfMavTransazioneAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggio.flows.MonitoraggioTransazioniFlow">
+        	<result value="sendpdfmav" screen="monitoraggioTransazioni.do"/>
+        </flow>
+    </action>
+
+    <action url="stampaPDFBollettini.do" screen="monitoraggioTransazioni.screen" writer="true">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.StampaPDFBollettiniAction</action-class>
+        <writer id="downloadPdfBollettini" content-type="application/pdf" inScope="false" attach="filename"/>
+    </action>
+    
+    <action url="ritorna.do" flow="true">
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.monitoraggio.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggio.flows.RitornaFlowManager">
+           	<result value="monitoraggiotransazioni" screen="monitoraggioTransazioni.do" />
+        </flow>
+    </action>  
+
+    <action url="assegnaTranAFittizio.do" screen="monitoraggioTransazioni.do" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.AssegnaTranAFittizioAction</action-class>
+    </action>
+    
+     <action url="richiediStorno.do" screen="richiediStorno.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.RichiediStornoAction</action-class>
+    </action>
+    
+     <action url="richiediRiconciliazione.do" screen="richiediRiconciliazione.screen" flow="false">
+        <action-class>org.seda.payer.manager.monitoraggio.actions.RichiediRiconciliazioneAction</action-class>
+    </action>
+
+</actions-mapping>   

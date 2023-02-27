@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+			
+	<global-ruleset>
+ 		<regexset> 			
+ 			<regex name="codicefisc_regex">
+ 				<pattern>^[a-zA-Z]{6}[\d]{2}[a-zA-Z][\d]{2}[a-zA-Z][\d]{3}[a-zA-Z]|[0-9]{11}$</pattern>
+ 				<description></description>
+ 			</regex> 			
+ 		</regexset>
+ 	</global-ruleset>
+			
+	<!--<action url="default.do" screen="default.screen">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ecmanager.actions.DefaultAction</action-class>
+    </action>-->
+    
+    <action url="default.do" screen="logincontribuente.screen">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ecmanager.actions.LoginContribuente</action-class>
+    </action>
+    
+    <action url="logincontribuente.do" screen="logincontribuente.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.LoginContribuente</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="logincontribuente.screen"/>
+			<result value="avantiEC" redirect="urlRedirectEC"/>
+		</flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+    <action url="ecanagrafica.do" screen="ecanagrafica.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.AnagraficaBollettinoListaAction</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="ecanagrafica.screen"/>
+			<result value="avantiEC" redirect="urlRedirectEC"/>
+			<result value="DownloadCsv" writer="anagraficabollettinoAnag_csv" content-type="plain/txt" inScope="true" attach="nome_file_csv"/>
+			<result value="download" writer="welcomekit_pdf" content-type="application/pdf" inScope="false" attach="filename"/>
+		</flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+    <action url="ecanagraficaedit.do" screen="ecanagraficaedit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.AnagraficaBollettinoEditAction</action-class>
+		<flow class="org.seda.payer.manager.walletmanager.flows.WalletAnagraficaContribuentiEditFlowAction">
+           	<result value="Search" screen="ecanagraficaedit.screen" />
+           	<result value="edit" screen="ecanagraficaedit.do" />
+           	<result value="ritorna" screen="ecanagrafica.do" />           	
+        </flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+     <action url="ecuffmanager.do" screen="ecuffmanager.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.LoginUffManager</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="ecuffmanager.screen"/>
+			<result value="avantiEC" redirect="urlRedirectEC"/>
+		</flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 	 			
+    </action>
+    
+    <action url="ecnotifiche.do" screen="ecnotifiche.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.EcNotificheListaAction</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="ecnotifiche.screen"/>
+			<result value="avantiEC" redirect="urlRedirectEC"/>
+			<result value="download" writer="filePath" content-type="application/pdf" inScope="false" attach="filename"/>
+		</flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+    <action url="ecnotificheedit.do" screen="ecnotificheedit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.ecmanager.actions.EcNotificheEditAction</action-class>
+		<flow class="org.seda.payer.manager.walletmanager.flows.WalletAnagraficaContribuentiEditFlowAction">
+           	<result value="Search" screen="ecnotificheedit.screen" />
+           	<result value="edit" screen="ecnotificheedit.do" />
+           	<result value="ritorna" screen="ecnotifiche.do" />           	
+        </flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+</actions-mapping>   

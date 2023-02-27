@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+	  <default>/applications/templates/default/default.jsp</default>
+	
+	  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+	  
+	  <template name="errori">
+		<url>/applications/templates/default/error_template.jsp</url>
+	  </template>
+	
+	  <screen name="blackbox" template="default">
+	    <parameter key="pagetitle" value="manager.blackbox.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/maggioli/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/blackboxconfig/include/blackBox.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/maggioli/footer.jsp"/>
+	  </screen>
+	   <screen name="blackboxEdit" template="default">
+	    <parameter key="pagetitle" value="manager.blackbox.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/maggioli/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/blackboxconfig/include/blackBoxEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/maggioli/footer.jsp"/>
+	  </screen>
+	  <screen name="blackboxCancel" template="default">
+	    <parameter key="pagetitle" value="manager.blackbox.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/maggioli/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/blackboxconfig/include/blackbox_cancel.jsp" />
+	   <parameter key="footer" value="/applications/templates/shared/maggioli/footer.jsp"/>
+	  </screen>
+	  
+
+  </templates>

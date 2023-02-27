@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+	  <default>/applications/templates/default/default.jsp</default>
+	
+	  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+	  
+	  <template name="errori">
+		<url>/applications/templates/default/error_template.jsp</url>
+	  </template>
+	  	  
+	  <!-- CONFIGURAZIONE MERCATO -->
+	   <screen name="tipologiabanco" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tipbanco.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tipologiaBanco.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="tipologiabancoEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tipbanco.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tipologiaBancoEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="tipologiabancoCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tipbanco.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tipologiaBanco_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="areamercantile" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.areamerc.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/areaMercantile.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="areamercantileEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.areamerc.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/areaMercantileEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="areamercantileCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.areamerc.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/areaMercantile_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	  <screen name="periodogiornaliero" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.pergiorn.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/periodoGiornaliero.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="periodogiornalieroEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.pergiorn.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/periodoGiornalieroEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="periodogiornalieroCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.pergiorn.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/periodoGiornaliero_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	  <screen name="anagautorizzazione" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.anagauto.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/anagAutorizzazione.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="anagautorizzazioneEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.anagauto.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/anagAutorizzazioneEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="anagautorizzazioneCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.anagauto.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/anagAutorizzazione_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	  <screen name="piazzola" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.piazzola.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/piazzola.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="piazzolaEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.piazzola.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/piazzolaEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="piazzolaCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.piazzola.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/piazzola_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	  <screen name="tariffe" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tariffe.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tariffa.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="tariffeEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tariffe.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tariffaEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="tariffeCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.tariffe.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/tariffa_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	 
+	  <screen name="compenso" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.compenso.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/compenso.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="compensoEdit" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.compenso.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/compensoEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	  
+	   <screen name="compensoCancel" template="default">
+	    <parameter key="pagetitle" value="manager.configmercato.compenso.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/mercatoconfig/include/compenso_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>	 
+	  <!-- CONFIGURAZIONE MERCATO FINE  -->
+	  
+  </templates>

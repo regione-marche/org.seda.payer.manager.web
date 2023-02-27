@@ -1,0 +1,35 @@
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+					 xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+					 entityID="https://www-quality-pagamenti.citymat.it/managerTR/metadata" 
+					 cacheDuration="P1M">
+	<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAssertionsSigned="true">
+		<md:KeyDescriptor use="signing">
+			<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+				<ds:X509Data>
+					<ds:X509Certificate>
+						MIICPjCCAacCBE3P7FwwDQYJKoZIhvcNAQEFBQAwZjELMAkGA1UEBhMCSVQxDzAN
+						BgNVBAgMBmRvbWFpbjENMAsGA1UEBwwEY2l0eTENMAsGA1UECgwESUNBUjENMAsG
+						A1UECwwESU5GMzEZMBcGA1UEAwwQU2VydmljZSBQcm92aWRlcjAeFw0xMTA1MTUx
+						NTA4MTJaFw0xNDA1MTQxNTA4MTJaMGYxCzAJBgNVBAYTAklUMQ8wDQYDVQQIDAZk
+						b21haW4xDTALBgNVBAcMBGNpdHkxDTALBgNVBAoMBElDQVIxDTALBgNVBAsMBElO
+						RjMxGTAXBgNVBAMMEFNlcnZpY2UgUHJvdmlkZXIwgZ8wDQYJKoZIhvcNAQEBBQAD
+						gY0AMIGJAoGBAKrjhQ2Ze4lfc302QnjePWNO2WPoZkD+KR4M8Gy3QbogJGUCTJvK
+						4FHfgP5crgxPDwyBnpL1RDPiwa9JjYz2z0oU4OxKmtiwu2oqt3zYQC+5W/XaJZXr
+						y1O2+vp9LMbmUMzmZMZYu0hcf6TtXUdGS5A5P5q0A0mooSmuPa9YByXbAgMBAAEw
+						DQYJKoZIhvcNAQEFBQADgYEAlMMbwGH2/4HKLoxz08k3rABQTmIWjITB8z3MUaJU
+						xTlhNJkL07TgpptMkx77fSS0BAR2sQm9+ujP8By1GrQvpWPQ0tPRSUJT+g05O87R
+						OSrc1S+WUXYQh3l3/Sll+GBgBxKxNboECHn85sCNx3heCYa5iSWbCrGli1NjIrLA
+						5p4=</ds:X509Certificate>
+				</ds:X509Data>
+			</ds:KeyInfo>
+		</md:KeyDescriptor>
+		<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www-quality-pagamenti.citymat.it/managerTR/login/login.do"/>
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+		<md:AssertionConsumerService index="1"
+									 Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+									 Location="https://www-quality-pagamenti.citymat.it/managerTR/AssertionConsumerService"
+									 />
+	</md:SPSSODescriptor>
+</md:EntityDescriptor>

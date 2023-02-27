@@ -1,0 +1,47 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://security.core.maf.j2ee5.seda.com"
+xmlns="http://security.core.maf.j2ee5.seda.com"
+elementFormDefault="qualified">
+
+<xsd:annotation>
+ 	<xsd:documentation xml:lang="en">
+    </xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="security-mapping" type="securityMappingType"/>
+  
+<xsd:complexType name="securityMappingType">
+	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+		<xsd:element name="constraint" type="constraintType"/>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="constraintType">
+	<xsd:sequence>
+		<xsd:element name="role-collection" type="roleCollectionType" minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="resource-collection" type="resourceCollectionType" minOccurs="0" maxOccurs="unbounded"/>		
+    </xsd:sequence> 
+</xsd:complexType>
+
+<xsd:complexType name="roleCollectionType">
+	<xsd:sequence>
+		<xsd:element name="role" type="xsd:string" minOccurs="1" maxOccurs="10"/>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="resourceCollectionType">
+	<xsd:sequence>
+		<xsd:element name="resource" type="resourceType" minOccurs="1" maxOccurs="unbounded"/>		
+    </xsd:sequence> 
+</xsd:complexType>
+
+<xsd:complexType name="resourceType">
+
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="url" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+
+
+  
+</xsd:schema>  

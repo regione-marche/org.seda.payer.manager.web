@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<global-ruleset>
+		<regexset>
+			<regex name="codicefisc_piva_regex">
+				<pattern>^[a-zA-Z]{6}[\d]{2}[a-zA-Z][\d]{2}[a-zA-Z][\d]{3}[a-zA-Z]|^[0-9]{11}$</pattern>
+				<description></description>
+			</regex>
+		</regexset>
+	</global-ruleset>
+    <action url="posfisico.do" screen="posfisico.screen" flow="true">
+		<role-collection>
+			<role>OPER</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.posfisico.actions.PosFisico</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="posfisico.screen"/>
+			<result value="avantiPOS" redirect="urlRedirectPOS"/>
+		</flow>
+		<ruleset>
+			<rule name="tbEleCausaleServizio" regex="descrizione40_regex">
+	       		<missing severity="continue"/>
+	       		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+	       	</rule>	
+       	</ruleset>
+    </action>
+    
+    
+</actions-mapping>   

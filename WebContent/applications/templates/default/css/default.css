@@ -1,0 +1,99 @@
+.divpopupshadow {
+	z-index: 900;
+	width: 100%;
+	background: #eff7d5;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	opacity: 0.5;
+	left: 0;
+}
+
+.divpopup {
+	top: 10%;
+	position: absolute;
+	left: 50%;
+	width: 500px;
+	z-index: 910;
+}
+
+.divpopupcontent {
+	position: relative;
+	left: -50%;
+	width: 100%;
+	background-color: #fff;
+	display: inline-block;
+	box-shadow: 5px 5px 8px #888;
+	height: auto;
+}
+
+.divpopupcontent .title {
+	text-align: center;
+	font-weight: 700;
+	font-size: 20px;
+	background-color: #ededed;
+    padding: 20px;
+    margin: 0;
+}
+
+.divpopupcontentVer {
+	position: relative;
+	left: -50%;
+	width: 100%;
+	background-color: #fff;
+	display: inline-block;
+	box-shadow: 5px 5px 8px #888;
+	height: 240px;
+}
+
+.divpopupcontentVer .title {
+	text-align: center;
+	font-weight: 700;
+	font-size: 20px;
+}
+.divpopupcontentVer .body {
+	margin:20px;
+}
+
+.divpopupcontent .body {
+	margin:20px;
+}
+.btnBlue  {
+	color:black;
+    border: none;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../img/btnBlueL.png);
+	float: right;
+	width: 132px;
+	height: 27px;
+	margin-right: 5px;
+	font-weight: bold;	
+	font-size: 0.95em;	
+	text-decoration: none;
+	font-family: Trebuchet MS;	
+	cursor: pointer;
+    padding-top: 10px;
+    margin-top: -5px;
+    text-align: center;
+}
+.btnGray  {
+	border: none;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../img/bkngbtnHome.png);
+	float: right;
+	width: 73px;
+	height: 27px;
+	margin-right: 5px;
+	font-weight: bold;	
+	font-size: 0.95em;	
+	text-decoration: none;
+	font-family: Trebuchet MS;	
+	cursor: pointer;
+}
+.iconAlert{
+	vertical-align: text-bottom;
+}

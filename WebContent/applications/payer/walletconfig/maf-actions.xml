@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+		<global-ruleset>
+ 		<regexset>
+ 			<regex name="descrizione_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_yyyy_mm_dd_regex">
+ 				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice20char_regex">
+ 				<pattern>^\w{1,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codicefisc_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			
+ 		</regexset>
+ 	</global-ruleset>
+			
+    	<!-- WALLET MONITORAGGIO -->
+    <action url="inviosollecito.do" screen="inviosollecito.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.InvioSollecitoAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.InvioSollecitoFlowAction">
+           	<result value="Search" screen="inviosollecito.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="inviosollecitoEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    <action url="inviosollecitoEdit.do" screen="inviosollecitoEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.InvioSollecitoEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.InvioSollecitoEditFlowAction">
+           	<result value="Search" screen="inviosollecitoEdit.screen" />
+           	<result value="edit" screen="inviosollecito.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="cancella" screen="inviosollecitoCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+     	<!-- WALLET SERVIZIO -->
+    <action url="walletservizio.do" screen="walletservizio.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletmanager.actions.WalletServizio</action-class>
+        <flow class="org.seda.payer.manager.walletmanager.flows.WalletServizioFlowAction">
+           	<result value="Search" screen="walletservizio.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    <action url="evoluzioneintimazione.do" screen="evoluzioneintimazione.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.EvoluzioneIntimazioneAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.EvoluzioneIntimazioneFlowAction">
+           	<result value="Search" screen="evoluzioneintimazione.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="evoluzioneintimazioneEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+     <action url="evoluzioneintimazioneEdit.do" screen="evoluzioneintimazioneEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.EvoluzioneIntimazioneEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.EvoluzioneIntimazioneEditFlowAction">
+           	<result value="Search" screen="evoluzioneintimazioneEdit.screen" />
+           	<result value="edit" screen="evoluzioneintimazione.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="cancella" screen="evoluzioneintimazioneCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+     <action url="pagamentoperservizio.do" screen="pagamentoperservizio.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.PagamentoPerServizioAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.PagamentoPerServizioFlowAction">
+           	<result value="Search" screen="pagamentoperservizio.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="pagamentoperservizioEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+     <action url="pagamentoperservizioEdit.do" screen="pagamentoperservizioEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.PagamentoPerServizioEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.PagamentoPerServizioEditFlowAction">
+           	<result value="Search" screen="pagamentoperservizioEdit.screen" />
+           	<result value="edit" screen="pagamentoperservizio.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="cancella" screen="pagamentoperservizioCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+    <action url="prioritasulservizio.do" screen="prioritasulservizio.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.PrioritaSulServizioAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.PrioritaSulServizioFlowAction">
+           	<result value="Search" screen="prioritasulservizio.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="prioritasulservizioEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+     <action url="prioritasulservizioEdit.do" screen="prioritasulservizioEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.PrioritaSulServizioEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.PrioritaSulServizioEditFlowAction">
+           	<result value="Search" screen="prioritasulservizioEdit.screen" />
+           	<result value="edit" screen="prioritasulservizioEdit.screen" />
+           	<result value="add" screen="prioritasulservizioEdit.screen" />
+           	<result value="cancella" screen="prioritasulservizioCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+     <action url="raccordopagonet.do" screen="raccordopagonet.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.RaccordoPagonetAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.RaccordoPagonetFlowAction">
+           	<result value="Search" screen="raccordopagonet.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="raccordopagonetEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    <action url="raccordopagonetEdit.do" screen="raccordopagonetEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.RaccordoPagonetEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.RaccordoPagonetEditFlowAction">
+           	<result value="Search" screen="raccordopagonetEdit.screen" />
+           	<result value="edit" screen="raccordopagonet.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="cancella" screen="raccordopagonetCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+    <!-- ABILITAZIONE DISCARICHI INIZIO -->
+    <action url="abilitazionediscarichi.do" screen="abilitazionediscarichi.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.AbilitazioneDiscarichiAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.AbilitazioneDiscarichiFlowAction">
+           	<result value="Search" screen="abilitazionediscarichi.screen" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="add" screen="abilitazionediscarichiEdit.do?codop=add" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    <action url="abilitazionediscarichiEdit.do" screen="abilitazionediscarichiEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.AbilitazioneDiscarichiEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.AbilitazioneDiscarichiEditFlowAction">
+           	<result value="Search" screen="abilitazionediscarichiEdit.screen" />
+           	<result value="edit" screen="abilitazionediscarichiEdit.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+           	<result value="cancella" screen="abilitazionediscarichiCancel.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+    
+    <!-- ABILITAZIONE DISCARICHI FINE -->
+    
+    <!-- GESTIONE AVVISI -->
+    <action url="gestioneAvvisi.do" screen="gestioneAvvisi.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.GestioneAvvisiAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.GestioneAvvisiFlowAction">
+           	<result value="Search" screen="gestioneAvvisi.screen" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset>
+    </action>
+    
+    <action url="gestioneAvvisiEdit.do" screen="gestioneAvvisiEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletconfig.actions.GestioneAvvisiEditAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.GestioneAvvisiEditFlowAction">
+           	<result value="Search" screen="gestioneAvvisiEdit.screen" />
+           	<result value="edit" screen="gestioneAvvisiEdit.do" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset>
+    </action>    
+    
+    <!-- GESTIONE AVVISI FINE -->  	
+        	
+    
+    
+    
+   
+    <action url="walletmanager.do" screen="walletmanager.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.walletmanager.actions.WalletManager</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="walletmanager.screen"/>
+			<result value="avantiWallet" redirect="urlRedirectWallet"/>
+		</flow>
+	</action>
+    
+    <action url="ritorna.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.walletconfig.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.walletconfig.flows.RitornaFlowAction">
+        <result value="inviosollecito" screen="inviosollecito.do" />
+           	<result value="evoluzioneintimazione" screen="evoluzioneintimazione.do" />
+           	<result value="pagamentoperservizio" screen="pagamentoperservizio.do" />
+           	<result value="prioritasulservizio" screen="prioritasulservizio.do" />
+           	<result value="raccordopagonet" screen="raccordopagonet.do" />
+           	<result value="abilitazionediscarichi" screen="abilitazionediscarichi.do" />
+           	<result value="gestioneAvvisi" screen="gestioneAvvisi.do" />
+           	
+        </flow>
+    </action> 
+    
+</actions-mapping>   

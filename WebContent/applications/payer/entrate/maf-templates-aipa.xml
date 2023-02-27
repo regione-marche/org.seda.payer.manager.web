@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+ <screen name="ricercaAnagrafiche" template="default">
+    <parameter key="pagetitle" value="title.entrate.anagrafiche" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/RicercaAnag.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+ <screen name="ricercaDocumentiAnag" template="default">
+    <parameter key="pagetitle" value="title.entrate.anagrafiche" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/DocumentiAnag.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+
+ <screen name="ricercaEmissioni" template="default">
+    <parameter key="pagetitle" value="title.entrate.emissioni" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/RicercaEmissioni.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioEmissione" template="default">
+    <parameter key="pagetitle" value="title.entrate.emissioni" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/dettaglioEmissione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+ <screen name="ricercaDocumentiEmi" template="default">
+    <parameter key="pagetitle" value="title.entrate.emissioni" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/DocumentiEmissione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+
+ <screen name="ricercaDocumenti" template="default">
+    <parameter key="pagetitle" value="title.entrate.documenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/ricercaDocumentiCarichi.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+  <screen name="documentoDettaglio" template="default">
+    <parameter key="pagetitle" value="title.entrate.documenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/DettaglioDocumento.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+ <screen name="ricercaPagamenti" template="default">
+    <parameter key="pagetitle" value="title.entrate.pagamenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/RicercaPagamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+  
+   <screen name="listaTributi" template="default">
+    <parameter key="pagetitle" value="title.entrate.tributi" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/listaTributi.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+  
+   <screen name="listaScadenze" template="default">
+    <parameter key="pagetitle" value="title.entrate.scadenze" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/listaScadenze.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+   <screen name="listaPagamenti" template="default">
+    <parameter key="pagetitle" value="title.entrate.pagamenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/listaPagamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+ 
+   <screen name="ricercaNote" template="default">
+    <parameter key="pagetitle" value="title.entrate.note" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/entrate/include/listaNote.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+</templates>

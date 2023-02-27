@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="codice2char_regex">
+ 				<pattern>^\w{1,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice1char_regex">
+ 				<pattern>^\w{1,1}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num18_regex">
+ 				<pattern>^\d{1,18}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num8_regex">
+ 				<pattern>^\d{1,8}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num13regex">
+ 				<pattern>^\d{1,13}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="descrizione_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_regex">
+ 				<pattern>^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<!-- ^((19|20)\d\d)(0[1-9]|1[012])(0[1-9]|1[0-9]|2[0-9]|3[01])\d{18}[\.,]\d{3}$</pattern> -->
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_yyyy_mm_dd_regex">
+ 				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="anno_yyyy_regex">
+ 				<pattern>^(19|20)\d\d$</pattern>
+ 				<description>Anno da 1900 a 2099</description>
+ 			</regex>
+ 			<regex name="mese_mm_regex">
+ 				<pattern>^(0[1-9]|1[012])$</pattern>
+ 				<description>Mese da 01 a 12</description>
+ 			</regex>
+ 			<regex name="giorno_dd_regex">
+ 				<pattern>^(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description>Giorno da 01 a 31</description>
+ 			</regex>
+ 			<regex name="codice20char_regex">
+ 				<pattern>^\w{1,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice30char_regex">
+ 				<pattern>^\w{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4char_regex">
+ 				<pattern>^\w{1,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5char_regex">
+ 				<pattern>^\w{1,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice50char_regex">
+ 				<pattern>^\w{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice64char_regex">
+ 				<pattern>^\w{1,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice256char_regex">
+ 				<pattern>^\w{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice2obblchar_regex">
+ 				<pattern>^\w{2,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3obblchar_regex">
+ 				<pattern>^\w{3,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4obblchar_regex">
+ 				<pattern>^\w{4,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5obblchar_regex">
+ 				<pattern>^\w{5,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice10obblchar_regex">
+ 				<pattern>^\w{10,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice15obblchar_regex">
+ 				<pattern>^\w{15,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="username_regex">
+ 				<pattern>^[a-zA-Z0-9]{4,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codicefisc_regex">
+ 				<pattern>^[a-zA-Z]{6}[\d]{2}[a-zA-Z][\d]{2}[a-zA-Z][\d]{3}[a-zA-Z]$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione100_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione128_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,128}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione50_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione30_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione512_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,512}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="url_regex">
+ <!--		<pattern>^http:[/][/]|www.([a-z]|[A-Z]|[0-9]|[/.]|[~])*)$</pattern>-->
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="nome_flusso_regex">
+ 				<pattern>^\w{29,29}[\.]zip$</pattern>
+ 				<description>nome del flusso di rendicontazione</description>
+ 			</regex>
+ 			<regex name="tipo_invio_flusso_regex">
+ 				<pattern>^FTP|EMAIL$</pattern>
+ 				<description>tipo invio flusso: FTP o EMAIL</description>
+ 			</regex>
+ 			<regex name="flag_Y_N_regex">
+ 				<pattern>^Y|N$</pattern>
+ 				<description>Flag Y/N</description>
+ 			</regex>
+ 			<regex name="indirizzo_IP_regex">
+ 				<pattern>(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)</pattern>
+ 				<description>IP</description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+			
+	<action url="logRequest.do" screen="logrequest_search.screen">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.logrequest.actions.LogRequestSearchAction</action-class>
+           <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_UtenteEnte" regex="codice15obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_applicazione" regex="codice256char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_userprofile" regex="codice4obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utenzaattiva" regex="flag_Y_N_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_da_day" regex="giorno_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_da_month" regex="mese_mm_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_da_year" regex="anno_yyyy_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_a_day" regex="giorno_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_a_month" regex="mese_mm_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="dataScadenza_a_year" regex="anno_yyyy_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="indirizzo_ip" regex="indirizzo_IP_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+  
+    <action url="dettaglioLogRequest.do" screen="logrequest_dettaglio.screen"
+		flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+			<role>AMEC</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.logrequest.actions.DettaglioLogRequestAction</action-class>
+	</action>
+	
+	<action url="logRequestIntegraente.do" screen="logrequest_integraente_search.screen">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.logrequest.actions.LogRequestIntegraenteSearchAction</action-class>
+			<ruleset>
+	        	<rule name="pageNumber" regex="num8_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="rowsPerPage" regex="num3_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="order" regex="codice64char_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="tx_societa" regex="codice5obblchar_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="tx_UtenteEnte" regex="codice15obblchar_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="tx_applicazione" regex="codice256char_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="tx_userprofile" regex="codice4obblchar_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="tx_utenzaattiva" regex="flag_Y_N_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_da_day" regex="giorno_dd_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_da_month" regex="mese_mm_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_da_year" regex="anno_yyyy_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_day" regex="giorno_dd_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_month" regex="mese_mm_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_year" regex="anno_yyyy_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="indirizzo_ip" regex="indirizzo_IP_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+        	</ruleset> 			
+   	</action>
+  
+    <action url="dettaglioIntegraenteLogRequest.do" screen="logrequest_integraente_dettaglio.screen"
+		flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+			<role>AMEC</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.logrequest.actions.DettaglioLogRequestIntegraenteAction</action-class>
+	</action>
+	
+	<action url="logRequestPagoPA.do" screen="logrequest_pagoPA_search.screen">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.logrequest.actions.LogRequestPagoPASearchAction</action-class>
+			<ruleset>
+	        	<rule name="pageNumber" regex="num8_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="rowsPerPage" regex="num3_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="order" regex="codice64char_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+	        	<rule name="dataScadenza_da_day" regex="giorno_dd_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_da_month" regex="mese_mm_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_da_year" regex="anno_yyyy_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_day" regex="giorno_dd_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_month" regex="mese_mm_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+				<rule name="dataScadenza_a_year" regex="anno_yyyy_regex">
+	        		<missing severity="continue"/>
+	        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        	</rule>
+
+        	</ruleset> 			
+   	</action>
+  
+    <action url="dettaglioPagoPALogRequest.do" screen="logrequest_pagoPA_dettaglio.screen"
+		flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+			<role>AMEC</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.logrequest.actions.LogRequestPagoPADettaglioAction</action-class>
+	</action>
+	
+
+</actions-mapping>   

@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+ 
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  
+  <screen name="home" template="default">
+    <parameter key="pagetitle" value="Configurazione" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/default/include/mainempty.jsp" />
+    <parameter key="results" value="" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+   <screen name="company_search" template="default">
+    <parameter key="pagetitle" value="manager.company.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/company_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/company_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="company_add" template="default">
+    <parameter key="pagetitle" value="manager.company.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.company.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/company_var.jsp" />
+    <parameter key="formaction" value="manager.company.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="company_edit" template="default">
+    <parameter key="pagetitle" value="manager.company.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.company.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/company_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="company_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.company.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.company.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.company.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/company_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="company_canc" template="default">
+    <parameter key="pagetitle" value="manager.company.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.company.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <!--BOLLETTINO--> 
+  
+  <screen name="bollettino_search" template="default">
+    <parameter key="pagetitle" value="manager.bollettino.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/bollettino_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/bollettino_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  
+   <screen name="bollettino_add" template="default">
+    <parameter key="pagetitle" value="manager.bollettino.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.bollettino.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/bollettino_var.jsp" />
+    <parameter key="formaction" value="manager.bollettino.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+	
+   <screen name="bollettino_edit" template="default">
+    <parameter key="pagetitle" value="manager.bollettino.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.bollettino.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/bollettino_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+ 
+  <screen name="bollettino_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.bollettino.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.bollettino.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.bollettino.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/bollettino_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+   <screen name="bollettino_canc" template="default">
+    <parameter key="pagetitle" value="manager.bollettino.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.bollettino.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+
+<!--ANAGRAFICA SERVIZI-->
+
+  <screen name="anagservizi_search" template="default">
+    <parameter key="pagetitle" value="manager.anagservizi.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagservizi_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/anagservizi_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<screen name="anagservizi_add" template="default">
+    <parameter key="pagetitle" value="manager.anagservizi.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagservizi.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagservizi_var.jsp" />
+    <parameter key="formaction" value="manager.anagservizi.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+ <screen name="anagservizi_edit" template="default">
+    <parameter key="pagetitle" value="manager.anagservizi.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagservizi.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagservizi_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+   <screen name="anagservizi_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.anagservizi.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagservizi.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.anagservizi.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagservizi_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="anagservizi_canc" template="default">
+    <parameter key="pagetitle" value="manager.anagservizi.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagservizi.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!--ANAGRAFICA ProvCom-->
+
+  <screen name="anagprovcom_search" template="default">
+    <parameter key="pagetitle" value="manager.anagprovcom.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagprovcom_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/anagprovcom_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<screen name="anagprovcom_add" template="default">
+    <parameter key="pagetitle" value="manager.anagprovcom.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagprovcom.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagprovcom_var.jsp" />
+    <parameter key="formaction" value="manager.anagprovcom.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+ <screen name="anagprovcom_edit" template="default">
+    <parameter key="pagetitle" value="manager.anagprovcom.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagprovcom.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagprovcom_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+   <screen name="anagprovcom_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.anagprovcom.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagprovcom.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.anagprovcom.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagprovcom_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="anagprovcom_canc" template="default">
+    <parameter key="pagetitle" value="manager.anagprovcom.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagprovcom.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!--ANAGRAFICA ENTE-->
+  
+  <screen name="anagente_search" template="default">
+    <parameter key="pagetitle" value="manager.anagente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/anagente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<screen name="anagente_add" template="default">
+    <parameter key="pagetitle" value="manager.anagente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/anagente_var.jsp" />
+    <parameter key="formaction" value="manager.anagente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+ <screen name="anagente_edit" template="default">
+    <parameter key="pagetitle" value="manager.anagente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+   <screen name="anagente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.anagente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.anagente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/anagente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="anagente_canc" template="default">
+    <parameter key="pagetitle" value="manager.anagente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.anagente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!--CANALI DI PAGAMENTO-->
+  
+  <screen name="canalepagamento_search" template="default">
+    <parameter key="pagetitle" value="manager.canalepagamento.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/canalepagamento_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/canalepagamento_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  
+
+<screen name="canalepagamento_add" template="default">
+    <parameter key="pagetitle" value="manager.canalepagamento.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.canalepagamento.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/canalepagamento_var.jsp" />
+    <parameter key="formaction" value="manager.canalepagamento.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  
+ <screen name="canalepagamento_edit" template="default">
+    <parameter key="pagetitle" value="manager.canalepagamento.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.canalepagamento.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/canalepagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+   <screen name="canalepagamento_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.canalepagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.canalepagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.canalepagamento.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/canalepagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="canalepagamento_canc" template="default">
+    <parameter key="pagetitle" value="manager.canalepagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.canalepagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!-- Tipologia Servizio --> 
+  
+   <screen name="tipologiaservizio_search" template="default">
+    <parameter key="pagetitle" value="manager.tipologiaservizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tipologiaservizio_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/tipologiaservizio_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+
+<screen name="tipologiaservizio_add" template="default">
+    <parameter key="pagetitle" value="manager.tipologiaservizio.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tipologiaservizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tipologiaservizio_var.jsp" />
+    <parameter key="formaction" value="manager.tipologiaservizio.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+ <screen name="tipologiaservizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.tipologiaservizio.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tipologiaservizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tipologiaservizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+   <screen name="tipologiaservizio_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.tipologiaservizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tipologiaservizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.tipologiaservizio.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tipologiaservizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="tipologiaservizio_canc" template="default">
+    <parameter key="pagetitle" value="manager.tipologiaservizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tipologiaservizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!-- Metodi di Pagamento -->
+  
+   <screen name="cartapagamento_search" template="default">
+    <parameter key="pagetitle" value="manager.metodopagamento.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/cartapagamento_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/cartapagamento_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="cartapagamento_add" template="default">
+    <parameter key="pagetitle" value="manager.metodopagamento.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.metodopagamento.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/cartapagamento_var.jsp" />
+    <parameter key="formaction" value="manager.metodopagamento.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="cartapagamento_edit" template="default">
+    <parameter key="pagetitle" value="manager.metodopagamento.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.metodopagamento.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/cartapagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+   <screen name="cartapagamento_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.metodopagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.metodopagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.metodopagamento.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/cartapagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="cartapagamento_canc" template="default">
+    <parameter key="pagetitle" value="manager.metodopagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.metodopagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+   <screen name="user_search" template="default">
+	<parameter key="pagetitle" value="manager.user.search.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />    
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/user_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/user_list.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen>
+
+  <screen name="user_add" template="default">
+	<parameter key="pagetitle" value="manager.user.add.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="formaction" value="manager.user.add.formaction" direct="true"/>
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/user_var.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen>
+
+  <screen name="user_edit" template="default">
+	<parameter key="pagetitle" value="manager.user.edit.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/user_var.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen>
+
+  <screen name="user_richiestacanc" template="default">
+	<parameter key="pagetitle" value="manager.user.canc.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.user.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/user_var.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen>
+
+  <screen name="user_canc" template="default">
+	<parameter key="pagetitle" value="manager.user.canc.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen> 
+  
+  <screen name="impostaservizio_search" template="default">
+    <parameter key="pagetitle" value="manager.impostaservizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/impostaservizio_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/impostaservizio_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="impostaservizio_add" template="default">
+    <parameter key="pagetitle" value="manager.impostaservizio.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.impostaservizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/impostaservizio_var.jsp" />
+    <parameter key="formaction" value="manager.impostaservizio.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="impostaservizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.impostaservizio.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.impostaservizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/impostaservizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="impostaservizio_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.impostaservizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.impostaservizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.impostaservizio.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/impostaservizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="impostaservizio_canc" template="default">
+    <parameter key="pagetitle" value="manager.impostaservizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.impostaservizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="configutentetiposervizio_search" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizio_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizio_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configutentetiposervizio_add" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizio.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizio_var.jsp" />
+    <parameter key="formaction" value="manager.configutentetiposervizio.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="configutentetiposervizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizio.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="configutentetiposervizio_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.configutentetiposervizio.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configutentetiposervizio_canc" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="gatewaypagamento_search" template="default">
+	<parameter key="pagetitle" value="manager.gatewaypagamento.search.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/gatewaypagamento_search.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="gatewaypagamento_add" template="default">
+	<parameter key="pagetitle" value="manager.gatewaypagamento.add.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/gatewaypagamento_var.jsp" />    
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="gatewaypagamento_edit" template="default">
+	<parameter key="pagetitle" value="manager.gatewaypagamento.edit.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/gatewaypagamento_var.jsp" />    
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+   <screen name="gatewaypagamento_canc" template="default">
+    <parameter key="pagetitle" value="manager.gatewaypagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/gatewaypagamento_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="gatewaypagamento_richiestacanc" template="default">
+	<parameter key="pagetitle" value="manager.welcome.title" direct="true"/>
+	<parameter key="contenttitle" value="manager.gatewaypagamento.canc.title" direct="true"/>
+     <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.gatewaypagamento.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/gatewaypagamento_var.jsp" />    
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="configsesscarrellosoccanpagamento_search" template="default">
+    <parameter key="pagetitle" value="manager.configsesscarrellosoccanpagamento.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configsesscarrellosoccanpagamento_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/configsesscarrellosoccanpagamento_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configsesscarrellosoccanpagamento_add" template="default">
+    <parameter key="pagetitle" value="manager.configsesscarrellosoccanpagamento.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configsesscarrellosoccanpagamento.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configsesscarrellosoccanpagamento_var.jsp" />
+    <parameter key="formaction" value="manager.configsesscarrellosoccanpagamento.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="configsesscarrellosoccanpagamento_edit" template="default">
+    <parameter key="pagetitle" value="manager.configsesscarrellosoccanpagamento.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configsesscarrellosoccanpagamento.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configsesscarrellosoccanpagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="configsesscarrellosoccanpagamento_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.configsesscarrellosoccanpagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configsesscarrellosoccanpagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.configsesscarrellosoccanpagamento.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configsesscarrellosoccanpagamento_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configsesscarrellosoccanpagamento_canc" template="default">
+    <parameter key="pagetitle" value="manager.configsesscarrellosoccanpagamento.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configsesscarrellosoccanpagamento.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="costinotifica_search" template="default">
+    <parameter key="pagetitle" value="manager.costinotifica.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costinotifica_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/costinotifica_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="costinotifica_add" template="default">
+    <parameter key="pagetitle" value="manager.costinotifica.add.title" direct="true"/>    
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costinotifica_var.jsp" />
+    <parameter key="formaction" value="manager.costinotifica.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="costinotifica_edit" template="default">
+    <parameter key="pagetitle" value="manager.costinotifica.edit.title" direct="true"/>    
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costinotifica_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="costinotifica_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.costinotifica.canc.title" direct="true"/>    
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.costinotifica.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costinotifica_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+ <screen name="costinotifica_canc" template="default">
+    <parameter key="pagetitle" value="manager.costinotifica.canc.title" direct="true"/>    
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+    
+  <screen name="utentetiposervizioente_search" template="default">
+    <parameter key="pagetitle" value="manager.utentetiposervizioente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/utentetiposervizioente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/utentetiposervizioente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="utentetiposervizioente_add" template="default">
+    <parameter key="pagetitle" value="manager.utentetiposervizioente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.utentetiposervizioente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/utentetiposervizioente_var.jsp" />
+    <parameter key="formaction" value="manager.utentetiposervizioente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="utentetiposervizioente_edit" template="default">
+    <parameter key="pagetitle" value="manager.utentetiposervizioente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.utentetiposervizioente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/utentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="utentetiposervizioente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.utentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.utentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.utentetiposervizioente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/utentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="utentetiposervizioente_canc" template="default">
+    <parameter key="pagetitle" value="manager.utentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.utentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="ente_search" template="default">
+    <parameter key="pagetitle" value="manager.ente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/ente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="ente_add" template="default">
+    <parameter key="pagetitle" value="manager.ente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.ente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ente_var.jsp" />
+    <parameter key="formaction" value="manager.ente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="ente_edit" template="default">
+    <parameter key="pagetitle" value="manager.ente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.ente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="ente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.ente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.ente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.ente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="ente_canc" template="default">
+    <parameter key="pagetitle" value="manager.ente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.ente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+    <screen name="costitransazionebanca_search" template="default">
+    <parameter key="pagetitle" value="manager.costitransazionebanca.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costitransazionebanca_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/costitransazionebanca_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="costitransazionebanca_add" template="default">
+    <parameter key="pagetitle" value="manager.costitransazionebanca.search.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.costitransazionebanca.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costitransazionebanca_var.jsp" />
+    <parameter key="formaction" value="manager.costitransazionebanca.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="costitransazionebanca_edit" template="default">
+    <parameter key="pagetitle" value="manager.costitransazionebanca.search.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.costitransazionebanca.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costitransazionebanca_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="costitransazionebanca_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.costitransazionebanca.search.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.costitransazionebanca.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.costitransazionebanca.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/costitransazionebanca_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="costitransazionebanca_canc" template="default">
+    <parameter key="pagetitle" value="manager.costitransazionebanca.search.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.costitransazionebanca.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="error" template="errori">
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+	<parameter key="content" value="/applications/templates/shared/error_content.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+   <screen name="configutentetiposervizioente_search" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizioente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizioente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizioente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configutentetiposervizioente_add" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizioente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizioente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/configutentetiposervizioente_var.jsp" />
+    <parameter key="formaction" value="manager.configutentetiposervizioente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="configutentetiposervizioente_edit" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizioente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizioente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/configutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="configutentetiposervizioente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.configutentetiposervizioente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configutentetiposervizioente_canc" template="default">
+    <parameter key="pagetitle" value="manager.configutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="rangeabiutentetiposervizio_search" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizio_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="rangeabiutentetiposervizio_add" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizio.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizio_var.jsp" />
+    <parameter key="formaction" value="manager.rangeabiutentetiposervizio.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="rangeabiutentetiposervizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizio.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="rangeabiutentetiposervizio_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.rangeabiutentetiposervizio.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="rangeabiutentetiposervizio_cancel" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizio_cancel.jsp" />         
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="rangeabiutentetiposervizioente_search" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizioente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizioente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizioente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="rangeabiutentetiposervizioente_add" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizioente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizioente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizioente_var.jsp" />
+    <parameter key="formaction" value="manager.rangeabiutentetiposervizioente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="rangeabiutentetiposervizioente_edit" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizioente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizioente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="rangeabiutentetiposervizioente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.rangeabiutentetiposervizioente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/rangeabiutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="rangeabiutentetiposervizioente_canc" template="default">
+    <parameter key="pagetitle" value="manager.rangeabiutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.rangeabiutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="configestrattoconto_search" template="default">
+    <parameter key="pagetitle" value="manager.configestrattoconto.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configestrattoconto_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/configestrattoconto_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configestrattoconto_add" template="default">
+    <parameter key="pagetitle" value="manager.configestrattoconto.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configestrattoconto.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configestrattoconto_var.jsp" />
+    <parameter key="formaction" value="manager.configestrattoconto.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="configestrattoconto_edit" template="default">
+    <parameter key="pagetitle" value="manager.configestrattoconto.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configestrattoconto.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configestrattoconto_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="configestrattoconto_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.configestrattoconto.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configestrattoconto.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.configestrattoconto.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/configestrattoconto_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="configestrattoconto_canc" template="default">
+    <parameter key="pagetitle" value="manager.configestrattoconto.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.configestrattoconto.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!-- Begin FUNZ. PAG. TPSERV --> 
+    <screen name="funzpagutentetiposervizio_search" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizio_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizio_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="funzpagutentetiposervizio_add" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizio.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizio_var.jsp" />
+    <parameter key="formaction" value="manager.funzpagutentetiposervizio.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="funzpagutentetiposervizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizio.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="funzpagutentetiposervizio_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.funzpagutentetiposervizio.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="funzpagutentetiposervizio_canc" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizio.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizio.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  	<!-- Begin FUNZ. PAG. TPSERV/ENTE --> 
+  <screen name="funzpagutentetiposervizioente_search" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizioente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizioente_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizioente_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="funzpagutentetiposervizioente_add" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizioente.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizioente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizioente_var.jsp" />
+    <parameter key="formaction" value="manager.funzpagutentetiposervizioente.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="funzpagutentetiposervizioente_edit" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizioente.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizioente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="funzpagutentetiposervizioente_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.funzpagutentetiposervizioente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/funzpagutentetiposervizioente_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="funzpagutentetiposervizioente_canc" template="default">
+    <parameter key="pagetitle" value="manager.funzpagutentetiposervizioente.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.funzpagutentetiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+<!-- ConfRendUtenteServizio INIZIO -->
+
+  <screen  name="ConfRendUtenteServizio_search" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizio.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizio_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="ConfRendUtenteServizio_add" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizio.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizio_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="ConfRendUtenteServizio_edit" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizio.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizio_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+ <screen name="ConfRendUtenteServizio_cancel" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizio.cancel.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizio_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+
+<!-- ConfRendUtenteServizio FINE -->
+  
+
+<!-- ConfRendUtenteServizioEnte INIZIO -->
+
+  <screen  name="ConfRendUtenteServizioEnte_search" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizioEnte.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizioEnte_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="ConfRendUtenteServizioEnte_add" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizioEnte.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizioEnte_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="ConfRendUtenteServizioEnte_edit" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizioEnte.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizioEnte_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+ <screen name="ConfRendUtenteServizioEnte_cancel" template="default">
+    <parameter key="pagetitle" value="manager.ConfRendUtenteServizioEnte.cancel.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/ConfRendUtenteServizioEnte_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+
+<!-- ConfRendUtenteServizioEnte FINE -->
+  
+
+<!-- SEZIONE FORMULARIO 1.1 Associazione Impositori Beneficiari PYCEBTB -->
+
+ <screen name="ricercaAssocImpBen" template="default">
+    <parameter key="pagetitle" value="manager.config.associmpben.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/RicercaAssocImpBen.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+ <screen name="schedaAssocImpBen" template="default">
+    <parameter key="pagetitle" value="manager.config.associmpben.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/SchedaAssocImpBen.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<!-- SEZIONE FORMULARIO 1.1B CONVENZIONE ENTE BENEFICIARIO PYCBPTB -->
+
+ <screen name="ricercaAssocBen" template="default">
+    <parameter key="pagetitle" value="manager.config.assocben.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/RicercaAssocBen.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+ <screen name="schedaAssocBen" template="default">
+    <parameter key="pagetitle" value="manager.config.assocben.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/SchedaAssocBen.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+   <screen name="cancellaAssocBen" template="default">
+    <parameter key="pagetitle" value="manager.config.assocben.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/CancellaAssocBen.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+
+<!-- SEZIONE FORMULARIO 1.2 CONVENZIONE ENTE BENEFICIARIO PYCENTB -->
+
+ <screen name="ricercaConvenzioniImp" template="default">
+    <parameter key="pagetitle" value="manager.config.conventimp.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/RicercaConvImp.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+ <screen name="schedaConvenzioneImp" template="default">
+    <parameter key="pagetitle" value="manager.config.conventimp.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/SchedaConvImp.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+
+<!-- SEZIONE FORMULARIO 1.3 BENEFICIARI PYBENTB -->
+
+ <screen name="ricercaBeneficiari" template="default">
+    <parameter key="pagetitle" value="manager.config.beneficiari.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/RicercaBeneficiari.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+ <screen name="schedaBeneficiario" template="default">
+    <parameter key="pagetitle" value="manager.config.beneficiari.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/SchedaBeneficiario.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+<!-- AbilitaSistemiEsterniSecureSite INIZIO -->
+
+  <screen  name="AbilitaSistemiEsterniSecureSite_search" template="default">
+    <parameter key="pagetitle" value="manager.abilitasecuresite.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaSistemiEsterniSecureSite_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="AbilitaSistemiEsterniSecureSite_add" template="default">
+    <parameter key="pagetitle" value="manager.abilitasecuresite.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaSistemiEsterniSecureSite_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="AbilitaSistemiEsterniSecureSite_edit" template="default">
+    <parameter key="pagetitle" value="manager.abilitasecuresite.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaSistemiEsterniSecureSite_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+ <screen name="AbilitaSistemiEsterniSecureSite_cancel" template="default">
+    <parameter key="pagetitle" value="manager.abilitasecuresite.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaSistemiEsterniSecureSite_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<!-- AbilitaSistemiEsterniSecureSite FINE -->  
+
+<!-- AbilitaCanalePagamentoTipoServizioEnte INIZIO -->
+ 
+  <screen  name="AbilitaCanalePagamentoTipoServizioEnte_search" template="default">
+    <parameter key="pagetitle" value="manager.abilitacanalepagamentotiposervizioente.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaCanalePagamentoTipoServizioEnte_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="AbilitaCanalePagamentoTipoServizioEnte_add" template="default">
+    <parameter key="pagetitle" value="manager.abilitacanalepagamentotiposervizioente.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaCanalePagamentoTipoServizioEnte_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="AbilitaCanalePagamentoTipoServizioEnte_edit" template="default">
+    <parameter key="pagetitle" value="manager.abilitacanalepagamentotiposervizioente.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaCanalePagamentoTipoServizioEnte_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+   
+ <screen name="AbilitaCanalePagamentoTipoServizioEnte_cancel" template="default">
+    <parameter key="pagetitle" value="manager.abilitacanalepagamentotiposervizioente.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/AbilitaCanalePagamentoTipoServizioEnte_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+<!-- AbilitaCanalePagamentoTipoServizioEnte FINE -->
+  
+  <!-- SCREEN MANAGEMENT - CONFIGURAZIONE TEMPLATE > PARAMETRI OTTICO -->
+  
+  <screen name="parametriottico_search" template="default">
+    <parameter key="pagetitle" value="manager.parametriottico.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/parametriottico/search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/parametriottico/list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="parametriottico_add" template="default">
+    <parameter key="pagetitle" value="manager.parametriottico.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.parametriottico.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/parametriottico/var.jsp" />
+    <parameter key="formaction" value="manager.parametriottico.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="parametriottico_edit" template="default">
+    <parameter key="pagetitle" value="manager.parametriottico.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.parametriottico.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/parametriottico/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="parametriottico_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.parametriottico.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.parametriottico.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.parametriottico.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/parametriottico/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="parametriottico_canc" template="default">
+    <parameter key="pagetitle" value="manager.parametriottico.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.parametriottico.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <!-- SCREEN MANAGEMENT - CONFIGURAZIONE TEMPLATE > TEMPLATE REPORT DINAMICI -->
+  
+  <screen name="templatereportdinamici_search" template="default">
+    <parameter key="pagetitle" value="manager.templatereportdinamici.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/templatereportdinamici/search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/templatereportdinamici/list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="templatereportdinamici_add" template="default">
+    <parameter key="pagetitle" value="manager.templatereportdinamici.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.templatereportdinamici.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/templatereportdinamici/var.jsp" />
+    <parameter key="formaction" value="manager.templatereportdinamici.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="templatereportdinamici_edit" template="default">
+    <parameter key="pagetitle" value="manager.templatereportdinamici.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.templatereportdinamici.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/templatereportdinamici/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="templatereportdinamici_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.templatereportdinamici.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.templatereportdinamici.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.templatereportdinamici.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/templatereportdinamici/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="templatereportdinamici_canc" template="default">
+    <parameter key="pagetitle" value="manager.templatereportdinamici.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.templatereportdinamici.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <!--  FILTRI ESTRATTO CONTO -->
+  <screen name="filtriestrattoconto_search" template="default">
+    <parameter key="pagetitle" value="manager.filtriestrattoconto.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/filtriestrattoconto_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/filtriestrattoconto_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="filtriestrattoconto_add" template="default">
+    <parameter key="pagetitle" value="manager.filtriestrattoconto.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.filtriestrattoconto.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/filtriestrattoconto_var.jsp" />
+    <parameter key="formaction" value="manager.filtriestrattoconto.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+ <screen name="filtriestrattoconto_edit" template="default">
+    <parameter key="pagetitle" value="manager.filtriestrattoconto.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.filtriestrattoconto.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/filtriestrattoconto_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+   
+  <screen name="filtriestrattoconto_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.filtriestrattoconto.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.filtriestrattoconto.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.filtriestrattoconto.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/filtriestrattoconto_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="filtriestrattoconto_canc" template="default">
+    <parameter key="pagetitle" value="manager.filtriestrattoconto.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.filtriestrattoconto.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <!-- INIZIO LP PG200360 -->
+  <!-- SCREEN MANAGEMENT - CONFIGURAZIONE TEMPLATE > TASSONOMIA -->
+  
+  <screen name="tassonomia_search" template="default">
+    <parameter key="pagetitle" value="manager.tassonomia.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tassonomia/search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/regabruzzo/include/tassonomia/list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="tassonomia_add" template="default">
+    <parameter key="pagetitle" value="manager.tassonomia.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tassonomia.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tassonomia/var.jsp" />
+    <parameter key="formaction" value="manager.tassonomia.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+  
+  <screen name="tassonomia_edit" template="default">
+    <parameter key="pagetitle" value="manager.tassonomia.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tassonomia.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tassonomia/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+  <screen name="tassonomia_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.tassonomia.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tassonomia.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.tassonomia.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/tassonomia/var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+ 
+  <screen name="tassonomia_canc" template="default">
+    <parameter key="pagetitle" value="manager.tassonomia.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.tassonomia.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/regabruzzo/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp"/>
+  </screen>
+
+
+  <!-- FINE LP PG200360 -->
+  
+</templates>

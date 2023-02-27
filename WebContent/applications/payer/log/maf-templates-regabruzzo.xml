@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  <template name="errori">
+	<url>/applications/templates/default/error_template.jsp</url>
+  </template>
+  
+
+  <screen name="log_search" template="default">
+	<parameter key="pagetitle" value="manager.log.search.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regabruzzo/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/log/include/log_search.jsp" />
+    <parameter key="results" value="/applications/templates/shared/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regabruzzo/footer.jsp" />
+  </screen>
+
+</templates>

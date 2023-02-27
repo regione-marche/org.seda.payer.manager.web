@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<action url="ricercaGiornaliCassa.do" screen="ricercaGiornaliCassa.screen" flow="true">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.RicercaGiornaliCassaAction</action-class>
+        <flow class="org.seda.payer.manager.riconciliazionemt.flows.RicercaGiornaliCassaFlow">
+        	<result value="ricerca" screen="ricercaGiornaliCassa.screen"/>
+			<result value="stampa" writer="stampa" content-type="application/pdf" inScope="false" attach="filename"/>
+        </flow>
+    </action>
+    
+	<action url="caricaGiornaleCassa.do" screen="caricaGiornaleCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.CaricaGiornaleCassaAction</action-class>
+    </action>
+    
+    <action url="dettaglioGiornaleCassa.do" screen="dettaglioGiornaleCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.DettaglioGiornaleCassaAction</action-class>
+    </action>
+    
+    <action url="upload.do" screen="caricaGiornaleCassa.screen" flow="false" csrf="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.UploadAction</action-class>
+    </action>
+    
+    <action url="dettaglioMovimentoCassa.do" screen="dettaglioMovimentoCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.DettaglioMovimentoCassaAction</action-class>
+    </action>
+    
+    <action url="dettaglioAssociazioniMovimentoCassa.do" screen="dettaglioAssociazioniMovimentoCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.DettaglioAssociazioniMovimentoCassaAction</action-class>
+    </action>
+    
+    <action url="associazioniFlussiMovimentoCassa.do" screen="associazioniFlussiMovimentoCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.AssociazioniFlussiMovimentoCassaAction</action-class>
+    </action>
+    
+    <action url="associazioniTransazioniMovimentoCassa.do" screen="associazioniTransazioniMovimentoCassa.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.AssociazioniTransazioniMovimentoCassaAction</action-class>
+    </action>
+    
+    <action url="regolarizzaSospeso.do" screen="regolarizzaSospeso.screen" flow="false">
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.RegolarizzaSospesoAction</action-class>
+    </action>
+	
+    <action url="ritorna.do" flow="true">
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.riconciliazionemt.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.riconciliazionemt.flows.RitornaFlowManager">
+           	<result value="ricercagiornalicassa" screen="ricercaGiornaliCassa.do" />
+        </flow>
+    </action> 
+    
+</actions-mapping>

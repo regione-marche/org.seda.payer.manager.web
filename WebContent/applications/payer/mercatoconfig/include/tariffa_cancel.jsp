@@ -1,0 +1,38 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+<%@ taglib uri="/WEB-INF/tld/Seda.tld" prefix="s"%>
+<%@ taglib uri="/WEB-INF/tld/maftags.tld" prefix="m"%>
+<m:view_state id="tariffa_cancel" encodeAttributes="true" />
+
+
+<s:div name="div_delete" cssclass="div_align_center divSelezione">
+	<s:div name="divDeleteTopName" cssclass="divRicercaTop">
+	<s:form name="delete_form" action="tariffeEdit.do?vista=${vista}" method="post"
+		hasbtn1="false" hasbtn2="false" hasbtn3="false">
+		<s:div name="divRicercaTitleName" cssclass="divRicTitle bold">
+		CANCELLAZIONE TARIFFA
+		</s:div>
+		<br/>
+		<br/>
+		<s:div name="divRicMetadati" cssclass="divRicMetadati">
+			<s:div name="divRicercaBottoni" cssclass="divRicBottoni">
+				<s:textbox name="fired_button_hidden" label="fired_button_hidden"
+					bmodify="true" text="" cssclass="rend_display_none"
+					cssclasslabel="rend_display_none" />
+				<s:button id="tx_button_delete" disable="${confermaDisabilitata}" onclick="" text="Cancella" type="submit" cssclass="btnStyle" />
+				<s:button id="tx_button_indietro" onclick="" text="Indietro" cssclass="btnStyle" type="submit" />
+			</s:div>
+		</s:div>
+				<input type="hidden" name="tx_societa" value="${tx_societa}" />
+				<input type="hidden" name="tx_utente" value="${tx_utente}" />
+				<input type="hidden" name="tx_ente" value="${tx_ente}" />
+				<input type="hidden" name="tx_cod_key_tariffa_h" value="${tx_cod_key_tariffa_h}" />
+		<!-- 	<input type="hidden" name="tx_area_mercantile_h" value="${tx_area_mercantile_h}" />	
+				<input type="hidden" name="tx_piazzola_h" value="${tx_piazzola_h}" />
+				<input type="hidden" name="tx_num_autor_h" value="${tx_num_autor_h}" />
+				<input type="hidden" name="tx_tipologia_banco_h" value="${tx_tipologia_banco_h}" />
+				<input type="hidden" name="tx_giorno_settimana_h" value="${tx_giorno_settimana_h}" />	  -->													
+	</s:form>
+</s:div>
+	
+</s:div>

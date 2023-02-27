@@ -1,0 +1,519 @@
+.ad_border_left_2px_BDDBF7{border-left:2px solid #BDDBF7;}
+
+.ad_border_right_2px_BDDBF7{border-right:2px solid #BDDBF7;}
+
+.ad_color_red{color:red;}
+
+.ad_display_block{display: block;}
+
+.seda-ui-divvalidator {text-align:center;}
+.profilo_divRicMetadati 
+{ 
+	display: block; 
+	clear: both; 
+}
+
+.profilo_divTipologiaServizioLeft, .profilo_divTipologiaServizioRight
+{ 
+	width: 380px; 
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.profilo_divTipologiaServizioLeft { float: left; margin-left: 25px;}
+.profilo_divTipologiaServizioRight { float: right; margin-right: 25px;}
+
+.profilo_divTipologiaServizioButtons 
+{ 
+	float: left; 
+	text-align: center;
+	margin-left: 43px;
+}
+
+.profilo_ddlTipologiaServizioLabel
+{
+	clear: both;
+	display: block;
+	text-align: left;
+}
+.seda-ui-form .profilo_ddlTipologiaServizioLabel
+{
+	width: 300px;
+}
+
+.profilo_ddlTipologiaServizio {
+    float: left;
+    width: 105%;
+    height: auto;
+    clear: left;
+	overflow: scroll;
+}
+
+div#divElement62 {
+    margin-right: 5%;
+}
+
+.profilo_btnAdd, .profilo_btnRemove
+{
+	display: block;
+	clear: both;
+	background-repeat: no-repeat;
+	background-color: Transparent;
+	border-style: none;
+	width: 85px;
+	padding: 0px;
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 1.1em;
+}
+.profilo_btnAdd
+{
+	background-image: url('../img/add.png');
+	background-position: center right;
+	text-align: left;
+	margin-top: 75px;
+} 
+.profilo_btnRemove
+{
+	background-image: url('../img/remove.png');
+	background-position: center left;
+	padding-left: 10px;
+	text-align: right;
+	margin-top: 20px;
+}
+html,body{
+	margin: 0 ;
+	padding: 0;
+	background-color:white;
+	font-size:0.88em;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial;
+}
+
+
+
+
+
+/****GENERICHE*****/
+.block_adminusers
+{
+	display: block;
+	clear: both;
+}
+
+.bold { 
+	font-weight: bold; 
+}
+
+.floatleft_adminusers {
+	display: block;
+	float: left;
+}
+
+.right {
+	float: right;
+	display: block;
+}
+
+.displayNone 
+{
+	display: none;
+}
+/**************/
+
+/*****CONTENITORI*****/
+
+
+.divRicTitle_adminusers, .divRicTitle_adminusers1 {
+background-color: #BFD9F0;
+text-transform: uppercase;
+text-align: center;
+padding-top: 2px;
+padding-bottom: 2px;
+margin: 1px;
+margin-bottom: 5px;
+margin-top: 62px;
+}
+.divRicTitle_adminusers1 {margin-top: 5px;}
+
+
+.container {
+	width: 1000px;
+	margin: 0px auto;
+}
+
+.label250 
+{
+    width: 250px!important;
+}
+
+.formRegistrazione
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+.note {
+	margin-top: 10px;
+	width: 840px;
+	margin-right: 70px;
+	margin-bottom: 20px;
+}
+
+.note65 {
+	width: 65px!important;
+	margin-top: 10px;
+	}
+
+.divMainRegistrazione
+{
+	margin-top: 8px;
+}
+
+.divRegistrazioneBody
+{
+	display:block;
+	float:left;
+	clear:both;
+	border: solid 1px #336f9c;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 15px;
+	margin-top: 10px;
+}
+
+.seda-ui-form .divTitleRegistrazione
+{
+	height: 30px;
+	margin-top: 10px;
+	/*background*/
+	background-color: #8FBCE4;
+	background-image: url(../../shared/img/loginMan.png);
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	/*Testo*/
+	font-size: 1.2em;
+	padding-top: 10px;
+	padding-left: 50px;
+	font-weight: bold;
+}
+
+.seda-ui-form .divSectionBorder
+{
+	border: solid 1px #336f9c;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: block;
+	float: left;
+	margin-bottom: 5px;
+	width: 955px;
+}
+.seda-ui-form .divSectionTitle
+{
+	color: #02559f;
+	font-weight: bold;
+	height: 20px;
+	padding-top: 5px;
+	margin-bottom: 10px;
+}
+.divSectionLeft, .divSectionRight
+{
+	width: 50%;
+	display: block;
+	float: left;
+}
+.seda-ui-form .divSectionTop, .seda-ui-form .divSectionBottom
+{
+	clear: both;
+	height: 37px; 
+}
+
+.divData, .divGroup, .divRadioButtons
+{
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+.divRadioButtons { margin-bottom: 10px;}
+
+/***BOTTONI****/
+
+.divButtonSaveCancel
+{
+	display: block;
+	clear: both;
+	height: 40px;
+	padding-top: 5px;
+	padding-right: 3px;
+}
+.btnBlue, .btnBlueLarge, .btnGray  {
+	border: none;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../../pagonet/img/btnBlue.png);
+	float: right;
+	width: 73px;
+	height: 27px;
+	margin-right: 5px;
+	font-weight: bold;	
+	font-size: 0.95em;	
+	text-decoration: none;
+	font-family: Trebuchet MS;	
+	cursor: pointer;
+}
+
+.btnBlueLarge
+{
+	/*width: 138px;*/
+	width: 13em;
+	margin-right: 0px;
+	background-image: url(../../pagonet/img/btnBlueL_center.png);
+	background-repeat: repeat-x;
+}
+.imgBorderBtnLarge
+{
+	width: 7px;
+	height: 27px;
+	border-style: none;
+	float:right;
+	margin:0px;
+	padding:0px;
+}
+.marginBtnRightLast	
+{
+	margin-right: 0px;
+}
+.btnGray
+{
+	background-image: url(../../shared/img/bkngbtnHome.png);
+}
+.aAnnulla {
+	border: none;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../../shared/img/bkngbtnHome.png);
+	float: right;
+	width: 73px;
+	height: 7px;
+	margin-right: 5px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	font-size: 0.95em;
+	font-family: Trebuchet MS;
+}
+/****STEPS****/
+.divStepRegistrazioneEnabled, .divStepRegistrazioneDisabled
+{
+	width: 314px;
+	display: block;
+	float: left;
+	margin-bottom: 5px;	
+	height: 32px;
+}
+.divStepRegistrazioneEnabled 
+{
+	border: solid 2px #97C0E6;
+}
+
+.divStepRegistrazioneDisabled 
+{
+	border: solid 2px #CCCCCC;
+}
+.imgStepRegistrazione
+{
+	display: block;
+	float: left;
+	margin-top: 4px;
+	margin-left: 6px;
+}
+.lblStepRegistrazione
+{
+	display: block;
+	float: left;
+	color: #4F4F4F;
+	font-weight: bold;
+	font-size: 1.1em;
+	padding-left: 5px;
+	padding-top: 11px;
+}
+.imgFreccia 
+{
+	display: block;
+	float: left;
+	margin-top: 13px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+/**** FORM***/
+.seda-ui-form .lblRegistrazione, 
+.seda-ui-form .lblRegistrazioneMin, 
+.seda-ui-form .lblRegistrazioneCap {
+	font-weight: bold; 
+	width: 130px;
+	/*height: 1.6em;
+	line-height: 1em;*/
+	text-align: right;
+	margin-right: 10px;	
+	margin-bottom: 15px;
+	padding-bottom: 0px;
+	display: block;
+	float: left;
+}
+.seda-ui-form .lblRegistrazioneMin { width: 80px; }
+.seda-ui-form .lblRegistrazioneCap { width: 40px; }
+
+.seda-ui-form .txtRegistrazione, .ddlRegistrazione, .txtRegistrazioneMin, .txtRegistrazioneMax, .txtRegistrazioneMedium, .ddlRegistrazioneLarge  {		
+	margin-bottom: 15px;
+	border-style: inset; /*Per Chrome e Firefox*/
+	display: block;
+	float: left;
+	width: 270px;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+.seda-ui-form .ddlRegistrazione { width: 278px;}
+.seda-ui-form .ddlRegistrazioneLarge { width: 755px;}
+.seda-ui-form .txtRegistrazioneMin { width: 50px; }
+.seda-ui-form .txtRegistrazioneMedium { width: 150px; }
+.seda-ui-form .txtRegistrazioneMax { width: 640px; }
+
+.cssdate 
+{
+	float: left;
+	display: block;
+}
+
+.rbPersona, .rbSesso
+{
+	float: left;
+	margin-right: 5px;
+}
+
+.lblPersona, .lblSesso
+{
+	display: block;
+	float: left;
+	margin-right: 20px;
+}
+.lblPersona { font-weight: bold; }
+
+.divHeight
+{
+	height: 37px;
+}
+.divTrattamentoDati
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	border: solid 1px #A9A9A9;
+	
+	display: block;
+	float: left;
+	width: 935px;
+	height: 200px;
+	overflow: auto;
+}
+.divAutorizzazioneCb
+{
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+.divCaptcha
+{
+	float: left;
+	display: block;
+	margin-top: 20px;
+}
+.cssCaptcha
+{
+	border: solid 1px #A9A9A9;
+	display: block;
+	float: left;
+	margin-left: 40px;
+	margin-bottom: 15px;
+}
+.divRigeneraCodice
+{
+	margin-left: 5px;
+	margin-top: 65px;
+}
+.btnRigeneraCodice, .btnHyperlink
+{
+	background-color: Transparent;
+	border-style: none;
+	text-align: left;
+	text-decoration: underline;
+	font-family: Trebuchet MS;
+	font-size: 88%;
+	cursor: pointer;
+}
+.seda-ui-form .btnAggiornaImgStyle
+{
+	background-image: url(../img/btnAggiorna.png);
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border: none;
+	width: 22px;
+	height: 22px;
+	text-align: left!important;
+	margin-left: 2px;
+	cursor: pointer;
+}
+
+.divBlockLeft
+{
+	display: block;
+	float: left;
+	width: 150px;
+}
+.seda-ui-form .btnCheckBoxImgStyleY, .btnCheckBoxImgStyleN, .btnRadioButtonImgStyleY, .btnRadioButtonImgStyleN
+{
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-position: left center;
+	border: none;
+	text-align: left!important;
+	padding-left: 22px;
+	font-weight: bold;
+	font-family: Trebuchet MS;
+	font-size: 88%;
+	cursor: pointer;
+}
+.btnCheckBoxImgStyleY {background-image: url(../img/cbSelected.png); margin-left: 20px; }
+.btnCheckBoxImgStyleN {background-image: url(../img/cbUnselected.png); margin-left: 20px; }
+.btnRadioButtonImgStyleY {background-image: url(../img/rbSelected.png); margin-left: 0px; margin-right: 20px;}
+.btnRadioButtonImgStyleN {background-image: url(../img/rbUnselected.png); margin-left: 0px; margin-right: 20px;}
+
+.btnCheckBoxMarginLeft { margin-left: 142px; }
+.btnCheckBoxMarginLeft3 { margin-left: 490px; }
+.btnEsteroWidth {width: 155px;}
+
+.bkngUsernameY, .bkngUsernameN
+{
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.bkngUsernameY { background-image: url(../img/ok.png); }
+.bkngUsernameN { background-image: url(../img/ko.png); }
+
+.seda-ui-form .ddlClassificazione
+{
+	margin-top: -10px;
+}
+
+.divSectionBottomClassificazione {
+	display: block;
+	float: left;
+	width: 100%;
+}

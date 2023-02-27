@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+  
+  <screen name="monitoraggioTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/MonitoraggioTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/consbonrm/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+
+  <screen name="modificaEmailSms" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/consbonrm/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaAllineamentoTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/ForzaAllineamentoTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+ 
+ <screen name="allineaManualmenteTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/AllineaManualmenteTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen> 
+  
+  <screen name="inviaNotificaAmministratore" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/InviaNotificaAmministratore.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+  
+  <screen name="inviaNotificaContribuente" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/InviaNotificaContribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+  <!--<screen name="scaricaReportCSV" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/ScaricaReportCSV.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="stampaPDFBollettini" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/StampaPDFBollettini.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+ 
+  
+  <!--<screen name="stampaReportPDF" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/StampaReportPDF.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="richiediRiconciliazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/consbonrm/RichiediRiconciliazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+  
+</templates>

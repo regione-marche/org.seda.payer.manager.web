@@ -1,0 +1,271 @@
+.seda-ui-label-operatore {
+	text-align: right;
+	margin: 1em 1em 1em 0em;
+	color: Black;
+}
+
+.seda-ui-form
+{
+    margin: 0px;    
+    padding: 0px;
+}
+
+.seda-ui-form .seda-ui-label {
+	width: 10%; /*140px;*/
+	/*color: #880000;*/
+	float: left;
+	font-weight: bold;
+	padding-top: 3px;
+	padding-left: 2px;
+	padding-bottom: 2px;
+	padding-right: 2px;
+}
+
+.seda-ui-datagrid {
+	border: 1px solid #CCC;
+	border-collapse: collapse;
+	margin-top: 3px;
+	width: 100%;
+	font-size: 1.0em;
+}
+
+.seda-ui-controlheader
+{
+    background-color: #d1dbe7!important;
+    height: 2em;
+}
+
+.seda-ui-headercell
+{
+    background-color: #e3eaf0;    
+}
+
+.seda-ui-datagrid th {
+	/*background-color: #FEFFD9;*/
+	background-color: #f4f4f4;
+	/*background-position: left center;
+	background-image: url(bkngTableHeader.png);
+	background-repeat: repeat-x;*/
+	
+	/*color: #880000;*/
+	font-weight: bold;
+	/*margin: 2px;*/
+	padding: 3px;
+	text-align:center;
+}
+
+.seda-ui-datagridheadercell
+{
+    background-position: left center;
+	background-image: url(../../shared/img/bkngTableHeader.png);
+	background-repeat: repeat-x;
+	background-color: #f4f4f4;
+    height: 0.6em;
+}
+
+.seda-ui-datagridcell {
+	background-color: #EEEEEE;
+	border: 1px solid #FFFFFF;
+	padding: 3px;
+	text-align: left;
+}
+
+.seda-ui-textarea {
+	 margin-top:5px; 
+	 margin-left:5px ; 
+	 vertical-align: middle; 
+	 float:right;
+}
+
+.seda-ui-textareaB {
+	 margin-left:5px ; 
+	 vertical-align: middle; 
+	 float:right;
+}
+
+.seda-ui-datagridcellbordered {
+	background-color: #EEEEEE;
+	border: 2px solid #FFFFFF;
+	padding: 3px;
+	text-align: left;
+}
+
+.seda-ui-cellheader{background-color:#EEEEEE; font-weight:bold;}
+
+/* inizio LP PG200130 */
+.seda-ui-cellheaderred{color:red; background-color:#EEEEEE; font-weight:bold;}
+
+.seda-ui-spanred{color: red; font-weight: bold}
+/* fine LP PG200130 */
+
+.seda-ui-cellheader30{background-color:#EEEEEE; font-weight:bold;width: 30%;}
+
+/* Menu ----------------------------------------*/
+.seda-ui-menuv{width:60px; list-style-type: none; padding: 0;margin: 0;}
+.seda-ui-menuo{height:60px; list-style-type: none; padding: 0;margin: 0;}
+.seda-ui-hlnkmenu{color:white;background-color:#1A3d51;height:25px; font-family:Century-Gothic; font-size:12px; font-weight:400; display:block; width:240px; text-decoration: none; padding-top:0px; border:solid 1px white; padding-bottom:0px; float:left; text-align:center;}
+.seda-ui-hlnkmenu:HOVER{background-color:#8F0000;}
+
+
+.seda-ui-datagridrowdispari .seda-ui-datagridcell{
+	background-color: #CCC;
+}
+.seda-ui-datagridrowdispari .seda-ui-datagridcellbordered{
+	background-color: #CCC;
+	border: 2px solid #FFFFFF;
+}
+
+.seda-ui-btnup {width:9px; height: 5px; background: url(../../shared/img/btnUp.png); display: block; margin: 0 auto;}
+.seda-ui-btnup span {display: none;}
+.seda-ui-btndown {width:9px; height: 5px; background: url(../../shared/img/btnDown.png); display: block; margin: 0 auto;}
+.seda-ui-btndown span {display: none;}
+
+/* Paginazione ----------------------------------------*/
+.seda-ui-paginglnk span {visibility:collapse; font-size: 1px;}
+.seda-ui-paginglnk {/*margin:2px; padding: 3px 11px 2px 4px;*/ margin-top: 0.2em; margin-left: 2px; margin-right: 2px; text-decoration: none;}
+.seda-ui-paginglnk a { text-decoration: none; }
+
+.seda-ui-spanfirst, .seda-ui-spanprev, .seda-ui-spannext, .seda-ui-spanlast
+{
+	display:none;
+	color: black;
+}
+.seda-ui-spanasc, .seda-ui-spandesc
+{
+	color: black;
+}
+
+.seda-ui-leftleftarrow {background: url(../../shared/img/btnFirst.png) no-repeat center center; width: 20px;/*width: 20px; padding: 3px 7px 2px 8px;*/}
+.seda-ui-leftarrow{background: url(../../shared/img/btnPrev.png) no-repeat center center; width: 20px;/*width: 20px; padding: 3px 7px 2px 8px;*/}
+.seda-ui-rightarrow{background: url(../../shared/img/btnNext.png) no-repeat center center; width: 20px;/*width: 20px; padding: 3px 7px 2px 8px;*/}
+.seda-ui-rightrightarrow{background: url(../../shared/img/btnLast.png) no-repeat center center; width: 20px;/*width: 20px; padding: 3px 7px 2px 8px;*/}
+.seda-ui-leftleftarrow, .seda-ui-leftarrow, .seda-ui-rightarrow, .seda-ui-rightrightarrow
+{
+	width: 22px;
+	height: 22px;
+}
+.seda-ui-spandgpage {margin-left:5px; margin-right:5px; margin-top: 0.3em;}
+.seda-ui-pagingbtn {border:none; text-decoration: none; cursor:pointer; background-color: Transparent;}
+
+/*.seda-ui-pagingbtn {background-image: url(../../shared/img/btnNext.png);
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border: none;
+	width: 22px;
+	height: 23px;
+	text-align: left!important;
+	margin-left: 2px;
+	cursor: pointer;}*/
+
+/*.seda-ui-disable .seda-ui-paginglnk {display: none;}*/
+.seda-ui-disable .seda-ui-paginglnk {width: 20px; background: none; text-decoration:none; cursor:default;}
+/*.seda-ui-disable .seda-ui-pagingbtn {display: none;}*/
+.seda-ui-disable .seda-ui-dgbuttonrow {}
+.seda-ui-disable .seda-ui-dgbuttonpage {display: none;}
+.seda-ui-disable .seda-ui-dgbuttonrow-visible {}
+.seda-ui-disable .seda-ui-dgbuttonpage-visible {display: none;}
+.seda-ui-disable .seda-ui-ddlpage {display: none;}
+.seda-ui-disable .seda-ui-labeldgpage {display: none;}
+
+.seda-ui-disable .seda-ui-spanfirst {display: none;}
+.seda-ui-disable .seda-ui-spanprev {display: none;}
+.seda-ui-disable .seda-ui-spannext {display: none;}
+.seda-ui-disable .seda-ui-spanlast {display: none;}
+
+.seda-ui-labeldgrow, .seda-ui-labeldgpage, .seda-ui-labeldgrow-visible, .seda-ui-labeldgpage-visible,
+.seda-ui-dgbuttonrow, .seda-ui-dgbuttonpage, .seda-ui-dgbuttonrow-visible, .seda-ui-dgbuttonpage-visible,
+.seda-ui-ddlpage, .seda-ui-ddlrow, .seda-ui-ddlpage-visible, .seda-ui-ddlrow-visible,
+.seda-ui-leftleftarrow,
+.seda-ui-leftarrow,
+.seda-ui-rightarrow,
+.seda-ui-rightrightarrow,
+.seda-ui-spandgpage
+{
+	display: block;
+	float: left;
+}
+
+.seda-ui-formdg
+{
+	text-align:left; 
+	height: 1.8em;
+	margin: 0;
+	padding-top: 0.1em;
+}
+
+.seda-ui-spandgrow 
+{
+	margin-left: 30px;
+	width: 15%; 
+	display: block;
+	float: left;
+	padding-top: 0.3em;
+	background-image: url(../../shared/img/splitPaginazione.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+	
+}
+.seda-ui-leftleftarrow 
+{
+	margin-left: 30px;
+}
+.seda-ui-labeldgrow, .seda-ui-labeldgpage, .seda-ui-labeldgrow-visible, .seda-ui-labeldgpage-visible
+{
+	margin-left: 30px;
+	padding-left: 30px;
+	background-image: url(../../shared/img/splitPaginazione.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+	margin-top: 0.2em;
+	margin-right: 2px;
+}
+.seda-ui-labeldgrow, .seda-ui-labeldgpage {display: none;}
+
+.seda-ui-dgbuttonrow, .seda-ui-dgbuttonpage, .seda-ui-dgbuttonrow-visible, .seda-ui-dgbuttonpage-visible
+{
+	background-image: url(../../shared/img/btnNext.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	
+	width: 25px;
+	height: 23px;
+	
+	color: #D1DBE7; /**per IE7**/
+	font-size:0px;
+	text-decoration: none;
+	margin-left: 10px;
+	margin-top: 0.1em;
+	text-align: left;
+}
+.seda-ui-dgbuttonrow, .seda-ui-dgbuttonpage {display: none;}
+
+
+
+.seda-ui-ddlpage, .seda-ui-ddlrow, .seda-ui-ddlpage-visible, .seda-ui-ddlrow-visible
+{
+	margin-top: 0.1em;
+}
+.seda-ui-ddlpage, .seda-ui-ddlrow  { display:none; }
+
+/* Fine Paginazione ----------------------------------------*/
+
+.seda-ui-spanvalidator {
+	color: Red;
+}
+
+.seda-ui-divvalidator {
+	margin: 30px 0px 15px 0px;
+}
+
+.seda-ui-button {cursor: pointer;}
+
+.seda-ui-ddl {height: 1.6em;}
+
+.seda-ui-required
+{
+	padding-left: 3px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}

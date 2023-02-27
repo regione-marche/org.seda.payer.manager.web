@@ -1,0 +1,190 @@
+/*stili per il layout elastico*/
+html,body{
+	margin: 0;
+	padding: 0;
+	/*background: #f3efde;*/
+}
+body{
+	font-family: arial, verdana, sans-serif;
+	font-size: 76%; /*dimensionamento percentuale del font */
+	text-align: center; /*centra in IE 5.x */
+}
+
+body input 
+{
+	font-size:105%;
+}
+
+body select
+{
+	font-size:105%;
+}
+
+/*stili generici, su header*/
+div#header{
+/*	padding: 0.5em;*/
+/*	background-color: #2456a8;*/
+	background: url(header_110.gif) repeat-x;
+	height: 110px;
+	color: #ffffff;
+}
+/*stili generici, su container*/
+div#container{
+	width: 1000px;
+	margin: 0 auto;
+	text-align: left;
+	/*border-left: 1px solid #2456a8;
+	border-right: 1px solid #2456a8;*/
+	background: #ffffff;
+	/*background: url(sidebar_180.gif) repeat-y top left*/;
+	
+}
+/*stili specifici per la navigazione delle applicazioni*/
+div#portalnavigation {
+/*	background-color:#9cf;*/
+	background: url(navigation_20.gif) repeat-x;
+	height: 20px;
+	margin: 0 0 0 0;
+	}
+div#portalnavigation ul{
+	margin: 0;
+	/*padding: 0 13em;*/
+	padding: 0 185px; 
+	list-style-type: none;
+}
+div#portalnavigation li{display: inline;
+				margin: 0 0 0 1em;
+				padding: 0} /*nota display: inline*/
+div#portalnavigation a{
+	color: #369;
+	font: normal bold 1.0em/1.5em arial,sans-serif;
+	text-decoration: none;
+}
+div#portalnavigation a:hover{color: yellow;text-decoration: underline}
+div#portalnavigation a#activelink{color: #033;text-decoration: none}
+
+/*stili specifici per la navigazione delle funzioni di una applicazione*/
+div#applnavigation {
+/*	background-color:#9cf;*/
+	background: url(navigation_20.gif) repeat-x;
+	height: 20px;
+	margin: 0 0 0 0;
+	}
+	
+div#applnavigation ul{
+	margin: 0; /*padding: 0 13em;*/
+	list-style-type: none;
+}
+div#applnavigation li{
+	display: inline;
+	margin: 0 0 0 1em;
+} /*nota display: inline*/
+
+div#applnavigation a{
+	color: #369;
+	font: normal bold 1.0em/1.5em arial,sans-serif;
+	text-decoration: none;
+}
+div#applnavigation a:hover{color: yellow;text-decoration: underline}
+div#applnavigation a#activelink{color: #033;text-decoration: none}
+
+/*stili specifici per il contenuto*/
+div#title{
+	/*margin-left: 13em;*/
+	padding: 0 0 0 1em;
+	background-color: #fff;
+	margin: 0 0 0 185px;
+}
+div#content{
+	/*margin-left: 13em;*/
+    /*margin: 0 0 0 185px;*/
+	background-color: #fff;
+	padding: 0 0 0 1em;
+}
+/*stili specifici per il pie' di pagina*/
+div#footer{
+	font-size: 80%;
+	text-align: center;
+	padding: 0.2em;
+	background-color: #2456a8;
+	color: #ffffff;
+	clear: left;
+}
+div#footer a, div#footer a:visited{
+	color: #fff;
+	text-decoration: none
+}
+div#footer a:hover {
+	color: #fff;
+	text-decoration: underline
+}
+
+.rend_display_none{display:none;}
+
+.rend_display_inline{display:inline;}
+
+.rend_display_block{display:block;}
+
+/*.div_align_center{text-align:center;}*/
+
+.text_align_right{text-align:right;}
+.textcenter {text-align:center;}
+
+.widthtriple { width: 795px; }
+.widthdouble { width: 480px; }
+
+.ddlProfiliTest {
+	float: left;
+    display: block;
+    color: white;
+    text-decoration: underline;
+    padding-right: 25px;
+}
+
+.ddlProfiliTestDLL {
+	color: black;
+	margin-right: 15px;
+}
+
+.ddlProfiliTestRM {
+	margin-top: 20px;
+    float: left;
+    display: block;
+    color: black;
+    text-decoration: underline;
+    padding-right: 25px;
+}
+
+.ddlProfiliTestDLLRM {
+	margin-top: 20px !important;	
+	color: black;
+	margin-right: 15px;
+}
+
+
+ 
+/*.logout2 {
+	padding-top: 20px;
+	padding-bottom: 15px;
+	float: left;
+	display: block;
+	color: white;
+	text-decoration: underline;
+	margin-right: 15px;
+	padding-right:25px;
+	font-weight:700;
+	background-image: url(../../shared/img/Lock.png);
+	background-position: center right;
+	background-repeat: no-repeat
+}*/
+
+.tbddlRM{
+	width:350px;
+}
+
+#ui-datepicker-div
+{
+    display: none;
+}
+
+

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping
+	xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+		<regexset>
+			<regex name="descrizione_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice3char_regex">
+				<pattern>^\w{1,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="date_yyyy_mm_dd_regex">
+				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice20char_regex">
+				<pattern>^\w{1,20}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codicefisc_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,16}$</pattern>
+				<description></description>
+			</regex>
+
+		</regexset>
+	</global-ruleset>
+	
+	<!-- Start Action Aosta -->
+	
+	<action url="ioitaliaconf.do" screen="ioitaliaconf.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaConfAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaConfFlowAction">
+			<result value="Search" screen="ioitaliaconf.screen" />
+			<result value="Nuovo" screen="ioitaliaconfedit.do" />
+			<result value="Cancella" screen="ioitaliaconfigurazionecancel.screen" />
+		</flow>
+	</action>
+	
+	<action url="ioitaliaconfedit.do" screen="ioitaliaconfedit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaConfEditAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaConfEditFlowAction">
+			<result value="Search" screen="ioitaliaconfedit.screen" />
+			<result value="edit" screen="ioitaliaconfedit.screen" />
+			<result value="ritorna" screen="ioitaliaconf.do" />
+		</flow>
+	</action>
+	
+	<action url="ioitalia.do" screen="ioitalia.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaFlowAction">
+			<result value="Search" screen="ioitalia.screen" />
+			<result value="Nuovo" screen="ioitalianewmessage.do" />
+			<!--  result value="add" screen="" /-->
+			<result value="reset" screen="ioitalia.screen" />
+			<result value="ritorna" screen="ioitalia.screen" />
+			<result value="ritornaHome" screen="ioitalia.screen" />
+		</flow>
+	</action>
+	
+	<action url="ioitaliaforniture.do" screen="ioitaliaforniture.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaEditAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaEditFlowAction">
+			<result value="Search" screen="ioitaliaforniture.screen" />
+			<result value="Download" writer="downloadCSV" content-type="text/csv" inScope="false" attach="filename" />
+			<result value="Nuovo" screen="ioitalianewmessage.do" />
+			<result value="ritorna" screen="ioitalia.do" />
+			<result value="Cancella" screen="ioitaliamessaggiocancel.screen" />
+		</flow>
+	</action>
+	
+	<action url="ioitalianewmessage.do" screen="ioitalianewmessage.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaNewAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaNewFlowAction">
+			<result value="Search" screen="ioitalianewmessage.screen" />
+			<!-- result value="add" screen="ioitalia.do" />
+			<result value="add2" screen="ioitaliaforniture.do" /-->
+			<result value="ritorna" screen="ioitalia.do" />
+			<result value="ritorna2" screen="ioitaliaforniture.do" />
+		</flow>
+	</action>
+	
+	<action url="ioitaliamessageedit.do" screen="ioitaliamessageedit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaMessageEditAction</action-class>
+		<flow class="org.seda.payer.manager.ioitalia.flows.IoItaliaMessageEditFlowAction">
+			<result value="Search" screen="ioitaliamessageedit.screen" />
+			<result value="Invia" screen="ioitaliamessageedit.screen" />
+			<!--  result value="add" screen="ioitaliaedit.screen" />
+			<result value="reset" screen="ioitaliaedit.screen" /-->
+			<result value="ritorna" screen="ioitaliaforniture.do" />
+			<result value="ritornaHome" screen="ioitalia.do" />
+		</flow>
+	</action>
+	
+	<action url="ritorna.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.ioitalia.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.ioitalia.flows.RitornaFlowAction">
+	        <result value="ioitaliaconf" screen="ioitaliaconf.do" /> 
+        </flow>
+    </action>
+    
+    <action url="ritornadue.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.ioitalia.actions.RitornaDueAction</action-class>
+        <flow class="org.seda.payer.manager.ioitalia.flows.RitornaDueFlowAction">
+	        <result value="ioitalia" screen="ioitalia.do" /> 
+        </flow>
+    </action>
+    
+    <action url="ioitaliaupload.do" screen="ioitaliaupload.screen" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaCaricaCsvAction</action-class>
+	</action>
+	
+	<action url="ioitaliauploadcsv.do" screen="ioitaliaupload.screen" flow="false"  csrf="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaUploadAction</action-class>
+	</action>
+	
+	<action url="ioitaliacaricadaticsv.do" screen="ioitaliaupload.screen" flow="false"  csrf="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.ioitalia.actions.IoItaliaCaricaCsvAction</action-class>
+	</action>
+   
+</actions-mapping>   

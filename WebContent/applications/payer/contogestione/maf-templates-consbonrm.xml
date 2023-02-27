@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+  
+ <screen name="ricercaContoGestione" template="default">
+    <parameter key="pagetitle" value="manager.contogestione.ricerca.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/consbonrm/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/contogestione/consbonrm/include/RicercaContoGestione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/consbonrm/footer.jsp"/>
+  </screen>
+
+  
+</templates>

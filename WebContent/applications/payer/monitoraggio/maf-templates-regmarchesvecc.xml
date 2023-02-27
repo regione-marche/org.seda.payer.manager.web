@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+
+  
+  <screen name="monitoraggioTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/regmarchesvecc/MonitoraggioTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/include/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+
+  <screen name="modificaEmailSms" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/regmarchesvecc/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/include/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaAllineamentoTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/ForzaAllineamentoTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+ 
+  <screen name="inviaNotificaAmministratore" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/InviaNotificaAmministratore.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+  
+  <screen name="inviaNotificaContribuente" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/InviaNotificaContribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+  
+  <screen name="stampaPDFBollettini" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/StampaPDFBollettini.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+  
+  <screen name="richiediStorno" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/regmarchesvecc/RichiediStorno.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+    
+  <screen name="richiediRiconciliazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/RichiediRiconciliazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+  
+</templates>

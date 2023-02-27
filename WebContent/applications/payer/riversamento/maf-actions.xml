@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+
+
+<!-- SEZIONE RIVERSAMENTI 2.1 -->
+
+    <action url="ricercaRiversamenti.do" screen="ricercaRiversamenti.screen" flow="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.RicercaRiversamentiAction</action-class>
+        <flow class="org.seda.payer.manager.riversamento.flows.RicercaRiversamentiFlow">
+           	<result value="ricerca" screen="ricercaRiversamenti.screen" />
+           	<result value="alertRiv" screen="alertRiversamenti.screen" />
+        </flow>
+
+    </action>
+
+    <action url="riversamentiDettaglioImp.do" screen="riversamentiDettaglioImp.screen" flow="false">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.RicercaRiversamentiDettImpAction</action-class>
+    </action>
+
+    <action url="riversamentiDettaglioContr.do" screen="riversamentiDettaglioContr.screen" flow="false">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.RicercaRiversamentiDettContrAction</action-class>
+    </action>
+
+<!-- ACTION SOSPENSIONE -->
+
+    <action url="riversamentiSospensioneStart.do" screen="riversamentiSospensione.screen" flow="false">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.SospensioneRivAction</action-class>
+    </action>
+
+
+<!-- ACTION CAMBIO STATO -->
+
+    <!--   action url="aggiornaStatoRiv.do" screen="ricercaRiversamenti.screen" flow="false" -->
+    <action url="aggiornaStatoRiv.do" flow="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+    	<action-class>org.seda.payer.manager.riversamento.actions.AggiornaStatoAction</action-class>
+        <flow class="org.seda.payer.manager.riversamento.flows.AggiornaStatoFlow">
+           	<result value="ricerca" screen="ricercaRiversamenti.do" />
+           	<result value="alertRiv" screen="alertRiversamento.screen" />
+        </flow>
+    </action>
+
+<!-- ACTION AGGIORNA FLAG CBI -->
+
+    <action url="aggiornaFlagCBI.do" flow="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+    	<action-class>org.seda.payer.manager.riversamento.actions.AggiornaFlagCBIAction</action-class>
+        <flow class="org.seda.payer.manager.riversamento.flows.AggiornaStatoFlow">
+           	<result value="ricerca" screen="ricercaRiversamenti.do" />
+           	<result value="alertRiv" screen="alertRiversamento.screen" />
+        </flow>
+    </action>
+
+<!-- ACTION DOWNLOAD FLUSSO CBI -->
+    <action url="downloadFlussoCBI.do" writer="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.DownloadFlussoCBIAction</action-class>
+		<writer id="CBIRiv" content-type="application/txt" inScope="false" attach="CBIRivD"/>
+    </action>
+
+<!-- ACTION DOWNLOAD PDF -->
+    <action url="stampaPDFRiv.do" writer="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.StampaPDFRivAction</action-class>
+		<writer id="pdfRiv" content-type="application/pdf" inScope="false" attach="pdfRivD"/>
+    </action>
+
+<!-- ACTION DOWNLOAD CSV -->
+    <action url="stampaCSVRiv.do" writer="true">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.riversamento.actions.StampaCSVRivAction</action-class>
+		<writer id="csvRiv" content-type="application/txt" inScope="false" attach="csvRivD"/>
+    </action>
+
+</actions-mapping>   

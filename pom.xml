@@ -1,0 +1,1418 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.seda.payer.manager.web</groupId>
+	<artifactId>org.seda.payer.manager.web</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+	<name>org.seda.payer.manager.web</name>
+	<description>org.seda.payer.manager.web</description>
+
+<parent>
+      <groupId>it.maggioli.informatica.base.pom</groupId>
+      <artifactId>pagonet-base</artifactId>
+      <version>1.0</version>
+   </parent>
+	
+		
+<properties>
+	   <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<archive>
+						<manifestEntries>
+						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
+							<Dependencies>com.seda.compatibility,com.seda.data:1.0,org.eclipse.birt.runtime,org.apache.log4j</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+<!-- 	<repositories> -->
+<!-- 		<repository> -->
+<!-- 			<id>maven-restlet</id> -->
+<!-- 			<name>Public online Restlet repository</name> -->
+<!-- 			<url>https://maven.geotoolkit.org</url> -->
+<!-- 		</repository> -->
+<!-- 	</repositories> -->
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.11.2.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>3.11.2.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<version>3.0.12.Final</version>
+			<scope>provided</scope>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.commons</groupId>
+			<artifactId>com.seda.commons</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-csv</artifactId>
+		    <version>1.5</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.seda.j2ee5.maf</groupId>
+			<artifactId>com.seda.j2ee5.maf</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.pgec.webservice.client</groupId>
+			<artifactId>com.seda.payer.pgec.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.flexjson/flexjson -->
+		<dependency>
+			<groupId>net.sf.flexjson</groupId>
+			<artifactId>flexjson</artifactId>
+			<version>3.3</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.ottico.webservice.client</groupId>
+			<artifactId>com.seda.payer.ottico.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.2.8.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		
+		
+
+<!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
+<dependency>
+    <groupId>org.reactivestreams</groupId>
+    <artifactId>reactive-streams</artifactId>
+    <version>1.0.3</version>
+    <scope>compile</scope>
+</dependency>
+
+
+		
+		
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.3</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.bancadati.webservice.client</groupId>
+			<artifactId>com.seda.payer.bancadati.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esed.payer.archiviocarichi.webservice.client</groupId>
+			<artifactId>com.esed.payer.archiviocarichi.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.gateways.webservice.client</groupId>
+			<artifactId>com.seda.payer.gateways.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- activation.jar -->
+		<!-- https://mvnrepository.com/artifact/com.sun.activation/javax.activation -->
+		<dependency>
+			<groupId>com.sun.activation</groupId>
+			<artifactId>javax.activation</artifactId>
+			<version>1.2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- avalon-framework-cvs-20020806.jar -->
+		<!-- https://mvnrepository.com/artifact/org.apache.avalon.framework/avalon-framework-api -->
+		<dependency>
+			<groupId>org.apache.avalon.framework</groupId>
+			<artifactId>avalon-framework-api</artifactId>
+			<version>4.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- batik.jar -->
+		<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-all -->
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-all</artifactId>
+			<version>1.13</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- batik.jar -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.w3c</groupId> -->
+		<!-- <artifactId>dom</artifactId> -->
+		<!-- <version>2.3.0-jaxb-1.0.6</version> -->
+		<!-- <scope>compile</scope> -->
+		<!-- </dependency> -->
+
+
+
+		<!-- commons-beanutils-1.6.jar -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- commons-dbcp-1.2.1.jar -->
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- commons-digester-1.5.jar -->
+
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>1.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- commons-math-1.0.jar -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- commons-pool-1.2.jar -->
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.2</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- commons-vfs.jar -->
+		<dependency>
+			<groupId>commons-vfs</groupId>
+			<artifactId>commons-vfs</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- dom4j.jar -->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!--manca eigenbase-xom -->
+
+		<!-- manca eigenbase-properties -->
+
+		<!-- manca eigenbase-resgen -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.xmlgraphics</groupId> -->
+<!-- 			<artifactId>fop</artifactId> -->
+<!-- 			<version>2.5</version> -->
+<!-- 			<scope>compile</scope> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>3.0.3</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- manca jakarta-regex -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.media</groupId> -->
+<!-- 			<artifactId>jai_codec</artifactId> -->
+<!-- 			<version>1.1.3</version> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.media</groupId> -->
+<!-- 			<artifactId>jai_core</artifactId> -->
+<!-- 			<version>1.1.3</version> -->
+<!-- 		</dependency> -->
+
+
+
+		<!-- javacup.jar -->
+		<dependency>
+			<groupId>java_cup</groupId>
+			<artifactId>java_cup</artifactId>
+			<version>0.9e</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- jaxen-full.jar -->
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- jcommon-1.0.0.jar -->
+		<!-- https://mvnrepository.com/artifact/org.jfree/jcommon -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jcommon</artifactId>
+			<version>1.0.23</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- jfreechart-1.0.0.jar -->
+		<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.14</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- jsf-api.jar -->
+		<!-- https://mvnrepository.com/artifact/javax.faces/jsf-api -->
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- logback-classic-0.9.9.jar -->
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.9</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- mail.jar -->
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- manca mondrian -->
+
+		<!--saaj-api.jar -->
+		<dependency>
+			<groupId>javax.xml.soap</groupId>
+			<artifactId>javax.xml.soap-api</artifactId>
+			<version>1.4.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.security.webservice.client</groupId>
+			<artifactId>com.seda.security.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.tag</groupId>
+			<artifactId>com.seda.tag</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>javax.servlet</groupId> -->
+		<!-- <artifactId>jstl</artifactId> -->
+		<!-- <version>1.2</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>javax</groupId> -->
+		<!-- <artifactId>javaee-api</artifactId> -->
+		<!-- <version>8.0</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+
+
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.5</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>1.6.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.rpc</groupId>
+			<artifactId>javax.xml.rpc-api</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- manca saxpath.jar -->
+
+		<dependency>
+			<groupId>com.tonbeller</groupId>
+			<artifactId>wcf</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/wcf.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tonbeller</groupId>
+			<artifactId>jpivot</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jpivot.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tonbeller</groupId>
+			<artifactId>tbutils-wcf</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/tbutils-wcf.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.core</groupId>
+			<artifactId>com.seda.payer.core</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.data</groupId>
+			<artifactId>com.seda.data</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.impostasoggiorno.webservice.client</groupId>
+			<artifactId>com.seda.payer.impostasoggiorno.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>icar-sp-inf3-j2ee-integration-kit</groupId>
+			<artifactId>icar-sp-inf3-j2ee-integration-kit</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/icar-sp-inf3-j2ee-integration-kit.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>inf3-commons</groupId>
+			<artifactId>inf3-commons</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/inf3-commons.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jstl-1.2-1.jar</systemPath>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.seda.payer.commons</groupId>
+			<artifactId>com.seda.payer.commons</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>67.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.integraente.webservice.client</groupId>
+			<artifactId>com.seda.payer.integraente.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.notifiche.webservice.client</groupId>
+			<artifactId>com.seda.payer.notifiche.webservice.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.emailsender.webservices.client</groupId>
+			<artifactId>com.seda.emailsender.webservices.client</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.birt.runtime</groupId> -->
+		<!-- <artifactId>org.eclipse.birt.runtime</artifactId> -->
+		<!-- <version>4.5.0a</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>com.seda.compatibility</groupId>
+			<artifactId>com.seda.compatibility</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>2.9.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/xml-apis-2.9.1.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>com.ibm.icu</artifactId>
+			<version>4.0.1.v20090822</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\lib\com.ibm.icu_4.0.1.v20090822.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>coreapi</groupId>
+			<artifactId>coreapi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\lib\coreapi.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>engineapi</groupId>
+			<artifactId>engineapi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\lib\engineapi.jar</systemPath>
+		</dependency>
+
+
+		<dependency>
+			<groupId>modelapi</groupId>
+			<artifactId>modelapi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\lib\modelapi.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>jai-codec</groupId>
+			<artifactId>jai-codec</artifactId>
+			<version>1.1.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jai_codec.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>jai-core</groupId>
+			<artifactId>jai-core</artifactId>
+			<version>1.1.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jai_core.jar</systemPath>
+		</dependency>
+
+
+		<dependency>
+			<groupId>jsr105-impl</groupId>
+			<artifactId>jsr105-impl</artifactId>
+			<version>1.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jsr105-impl-1.0.1.jar</systemPath>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>icar-sp-inf3-j2ee-integration-kit</groupId>
+			<artifactId>icar-sp-inf3-j2ee-integration-kit</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/icar-sp-inf3-j2ee-integration-kit.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>esapi</groupId>
+			<artifactId>esapi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/esapi-2.0.1.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>inf3-commons</groupId>
+			<artifactId>inf3-commons</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/inf3-commons.jar</systemPath>
+		</dependency>
+		
+		<!-- <dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient-contrib-ssl</artifactId>
+			<version>3.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\WebContent\WEB-INF\lib\commons-httpclient-contrib-ssl-3.1.jar</systemPath>
+		</dependency> -->
+		
+		
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>it.regulus.util</groupId>
+			<artifactId>it.regulus.util</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jai-codec</groupId>
+			<artifactId>jai-codec</artifactId>
+			<version>1.1.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jai_codec.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>jai-core</groupId>
+			<artifactId>jai-core</artifactId>
+			<version>1.1.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jai_core.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml</artifactId>
+			<version>2.6.4</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- inizio LP PG21X007 -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.7.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esed.log.req</groupId>
+			<artifactId>com.esed.log.req</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- fine LP PG21X007 -->
+		
+		
+		<dependency>
+            <groupId>org.glassfish.corba</groupId>
+            <artifactId>glassfish-corba-omgapi</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+	</dependencies>
+	
+	
+	
+	<profiles>
+	
+	<profile>
+        <id>trentrisc</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        <finalName>org.seda.payer.trentino.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml
+						</warSourceExcludes>
+
+						<warSourceDirectory>WebContent</warSourceDirectory>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<archive>
+							<manifestEntries>
+							<Logging-Profile>org.seda.payer.trentino.manager.web</Logging-Profile> 
+							</manifestEntries>            
+						</archive>  
+						<webResources>
+	                          <webResource>
+	                            <directory>profili/trentrisc/images</directory>
+	                            <targetPath>images</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+	                          
+	                          <webResource>
+	                            <directory>profili/trentrisc/styles</directory>
+	                            <targetPath>styles</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+	                          
+	                          
+	                           <webResource>
+	                            <directory>profili/trentrisc/resources</directory>
+	                            <targetPath>resources</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+	                          
+	                          <webResource>
+	                            <directory>profili/trentrisc/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+	                          
+	                       
+	                          
+	                          
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+                   
+                   
+        </build>
+    </profile>
+	
+     <profile>
+        <id>sassari</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.sassari.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.sassari.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/sassari/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    
+    
+     <profile>
+        <id>aosta</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.aosta.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+						<warSourceDirectory>WebContent</warSourceDirectory>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<archive>
+							<manifestEntries>
+								<Logging-Profile>org.seda.payer.aosta.manager.web</Logging-Profile> 
+							</manifestEntries>            
+						</archive>  
+						<webResources>
+							<webResource>
+								<directory>profili/aosta/WEB-INF</directory>
+								<targetPath>/WEB-INF</targetPath>
+								<include>**/*</include>
+							</webResource>
+						</webResources>
+												
+						<attachClasses>true</attachClasses>  
+
+						
+						
+
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+     <profile>
+        <id>creset</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.creset.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+						<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.creset.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/creset/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+     <profile>
+        <id>regabruzzo</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.regabruzzo.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.regabruzzo.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/regabruzzo/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+     <profile>
+        <id>maggioli</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.maggioli.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.maggioli.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/maggioli/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    
+     <profile>
+        <id>roseto</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.roseto.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.roseto.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/roseto/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    
+     <profile>
+        <id>fccsa</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.fccsa.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+						
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.fccsa.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/fccsa/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    <profile>
+        <id>bolzano</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.bolzano.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.bolzano.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/bolzano/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    
+     <profile>
+        <id>soris</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.soris.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+						<!-- esclusione classi specializzate WEB-INF  -->
+						<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+						
+						<warSourceDirectory>WebContent</warSourceDirectory>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+							<archive>
+							<manifestEntries>
+								<Logging-Profile>org.seda.payer.soris.manager.web</Logging-Profile> 
+							</manifestEntries>            
+							</archive>  
+						<webResources>
+							<webResource>
+							<directory>profili/soris/WEB-INF</directory>
+							<targetPath>/WEB-INF</targetPath>
+							<include>**/*</include>
+							</webResource>
+						</webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    <profile>
+        <id>regmarche</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.regmarche.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/soris/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-soris.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.regmarche.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/regmarche/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    <profile>
+        <id>sviluppo</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>/WebContent/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+    <profile>
+        <id>newsoris</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation> 
+        <build>
+        	<finalName>org.seda.payer.newsoris.manager.web</finalName>
+        <plugins>
+           <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                  
+                   <configuration>
+				   		<!-- esclusione classi specializzate WEB-INF  -->
+				   		<packagingExcludes>
+						**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/trentrisc/**
+						</packagingExcludes>
+						<!-- esclusione classi specializzate applications  -->
+						<warSourceExcludes>
+							**/aosta/**,**/andreani-del/**,**/bolzano/**,**/cbec/**,**/consbonrm/**,**/creset/**,**/fccsa/**,**/lepida/**,**/maggioli/**,**/padanatech/**,**/provroma/**,**/regabruzzo/**,**/regmarche/**,**/regmarchesvecc/**,**/roseto/**,**/sap/**,**/sassari/**,**/serc/**,**/trentrisc/**
+							,**/*-aosta.xml,**/*-andreani-del.xml,**/*-bolzano.xml,**/*-cbec.xml,**/*-consbonrm.xml,**/*-creset.xml,**/*-fccsa.xml,**/*-lepida.xml,**/*-maggioli.xml,**/*-padanatech.xml,**/*-provroma.xml,**/*-regabruzzo.xml,**/*-regmarche.xml,**/*-regmarchesvecc.xml,**/*-roseto.xml,**/*-sap.xml,**/*-sassari.xml,**/*-serc.xml,**/*-trentrisc.xml
+						</warSourceExcludes>
+
+                            <warSourceDirectory>WebContent</warSourceDirectory>
+                              <failOnMissingWebXml>false</failOnMissingWebXml>
+                              <archive>
+                                <manifestEntries>
+                                  <Logging-Profile>org.seda.payer.newsoris.manager.web</Logging-Profile> 
+                                </manifestEntries>            
+                              </archive>  
+                          <webResources>
+	                           <webResource>
+	                            <directory>profili/newsoris/WEB-INF</directory>
+	                            <targetPath>/WEB-INF</targetPath>
+	                            <include>**/*</include>
+	                          </webResource>
+                        </webResources>
+                        
+                        
+                        <attachClasses>true</attachClasses>  
+                        </configuration>
+                    </plugin>
+                   </plugins>
+        </build>
+    </profile>
+    
+	</profiles>
+	
+	
+	
+	
+</project>

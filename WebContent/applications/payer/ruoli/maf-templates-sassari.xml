@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+ <screen name="ricercaAnagrafiche" template="default">
+    <parameter key="pagetitle" value="title.ruoli.anagrafiche" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaAnagrafiche.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+ <screen name="ricercaAnag" template="default">
+    <parameter key="pagetitle" value="title.ruoli.anagrafiche" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaAnag.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+ <screen name="ricercaRuoli" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaRuoli.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+ <screen name="dettaglioRuolo" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/DettaglioRuolo.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+  <screen name="ricercaPartiteRuoli" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaPartiteRuoli.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+  <screen name="ricercaArticoli" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaArticoli.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+    <screen name="ricercaPagamentiDett" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaPagamentiDett.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+
+ <screen name="dettaglioPartita" template="default">
+    <parameter key="pagetitle" value="title.ruoli.ruoli" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/DettaglioPartita.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+    <screen name="ricercaPartite" template="default">
+    <parameter key="pagetitle" value="title.ruoli.partite" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/ricercaPartite.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+ 
+   <screen name="ricercaPartiteAnagrafiche" template="default">
+    <parameter key="pagetitle" value="title.ruoli.partite" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaPartiteAnagrafiche.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+   <screen name="ricercaPagamenti" template="default">
+    <parameter key="pagetitle" value="title.ruoli.pagamenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ruoli/include/RicercaPagamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+</templates>

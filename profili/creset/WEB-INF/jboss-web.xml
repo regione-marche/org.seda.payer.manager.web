@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <context-root>managerR0</context-root>
+   
+    <resource-ref>
+        <res-ref-name>payerDataSourceR0</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:/payerDataSourceR0</jndi-name>
+    </resource-ref>
+    
+    <resource-ref>
+        <res-ref-name>sddDataSource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:/sddDataSource</jndi-name>
+    </resource-ref>
+    
+    <resource-ref>
+        <res-ref-name>easybridgeDataSource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:/easybridgeDataSource</jndi-name>
+    </resource-ref>
+    
+      <session-config>
+          <cookie-config>
+             <http-only>true</http-only>
+             <secure>true</secure>
+          </cookie-config>
+          <tracking-mode>COOKIE</tracking-mode>
+      </session-config>
+    
+</jboss-web>

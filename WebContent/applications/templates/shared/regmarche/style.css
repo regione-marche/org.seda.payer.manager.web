@@ -1,0 +1,47 @@
+div#container{
+	width: 95vw;
+}
+
+.menu, 
+.sub_menu, 
+.subsub_menu
+{
+	width:99.8% !important;
+}
+
+.divFooterContainer {
+	width:95vw;
+}
+
+.Header {
+	width: 95vw !important;
+}
+
+.footerRight{
+	float:none !important;
+}
+
+.divLogin{
+	width:95vw;
+}
+
+.divIntestazioneLogin,
+.divEmpty,
+.footerRight,
+.divProfiloOuter{
+	width: unset !important;
+}
+
+.divRicMetadatiLeft,
+.divRicMetadatiCenter, 
+.divRicMetadatiRight, 
+.divRicMetadatiLeftAvvisi,
+.divRicMetadatiTopLeft, 
+.divRicMetadatiTopCenter, 
+.divRicMetadatiTopRight {
+    width: 33%;
+}
+
+.ddlProfiliTest {
+	margin-top: 20px !important;	
+}

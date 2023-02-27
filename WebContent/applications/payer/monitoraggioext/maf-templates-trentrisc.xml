@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  
+  <screen name="monitoraggioext" template="default">
+    <parameter key="pagetitle" value="title.monitoraggioext" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/trentrisc/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggioext/include/monitoraggioext.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/trentrisc/footer.jsp"/>
+  </screen>
+ 
+ <screen name="monitoraggioextdettaglio" template="default">
+    <parameter key="pagetitle" value="title.monitoraggioext.dettaglio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/trentrisc/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggioext/include/monitoraggioextdettaglio.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/trentrisc/footer.jsp"/>
+  	
+  </screen>
+  
+</templates>

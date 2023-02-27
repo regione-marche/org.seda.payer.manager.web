@@ -1,0 +1,129 @@
+
+html,body{
+	margin: 0 ;
+	padding: 0;
+	background-color:white;
+	/*font-size: 0.88em;*/
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial;
+	font-size: 88%;
+}
+
+
+/**** MANAGER LOGIN ****/
+
+.disWISRow
+{
+	display: block;
+	float: left;
+	clear: both;
+	width: 600px;
+	height: 30px;
+	margin-bottom: 8px;
+}
+
+.divWISContainer
+{
+	clear: both;
+}
+.divWISTop
+{
+	height: 20px;
+}
+.divWISFill
+{
+	/*width: 900px;*/
+	height: 28em;
+	/*margin-left: 50px;*/
+	margin-bottom: 18px;
+	border: solid 1px #8AB9E3;
+}
+.divWISTitle
+{
+	/*width: 900px;*/
+	background-color: #BFD9F0;
+	text-align: center;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.divWISContainerGray
+{
+	/*width: 860px;*/
+	margin: 20px;
+	background-color: #EDEDED;
+}
+.divWISDati
+{
+	padding: 30px 0px 10px 30px;
+	height: 8em;
+}
+
+.labelWISTop
+{
+	display: block;
+	clear: both;
+	color: Black !important;
+	/*margin-top: 5px;*/
+	text-align: right;
+	width: 14em !important;
+	padding-left: 5px !important;
+}
+
+.tbWISBottom 
+{
+	width: 300px !important;
+	float: left;
+	margin-left: 5px;
+	margin-top: 0px;
+}
+.divWISLink
+{
+	height: 3em;
+	padding: 10px 20px 10px 0px;
+}
+.btnVaiWIS
+{
+	float: right;
+	font-size: 12px;
+	
+	margin-top: 2px;
+	text-decoration: none;
+	text-align: right;
+	padding-right: 30px;
+	color: black;
+	padding-top: 2px;
+	display: block;
+	border:0px;
+	cursor:pointer;
+	background-image: url(../../wismanager/img/arrowGoTo.png);
+	background-position: center right;
+	background-repeat: no-repeat;
+	background-color: Transparent;
+}
+
+/*PG180050 GG - inizio*/
+.txtDisabled { border: none;}
+/*PG180050 GG - fine*/
+
+/*PG180170 GG - inizio*/
+.textAreaNote 
+{
+	float: left;
+	margin-bottom:15px;
+	width:855px;
+}
+/*PG180170 GG - fine*/
+
+.divRicMetadatiLeftAnagStruttura, .divRicMetadatiCenterAnagStruttura, .divRicMetadatiRightAnagStruttura, .divRicMetadatiLeftAvvisiAnagStruttura {
+    width: 33%;
+    float: left;
+    margin-top: 5px;
+}
+
+/*.divRicMetadatiLeft, .divRicMetadatiCenter, .divRicMetadatiRight, .divRicMetadatiLeftAvvisi {
+    width: 33%;
+}*/
+.tbddl{
+	width:224px;
+}
+

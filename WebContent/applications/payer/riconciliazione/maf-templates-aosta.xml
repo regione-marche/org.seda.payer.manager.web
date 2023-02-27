@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+
+ <screen name="riconciliazioneTransazioni" template="default">
+    <parameter key="pagetitle" value="title.riconmovimenti" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/RiconciliazioneTransazioni.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+
+ <screen name="riconciliazioneManualeTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.riconmanuale" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/RiconciliazioneManualeTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/include/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.riconmovimenti" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/include/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/riconciliazione/include/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+
+<!-- 
+  <screen name="associaTransazione" template="default">
+    <parameter key="pagetitle" value="Modifica email e numero SMS" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+
+  <screen name="eliminaAssociazione" template="default">
+    <parameter key="pagetitle" value="Elimina Associazione" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/EliminaAssociazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaChiusuraQuadratura" template="default">
+    <parameter key="pagetitle" value="Forza Chiusura Quadratura" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/ForzaChiusuraQuadratura.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+  -->
+ <!-- 
+  <screen name="impostaMovimentoRiferimento" template="default">
+    <parameter key="pagetitle" value="Imposta Movimento Riferimento" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/ImpostaMovimentoRiferimento.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+  
+  <screen name="ricercaListaMovimenti" template="default">
+    <parameter key="pagetitle" value="Ricerca Lista Movimenti" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/RicercaListaMovimenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+  
+  <screen name="ricercaListaTransazioni" template="default">
+    <parameter key="pagetitle" value="Ricerca Lista Transazioni" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/RicercaListaTransazioni.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+ -->
+ 
+ <!-- 
+  <screen name="scaricaMovimento" template="default">
+    <parameter key="pagetitle" value="Acarica Movimento" />
+  	<parameter key="header" value="/applications/templates/shared/aosta/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazione/include/ScaricaMovimento.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aosta/footer.jsp"/>
+  </screen>
+ -->
+  
+</templates>

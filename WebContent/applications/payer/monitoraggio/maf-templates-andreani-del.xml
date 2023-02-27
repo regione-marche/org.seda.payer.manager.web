@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+  
+  <screen name="monitoraggioTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/MonitoraggioTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/andreani/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+
+  <screen name="modificaEmailSms" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/andreani/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaAllineamentoTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/ForzaAllineamentoTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+ 
+ <screen name="allineaManualmenteTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/AllineaManualmenteTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen> 
+  
+  <screen name="inviaNotificaAmministratore" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/InviaNotificaAmministratore.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+  
+  <screen name="inviaNotificaContribuente" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/InviaNotificaContribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+  <!--<screen name="scaricaReportCSV" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/ScaricaReportCSV.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="stampaPDFBollettini" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/StampaPDFBollettini.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+ 
+  
+  <!--<screen name="stampaReportPDF" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/StampaReportPDF.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="richiediRiconciliazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/andreani/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/andreani/RichiediRiconciliazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/andreani/footer.jsp"/>
+  </screen>
+  
+</templates>

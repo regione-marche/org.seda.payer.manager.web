@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+
+
+<!-- SEZIONE ECCEDENZE -->
+
+    <action url="ricercaEccedenze.do" screen="ricercaEccedenze.screen" flow="false">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMEN</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.eccedenze.actions.RicercaEccedenzeAction</action-class>
+    </action>
+
+    <action url="eccedenzeDettaglio.do" screen="eccedenzeDettaglio.screen" flow="false">
+       <role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.eccedenze.actions.RicercaEccedenzeDettAction</action-class>
+    </action>
+
+</actions-mapping>   

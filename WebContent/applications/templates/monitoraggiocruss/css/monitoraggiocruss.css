@@ -1,0 +1,11 @@
+.divMCRUSS
+{
+	float: left;
+	width: 49%;
+	padding: 5px;
+}
+.tableMCRUSS
+{
+	overflow-y: scroll;
+	height: 25em;
+}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+  
+  <screen name="monitoraggioTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/MonitoraggioTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/padanatech/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+
+  <screen name="modificaEmailSms" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/padanatech/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaAllineamentoTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/ForzaAllineamentoTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+ 
+ <screen name="allineaManualmenteTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/AllineaManualmenteTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen> 
+  
+  <screen name="inviaNotificaAmministratore" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/InviaNotificaAmministratore.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+  
+  <screen name="inviaNotificaContribuente" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/InviaNotificaContribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+  <!--<screen name="scaricaReportCSV" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/ScaricaReportCSV.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="stampaPDFBollettini" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/StampaPDFBollettini.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+ 
+  
+  <!--<screen name="stampaReportPDF" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/StampaReportPDF.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="richiediRiconciliazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/padanatech/RichiediRiconciliazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>
+  
+</templates>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	
+    <action url="monitoraggiocruss.do" screen="monitoraggiocruss.screen">
+        <action-class>org.seda.payer.manager.monitoraggiocruss.actions.MonitoraggioCrussAction</action-class>
+    </action>
+
+</actions-mapping>   

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	   
+    <action url="wismanager.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.wismanager.actions.WisManager</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlow">
+			<result value="search" screen="wismanager.screen"/>
+			<result value="cambiaProvincia" screen="wismanager.screen"/>
+			<result value="avantiWIS" redirect="urlRedirectWIS"/>
+		</flow>
+					
+    </action>
+    
+    
+</actions-mapping>   

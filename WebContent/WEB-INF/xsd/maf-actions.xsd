@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://action.core.maf.j2ee5.seda.com"
+xmlns="http://action.core.maf.j2ee5.seda.com"
+elementFormDefault="qualified">
+ 
+<xsd:annotation>
+ 	<xsd:documentation xml:lang="en">
+    </xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="actions-mapping" type="actionsMappingType"/>
+  
+<xsd:complexType name="actionsMappingType">
+	<xsd:sequence>
+		<xsd:element name="menu" type="menuType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="complex-actions" type="complexType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="global-ruleset" type="globalRulesetType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="action" type="actionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="menuType">
+	<xsd:sequence>
+		<xsd:element name="link" type="menuLinkType" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    
+</xsd:complexType>
+
+<xsd:complexType name="menuLinkType">
+	<xsd:attribute name="text" type="xsd:string" use="required"/>	
+	<xsd:attribute name="actionurl" type="xsd:string" use="required"/>
+	<xsd:attribute name="enabled" type="xsd:boolean" use="optional"/>
+</xsd:complexType>
+
+<xsd:complexType name="complexType">
+	<xsd:sequence>
+		<xsd:element name="complex-target" type="complexTargetType" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    
+</xsd:complexType>
+
+<xsd:complexType name="complexTargetType">
+	<xsd:attribute name="value" type="xsd:string" use="required"/>	
+	<xsd:attribute name="actionurl" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="globalRulesetType">
+	<xsd:sequence>
+		<xsd:element name="regexset" type="regexsetType" minOccurs="0" maxOccurs="unbounded"/>	
+		<xsd:element name="ruleset" type="rulesetType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="regexsetType">
+	<xsd:sequence>
+		<xsd:element name="regex" type="regexType" minOccurs="1" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="regexType">
+	<xsd:sequence>
+		<xsd:element name="pattern" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+	</xsd:sequence>
+	<xsd:attribute name="name" type="xsd:string" use="required"/>	
+</xsd:complexType>
+
+<xsd:complexType name="rulesetType">
+	<xsd:sequence>
+		<xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="ruleType">
+	<xsd:sequence>
+		<xsd:element name="validation" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="missing" type="ruleCategoryType" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="malformed" type="ruleCategoryType" minOccurs="1" maxOccurs="1"/>
+	</xsd:sequence>
+	<xsd:attribute name="name" type="xsd:string" use="required"/>
+	<xsd:attribute name="regex" type="xsd:string"/>
+</xsd:complexType>
+
+<xsd:complexType name="ruleCategoryType">
+	<xsd:sequence>
+		<xsd:element name="rule-action" type="ruleActionType" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="severity" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<!-- xsd:enumeration value="ignore"/ -->
+				<xsd:enumeration value="continue"/>				
+				<xsd:enumeration value="fatal"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+</xsd:complexType>
+
+<xsd:complexType name="ruleActionType">
+	<xsd:sequence>
+		<xsd:element name="parameter" type="ruleActionParameterType" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="class" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="ruleActionParameterType">
+	<xsd:attribute  name="name" type="xsd:string" use="required"/>
+	<xsd:attribute  name="value" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="actionType">
+	<xsd:sequence>
+		<xsd:element name="role-collection" type="actionRoleType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>			
+		<xsd:element name="action-class" type="xsd:string"/>
+		<xsd:element name="flow" type="flowType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="writer" type="writerType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="redirect" type="redirectType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="settings" type="settingsType" minOccurs="0" maxOccurs="1"/>				
+		<xsd:element name="ruleset" type="rulesetType" minOccurs="0" maxOccurs="1"/>		
+    </xsd:sequence>
+    <xsd:attribute name="url" type="xsd:string" use="required"/>
+    <xsd:attribute name="menuaction" type="xsd:string"/>    
+    <xsd:attribute name="screen" type="xsd:string" />
+    <xsd:attribute name="flow" type="xsd:boolean" />    
+    <xsd:attribute name="writer" type="xsd:boolean" />    
+    <xsd:attribute name="redirect" type="xsd:boolean" />    
+    <xsd:attribute name="csrf" type="xsd:boolean" />    
+</xsd:complexType>
+
+<xsd:complexType name="actionRoleType">
+	<xsd:sequence>
+		<xsd:element name="role" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    	
+</xsd:complexType>
+
+<xsd:complexType name="flowType">
+	<xsd:sequence>
+		<xsd:element name="settings" type="settingsType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="properties" type="propertiesType" minOccurs="0" maxOccurs="1"/>	
+		<xsd:element name="result" type="resultType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="class" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="resultType">
+    <xsd:attribute name="value" type="xsd:string" use="required"/>
+    <xsd:attribute name="screen" type="xsd:string"/>
+    <xsd:attribute name="applid" type="xsd:string"/>
+    <xsd:attribute name="writer" type="xsd:string"/>    
+    <xsd:attribute name="redirect" type="xsd:string"/>
+    <xsd:attribute name="inScope" type="xsd:boolean"/>
+	<xsd:attribute name="content-type" type="xsd:string"/>    
+	<xsd:attribute name="attach" type="xsd:string"/>
+</xsd:complexType>
+
+<xsd:complexType name="writerType">
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+	<xsd:attribute name="attach" type="xsd:string"/>    
+	<xsd:attribute name="scope">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="application"/>
+				<xsd:enumeration value="session"/>				
+				<xsd:enumeration value="request"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+	<xsd:attribute name="inScope" type="xsd:boolean"/>
+	<xsd:attribute name="content-type" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="redirectType">
+    <xsd:attribute name="id" type="xsd:string"/>
+	<xsd:attribute name="url" type="xsd:string"/>    
+</xsd:complexType>  
+
+<xsd:complexType name="settingsType">
+	<xsd:sequence>
+		<xsd:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>    
+</xsd:complexType>
+
+<xsd:complexType name="propertiesType">
+	<xsd:sequence>
+		<xsd:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>    
+</xsd:complexType>    
+
+<xsd:complexType name="propertyType">
+    <xsd:attribute name="key" type="xsd:string" use="required"/>
+	<xsd:attribute name="value" type="xsd:string" use="required"/>    
+</xsd:complexType>  
+  
+</xsd:schema>  

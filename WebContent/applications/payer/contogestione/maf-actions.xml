@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+    
+     <action url="ricercaContoGestione.do" screen="ricercaContoGestioneD.do" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.contogestione.actions.AvanzaAction</action-class>
+	 </action>
+    
+    <action url="ricercaContoGestioneD.do" screen="ricercaContoGestione.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.contogestione.actions.ContoGestioneSearchAction</action-class>
+        <flow class="org.seda.payer.manager.contogestione.flows.GenericFlowManager">
+			<result value="default" screen="ricercaContoGestione.screen" />
+			<result value="ricerca" screen="ricercaContoGestione.screen" />
+			<result value="combo" screen="ricercaContoGestione.screen" />
+			<result value="mail" screen="ricercaContoGestione.screen" />
+			<result value="download" writer="filePath" content-type="application/pdf" inScope="false" attach="filename"/>
+        </flow>
+
+    </action>
+
+
+</actions-mapping>   

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+
+
+
+<!-- Ricerca Anagrafiche -->
+    <action url="ricercaAnagrafiche.do" screen="ricercaAnagrafiche.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaAnagAction</action-class>
+    </action>
+
+    <action url="ricercaDettaglioAnag.do" screen="ricercaDocumentiAnag.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaAnagDettAction</action-class>
+    </action>
+
+<!-- Ricerca Emissioni -->
+    <action url="ricercaEmissioni.do" screen="ricercaEmissioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaEmissioniAction</action-class>
+    </action>
+
+    <action url="dettaglioEmissione.do" screen="dettaglioEmissione.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.DettaglioEmissioneAction</action-class>
+    </action>
+    
+<!--  
+    <action url="ricercaDettaglioEmi.do" screen="ricercaEmissioni.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaAnagraficheAction</action-class>
+    </action>
+-->
+    <action url="ricercaDocumentiEmi.do" screen="ricercaDocumentiEmi.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaDocumentiEmiAction</action-class>
+    </action>
+
+<!-- Ricerca e funzioni CRUD Documenti Carichi -->
+    <action url="gestioneDocumentiCarico.do" screen="gestioneDocumentiCarico_search.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.GestioneDocumentiCaricoAction</action-class>
+        <flow class="org.seda.payer.manager.entrate.flows.GestioneDocumentiCaricoFlow">
+			<result value="search" screen="gestioneDocumentiCarico_search.screen" />
+			<result value="add" screen="gestioneDocumentiCarico_add.screen" />
+			<result value="edit" screen="gestioneDocumentiCarico_edit.screen" />
+			<result value="delete" screen="gestioneDocumentiCarico_delete.screen" />
+			<result value="stampa" writer="pdfAvviso" content-type="application/pdf" inScope="false" attach="pdfAvviso" />
+		</flow>
+    </action>
+  
+
+	<!--  Solo funzione di ricerca documenti carichi --> 
+    <action url="ricercaDocumenti.do" screen="ricercaDocumenti.screen" flow="true">
+      <action-class>org.seda.payer.manager.entrate.actions.RicercaDocumentiCarichiAction</action-class>
+        <flow class="org.seda.payer.manager.entrate.flows.RicercaDocumentiCarichiFlow">
+          <result value="ricerca" screen="ricercaDocumenti.screen" />
+          <result value="gestione" screen="gestioneDocumentiCarico.do" />
+      </flow>
+    </action>
+
+
+<!-- Ricerca Pagamenti -->
+    <action url="ricercaPagamenti.do" screen="ricercaPagamenti.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaPagamentiAction</action-class>
+        <flow class="org.seda.payer.manager.entrate.flows.RicercaPagamentiFlow">
+        	<result value="ricerca" screen="ricercaPagamenti.screen"/>
+			<result value="download" writer="pagamentiCSVZIP" content-type="application/zip" inScope="false" attach="filename"/>
+		</flow>
+    </action>
+    
+<!-- Dettaglio Documento -->
+    <action url="documentoDettaglio.do" screen="documentoDettaglio.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.DettaglioDocumentoAction</action-class>
+            <flow class="org.seda.payer.manager.entrate.flows.DettaglioDocumentoFlow">
+				<result value="dettaglioDocumento" screen="documentoDettaglio.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaDettaglioAnag.do"/>
+				<result value="ricercaEmissioni" screen="ricercaDocumentiEmi.do"/>
+				<result value="ricercaDocumenti" screen="ricercaDocumenti.do"/>
+				<result value="gestioneDocumentiCarico" screen="gestioneDocumentiCarico.do"/>
+	        </flow>
+     </action>
+			
+<!-- Ricerca Tributi -->
+    <action url="ricercaTributi.do" screen="listaTributi.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaTributiAction</action-class>
+            <flow class="org.seda.payer.manager.entrate.flows.RicercaTributiFlow">
+            	<result value="listaTributi" screen="listaTributi.screen"/>
+              <result value="listaTributiDiscarico" screen="listaTributiDiscarico.screen"/>
+              <result value="listaTributiSalva" screen="listaTributiDiscarico.screen"/>
+      				<result value="ricercaAnagrafica" screen="ricercaDettaglioAnag.do"/>
+      				<result value="ricercaEmissioni" screen="ricercaDocumentiEmi.do"/>
+      				<result value="ricercaDocumenti" screen="ricercaDocumenti.do"/>
+	        </flow>
+    </action>
+    
+<!-- Ricerca Scadenze -->
+    <action url="ricercaScadenze.do" screen="listaScadenze.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaScadenzeAction</action-class>
+            <flow class="org.seda.payer.manager.entrate.flows.RicercaScadenzeFlow">
+            	<result value="listaScadenze" screen="listaScadenze.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaDettaglioAnag.do"/>
+				<result value="ricercaEmissioni" screen="ricercaDocumentiEmi.do"/>
+				<result value="ricercaDocumenti" screen="ricercaDocumenti.do"/>
+	        </flow>
+    </action>
+<!-- Ricerca Pagamenti -->
+    <action url="ricercaPagamentiDocumenti.do" screen="listaPagamenti.screen" flow="true">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaPagamentiDocumentiAction</action-class>
+            <flow class="org.seda.payer.manager.entrate.flows.RicercaPagamentiDocumentiFlow">
+            	<result value="listaPagamenti" screen="listaPagamenti.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaDettaglioAnag.do"/>
+				<result value="ricercaEmissioni" screen="ricercaDocumentiEmi.do"/>
+				<result value="ricercaDocumenti" screen="ricercaDocumenti.do"/>
+	        </flow>
+    </action>
+    
+<!-- Ricerca Note -->
+    <action url="ricercaNote.do" screen="ricercaNote.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.RicercaNoteAction</action-class>
+    </action>
+    
+    <!-- SVILUPPO_001_LP_26.08.2019 -->
+    <action url="uploadDocumento.do" screen="caricaCSVEC.screen" flow="false">
+        <action-class>org.seda.payer.manager.entrate.actions.CaricaCsvEcAction</action-class>
+    </action>
+
+    <action url="upload.do" screen="caricaCSVEC.screen" flow="false" csrf="false">
+        <action-class>org.seda.payer.manager.entrate.actions.UploadAction</action-class>
+    </action>
+    <!-- FINE SVILUPPO_001_LP_26.08.2019 -->
+    
+    <!--  
+    <action url="stampaAvvisoPagoPA.do"  writer="true">
+        <action-class>org.seda.payer.manager.entrate.actions.StampaAvvisoPagoPA</action-class>
+		<writer id="pathFileToDownload" content-type="application/pdf" inScope="false" attach="nome_file_pdf"/>
+    </action>
+    -->
+    
+</actions-mapping>   

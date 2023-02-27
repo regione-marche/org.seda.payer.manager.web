@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://exceptions.core.maf.j2ee5.seda.com"
+xmlns="http://exceptions.core.maf.j2ee5.seda.com"
+elementFormDefault="qualified">
+
+<xsd:annotation>
+ 	<xsd:documentation xml:lang="en">
+    </xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="exceptions-mapping" type="exceptionsMappingType"/>
+
+<xsd:complexType name="exceptionsMappingType">
+	<xsd:sequence>
+		<xsd:element name="exception" type="exceptionType"  minOccurs="0" maxOccurs="unbounded"/>		
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="exceptionType">
+    <xsd:attribute name="class" type="xsd:string" use="required"/>
+    <xsd:attribute name="screen" type="xsd:string" use="required"/>
+    <xsd:attribute name="applid" type="xsd:string"/>    
+</xsd:complexType>
+
+</xsd:schema>

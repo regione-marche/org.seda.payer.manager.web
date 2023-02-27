@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  <template name="errori">
+	<url>/applications/templates/default/error_template.jsp</url>
+  </template>
+
+  <screen name="walletMonitoraggio" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletMonitoraggio.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+  
+  <screen name="walletMonitoraggioedit" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletMonitoraggioEdit.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+  
+  <screen name="walletServizio" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletServizio.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
+  <screen name="walletServizioedit" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletServizioEdit.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
+  <screen name="walletmanager" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletManager.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
+  <screen name="walletAnagraficaContribuenti" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletAnagraficaContribuenti.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
+  <screen name="walletAnagraficaContribuentiedit" template="default">
+    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/walletmanager/include/WalletAnagraficaContribuentiEdit.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
+</templates>

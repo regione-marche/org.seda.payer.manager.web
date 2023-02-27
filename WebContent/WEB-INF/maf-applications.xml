@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications-mapping xmlns="http://application.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://application.core.maf.j2ee5.seda.com xsd/maf-applications.xsd">
+	<default>
+		<config-path>/WebContent/applications</config-path>
+		<applid>login</applid>
+		<ignored-ext>.css .js .jpg .gif .pdf .png .PNG .jks .xml .jsp .properties</ignored-ext>
+		<ignored-subcontext>/MetadataPublisherServlet /metadata /AssertionConsumerService /metadataAR /metadataGW /DisplayChart /GetChart /Print /xmla /SingleLogoutService /ext/bolzanoExt</ignored-subcontext>
+	</default>
+	<security enabled="true">
+		<login-page>/login/login.do</login-page>
+		<security-error-page>/login/loginerror.do</security-error-page>
+		<signon-class>org.seda.payer.manager.login.actions.SignOnSupport</signon-class>
+		<sso-class>org.seda.payer.manager.login.actions.SSOSupport</sso-class>
+		<after-login>/default/default.do</after-login>
+		<locked-timeout>1</locked-timeout> 
+		<login-ruleset>
+			<username-regex>^[a-zA-Z0-9].{3,50}$</username-regex>
+			<password-regex>^[a-zA-Z0-9\.,!#%]{3,15}$</password-regex>
+			<attempts>3</attempts> 
+			<locked-timeout>1</locked-timeout>
+			<msg-invalid>Lo username o la password non sono sintatticamente corrette.</msg-invalid>
+			<msg-locked>Il tuo account risulta bloccato. Contatta l'amministratore di sistema.</msg-locked>
+			<msg-notfound>Il tuo account non risulta censito.</msg-notfound>
+			<msg-notsignedon>Si prega di eseguire il login.</msg-notsignedon>
+			<msg-lowprofile>Non ha i requisiti di autorizzazione sufficienti per la sua richiesta.</msg-lowprofile>
+			<msg-lowrole>Non ha i requisiti di autorizzazione sufficienti per la sua richiesta.</msg-lowrole>			
+		</login-ruleset> 
+	</security>
+ 	
+ 	<application name="login" protected="false" activate="true">
+		<description>Applicazione di Login</description>	
+		<config-path>/applications/payer/login</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->  
+		</template-collection>
+		<subcontext>/login</subcontext>
+		<welcome>login.do</welcome>
+	</application>
+ 	
+ 	<application name="default" protected="true" activate="true">
+ 		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+			<profile>PROF</profile>
+			<profile>OPER</profile>
+		</profile-collection>
+		<description>Applicazione di default per la gestione del menù</description>	
+		<config-path>/applications/payer/default</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->  
+		</template-collection>
+		<subcontext>/default</subcontext>
+		<welcome>default.do</welcome>
+		<starter-class>org.seda.payer.manager.components.config.ManagerStarter</starter-class>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+		<session-class>org.seda.payer.manager.components.listeners.SessionHandler</session-class>
+	</application>
+
+	<application name="entrate" protected="true" activate="true">
+		<profile-collection>
+		<profile>AMMI</profile>
+		<profile>AMSO</profile>
+		<profile>AMUT</profile>
+		<profile>AMEN</profile>
+		</profile-collection>
+		<description>Entrate</description>
+		<config-path>/applications/payer/entrate</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/entrate</subcontext>
+		<welcome>ricercaAnagrafiche.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	<application name="ruoli" protected="true" activate="true">
+		<profile-collection>
+		<profile>AMMI</profile>
+		<profile>AMSO</profile>
+		<profile>AMUT</profile>
+		<profile>AMEN</profile>
+		</profile-collection>
+		<description>Ruoli</description>
+		<config-path>/applications/payer/ruoli</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/ruoli</subcontext>
+		<welcome>ricercaAnagrafiche.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+
+	<application name="monitoraggio" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Monitoraggio transazioni</description>
+		<config-path>/applications/payer/monitoraggio</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/monitoraggio</subcontext>
+		<welcome>monitoraggioTransazioni.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+		
+	<application name="riconciliazione" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+		</profile-collection>
+		<description>Riconciliazione transazioni</description>
+		<config-path>/applications/payer/riconciliazione</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/riconciliazione</subcontext>
+		<welcome>riconciliazioneTransazioni.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	<application name="riconciliazionenn" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Riconciliazione transazioni nodo</description>
+		<config-path>/applications/payer/riconciliazionenn</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template> 
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400--> 
+		</template-collection>
+		<subcontext>/riconciliazionenn</subcontext>
+		<welcome>riconciliazioneTransazioniNodo.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="riconciliazionemt" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Riconciliazione Movimenti Tesoreria</description>
+		<config-path>/applications/payer/riconciliazionemt</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/riconciliazionemt</subcontext>
+		<welcome>ricercaGiornaliCassa.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="rendicontazione" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Manager rendicontazione flussi</description>
+		<config-path>/applications/payer/rendicontazione</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/rendicontazione</subcontext>
+		<welcome>ricercaFlussi.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="configurazione" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Manager Configurazioni Applicative</description>
+		<config-path>/applications/payer/configurazione</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/configurazione</subcontext>
+		<welcome>home.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="ottico" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Manager ottico</description>
+		<config-path>/applications/payer/ottico</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/ottico</subcontext>
+		<welcome>elaborazioni.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="adminusers" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Amministrazione utenze</description>
+		<config-path>/applications/payer/adminusers</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->  
+		</template-collection>
+		<subcontext>/adminusers</subcontext>
+		<welcome>usersSearch.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="log" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Log accessi mensili/annuali</description>
+		<config-path>/applications/payer/log</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/log</subcontext>
+		<welcome>logAccessi.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="logrequest" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Log Request</description>
+		<config-path>/applications/payer/logrequest</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+			<template name="newsoris">maf-templates-soris.xml</template>
+		</template-collection>
+		<subcontext>/logrequest</subcontext>
+		<welcome>logRequest.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="ecmanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Estratto Conto Manager</description>
+		<config-path>/applications/payer/ecmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/ecmanager</subcontext>
+		<welcome>default.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="ecagemanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Estratto Conto Manager Agenzie</description>
+		<config-path>/applications/payer/ecmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/ecagemanager</subcontext>
+		<welcome>default.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	
+	<application name="ecanagrafica" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Estratto Conto Manager</description>
+		<config-path>/applications/payer/ecmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/ecanagrafica</subcontext>
+		<welcome>default.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	
+	<application name="ecuffmanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Estratto Conto Manager</description>
+		<config-path>/applications/payer/ecmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/ecuffmanager</subcontext>
+		<welcome>default.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	<application name="ecnotifiche" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Estratto Conto Manager</description>
+		<config-path>/applications/payer/ecmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/ecnotifiche</subcontext>
+		<welcome>default.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	
+
+	<application name="monitoraggioext" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+		</profile-collection>
+		<description>Monitoraggio notifiche portali esterni</description>
+		<config-path>/applications/payer/monitoraggioext</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>			
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/monitoraggioext</subcontext>
+		<welcome>monitoraggioext.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+    
+	<application name="monitoraggiocup" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+		</profile-collection>
+		<description>Monitoraggio notifiche portale cup</description>
+		<config-path>/applications/payer/monitoraggiocup</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="regmarche">maf-templates-regmarche.xml</template>
+		</template-collection>
+		<subcontext>/monitoraggiocup</subcontext>
+		<welcome>monitoraggiocup.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	
+	<application name="monitoraggiosoap" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+		</profile-collection>
+		<description>Monitoraggio notifiche soap</description>
+		<config-path>/applications/payer/monitoraggiosoap</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="andreani">maf-templates-andreani-del</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <template name="regmarchesvecc">maf-templates-regmarchesvecc.xml</template>  
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+		</template-collection>
+		<subcontext>/monitoraggiosoap</subcontext>
+		<welcome>monitoraggiosoap.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+    
+
+	<application name="monitoraggionn" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Monitoraggio Nodo Nazionale</description>
+		<config-path>/applications/payer/monitoraggionn</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+            <!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/monitoraggionn</subcontext>
+		<welcome>monitoraggionn.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	
+
+	<application name="sitoistituzionale" protected="false" activate="true">
+		<description>Sito Istituzionale</description>	
+		<config-path>/applications/payer/sitoistituzionale</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/sitoistituzionale</subcontext>
+		<welcome>default.do</welcome>
+	</application>
+	
+	<application name="wismanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>WIS Manager</description>
+		<config-path>/applications/payer/wismanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/wismanager</subcontext>
+		<welcome>wismanager.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="wisconfig" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>WIS Configurazione</description>
+		<config-path>/applications/payer/wisconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/wisconfig</subcontext>
+		<welcome>home.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="posfisico" protected="true" activate="true">
+		<profile-collection>
+			<profile>OPER</profile>
+		</profile-collection>
+		<description>POS Fisico</description>
+		<config-path>/applications/payer/posfisico</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/posfisico</subcontext>
+		<welcome>posfisico.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="monitoraggiowis" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Monitoraggio WIS</description>
+		<config-path>/applications/payer/monitoraggiowis</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/monitoraggiowis</subcontext>
+		<welcome>monitoraggiowis.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="walletmanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletmanager</subcontext>
+		<welcome>walletmanager.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="walletmonitoraggio" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletmonitoraggio</subcontext>
+		<welcome>walletmonitoraggio.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="walletservizio" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletservizio</subcontext>
+		<welcome>walletservizio.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="walletanagraficacontribuenti" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletanagraficacontribuenti</subcontext>
+		<welcome>walletanagraficacontribuenti.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	
+	<application name="walletricaricheborsellino" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletricaricheborsellino</subcontext>
+		<welcome>walletricaricheborsellino.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application> 
+	
+	<application name="walletsollecitodiscarico" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Manager</description>
+		<config-path>/applications/payer/walletmanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletsollecitodiscarico</subcontext>
+		<welcome>walletsollecitodiscarico.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="walletconfig" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Wallet Config</description>
+		<config-path>/applications/payer/walletconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/walletconfig</subcontext>
+		<welcome>inviosollecito.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	<application name="blackboxconfig" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>BlackBox Config</description>
+		<config-path>/applications/payer/blackboxconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<template name="regmarche">maf-templates-regmarche.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/blackboxconfig</subcontext>
+		<welcome>blackbox.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	<application name="modello3config" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Modello3 Config</description>
+		<config-path>/applications/payer/modello3config</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="regmarche">maf-templates-regmarche.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/modello3config</subcontext>
+		<welcome>modello3.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+		
+	<application name="mercatoconfig" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Mercato Config</description>
+		<config-path>/applications/payer/mercatoconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/mercatoconfig</subcontext>
+		<welcome>tipologiabanco.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="mercatimanager" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Mercati Manager</description>
+		<config-path>/applications/payer/mercatimanager</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/mercatimanager</subcontext>
+		<welcome>mercatimanager.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="monitoraggiomercati" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Monitoraggio Mercati</description>
+		<config-path>/applications/payer/monitoraggiomercati</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+			<!--PG200400-->
+			<template name="newsoris">maf-templates-soris.xml</template>
+			<!--FINE PG200400-->
+		</template-collection>
+		<subcontext>/monitoraggiomercati</subcontext>
+		<welcome>monitoraggiomercati.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+ 	<application name="gestioneuffici" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Gestione uffici</description>	
+		<config-path>/applications/payer/gestioneuffici</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+		</template-collection>
+		<subcontext>/gestioneuffici</subcontext>
+		<welcome>gestioneuffici.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+
+	<application name="monitoraggiocruss" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+		</profile-collection>
+		<description>Monitoraggio cruscotto</description>
+		<config-path>/applications/payer/monitoraggiocruss</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>
+		</template-collection>
+		<subcontext>/monitoraggiocruss</subcontext>
+		<welcome>monitoraggiocruss.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+
+	<application name="blackboxpos" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Gestione Posizioni BlackBox</description>
+		<config-path>/applications/payer/blackboxconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+		</template-collection>
+		<subcontext>/blackboxpos</subcontext>
+		<welcome>blackboxpos.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
+	<application name="blackboxposlog" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Gestione Log Posizioni BlackBox</description>
+		<config-path>/applications/payer/blackboxconfig</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+		</template-collection>
+		<subcontext>/blackboxposlog</subcontext>
+		<welcome>blackboxposlog.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	<application name="serviziattivi" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile>
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Servizi Attivi</description>
+		<config-path>/applications/payer/serviziattivi</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="lepida">maf-templates-lepida.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="maggioli">maf-templates-maggioli.xml</template>
+			<template name="sassari">maf-templates-sassari.xml</template>
+			<template name="consbonrm">maf-templates-consbonrm.xml</template>
+			<template name="sap">maf-templates-sap.xml</template>
+			<template name="padanatech">maf-templates-padanatech.xml</template>
+			<template name="fccsa">maf-templates-fccsa.xml</template>
+			<template name="regabruzzo">maf-templates-regabruzzo.xml</template>
+			<template name="roseto">maf-templates-roseto.xml</template>
+			<template name="cbec">maf-templates-cbec.xml</template>
+			<template name="provroma">maf-templates-provroma.xml</template>
+			<template name="serc">maf-templates-serc.xml</template>
+			<template name="soris">maf-templates-soris.xml</template>
+			<template name="creset">maf-templates-creset.xml</template>
+            <template name="regmarche">maf-templates-regmarche.xml</template>  
+		</template-collection>
+		<subcontext>/serviziattivi</subcontext>
+		<welcome>serviziattivi.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+	
+	
+	<application name="ioitalia" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Io Italia</description>
+		<config-path>/applications/payer/ioitalia</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="aosta">maf-templates-aosta.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+		</template-collection>
+		<subcontext>/ioitalia</subcontext>
+		<welcome>ioitalia.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+
+	
+	
+	
+	<application name="integrazioneflussi" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMMI</profile>
+			<profile>AMSO</profile> 
+			<profile>AMUT</profile>
+			<profile>AMEN</profile>
+		</profile-collection>
+		<description>Integrazione Flussi</description>
+		<config-path>/applications/payer/integrazioneflussi</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="regmarche">maf-templates-regmarche.xml</template>
+		</template-collection>
+		<subcontext>/integrazioneflussi</subcontext>
+		<welcome>integrazioneflussi.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+	
+
+</applications-mapping>

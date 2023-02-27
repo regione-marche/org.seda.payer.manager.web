@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^(?:(?!').)*{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+    
+    <action url="monitoraggiosoap.do" screen="monitoraggiosoap.screen">
+        <action-class>org.seda.payer.manager.monitoraggiosoap.actions.MonitoraggioSoapAction</action-class>
+		<ruleset>
+        	<rule name="txtIdTransazione" regex="descrizione64_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="txtNumeroDocumento">
+        		<validation>maxlength=128</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        	<rule name="txtNumeroOperazione">
+        		<validation>maxlength=128</validation>
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>  
+        </ruleset> 
+    </action>
+    
+    <action url="downloadXml.do" writer="true">
+    	<action-class>org.seda.payer.manager.monitoraggiosoap.actions.DownloadXmlAction</action-class>
+    	<writer id="file_xml" content-type="plain/txt" inScope="true" attach="nome_file_xml"/>
+    </action>
+
+	<action url="dettaglioNotifica.do" screen="monitoraggiosoapdettaglio.screen">
+		<action-class>org.seda.payer.manager.monitoraggiosoap.actions.MonitoraggioSoapDettaglioAction</action-class>
+	</action>
+	
+	<action url="ritorna.do" screen="monitoraggiosoap.do">
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.monitoraggiosoap.actions.RitornaAction</action-class>
+    </action>  
+    
+    <action url="notifica.do" flow="true">
+        <action-class>org.seda.payer.manager.monitoraggiosoap.actions.NotificaAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggiosoap.flows.MonitoraggioSoapNotificaFlow">
+        	<result value="monitoraggiosoap" screen="monitoraggiosoap.screen"/>
+        	<result value="monitoraggiosoapdettaglio" screen="monitoraggiosoapdettaglio.screen"/>
+        </flow>
+    </action> 
+
+</actions-mapping>   

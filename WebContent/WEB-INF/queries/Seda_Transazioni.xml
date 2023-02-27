@@ -1,0 +1,327 @@
+<Schema name="PayerAnalysis">
+	<Dimension type="StandardDimension" name="Utente">
+		<Hierarchy name="Utente" hasAll="true" allMemberName="Tutti" primaryKey="USR_CUSRUSER">
+			<Table name="PYUSRTB" alias="">
+			</Table>
+			<Level name="Utente" column="USR_CUSRUSER" type="String" uniqueMembers="true" levelType="Regular">
+			</Level>
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="StandardDimension" name="Ente">
+		<Hierarchy name="Ente" hasAll="true" allMemberName="Tutti" primaryKey="ANE_KANEKENT">
+			<Table name="PYANETB" alias="">
+			</Table>
+			<Level name="Ente" column="ANE_KANEKENT" type="String" uniqueMembers="true" levelType="Regular">
+			</Level>
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="StandardDimension" name="Societa">
+		<Hierarchy name="Societa" hasAll="true" allMemberName="Tutte" primaryKey="SOC_CSOCCSOC" >
+			<View alias="PYSOCTB">
+			<SQL dialect="generic">
+					SELECT SOC_CSOCCSOC, SOC_DSOCDSOC FROM PYSOCTB
+					XXXWHERECONDITION_SOCXXX				
+				</SQL>
+			</View>
+			<Level name="Societa" column="SOC_DSOCDSOC" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="StandardDimension" name="Tipo Servizio">
+		<Hierarchy name="Tipo Servizio" hasAll="true" allMemberName="Tutte" primaryKey="TSE_KTSEKTSE">
+			<View alias="PYTSETB">
+			<SQL dialect="generic">
+					SELECT concat(TSE_CSOCCSOC,TSE_CTSECTSE) AS TSE_KTSEKTSE, 
+					SOC_DSOCDSOC,
+					TSE_CSOCCSOC,TSE_CTSECTSE,TSE_GTSEGAGG,TSE_CTSECOPE,
+					concat(TSE_CTSECTSE,concat('-',TSE_DTSEDTSE)) AS TSE_DTSEDTSE
+					FROM PYTSETB 	inner join PYSOCTB on PYSOCTB.SOC_CSOCCSOC=TSE_CSOCCSOC				
+				</SQL>
+			</View>
+			<Level name="Tipo Servizio" column="TSE_CTSECTSE" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">			    	
+			</Level>			
+			<Level name="Societa" column="SOC_DSOCDSOC" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">			    				
+    		</Level>			
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="StandardDimension" name="Tipo Bollettino">
+		<Hierarchy name="Tipo Bollettino" hasAll="true" allMemberName="Tutte" primaryKey="BOL_TBOLTBOL">
+			<Table name="PYBOLTB" alias="">
+			</Table>
+			<Level name="Tipo" column="BOL_TBOLTBOL" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			<Property name="Descrizione" column="BOL_DBOLDBOL" type="String">
+    		</Property>
+			<Property name="Modalita" column="BOL_DBOLMODA" type="String">
+    		</Property>
+			</Level>
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="StandardDimension" name="Gateway">
+		<Hierarchy name="Gateway" hasAll="true" allMemberName="Tutti" primaryKey="GTW_KGTWKGTW">
+			<View alias="PYGTWTB">
+			<SQL dialect="generic">
+					SELECT GTW_KGTWKGTW, 
+					concat(GTW_DGTWDGTW,concat('-',concat(CAN_DCANDCAN,concat('-',UTE_DUTEDUTE)))) AS GTW_DGTWDGTW,
+					GTW_KCANKCAN,
+					GTW_CGTWCABI, GTW_CGTWCCAB, GTW_CGTWCCCB
+					FROM PYGTWTB
+                    inner join PYUTETB on PYUTETB.UTE_CSOCCSOC=GTW_CSOCCSOC and PYUTETB.UTE_CUTECUTE=GTW_CUTECUTE
+                    inner join PYCANTB on PYCANTB.CAN_KCANKCAN=GTW_KCANKCAN
+			</SQL>
+			</View>
+			<Level name="Gateway" column="GTW_DGTWDGTW" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+				<Property name="Canale" column="GTW_KCANKCAN" type="String">
+    		</Property>
+    		<Property name="Abi" column="GTW_CGTWCABI" type="String">
+    		</Property>
+    		<Property name="Cab" column="GTW_CGTWCCAB" type="String">
+    		</Property>
+    		<Property name="C/C" column="GTW_CGTWCCCB" type="String">
+    		</Property>
+			</Level>
+		</Hierarchy>
+	</Dimension>
+	<Dimension type="TimeDimension" name="Data Pagam">
+  <Hierarchy hasAll="true" allMemberName="Tutti" primaryKey="TMP_KTMPKTMP">
+   <Table name="PYTMPTB">
+   </Table>
+   <Level name="Anno Pagam" column="TMP_GTMPANNO" type="String" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+   </Level>
+    <Level name="Trimestre Pagam" column="TMP_GTMPTRIM" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+   </Level>
+   <Level name="Mese Pagam" column="TMP_GTMPMESE" ordinalColumn="TMP_GTMPMANN" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+   </Level>
+    <Level name="Giorno Pagam" column="TMP_GTMPDATA" ordinalColumn="TMP_GTMPDATA" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" formatter="org.seda.payer.manager.analysis.formatter.DateFormatter">
+   </Level>
+  </Hierarchy>
+ </Dimension>
+ <Dimension type="TimeDimension" name="Data Trans">
+  <Hierarchy hasAll="true" allMemberName="Tutti" primaryKey="TMP_KTMPKTMP">
+   <Table name="PYTMPTB">
+   </Table>
+   <Level name="Anno Trans" column="TMP_GTMPANNO" type="String" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+   </Level>
+    <Level name="Trimestre Trans" column="TMP_GTMPTRIM" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+   </Level>
+   <Level name="Mese Trans" column="TMP_GTMPMESE" ordinalColumn="TMP_GTMPMANN" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+   </Level>
+   <Level name="Giorno Trans" column="TMP_GTMPDATA" ordinalColumn="TMP_GTMPDATA" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" formatter="org.seda.payer.manager.analysis.formatter.DateFormatter">
+   </Level>
+  </Hierarchy>
+ </Dimension>
+<Dimension type="StandardDimension" name="Canale Pagam">
+		<Hierarchy name="Canale Pagam" hasAll="true" allMemberName="Tutti" primaryKey="CAN_KCANKCAN">
+			<Table name="PYCANTB" alias="" >				
+			</Table>
+			<Level name="Canale Pagam" column="CAN_DCANDCAN" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>
+		</Hierarchy>
+</Dimension>
+<Dimension type="StandardDimension" name="Esito">
+		<Hierarchy name="Esito" hasAll="true" allMemberName="Tutti" primaryKey="ESI_KESIKESI">
+			<Table name="PYESITB" alias="" >				
+			</Table>
+			<Level name="Esito" column="ESI_DESIDESI" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>
+		</Hierarchy>
+</Dimension>
+<Dimension type="StandardDimension" name="Enti">
+		<Hierarchy name="Enti" hasAll="true" allMemberName="Tutti" primaryKey="ENT_KANEKENT">
+			<View alias="PYENTTB">
+			<SQL dialect="generic">
+					SELECT 
+					ENT_KANEKENT,
+					ANE_DANEDENT,
+					concat(ANE_CANECENT,concat(concat(' ',ANE_TANETUFF),concat(' ',ANE_CANECUFF))) AS ENTE
+					FROM PYENTTB 
+					INNER JOIN PYANETB ON ANE_KANEKENT=ENT_KANEKENT
+					INNER JOIN PYUTETB ON UTE_CUTECUTE=ENT_CUTECUTE
+					INNER JOIN PYSOCTB ON SOC_CSOCCSOC=ENT_CSOCCSOC
+				</SQL>
+			</View>
+			<Level name="Ente" column="ANE_DANEDENT" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>			
+		</Hierarchy>
+</Dimension>
+<Dimension type="StandardDimension" name="Organizzazione">
+		<Hierarchy name="Organizzazione" hasAll="true" allMemberName="Tutti" primaryKey="KORGKORG">
+			<View alias="PYENTTB">
+			<SQL dialect="generic">
+					SELECT 
+					ENT_CSOCCSOC,
+					ENT_CUTECUTE,
+					UTE_DUTEDUTE,
+					ENT_KANEKENT,
+					SOC_DSOCDSOC,
+					ANE_DANEDENT,
+					concat(ENT_CSOCCSOC,concat(ENT_CUTECUTE,ENT_KANEKENT)) AS KORGKORG,
+					concat(ANE_CANECENT,concat(concat(' ',ANE_TANETUFF),concat(' ',ANE_CANECUFF))) AS ENTE
+					FROM PYENTTB 
+					INNER JOIN PYANETB ON ANE_KANEKENT=ENT_KANEKENT
+					INNER JOIN PYUTETB ON UTE_CUTECUTE=ENT_CUTECUTE
+					INNER JOIN PYSOCTB ON SOC_CSOCCSOC=ENT_CSOCCSOC
+					XXXWHERECONDITION_ORGXXX
+				</SQL>
+			</View>
+			<Level name="Societa" column="SOC_DSOCDSOC" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>
+			<Level name="Utente" column="UTE_DUTEDUTE" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>
+			<Level name="Ente" column="ANE_DANEDENT" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>			
+		</Hierarchy>
+</Dimension>
+<Dimension type="StandardDimension" name="CuteCute">
+		<Hierarchy name="CuteCute" hasAll="true" allMemberName="Tutti" primaryKey="UTE_CUTECUTE">
+			<Table name="PYUTETB" alias="" >				
+			</Table>
+			<Level name="CuteCute" column="UTE_DUTEDUTE" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+			</Level>		
+		</Hierarchy>
+</Dimension>
+
+	<Cube name="Transazioni" cache="true" enabled="true">
+		<View alias="PYTRATB">
+			<SQL dialect="generic">
+					SELECT  
+                    TRA_KTRAKTRA,
+                    TRA_FTRAFESI,
+                    TRA_CSOCCSOC,
+                    TRA_KGTWKGTW,
+                    GTW_KCANKCAN,
+                    TRA_GTRADTRA,
+                    TRA_GTRADPAG,
+                    PYTMPTB.TMP_KTMPKTMP AS ID_TIME_PAGAMENTO,
+                    O.TMP_KTMPKTMP AS ID_TIME_TRANSAZIONE,
+                    TRA_ITRAITOT,
+                    TRA_ITRACOTR,
+                    TRA_ITRACOGW,
+                    TRA_ITRACONT,
+                    TRA_ITRACENT,
+                    COUNT(*)  AS NUMERO
+					FROM PYTRATB INNER JOIN
+			        PYTMPTB ON PYTMPTB.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADPAG)
+ 	                INNER JOIN PYTMPTB O ON O.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADTRA)      
+	                INNER JOIN PYGTWTB G ON G.GTW_KGTWKGTW=PYTRATB.TRA_KGTWKGTW 
+					XXXWHERECONDITION_TRANSXXX
+					GROUP BY TRA_KTRAKTRA, TRA_FTRAFESI,TRA_CSOCCSOC, TRA_KGTWKGTW, GTW_KCANKCAN,TRA_GTRADTRA,
+					TRA_GTRADTRA,TRA_GTRADPAG, PYTMPTB.TMP_KTMPKTMP, O.TMP_KTMPKTMP, TRA_ITRAITOT, TRA_ITRACOTR, TRA_ITRACOGW, TRA_ITRACONT, TRA_ITRACENT
+				</SQL>
+		</View>
+		<DimensionUsage source="Societa" name="Societa" foreignKey="TRA_CSOCCSOC" >
+		</DimensionUsage>
+		<DimensionUsage source="Gateway" name="Gateway" foreignKey="TRA_KGTWKGTW">
+		</DimensionUsage>
+		<DimensionUsage source="Data Pagam" name="Data Pagam" foreignKey="ID_TIME_PAGAMENTO">
+		</DimensionUsage>
+		<DimensionUsage source="Data Trans" name="Data Trans" foreignKey="ID_TIME_TRANSAZIONE">
+		</DimensionUsage>
+		<DimensionUsage source="Esito" name="Esito" foreignKey="TRA_FTRAFESI">
+		</DimensionUsage>
+		<DimensionUsage source="Canale Pagam" name="Canale Pagam" foreignKey="GTW_KCANKCAN">
+		</DimensionUsage>
+		<Measure name="Imp Complessivo" column="TRA_ITRAITOT" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Costi Trans Contribuente" column="TRA_ITRACOTR" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Costi Banca" column="TRA_ITRACOGW" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Spese Notifica" column="TRA_ITRACONT" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Costi Trans Ente" column="TRA_ITRACENT" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Tot Trans" column="NUMERO" aggregator="count" visible="true" datatype="Numeric">
+		</Measure>
+	</Cube>
+	<Cube name="Dettaglio" cache="true" enabled="true">
+		<View alias="PYDETTB">
+			<SQL dialect="generic">
+							select a.CSOCCSOC, a.CUTECUTE, a.KANEKENT, a.KTSEKTSE, a.KORGKORG, a.CTSECTSE,a.TBOLTBOL,a.KTRAKTRA,a.ID_TIME_PAGAMENTO, a.ID_TIME_TRANSAZIONE,	a.IMPORTO,
+					sum(a.num_bollettini) as NUM_BOLLETTINI
+					from (SELECT  concat(TIC_CSOCCSOC,TIC_CTSECTSE) as KTSEKTSE,
+						concat(TIC_CSOCCSOC,concat(TIC_CUTECUTE,TIC_KANEKENT)) AS KORGKORG,	
+						TIC_CSOCCSOC AS CSOCCSOC, 
+						TIC_CUTECUTE AS CUTECUTE, 
+						TIC_KANEKENT AS KANEKENT, 
+						TIC_CTSECTSE AS CTSECTSE,
+						TIC_TBOLTBOL AS TBOLTBOL,
+						TIC_KTRAKTRA AS KTRAKTRA,
+						PYTMPTB.TMP_KTMPKTMP AS ID_TIME_PAGAMENTO, 
+						O.TMP_KTMPKTMP AS ID_TIME_TRANSAZIONE,	
+						sum(TIC_ITICIMOV) AS IMPORTO,
+						(SELECT COUNT(*) FROM PYTICTB B	WHERE PYTICTB.TIC_KTRAKTRA=B.TIC_KTRAKTRA and
+						PYTICTB.TIC_CSOCCSOC = B.TIC_CSOCCSOC and PYTICTB.TIC_CUTECUTE = B.TIC_CUTECUTE and
+                        PYTICTB.TIC_KANEKENT = B.TIC_KANEKENT and PYTICTB.TIC_CTSECTSE=B.TIC_CTSECTSE and PYTICTB.TIC_TBOLTBOL=B.TIC_TBOLTBOL) AS NUM_BOLLETTINI
+						FROM PYTICTB
+						INNER JOIN PYTRATB ON TRA_KTRAKTRA=TIC_KTRAKTRA
+						LEFT OUTER JOIN PYTMPTB ON PYTMPTB.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADPAG) 
+						LEFT OUTER JOIN PYTMPTB O ON O.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADTRA)
+						where TRA_FTRAFESI = '1' and TRA_GTRADPAG &lt; CURRENT_DATE	 
+						group by TIC_CSOCCSOC,TIC_CUTECUTE,TIC_KANEKENT,TIC_CTSECTSE,TIC_TBOLTBOL,TIC_KTRAKTRA,PYTMPTB.TMP_KTMPKTMP,O.TMP_KTMPKTMP
+						 
+						UNION ALL
+						SELECT concat(TDT_CSOCCSOC,TDT_CTSECTSE) as KTSEKTSE,
+						concat(TDT_CSOCCSOC,concat(TDT_CUTECUTE,TDT_KANEKENT_CON)) AS KORGKORG,		
+						TDT_CSOCCSOC AS CSOCCSOC,
+						TDT_CUTECUTE AS CUTECUTE, 
+						TDT_KANEKENT_CON AS KANEKENT, 
+						TDT_CTSECTSE AS CTSECTSE,
+						TDT_TBOLTBOL as TBOLTBOL,
+						TDT_KTRAKTRA AS KTRAKTRA,
+						PYTMPTB.TMP_KTMPKTMP AS ID_TIME_PAGAMENTO, 
+						O.TMP_KTMPKTMP AS ID_TIME_TRANSAZIONE,	 
+						sum(TDT_ITDTTOTA) AS IMPORTO,
+						(SELECT COUNT(*) FROM PYTDTTB B	WHERE PYTDTTB.TDT_KTRAKTRA=B.TDT_KTRAKTRA and
+						PYTDTTB.TDT_CSOCCSOC = B.TDT_CSOCCSOC and PYTDTTB.TDT_CUTECUTE = B.TDT_CUTECUTE and
+                        PYTDTTB.TDT_KANEKENT_CON = B.TDT_KANEKENT_CON and PYTDTTB.TDT_CTSECTSE=B.TDT_CTSECTSE and PYTDTTB.TDT_TBOLTBOL=B.TDT_TBOLTBOL ) AS NUM_BOLLETTINI
+						FROM PYTDTTB
+						INNER JOIN PYTRATB ON TRA_KTRAKTRA=TDT_KTRAKTRA
+						LEFT OUTER JOIN PYTMPTB ON PYTMPTB.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADPAG) 
+						LEFT OUTER JOIN PYTMPTB O ON O.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADTRA) 
+						where TRA_FTRAFESI = '1' and TRA_GTRADPAG &lt; CURRENT_DATE	
+						group by TDT_CSOCCSOC,TDT_CUTECUTE,TDT_KANEKENT_CON,TDT_CTSECTSE,TDT_TBOLTBOL,TDT_KTRAKTRA,PYTMPTB.TMP_KTMPKTMP,O.TMP_KTMPKTMP
+						
+						UNION ALL
+						SELECT concat(TFR_CSOCCSOC,TFR_CTSECTSE) as KTSEKTSE,
+						concat(TFR_CSOCCSOC,concat(TFR_CUTECUTE,TFR_KANEKENT_CON)) AS KORGKORG,	
+						TFR_CSOCCSOC AS CSOCCSOC, 
+						TFR_CUTECUTE AS CUTECUTE,
+						TFR_KANEKENT_CON AS KANEKENT, 
+						TFR_CTSECTSE AS CTSECTSE,
+						TFR_TBOLTBOL as TBOLTBOL,
+						TFR_KTRAKTRA AS KTRAKTRA,
+						PYTMPTB.TMP_KTMPKTMP AS ID_TIME_PAGAMENTO, 
+						O.TMP_KTMPKTMP AS ID_TIME_TRANSAZIONE,	
+						sum(TFR_ITFRTOTA) AS IMPORTO,
+						(SELECT COUNT(*) FROM PYTFRTB B	WHERE PYTFRTB.TFR_KTRAKTRA=B.TFR_KTRAKTRA and
+						PYTFRTB.TFR_CSOCCSOC = B.TFR_CSOCCSOC and PYTFRTB.TFR_CUTECUTE = B.TFR_CUTECUTE and
+                        PYTFRTB.TFR_KANEKENT_CON = B.TFR_KANEKENT_CON and PYTFRTB.TFR_CTSECTSE=B.TFR_CTSECTSE and PYTFRTB.TFR_TBOLTBOL=B.TFR_TBOLTBOL) AS NUM_BOLLETTINI		
+						FROM PYTFRTB
+						INNER JOIN PYTRATB ON TRA_KTRAKTRA=TFR_KTRAKTRA
+						LEFT OUTER JOIN PYTMPTB ON PYTMPTB.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADPAG) 
+						LEFT OUTER JOIN PYTMPTB O ON O.TMP_GTMPDATA=DATE(PYTRATB.TRA_GTRADTRA) 
+						where TRA_FTRAFESI = '1' and TRA_GTRADPAG &lt; CURRENT_DATE	
+						group by TFR_CSOCCSOC,TFR_CUTECUTE,TFR_KANEKENT_CON,TFR_CTSECTSE,TFR_TBOLTBOL,TFR_KTRAKTRA,PYTMPTB.TMP_KTMPKTMP,O.TMP_KTMPKTMP
+				) a 
+						XXXWHERECONDITION_DETXXX
+						group by a.CSOCCSOC, a.CUTECUTE, a.KANEKENT, a.KTSEKTSE, a.KORGKORG, a.CTSECTSE,a.TBOLTBOL,a.KTRAKTRA,a.ID_TIME_PAGAMENTO, a.ID_TIME_TRANSAZIONE, a.IMPORTO											
+				</SQL>
+		</View>		
+		<DimensionUsage source="Tipo Servizio" name="Tipo Servizio" foreignKey="KTSEKTSE">
+		</DimensionUsage>
+		<DimensionUsage source="Tipo Bollettino" name="Tipo Bollettino" foreignKey="TBOLTBOL">
+		</DimensionUsage>
+		<DimensionUsage source="Organizzazione" name="Organizzazione" foreignKey="KORGKORG">
+		</DimensionUsage>
+		<DimensionUsage source="Data Pagam" name="Data Pagam" foreignKey="ID_TIME_PAGAMENTO">
+		</DimensionUsage>
+		<DimensionUsage source="Data Trans" name="Data Trans" foreignKey="ID_TIME_TRANSAZIONE">
+		</DimensionUsage>
+		<Measure name="Importo" column="IMPORTO" aggregator="sum" visible="true" formatString="#,##0.00">
+		</Measure>
+		<Measure name="Num Bollettini" column="NUM_BOLLETTINI" aggregator="sum"  visible="true">
+		</Measure>
+		<Measure name="Num Trans" column="NUM_BOLLETTINI" aggregator="count" visible="true" >
+		</Measure>			
+	</Cube>
+</Schema>

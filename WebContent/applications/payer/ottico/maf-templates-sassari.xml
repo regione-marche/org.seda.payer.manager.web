@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <screen name="elaborazioni_search" template="default">
+    <parameter key="pagetitle" value="manager.ottico.elaborazioni.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ottico/include/elaborazioni/search.jsp" />
+    <parameter key="results" value="/applications/payer/ottico/include/elaborazioni/list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+</templates>

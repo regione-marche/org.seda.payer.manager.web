@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+	  <default>/applications/templates/default/default.jsp</default>
+	
+	  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+	  
+	  <template name="errori">
+		<url>/applications/templates/default/error_template.jsp</url>
+	  </template>
+	
+	  <screen name="inviosollecito" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/invioSollecito.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	   <screen name="inviosollecitoEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/invioSollecitoEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  <screen name="inviosollecitoCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/invioSollecito_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  
+	  
+	  <screen name="evoluzioneintimazione" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/evoluzioneIntimazione.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>	  
+	  <screen name="evoluzioneintimazioneEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/evoluzioneIntimazioneEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  <screen name="evoluzioneintimazioneCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/evoluzioneIntimazione_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  
+	  
+	  
+	   <screen name="pagamentoperservizio" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/pagamentoPerServizio.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	   <screen name="pagamentoperservizioEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/pagamentoPerServizioEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>	  
+	   <screen name="pagamentoperservizioCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/pagamentoPerServizio_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  
+	  
+	   <screen name="prioritasulservizio" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/prioritaSulServizio.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	   <screen name="prioritasulservizioEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/prioritaSulServizioEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>	  
+	   <screen name="prioritasulservizioCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/prioritaSulServizio_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  
+	  
+	   <screen name="raccordopagonet" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/raccordoPagonet.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	   <screen name="raccordopagonetEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/raccordoPagonetEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  <screen name="raccordopagonetCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/raccordoPagonet_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+	  </screen>
+	  
+	   <!-- ABILITAZIONE DISCARICHI INIZIO -->
+	  <screen name="abilitazionediscarichi" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/abilitazionediscarichi.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="abilitazionediscarichiEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/abilitazionediscarichiEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	  <screen name="abilitazionediscarichiCancel" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/rabilitazionediscarichiCancel.jsp"/>
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	  <!-- ABILITAZIONE DISCARICHI FINE -->
+	  <!-- GESTIONE AVVISI -->
+	  <screen name="gestioneAvvisi" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/gestioneAvvisi.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	   <screen name="gestioneAvvisiEdit" template="default">
+	    <parameter key="pagetitle" value="manager.walletmonitoraggio.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/walletconfig/include/gestioneAvvisiEdit.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+	  </screen>
+	  <!-- GESTIONE AVVISI FINE-->	  
+	  
+  </templates>

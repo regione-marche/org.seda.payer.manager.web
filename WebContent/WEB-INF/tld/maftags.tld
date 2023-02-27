@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+  <description>MVC Application framework custom tags and functions</description>  
+  <tlib-version>1.0</tlib-version>
+  <short-name>mafTags</short-name>
+  <uri>com.seda.j2ee5.maf.taglibs</uri>
+
+<!--************** TAG *****************-->
+<!-- if then else tag -->
+  <tag>
+  	<description>
+  	 If tag
+  	</description>  
+  	<name>if</name>
+  	<tag-class>com.seda.j2ee5.maf.taglibs.IfTag</tag-class>
+  	
+  	<body-content>JSP</body-content>
+  	
+	<attribute>
+      <description>the boolean test</description>
+      <name>test</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>  
+  
+  <tag>
+  	<description>
+  	 Then tag
+  	</description>  
+  	<name>then</name>
+  	<tag-class>com.seda.j2ee5.maf.taglibs.ThenTag</tag-class>
+  	
+  	<body-content>JSP</body-content>
+  </tag>  
+  <tag>
+  	<description>
+  	 Else tag
+  	</description>  
+  	<name>else</name>
+  	<tag-class>com.seda.j2ee5.maf.taglibs.ElseTag</tag-class>
+  	
+  	<body-content>JSP</body-content>
+  </tag>  
+  
+  
+  <!-- view state tag -->
+  <tag>
+  	<description>
+  	 This tag caches the view state in the user session and provides a couple of object
+  	 with the current page parameters and the page request attributes (other than user parameters included by the view_state_value tag) 
+  	 by encoding them using Base 64 Encoded Strings
+  	</description>  
+  	<name>view_state</name>
+  	<tag-class>com.seda.j2ee5.maf.taglibs.ViewStateTag</tag-class>
+  	
+  	<body-content>JSP</body-content>
+  	
+	<attribute>
+      <description>the cached session name</description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+    <attribute>
+      <description>true to stored request parameters</description>    
+      <name>encodeParameters</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+    <attribute>
+      <description>true to stored request attributes</description>    
+      <name>encodeAttributes</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+      	
+  </tag>
+  <!-- view state parameter tag --> 
+  <tag>
+    <description>
+     This tag is used to specify a parameter to be used along with the client cache link tag.
+    </description>  
+    <name>parameter</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ViewStateValueTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the parameter key</description>    
+      <name>key</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the parameter value</description>    
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+   </tag>
+ 
+<!-- buffer tag -->
+   <tag>
+    <description>
+      This tag allows the user to buffer string information and set the duration of the buffer slot.    
+      Enables content to be refresh only after a specific amount of time.
+    </description>
+       
+    <name>cache</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.BufferTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the scope of the buffer slot</description>    
+      <name>scope</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the buffer slot duration in milliseconds</description>    
+      <name>duration</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the buffer slot key in the provided scope</description>    
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag> 
+ 
+  <!-- i18n message --> 
+  <tag>
+    <description>
+     This tag is used to localized message in jsp
+    </description>  
+    <name>message</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.MessageTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the message key</description>    
+      <name>key</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the bundle name value</description>    
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the preferred language value</description>    
+      <name>language</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+    <attribute>
+      <description>the preferred country value</description>    
+      <name>country</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the preferred variant value</description>    
+      <name>variant</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+   </tag>
+   
+   
+   <tag>
+	<description>
+     This tag is used to set the page bundle name used in the tag message
+    </description>
+	<name>setBundle</name>
+	<tag-class>com.seda.j2ee5.maf.taglibs.MessageBundleTag</tag-class>
+
+	<body-content>empty</body-content>
+
+	<attribute>
+		<description>the name of the resource bundle</description>
+		<name>name</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+   </tag>
+  <!-- ******************************************** -->
+  <!--                     HTML TAGS                -->  
+  <!-- ******************************************** -->
+  <!-- Link css -->
+  <tag>
+    <description>
+     Provides a support to the html link header clause
+    </description>  
+    <name>css</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.CssTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+   </tag>
+ <tag>
+    <description>
+     Provides a support to the html class attribute
+    </description>  
+    <name>cssclass</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.CssClassTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+   </tag>   
+        <!-- Link css -->
+  <tag>
+    <description>
+     Provides a support to the html script header clause
+    </description>  
+    <name>script</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ScriptTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+    <attribute>
+      <description>the script type</description>    
+      <name>type</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+   </tag> 
+  <!-- Anchor -->
+  <tag>
+    <description>
+     Provides a support to the html anchor
+    </description>  
+    <name>link</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.AnchorTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the anchor name</description>	
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the anchor id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the anchor action</description>    
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the anchor title</description>
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the css class</description>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+    
+	<attribute>
+      <description>the wrapped text</description>
+      <name>text</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the anchor target</description>
+      <name>target</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>onclick event</description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>        
+	<attribute>
+      <description>generate javascript function (default true)</description>
+      <name>autojs</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+   </tag>
+   
+ <!-- Title -->
+  <tag>
+    <description>
+     Provides the title support 
+    </description>  
+    <name>title</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.TitleTag</tag-class>
+   
+    <body-content>JSP</body-content>
+	
+   </tag>   
+   
+ <!-- Text -->
+  <tag>
+    <description>
+     Provides the text support 
+    </description>  
+    <name>text</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.TextTag</tag-class>
+  
+    <body-content>JSP</body-content>
+	
+   </tag>
+        
+  <!-- Form -->
+  <tag>
+    <description>
+     Provides a form that can have input validated after submission
+    </description>  
+    <name>form</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.FormTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the form name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the form action</description>    
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the form method</description>
+      <name>method</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the css class</description>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>	
+    
+	<attribute>
+      <description>the validation flag</description>
+      <name>validation</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+   </tag>
+  
+<!-- Action -->
+  <tag>
+    <description>
+     Provides the action support to a form tag, button tag or anchor tag. Use this tag with the jstl core url tag in the body
+    </description>  
+    <name>action</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ActionTag</tag-class>
+ 
+    <body-content>JSP</body-content>
+	
+   </tag>        
+  
+<!-- Submit -->
+  <tag>
+    <description>
+     Provides a submit button for a form tag.
+    </description>  
+    <name>submit</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.InputSubmitTag</tag-class>
+ 
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the input submit name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <description>the input submit value</description>	
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+
+	<attribute>
+      <description>the switch to activate validation. true is the default</description>    
+      <name>validate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>the input text id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+    <attribute>
+      <description>the css class</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>onclick event</description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+   </tag>    
+<!-- Button -->
+  <tag>
+    <description>
+     Provides an input button for a form tag. The action, in case of onclick event, will be override the parent form action.
+     If this tag is outside the form tag will be wrapped with a form.
+    </description>  
+    <name>button</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.InputButtonTag</tag-class>
+ 
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the input button name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <description>the input button value</description>	
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>the switch to activate validation. true is the default</description>    
+      <name>validate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the button action</description>	
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>the input button id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+    <attribute>
+      <description>the css class</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>onclick event</description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+   </tag>      
+ <!-- InputText -->
+  <tag>
+    <description>
+     Provides an html input text that can be validated. Use with form tag.
+    </description>  
+    <name>textbox</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.InputTextTag</tag-class>
+ 
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the input text name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <description>the extra information about an element</description>	
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the input text id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  
+	<attribute>
+      <description>the validation rules</description>	
+      <name>validation</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the mask edit rules</description>	
+      <name>mask</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the max length</description>    
+      <name>maxlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the input text size</description>    
+      <name>size</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the input width in pixel</description>    
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the min length</description>    
+      <name>minlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>if required</description>    
+      <name>required</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>if readonly text box</description>    
+      <name>readonly</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the css class</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag>  
+  
+<!-- InputPassword -->
+  <tag>
+    <description>
+     Provides an html input text that can be validated. Use with form tag.
+    </description>  
+    <name>password</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.InputPasswordTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the input password name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <description>the input password id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>the input text size</description>    
+      <name>size</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>the input width in pixel</description>    
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  
+	<attribute>
+      <description>the validation rules</description>	
+      <name>validation</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the max length</description>    
+      <name>maxlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the min length</description>    
+      <name>minlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the css class</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag>    
+  
+   <!-- name tag -->
+  <tag>
+   <description>
+     Provides a name tag for html input
+    </description>  
+    <name>name</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.NameTag</tag-class>
+
+    <body-content>JSP</body-content>
+  </tag>
+
+  <!-- value tag -->
+  <tag>
+   <description>
+     Provides a value tag for html input
+    </description>  
+    <name>value</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ValueTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+    <attribute>
+      <description>if the trim() function must be applied. true is the default.</description>
+      <name>trim</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+  </tag>
+  
+    
+<!-- checkbox tag -->
+
+  <tag>
+    <description>
+     Enhanced version of the html Checkbox input tag
+    </description>  
+    <name>checkbox</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.InputCheckboxTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the checkbox name</description>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>the checkbox id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+        
+	<attribute>
+      <description>checkbox required</description>	
+      <name>required</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+            
+	<attribute>
+	  <description>if true, submit the parent form</description>	
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+	  <description>if the onclick attribute is true, this is the new action of the parent form</description>	
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+     </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>      
+  </tag>
+
+  <!-- checkbox checked tag -->
+  <tag>
+
+    <description>
+     To be used with the checkbox to specify whether or not the tag is to be checked
+    </description>  
+    <name>checked</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.CheckedTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+  </tag>  
+  
+  
+  <!-- select tag -->
+  <tag>
+    <description>
+     Html Select tag 
+    </description>  
+    <name>select</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.SelectTag</tag-class>
+
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the name of the select tag</description>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the number of visible options in a drop-down list</description>
+      <name>size</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+	  <description>if true, submit the parent form</description>	
+      <name>onchange</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+	  <description>if the onchange attribute is true, this is the new action of the parent form</description>	
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- selected tag -->
+  <tag>
+    <description>
+     Selected tag to be used with select tag 
+    </description>  
+    <name>selected</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.SelectedTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>if the trim() function must be applied to the body. true is the default.</description>
+      <name>trim</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+
+  </tag>
+
+  <!-- option tag -->
+  <tag>
+    <description>
+     Option tag to be used with select tag 
+    </description>  
+    <name>option</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.OptionTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>if the trim() function must be applied to the body. true is the default.</description>
+      <name>trim</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+  </tag>
+  
+  <!-- option binder with OptionData arraylist tag -->
+  <tag>
+    <description>
+     Option binder tag to be used with select tag and a OptionData arrylist in the request 
+    </description>  
+    <name>option-binder</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.OptionBinderTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+    <attribute>
+      <description>the attribute id of the OptionData arrylist</description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+    <attribute>
+      <description>the OptionData arrylist object</description>
+      <name>options</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+  </tag>  
+  
+   <!-- label tag for input form fields-->
+  <tag>
+    <description>
+     Label tag to be used within input tag 
+    </description>  
+    <name>label</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LabelTag</tag-class>
+      
+    <body-content>JSP</body-content>
+	
+	<attribute>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	
+	<attribute>
+      <name>position</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <name>print</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+  </tag>
+  
+  <!-- required tag -->
+  <tag>
+    <description>
+     Define an input required field 
+    </description>  
+    <name>required</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.RequiredTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+  </tag>  
+  
+  <!-- Readonly tag -->
+  <tag>
+    <description>
+     Define an input readonly field 
+    </description>  
+    <name>readonly</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ReadonlyTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+  </tag>    
+  
+  <!-- Disabled tag -->
+  <tag>
+    <description>
+     Define an input disabled field 
+    </description>  
+    <name>disabled</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.DisabledTag</tag-class>
+      
+    <body-content>JSP</body-content>
+
+  </tag> 
+  
+<!-- Textarea -->
+  <tag>
+    <description>
+     Provides an html textarea that can be validated. Use with or not form tag.
+    </description>  
+    <name>textarea</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.TextareaTag</tag-class>
+ 
+    <body-content>JSP</body-content>
+
+	<attribute>
+      <description>the textarea name</description>	
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    
+	<attribute>
+      <description>the textarea id</description>	
+      <name>htmlid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  
+	<attribute>
+      <description>if required</description>	
+      <name>required</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+  
+	<attribute>
+      <description>the validation rules</description>	
+      <name>validation</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the max rows</description>    
+      <name>rows</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the max columns</description>    
+      <name>cols</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+	<attribute>
+      <description>the max length</description>    
+      <name>maxlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+    <attribute>
+      <description>the css class</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+      <description>tabindex</description>
+      <name>tabindex</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag>  
+    
+<!-- content tag -->
+  <tag>
+   <description>
+     Provides a content tag for html textarea
+    </description>  
+    <name>content</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.ContentTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>if the content characters will be encoded in to the corresponding html entity name</description>    
+      <name>encode</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+  </tag>  
+  
+<!-- Paging tag -->
+  <tag>
+   <description>
+     Provides a support for a base paging
+    </description>  
+    <name>paging</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.PagingTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>the name of the paging form</description>    
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the PageMetaData</description>    
+      <name>metaData</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+	
+	<attribute>
+      <description>the action of the paging form</description>    
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The name of the pageSize parameter (default pageSize)</description>    
+      <name>pageSizeName</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+	<attribute>
+      <description>The name of the pageNumber parameter (default pageNumer)</description>    
+      <name>pageNumberName</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+	<attribute>
+      <description>The name of the pageNumberTarget parameter (default pageNumerTarget). This is the requested number page</description>    
+      <name>pageNumberTargetName</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+        
+	<attribute>
+      <description>the lower number of the select list box for the page size value</description>    
+      <name>pageSizeBase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the gap beetwen two page size values</description>    
+      <name>pageSizeGap</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the highest number of the select list box for the page size value</description>    
+      <name>pageSizeMax</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+
+  </tag>
+
+<!-- DateSelector tag -->
+  <tag>
+   <description>
+     Provides a support for a base date selector tag
+    </description>  
+    <name>date</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.DateSelectorTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>the name of the date parameters. _year, _month, _day will be attached to the end of the parameter name in according to the Date Validation suffix</description>    
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the label name used to describe the validation error</description>    
+      <name>label</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+	
+	<attribute>
+      <description>the string representation of the locale es.: it_IT</description>    
+      <name>locale</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+	
+	<attribute>
+      <description>the calendar object to define the selected date</description>    
+      <name>calendar</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>the sql date object to define the selected date</description>    
+      <name>sqlDate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>     
+    
+	<attribute>
+      <description>the string representation of the selected date</description>    
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+        
+	<attribute>
+      <description>the base number for the year (default current year minus 3)</description>    
+      <name>yearMin</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+	<attribute>
+      <description>the top number for the year (default current year plus 3)</description>    
+      <name>yearMax</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+        
+	<attribute>
+      <description>for a required date</description>    
+      <name>required</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+
+  </tag>
+	
+<!-- Dumper Tag -->
+
+  <tag>
+   <description>
+     Provides a support for a memory dump about page, header, cookie, request, session and application scope
+    </description>  
+    <name>dump</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LogDump</tag-class>
+
+    <body-content>empty</body-content>
+    
+	<attribute>
+      <description>the name of the scope to be dumped. Valids are page, header, cookie, request, session and application</description>    
+      <name>scope</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+  </tag>
+
+<!-- Logger Tag -->
+
+  <tag>
+   <description>
+     Provides a support to log DEBUG in a jsp page
+    </description>  
+    <name>log_debug</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LogDebug</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>The log category name used to log this message.</description>    
+      <name>category</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The message to log. If this is not specified then the body of the tag is used instead.</description>    
+      <name>message</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>The exception to log. If this is not specified then only the message will be logged.</description>    
+      <name>exception</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+
+  </tag>
+
+  <tag>
+   <description>
+     Provides a support to log INFO in a jsp page
+    </description>  
+    <name>log_info</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LogInfo</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>The log category name used to log this message.</description>    
+      <name>category</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The message to log. If this is not specified then the body of the tag is used instead.</description>    
+      <name>message</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>The exception to log. If this is not specified then only the message will be logged.</description>    
+      <name>exception</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+
+  </tag>
+
+ <tag>
+   <description>
+     Provides a support to log WARN in a jsp page
+    </description>  
+    <name>log_warn</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LogWarn</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>The log category name used to log this message.</description>    
+      <name>category</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The message to log. If this is not specified then the body of the tag is used instead.</description>    
+      <name>message</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>The exception to log. If this is not specified then only the message will be logged.</description>    
+      <name>exception</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+
+  </tag>
+<tag>
+   <description>
+     Provides a support to log ERROR in a jsp page
+    </description>  
+    <name>log_error</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.LogError</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>The log category name used to log this message.</description>    
+      <name>category</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The message to log. If this is not specified then the body of the tag is used instead.</description>    
+      <name>message</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+	<attribute>
+      <description>The exception to log. If this is not specified then only the message will be logged.</description>    
+      <name>exception</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+
+  </tag>	
+<!-- Captcha Tag -->
+  <tag>
+   <description>
+     Provides a support write a captcha image and save the captha string in session
+    </description>  
+    <name>captcha</name>
+    <tag-class>com.seda.j2ee5.maf.taglibs.CaptchaTag</tag-class>
+
+    <body-content>JSP</body-content>
+    
+	<attribute>
+      <description>The height of the captcha image.</description>    
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The width of the captcha image.</description>    
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    
+	<attribute>
+      <description>The css class for the captcha image.</description>    
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+
+  </tag>	  
+  
+ </taglib>

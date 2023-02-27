@@ -1,0 +1,42 @@
+#var_form_anag_struttura{
+	padding-top:15px;
+	padding-right:10px;
+	padding-left:10px;
+	text-align:left;
+}
+
+
+
+
+#divRicMetadatiTopLeftAnag,
+#divRicMetadatiTopCenterAnag,
+#divRicMetadatiTopRightAnag
+{
+	width: unset;
+    float: left;
+    line-height: 1.1em;
+    
+}
+
+/*CSS per IE 8, 9, 10*/
+@media screen\0 {
+     .textareaman {width:218px;}
+  
+  #divRicMetadatiTopLeftAnag,
+  #divRicMetadatiTopCenterAnag,
+  #divRicMetadatiTopRightAnag
+  {width: 315px;}
+}
+ /*CSS per IE 6,7*/
+ @media screen\9 { 
+   .textareaman {width:218px;}
+  
+  #divRicMetadatiTopLeftAnag,
+  #divRicMetadatiTopCenterAnag,
+  #divRicMetadatiTopRightAnag
+  {width: 315px;}
+}
+
+#divElement14{
+	clear:both;
+}

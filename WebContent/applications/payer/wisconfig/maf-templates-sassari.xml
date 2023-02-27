@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+ 
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  <screen name="home" template="default">
+    <parameter key="pagetitle" value="Configurazione" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/default/include/mainempty.jsp" />
+    <parameter key="results" value="" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+  
+<!-- IMPOSTA DI SOGGIORNO INIZIO -->
+ 
+  <screen  name="impostaSoggiornoTipologiaSoggetti_search" template="default">
+    <parameter key="pagetitle" value="manager.impostasoggiornotiposoggetti.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTipologiaSoggetti_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoTipologiaSoggetto_var" template="default">
+    <parameter key="pagetitle" value="manager.impostasoggiornotiposoggetti.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTipologiaSoggetti_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoTipologiaSoggetto_cancel" template="default">
+    <parameter key="pagetitle" value="manager.impostasoggiornotiposoggetti.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTipologiaSoggetto_cancel.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen name="impostasoggiornoTipologiaStrutture_search" template="default">
+    <parameter key="pagetitle" value="manager.tipologiastruttura.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/include/impostasoggiornoTipologiaStrutture_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostasoggiornoTipologiaStrutture_var" template="default">
+    <parameter key="pagetitle" value="manager.tipologiastruttura.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/include/impostaSoggiornoTipologiaStrutture_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+ 
+ <screen name="impostasoggiornoTipologiaStrutture_edit" template="default">
+    <parameter key="pagetitle" value="manager.tipologiastruttura.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/include/impostasoggiornoTipologiaStrutture_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+   <screen name="impostasoggiornoTipologiaStrutture_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.tipologiastruttura.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.anagente.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/wisconfig/include/impostasoggiornoTipologiaStrutture_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+ 
+  <screen name="impostasoggiornoTipologiaStrutture_cancel" template="default">
+    <parameter key="pagetitle" value="manager.tipologiastruttura.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/include/impostaSoggiornoTipologiaStrutture_cancel.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+   <screen  name="impostaSoggiornoAnagStruttura_search" template="default">
+    <parameter key="pagetitle" value="manager.anagraficastruttura.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoAnagStruttura_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen name="impostaSoggiornoAnagStruttura_var" template="default">
+    <parameter key="pagetitle" value="manager.anagraficastruttura.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoAnagStruttura_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+   <screen  name="impostaSoggiornoAnagStruttura_cancel" template="default">
+    <parameter key="pagetitle" value="manager.anagraficastruttura.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoAnagStruttura_cancel.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoConfigurazioneImposta_search" template="default">
+    <parameter key="pagetitle" value="manager.raccordoentrate.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoConfigurazioneImposta_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+  <screen  name="impostaSoggiornoConfigurazioneImposta_var" template="default">
+    <parameter key="pagetitle" value="manager.raccordoentrate.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoConfigurazioneImposta_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoConfigurazioneImposta_cancel" template="default">
+    <parameter key="pagetitle" value="manager.raccordoentrate.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoConfigurazioneImposta_cancel.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+  
+
+<!-- TARIFFE  -->
+
+  <screen  name="impostaTariffa2_search" template="default">
+    <parameter key="pagetitle" value="manager.tariffestrutture.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTariffa_search.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoTariffa_var" template="default">
+    <parameter key="pagetitle" value="manager.tariffestrutture.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTariffa_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoTariffa_cancel" template="default">
+    <parameter key="pagetitle" value="manager.tariffestrutture.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoTariffa_cancel.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+<!-- inizio LP PG1800XX_016  -->
+  <screen  name="impostaSoggiornoFasciaTariffa_var" template="default">
+    <parameter key="pagetitle" value="manager.fascetariffestrutture.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoFasciaTariffa_var.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+
+  <screen  name="impostaSoggiornoFasciaTariffa_cancel" template="default">
+    <parameter key="pagetitle" value="manager.fascetariffestrutture.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/sassari/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/wisconfig/sassari/include/impostaSoggiornoFasciaTariffa_cancel.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/sassari/footer.jsp"/>
+  </screen>
+<!-- fine LP PG1800XX_016  -->
+
+  <!-- IMPOSTA DI SOGGIORNO FINE -->
+  
+
+</templates>

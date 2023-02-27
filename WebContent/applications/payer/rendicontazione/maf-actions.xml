@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+		<!-- Action che permette di effettuare LA RICERCA E LA VISUALIZZAZIONE DELLA LISTA DEI FLUSSI,
+		e della tabella di riepilogo, in funzione dei criteri selezionati dall'utente. Gestisce 
+		inoltre la presentazione  	-->    
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="codice2char_regex">
+ 				<pattern>^\w{1,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice1char_regex">
+ 				<pattern>^\w{1,1}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num18_regex">
+ 				<pattern>^\d{1,18}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num8_regex">
+ 				<pattern>^\d{1,8}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num13regex">
+ 				<pattern>^\d{1,13}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="descrizione_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_regex">
+ 				<pattern>^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<!-- ^((19|20)\d\d)(0[1-9]|1[012])(0[1-9]|1[0-9]|2[0-9]|3[01])\d{18}[\.,]\d{3}$</pattern> -->
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_yyyy_mm_dd_regex">
+ 				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice20char_regex">
+ 				<pattern>^\w{1,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice30char_regex">
+ 				<pattern>^\w{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4char_regex">
+ 				<pattern>^\w{1,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5char_regex">
+ 				<pattern>^\w{1,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice50char_regex">
+ 				<pattern>^\w{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice64char_regex">
+ 				<pattern>^\w{1,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codiceTransazione_regex">
+ 				<pattern>^[0-9a-zA-Z\-]{1,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4obblchar_regex">
+ 				<pattern>^\w{4,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice2obblchar_regex">
+ 				<pattern>^\w{2,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3obblchar_regex">
+ 				<pattern>^\w{3,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5obblchar_regex">
+ 				<pattern>^\w{5,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice10obblchar_regex">
+ 				<pattern>^\w{10,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="username_regex">
+ 				<pattern>^[a-zA-Z0-9]{3,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codicefisc_regex">
+ <!--  		<pattern>^[A-Z]{6}[]{2}[A-Z][]{2}[A-Z][]{3}[A-Z]*$</pattern> -->	
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione100_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione128_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,128}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione50_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione30_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione512_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,512}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="url_regex">
+ <!--		<pattern>^http:[/][/]|www.([a-z]|[A-Z]|[0-9]|[/.]|[~])*)$</pattern>-->
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="nome_flusso_regex">
+ 				<pattern>^\w{29,29}[\.]zip$</pattern>
+ 				<description>nome del flusso di rendicontazione</description>
+ 			</regex>
+ 			<regex name="tipo_invio_flusso_regex">
+ 				<pattern>^FTP|EMAIL$</pattern>
+ 				<description>tipo invio flusso: FTP o EMAIL</description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+			
+    <action url="ricercaFlussi.do" screen="ricercaFlussi.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.RicercaFlussi</action-class>
+        <flow class="org.seda.payer.manager.rendicontazione.actions.RicercaFlussiFlowAction">
+           	<result value="Search" screen="ricercaFlussi.screen" />
+           	<result value="StampaPdf" screen="stampaReportPdf.do" />
+           	<result value="DownloadCsv" screen="downloadListaCsv.do" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_transazione" regex="codiceTransazione_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_canale_pagamento" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_chiave_rendicontazione" regex="codice30char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_gateway" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipologia_servizio" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_strumento" regex="codice2obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipo_flusso" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+	
+		<!-- Action per il DOWNLOAD DELLA LISTA DEI FLUSSI IN FORMATO CSV : il nome del file che 
+		viene visualizzato all'utente è contenuto nell'attributo "nome_file_csv"; il testo CSV è 
+		una stringa contenuta nell'attributo "lista_flussi_csv"  -->  
+		  
+    <action url="downloadListaCsv.do" writer="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.DownloadListaCsv</action-class>
+        <writer id="lista_flussi_csv" content-type="plain/txt" inScope="true" attach="nome_file_csv"/>
+         <ruleset>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice4obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_transazione" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_canale_pagamento" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_chiave_rendicontazione" regex="codice30char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_gateway" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipologia_servizio" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_strumento" regex="codice2obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipo_flusso" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+
+		<!-- Action per il DOWNLOAD DEL SINGOLO FLUSSO DI RENDICONTAZIONE : il nome del file che 
+		viene visualizzato all'utente è contenuto nell'attributo "nome_flusso"; il flusso si 
+		 trova su disco e il suo nome è contenuto nell'attributo "pathname_flusso"  -->  
+		  
+    <action url="downloadFlusso.do" writer="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.DownloadFlusso</action-class>
+        <writer id="pathname_flusso" content-type="application/zip" inScope="false" attach="nome_flusso"/>
+        <ruleset> 			
+			<rule name="tx_nome_flusso" regex="nome_flusso_regex">
+        		<missing severity="fatal"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+
+		<!-- Action per il DOWNLOAD DELLA STAMPA DELLA LISTA DEI FLUSSI IN FORMATO PDF: il nome del file
+		 che viene visualizzato all'utente è contenuto nell'attributo "nome_file_pdf"; il file PDF si 
+		 trova su disco e il suo nome è contenuto nell'attributo "pathname_file_pdf"  -->   
+		  
+    <action url="stampaReportPdf.do" writer="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.StampaReportPdf</action-class>
+        <writer id="pathname_file_pdf" content-type="application/pdf" inScope="false" attach="nome_file_pdf"/>
+         <ruleset>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice4obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_transazione" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_canale_pagamento" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_chiave_rendicontazione" regex="codice30char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codice_gateway" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_pag_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipologia_servizio" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_strumento" regex="codice2obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_tipo_flusso" regex="codice3obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_da" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_data_cre_a" regex="date_yyyy_mm_dd_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+		<!-- Action per effettuare il REINVIO DI UN SINGOLO FLUSSO DI RENDICONTAZIONE  -->
+		    
+    <action url="inviaFlusso.do" screen="inviaFlusso.screen" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.InviaFlusso</action-class>
+        <ruleset>
+	        <rule name="chiaveRendicontazione" regex="codice30char_regex">
+	       		<missing severity="fatal"/>
+	       		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	        </rule>
+	        <rule name="tx_tipo_invio_flusso" regex="tipo_invio_flusso_regex">
+	       		<missing severity="fatal"/>
+	       		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+	       	</rule>
+        </ruleset>
+    </action>
+
+    <action url="ritorna.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.rendicontazione.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.rendicontazione.actions.RitornaFlowAction">
+           	<result value="FlussiSearch" screen="ricercaFlussi.do" />
+        </flow>
+    </action>  
+
+    
+</actions-mapping>   

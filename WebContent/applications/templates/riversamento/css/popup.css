@@ -1,0 +1,49 @@
+#backgroundPopup{
+	display:none;
+	position:fixed;
+	_position:absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	background:#FFFFFF;
+	border:1px solid #cecece;
+	z-index:1;
+}
+#popupDettaglio{
+	display:none;
+	position:fixed;
+	_position:absolute;
+	height:300px;
+	width:900px;
+	background:#FFFFFF;
+	border:2px solid #cecece;
+	z-index:2;
+	padding:12px;
+	padding-top: 30px;
+	/*font-size:12px;*/
+}
+#chiudiPopupDettaglio{
+	font-size:14px;
+	line-height:14px;
+	right:6px;
+	top:4px;
+	position:absolute;
+	color:#6fa5fd;
+	font-weight:700;
+	display:block;
+	cursor:pointer;
+}
+.tipo_bollettino_ICIM{display:none;}
+
+.tipo_bollettino_ISCM{display:none;}
+
+.tipo_bollettino_BOL{display:none;}
+
+.tipo_bollettino_SPO{display:none;}
+
+.tipo_bollettino_MAV{display:none;}
+
+.tipo_bollettino_CDS{display:none;}
+
+.tipo_bollettino_PRE{display:none;}

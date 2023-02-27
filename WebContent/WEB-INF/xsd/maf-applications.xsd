@@ -1,0 +1,128 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://application.core.maf.j2ee5.seda.com"
+xmlns="http://application.core.maf.j2ee5.seda.com"
+elementFormDefault="qualified">
+
+<xsd:element name="applications-mapping" type="applicationsMappingType"/>
+
+<xsd:complexType name="applicationsMappingType">
+	<xsd:sequence>
+		<xsd:element name="default" type="defaultType"  minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="security" type="securityType"  minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="menu-collection" type="menuCollectionType"  minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="application" type="applicationType"  minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="defaultType">
+	<xsd:sequence>
+		<xsd:element name="config-path" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="applid" type="xsd:string" minOccurs="1" maxOccurs="1"/>		
+		<xsd:element name="ignored-ext" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="ignored-subcontext" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="securityType">
+	<xsd:sequence>
+		<xsd:element name="login-page" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="security-error-page" type="xsd:string" minOccurs="0" maxOccurs="1"/>			
+		<xsd:element name="signon-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="sso-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="after-login" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="locked-timeout" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="login-ruleset" type="loginRuleSetType" minOccurs="1" maxOccurs="1"/>		
+    </xsd:sequence>
+    <xsd:attribute name="enabled" type="xsd:boolean" use="optional"/>    
+</xsd:complexType>
+
+<xsd:complexType name="loginRuleSetType">
+	<xsd:sequence>
+		<xsd:element name="username-regex" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="password-regex" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="attempts" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="locked-timeout" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="msg-invalid" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="msg-locked" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="msg-notfound" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="msg-notsignedon" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="msg-lowprofile" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		<xsd:element name="msg-lowrole" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+    </xsd:sequence>    
+</xsd:complexType>
+
+<xsd:complexType name="menuCollectionType">
+	<xsd:sequence>
+		<xsd:element name="menu" type="menuType" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    	
+</xsd:complexType>
+		
+<xsd:complexType name="menuType">
+	<xsd:sequence>
+		<xsd:element name="link" type="menuLinkType" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>
+    <xsd:attribute name="template" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="menuLinkType">
+	<xsd:attribute name="text" type="xsd:string" use="required"/>    
+	<xsd:attribute name="applid" type="xsd:string" use="required"/>
+	<xsd:attribute name="enabled" type="xsd:boolean" use="optional"/>
+</xsd:complexType>
+
+<xsd:complexType name="applicationType">
+	<xsd:sequence>
+		<xsd:element name="profile-collection" type="applicationProfileType" minOccurs="0" maxOccurs="1"/>	
+	
+		<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="remember-protected-url" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				
+		<xsd:element name="config-path" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		
+		<xsd:element name="template-collection" type="templateCollectionType" minOccurs="0" maxOccurs="1"/>
+		
+		<xsd:element name="subcontext" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="welcome" type="xsd:string" minOccurs="1" maxOccurs="1"/>		
+
+		<xsd:element name="starter-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				
+		<xsd:element name="controller-servlet" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		
+		<xsd:element name="binder-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+		
+		<xsd:element name="session-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="captcha" type="captchaType" minOccurs="0" maxOccurs="1"/>		
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="activate" type="xsd:boolean" use="optional"/>
+	<xsd:attribute name="protected" type="xsd:boolean" use="optional"/>        
+</xsd:complexType>
+
+<xsd:complexType name="templateCollectionType">
+	<xsd:sequence>
+		<xsd:element name="template" type="templateType" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    	
+</xsd:complexType>
+
+<xsd:complexType name="templateType" >
+	<xsd:simpleContent>
+		<xsd:extension base="xsd:string">
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:simpleContent>
+</xsd:complexType>
+
+<xsd:complexType name="applicationProfileType">
+	<xsd:sequence>
+		<xsd:element name="profile" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>	
+    </xsd:sequence>    	
+</xsd:complexType>
+
+<xsd:complexType name="captchaType">
+	<xsd:sequence>
+		<xsd:element name="captcha-url" type="xsd:string" minOccurs="1" maxOccurs="1"/>	
+		<xsd:element name="captcha-class" type="xsd:string" minOccurs="0" maxOccurs="1"/>		
+    </xsd:sequence>    	
+</xsd:complexType>
+
+</xsd:schema>

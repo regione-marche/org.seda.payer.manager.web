@@ -1,0 +1,244 @@
+
+html,body{
+	margin: 0 ;
+	padding: 0;
+	background-color:white;
+	/*font-size: 0.88em;*/
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial;
+	font-size: 88%;
+}
+
+
+/**** MANAGER LOGIN ****/
+.divECContainer
+{
+	clear: both;
+}
+.divECTop
+{
+	height: 20px;
+}
+.divECFill
+{
+	/*width: 900px;*/
+	height: 28em;
+	/*margin-left: 50px;*/
+	margin-bottom: 18px;
+	border: solid 1px #8AB9E3;
+}
+
+.divECFillSoris
+{
+	/*width: 900px;*/
+	height: 33em;
+	/*margin-left: 50px;*/
+	margin-bottom: 18px;
+	border: solid 1px #8AB9E3;
+}
+
+.divECTitle
+{
+	/*width: 900px;*/
+	background-color: #BFD9F0;
+	text-align: center;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.divECContainerGray,
+.divECContainerGrayEC
+{
+	/*width: 860px;*/
+	margin: 20px;
+	background-color: #EDEDED;
+}
+
+.divECContainerGrayEC
+{
+  height: 22.5em;
+}
+
+.divECCodiceFiscale
+{
+	padding: 30px 0px 10px 30px;
+	height: 8em;
+}
+
+.divECCodiceFiscaleTrentrisc
+{
+	padding: 30px 0px 10px 30px;
+	height: 4em;
+}
+
+.divECDouble
+{
+	padding: 30px 0px 10px 30px;
+	height: 2em;
+	width: 50%;
+}
+
+.labelECTop, .tbECBottom , .tbECBottomEnte , .tbECBottomDocumento , .labelECTopEnte , .labelECTopDocumento, .labelECTopEnte2 , .labelECTopDocumento2, .tbECBottomEnte2 , .tbECBottomDocumento2 .labelECTopProgCoob, .tbECBottomProgCoob 
+{
+	display: block;
+	/*clear: both;*/
+	color: Black !important;
+}
+
+.labelWalletManager, .tbWalletBottomManager
+{
+	display: block;
+	clear: both;
+	color: Black !important;
+	
+}
+
+.tbWalletBottomManager 
+{
+	width: 300px !important;
+	float: left;
+}
+.labelWalletManager
+{
+	width: 14em !important;
+	padding-left: 5px !important;
+}
+.labelECTop 
+{
+	width: 14em !important;
+	padding-left: 5px !important;
+}
+
+
+.labelECTopEnte 
+{
+	width: 5em !important;
+	padding-left: 5px !important;
+	/*margin-left: 30px;
+	margin-top: 3.5px;*/
+}
+
+.labelECTopDocumento 
+{
+	width: 8em !important;
+	padding-left: 22px !important;
+	/*margin-top: -48px;*/
+	
+}
+
+.tbECBottom 
+{
+	width: 300px !important;
+	float: left;
+}
+
+.tbECBottomCodFisc
+{
+	width: 300px !important;
+	float: left;
+	margin-left: -175px;
+	margin-top: 25px;
+
+}
+.tbECBottomEnte
+{
+	width: 100px !important;
+	margin-left: -65px;
+	float: left;
+	margin-top: 23px;
+	
+} 
+.tbECBottomDocumento
+{
+	width: 160px !important;
+	/*margin-top: -22px;
+	margin-left: 2px;
+	margin-bottom: 2px;*/
+	float:right;
+
+}
+.divECLink
+{
+	height: 3em;
+	padding: 10px 20px 10px 0px;
+}
+.btnVaiEC
+{
+	float: right;
+	font-size: 12px;
+	
+	margin-top: 2px;
+	text-decoration: none;
+	text-align: right;
+	padding-right: 30px;
+	color: black;
+	padding-top: 2px;
+	display: block;
+	border:0px;
+	cursor:pointer;
+	background-image: url(../../ecmanager/img/arrowGoTo.png);
+	background-position: center right;
+	background-repeat: no-repeat;
+	background-color: Transparent;
+}
+.ad_color_red{color:red;}
+
+/* PG160170_001 - inizio */
+
+.labelECTopEnte2 
+{
+	width: 5em !important;
+	padding-left: 5px !important;
+	/*margin-left: 30px;
+	margin-top: 3.5px;*/
+}
+
+.labelECTopDocumento2 
+{
+	width: 8em !important;
+	padding-left: 8px !important;
+	/*margin-top: -48px;*/
+	
+}
+
+.labelECTopProgCoob 
+{
+	width: 6em !important;
+	padding-left: 237px !important;
+	margin-top: -45px;
+}
+
+.tbECBottomEnte2
+{
+	width: 70px !important;
+	margin-left: -65px;
+	float: left;
+	margin-top: 23px;
+	
+} 
+.tbECBottomDocumento2
+{
+	width: 140px !important;
+	/*margin-top: -22px;
+	margin-bottom: 2px;*/
+	float:left;
+	margin-left: 4px;
+
+}
+
+.tbECBottomProgCoob
+{
+	width: 70px !important;
+	margin-left: 235px;
+	float: left;
+	margin-top: -22px;
+	
+}
+
+/* PG160170_001 - fine */
+
+/*PG200120*/
+div#tx_dataScadenza_div,
+div#tx_dataCreazione_div {
+    display: inline-block;
+}
+/*FINE PG200120*/

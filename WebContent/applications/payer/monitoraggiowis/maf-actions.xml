@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	   
+    <action url="monitoraggiowis.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.monitoraggiowis.actions.MonitoraggioWisAction</action-class>
+        <flow class="org.seda.payer.manager.monitoraggiowis.actions.MonitoraggioWisFlow">
+			<result value="ricerca" screen="monitoraggiowis.screen"/>
+			<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+		</flow>
+					
+    </action>
+    
+    <action url="dettagliocomunicazione.do" screen="dettagliocomunicazione.screen">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.monitoraggiowis.actions.DettaglioComunicazioneAction</action-class>
+    </action>
+    
+    
+    <action url="ritorna.do" screen="monitoraggiowis.screen">
+    	<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.monitoraggiowis.actions.RitornaAction</action-class>
+    </action> 
+    
+</actions-mapping>   

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="descrizione_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+			
+    <action url="gestioneuffici.do" screen="gestioneuffici.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.configurazione.actions.GestioneUfficiAction</action-class>
+        <flow class="org.seda.payer.manager.configurazione.flows.GestioneUfficiFlowAction">
+           	<result value="Search" screen="gestioneuffici.screen" />
+           	<result value="Add" screen="gestioneufficiadd.screen" />
+           	<result value="Edit" screen="gestioneufficiedit.screen" />
+           	<result value="Cancel" screen="gestioneufficicancel.screen" />
+        </flow>	
+    </action>
+    
+</actions-mapping>   

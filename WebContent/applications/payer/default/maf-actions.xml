@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="username_regex">
+ 				<pattern>^[a-zA-Z0-9]{8,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="vecchia_password_regex">
+ 				<pattern>^.{8,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="password_regex">
+ 				<pattern>^[a-zA-Z0-9\.,!#%]{8,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="puk_regex">
+ 				<pattern>^.{5,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+<!-- 
+	<action url="default.do" screen="default.screen" flow="true">
+       <action-class>org.seda.payer.manager.defaults.actions.DefaultAction</action-class>
+		<flow  class="org.seda.payer.manager.defaults.actions.DefaultFlowAction" >
+			<result value="00" screen="default.screen"/>
+			<result value="05" screen="cambiopswd.screen" applid="login"/>
+			<result value="errore" screen="message.screen"/>
+		</flow>
+    </action>
+ -->
+	<action url="default.do" screen="default.screen" flow="true">
+       <action-class>org.seda.payer.manager.defaults.actions.DefaultAction</action-class>
+         <flow class="org.seda.payer.manager.defaults.actions.DefaultFlowAction">
+           	<result value="1" screen="default.screen" />
+           	<result value="N" screen="sceltaProfilo.do" />
+        </flow>         
+    </action>
+
+	<action url="sceltaProfilo.do" screen="sceltaProfilo.screen" flow="true">
+       <action-class>org.seda.payer.manager.defaults.actions.SceltaProfiloAction</action-class>
+         <flow class="org.seda.payer.manager.defaults.actions.DefaultFlowAction">
+           	<result value="1" screen="default.do" />
+           	<result value="N" screen="sceltaProfilo.screen" />
+        </flow>         
+    </action>
+    
+    <action url="defaultprot.do" screen="default.screen" csrf="false">
+       <action-class>org.seda.payer.manager.defaults.actions.DefaultAction</action-class>
+    </action>
+ 	  
+</actions-mapping>   
+

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+	 
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="username_regex">
+ 				<pattern>^[a-zA-Z0-9].{3,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="vecchia_password_regex">
+ 				<pattern>^.{8,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="password_regex">
+ 				<pattern>^[a-zA-Z0-9\.,!#%]{8,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="puk_regex">
+ 				<pattern>^.{5,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+	 
+	<action  url="login.do" screen="login.screen">
+       <action-class>org.seda.payer.manager.actions.SignOnAction</action-class>
+    </action>
+    
+    <action  url="loginPdp.do" screen="login_pdp.screen">
+       <action-class>org.seda.payer.manager.actions.SignOnAction</action-class>
+    </action>
+    
+ 	<action url="logoff.do" screen="login.do" flow="true">
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow  class="org.seda.payer.manager.actions.LoginFlowAction" >
+        	<result value="redirect" redirect="urlPortale"/>
+			<result value="login" screen="login.do"/>
+        </flow>
+    </action>
+    
+    <action url="logoffAuthFederata.do" screen="login.do" >
+        <action-class>org.seda.payer.manager.login.trentrisc.actions.SignOffAction</action-class>
+    </action>
+    
+    <action url="logoffAuthFederataBolzano.do" screen="login.do" >
+        <action-class>org.seda.payer.manager.login.bolzano.actions.SignOffAction</action-class>
+    </action>
+        
+    <!-- inizio LP PG200060 -->
+    <action url="logoffAuthFederataRegMarche.do" screen="login.do" >
+        <action-class>org.seda.payer.manager.login.regmarche.actions.SignOffAction</action-class>
+    </action>
+    <!-- fine LP PG200060 -->
+
+	<action url="resetPswd.do" screen="resetpswd.screen" flow="true">
+        <action-class>org.seda.payer.manager.login.actions.ResetPswdAction</action-class>
+		<flow  class="org.seda.payer.manager.login.actions.ResetPswdFlowAction" >
+			<result value="resetPswd" screen="resetpswd.screen"/>
+			<result value="login" screen="login.screen"/>
+		</flow>
+        <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="puk" regex="puk_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="emailNotifiche" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+		</ruleset>
+    </action>
+    
+    	<action url="cambioPswd.do" screen="cambiopswd.screen" flow="true">
+        <action-class>org.seda.payer.manager.login.actions.CambioPswdAction</action-class>
+		<flow  class="org.seda.payer.manager.login.actions.CambioPswdFlowAction" >
+			<result value="default" screen="default.screen" applid="default"/>
+			<result value="cambioPswd" screen="cambiopswd.screen"/>
+			<result value="login" screen="login.screen"/>
+		</flow>
+        <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="puk" regex="puk_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_password" regex="vecchia_password_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_nuova_password" regex="password_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_conferma_nuova_password" regex="password_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="emailNotifiche" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+		</ruleset>
+    </action>
+    
+    <action url="sceltaAut.do" flow="true">
+        <action-class>org.seda.payer.manager.login.actions.SceltaAutenticazioneAction</action-class>
+		<flow  class="org.seda.payer.manager.login.actions.SceltaAutenticazioneFlowAction" >
+			<result value="proprietaria" screen="loginPdp.do"/>
+			<result value="federata" redirect="urlRedirectDefault"/>
+		</flow>
+    </action>
+    
+    <action url="loginerror.do" screen="loginerror.screen">
+        <action-class>org.seda.payer.manager.login.actions.LoginErrorAction</action-class>
+    </action>
+
+  
+</actions-mapping>   

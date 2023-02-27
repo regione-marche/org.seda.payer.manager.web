@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="codice2char_regex">
+ 				<pattern>^\w{1,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice1char_regex">
+ 				<pattern>^\w{1,1}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num18_regex">
+ 				<pattern>^\d{1,18}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num8_regex">
+ 				<pattern>^\d{1,8}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num13regex">
+ 				<pattern>^\d{1,13}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num15regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="descrizione_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_regex">
+ 				<pattern>^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="date_yyyy_mm_dd_regex">
+ 				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="anno_yyyy_regex">
+ 				<pattern>^(19|20)\d\d$</pattern>
+ 				<description>Anno da 1900 a 2099</description>
+ 			</regex>
+ 			<regex name="mese_mm_regex">
+ 				<pattern>^(0[1-9]|1[012])$</pattern>
+ 				<description>Mese da 01 a 12</description>
+ 			</regex>
+ 			<regex name="giorno_dd_regex">
+ 				<pattern>^(0[1-9]|[12][0-9]|3[01])$</pattern>
+ 				<description>Giorno da 01 a 31</description>
+ 			</regex>
+ 			<regex name="codice10char_regex">
+ 				<pattern>^\w{1,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice20char_regex">
+ 				<pattern>^\w{1,20}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice30char_regex">
+ 				<pattern>^\w{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4char_regex">
+ 				<pattern>^\w{1,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3char_regex">
+ 				<pattern>^\w{1,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5char_regex">
+ 				<pattern>^\w{1,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice50char_regex">
+ 				<pattern>^\w{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice64char_regex">
+ 				<pattern>^\w{1,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice256char_regex">
+ 				<pattern>^\w{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice2obblchar_regex">
+ 				<pattern>^\w{2,2}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice3obblchar_regex">
+ 				<pattern>^\w{3,3}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice4obblchar_regex">
+ 				<pattern>^\w{4,4}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice5obblchar_regex">
+ 				<pattern>^\w{5,5}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice10obblchar_regex">
+ 				<pattern>^\w{10,10}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice15obblchar_regex">
+ 				<pattern>^\w{15,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codice16obblchar_regex">
+ 				<pattern>^\w{16,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="username_regex">
+ 				<pattern>^[a-zA-Z0-9]{8,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="password_regex">
+ 				<pattern>^[a-zA-Z0-9\.,!#%]{8,15}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="cognome_regex">
+ 				<pattern>^[a-zA-Z ]{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="nome_regex">
+ 				<pattern>^[a-zA-Z ]{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="codicefisc_regex">
+ 				<pattern>^[a-zA-Z]{6}[\d]{2}[a-zA-Z][\d]{2}[a-zA-Z][\d]{3}[a-zA-Z]|[0-9]{11}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione100_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione128_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,128}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione50_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione30_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,30}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione512_regex">
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,512}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="url_regex">
+ <!--		<pattern>^http:[/][/]|www.([a-z]|[A-Z]|[0-9]|[/.]|[~])*)$</pattern>-->
+ 				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="nome_flusso_regex">
+ 				<pattern>^\w{29,29}[\.]zip$</pattern>
+ 				<description>nome del flusso di rendicontazione</description>
+ 			</regex>
+ 			<regex name="tipo_invio_flusso_regex">
+ 				<pattern>^FTP|EMAIL$</pattern>
+ 				<description>tipo invio flusso: FTP o EMAIL</description>
+ 			</regex>
+ 			<regex name="checkbox_Y_regex">
+ 				<pattern>^Y$</pattern>
+ 				<description>Checkbox</description>
+ 			</regex>
+ 			<regex name="flag_Y_N_regex">
+ 				<pattern>^Y|N$</pattern>
+ 				<description>Flag Y/N</description>
+ 			</regex>
+ 			<regex name="tipoUtente_D_F_G_regex">
+ 				<pattern>^D|F|G$</pattern>
+ 				<description>Tipologia Utente</description>
+ 			</regex>
+ 			<regex name="descrizione_testo_spazio_50_regex">
+ 				<pattern>^[a-zA-Z ]{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="descrizione_testo_spazio_256_regex">
+ 				<pattern>^[a-zA-Z ]{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			
+ 			
+ 			
+ 			<regex name="descrizioneRegex256">
+ 				<pattern><![CDATA[[\w \t \? \+ \( \) \& \. \, \x3B '\* \$ % @ \x3D \x2F -]{0,256}]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="alfanumerico20Regex">
+ 				<pattern>^\w{0,20}$</pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="alfanumerico2Regex">
+ 				<pattern>^\w{2}$</pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="digitsRegex">
+ 				<pattern>^[\d]*$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="digits5Regex">
+ 				<pattern>^[\d]{5}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="digits15Regex">
+ 				<pattern>^[\d]{0,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="codFiscRegex">
+ 				<pattern>^[a-zA-Z0-9]{16,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="partitaIvaRegex">
+ 				<pattern>^[\d]{11}$</pattern>
+ 				<description>partita iva</description>
+ 			</regex>
+ 			<regex name="codFiscPIvaRegex">
+ 				<pattern>^[a-zA-Z0-9]{11,16}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			
+ 			<regex name="ddlProvinciaRegex">
+				<pattern>^[A-Z]{2}\|[a-zA-Z0-9 '-.,]{1,256}$</pattern>
+				<description>sigla provincia|descrizione provincia</description>
+			</regex>
+			<regex name="ddlComuneRegex">
+				<pattern>^[a-zA-Z0-9]{4}\|[a-zA-Z0-9 '-.,]{1,256}$</pattern>
+				<description>codice belfiore|descrizione comune</description>
+			</regex>
+			<regex name="ddlDocumentoRegex">
+				<pattern>^(CI|PP)$</pattern>
+				<description></description>
+			</regex>
+			<regex name="ddlCategoriaMerceologicaRegex">
+				<pattern>^[a-zA-Z0-9]{2}\.[a-zA-Z0-9]{2}\.[a-zA-Z0-9]{2}$</pattern>
+				<description></description>
+			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+			
+	<action url="usersSearch.do" screen="adminusers_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.UsersSearchAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SearchFlowAction">
+           	<result value="userSearch" screen="adminusers_search.screen" />
+           	<result value="userAdd" screen="userAdd.do" />
+        </flow>
+           <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_UtenteEnte" regex="codice15obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_provincia" regex="codice2obblchar_regex"> 
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_applicazione" regex="codice256char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_userprofile" regex="codice10char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utenzaattiva" regex="flag_Y_N_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+        
+    </action>
+
+	<action url="userAdd.do" screen="adminusers_add.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.AddFlowAction">
+           	<result value="userAdd1" screen="adminusers_add.screen" />
+           	<result value="userAdd2" screen="userAdd2.do" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+           <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_userprofile" regex="codice10char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codiceFiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="abilitazioneMultiUtente" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="utenzaAttiva" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+<!-- fine LP PG200060 -->
+		
+        </ruleset>
+         			
+    </action>
+
+	<action url="autocompleteJson.do"  writer="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.UsernameAutoCompleteJsonAction</action-class>
+		<writer id="listaUserNameJson" content-type="application/json" inScope="true" />
+    </action>
+    
+	<!-- 
+	NOTA: A questa Action è associata una classe diversa in funzione del template,
+	"default" o "lepida", e pertanto come "action-class" si utilizza "ActionCaller" 
+	che, in funzione del template, esegue la classe richiesta
+	 -->
+	<action url="userAdd2.do" screen="adminusers_add2.screen" flow="true" >
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+         <flow class="org.seda.payer.manager.adminusers.actions.AddFlowAction">
+           	<result value="userAdd1" screen="userAdd.do" />
+           	<result value="userAdd2" screen="adminusers_add2.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>         
+           <ruleset>
+			<rule name="downloadFlussiRendicontazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="invioFlussiRendicontazioneViaFtp" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="invioFlussiRendicontazioneViaEmail" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerTransazioniOK" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerTransazioniKO" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerRiconciliazioneManuale" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="attivazioneEstrattoContoManager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="abilitazioneProfiloRiversamento" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="configurazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="adminusers" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="log" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="ecmanager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="ecanagrafica" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="ecuffmanager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="monitoraggio" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="rendicontazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="riconciliazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="riversamento" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+
+	<action url="userEdit.do" screen="adminusers_edit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.UserEditAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.EditFlowAction">
+           	<result value="userEdit1" screen="adminusers_edit.screen" />
+           	<result value="userEdit2" screen="userEdit2.do" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+           <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_userprofile" regex="codice10char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_societa" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_utente" regex="codice5obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="tx_ente" regex="codice10obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codiceFiscale" regex="codice16obblchar_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="abilitazioneMultiUtente" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="utenzaAttiva" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+
+	<action url="userEdit2.do" screen="adminusers_edit2.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+         <flow class="org.seda.payer.manager.adminusers.actions.EditFlowAction">
+           	<result value="userEdit1" screen="userEdit.do" />
+           	<result value="userEdit2" screen="adminusers_edit2.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>         
+        <ruleset>
+			
+			<rule name="downloadFlussiRendicontazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="invioFlussiRendicontazioneViaFtp" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="invioFlussiRendicontazioneViaEmail" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerTransazioniOK" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerTransazioniKO" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="azioniPerRiconciliazioneManuale" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="attivazioneEstrattoContoManager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="abilitazioneProfiloRiversamento" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="configurazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="adminusers" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="log" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="ecmanager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="ecanagrafica" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<rule name="ecuffmanager" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+			<rule name="monitoraggio" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="rendicontazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="riconciliazione" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="riversamento" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+
+	<action url="userDelete.do" screen="adminusers_canc.screen">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.UserDeleteAction</action-class>
+    </action>
+
+<!-- GESTIONE UTENZE INIZIO -->
+
+	<action url="seUsersAdd.do" screen="seUsers_add.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeAddFlowAction">
+           	<result value="add" screen="seUsers_add.screen" />
+           	<result value="pfisica" screen="seUsersAddPersonaFisica.do"/>
+			<result value="pgiuridica" screen="seUsersAddPersonaGiuridica.do"/>          
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+           <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_nome" regex="descrizione_testo_spazio_50_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_cognome" regex="descrizione_testo_spazio_256_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="emailNotifiche" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="smsNotifiche" regex="num15regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_codiceFiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="nessunaScadenza" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="utenzaAttiva" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="passwordAutogenerata" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	<!-- Persona fisica / delegato -->
+        	<rule name="txtCognome" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNome" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+<!-- PG200060 verificare controllo codicefiscale .... se togliere o meno commento .... -->
+<!-- 
+	20/12/2017 INIZIO - Marini - Inserito controllo codice fiscale lato action per gestire OMOCODIA    	
+        	<rule name="txtCodFiscale" regex="codFiscRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+    20/12/2017 FINE   - Marini
+-->       	
+        	<rule name="ddlProvinciaNascita" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneNascita" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlDocumento" regex="ddlDocumentoRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNumDocumento" regex="alfanumerico20Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEnteRilascio" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoResidenza" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaResidenza" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneResidenza" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapResidenza" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoDomicilio" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaDomicilio" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneDomicilio" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapDomicilio" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEmail" regex="mailRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEmailPEC" regex="mailRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCellulare" regex="digits15Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtTelefono" regex="digits15Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<!-- Persona giuridica -->
+        	<rule name="txtPartitaIVA" regex="codFiscPIvaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtRagioneSociale" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlFamigliaMerceologica" regex="alfanumerico2Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlCategoriaMerceologica" regex="ddlCategoriaMerceologicaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNumeroAutorizzazione" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoSedeLegale" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaSedeLegale" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneSedeLegale" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapSedeLegale" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoSedeOperativa" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaSedeOperativa" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneSedeOperativa" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapSedeOperativa" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        </ruleset>
+    </action>
+
+	<action url="seUsersEdit.do" screen="seUsers_edit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.actions.ActionCaller</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeEditFlowAction">
+           	<result value="edit" screen="seUsers_edit.screen" />
+           	<result value="pfisica" screen="seUsersEditPersonaFisica.do"/>
+			<result value="pgiuridica" screen="seUsersEditPersonaGiuridica.do"/>       
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+           <ruleset>
+			<rule name="tx_username" regex="username_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_nome" regex="descrizione_testo_spazio_50_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_cognome" regex="descrizione_testo_spazio_256_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="emailNotifiche" regex="email_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="smsNotifiche" regex="num15regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tipologiaUtente" regex="tipoUtente_D_F_G_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+<!-- PG200060 verificare controllo codicefiscale .... se togliere o meno commento .... -->
+<!-- 
+    20/12/2017 INIZIO - Marini - Inserito controllo codice fiscale lato action per gestire OMOCODIA    	
+			<rule name="tx_codiceFiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+    20/12/2017 FINE   - Marini
+ -->       	
+			<rule name="nessunaScadenza" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="utenzaAttiva" regex="checkbox_Y_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	
+        	
+        	<!-- Persona fisica / delegato -->
+        	<rule name="txtCognome" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNome" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCodFiscale" regex="codFiscRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaNascita" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneNascita" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlDocumento" regex="ddlDocumentoRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNumDocumento" regex="alfanumerico20Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEnteRilascio" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoResidenza" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaResidenza" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneResidenza" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapResidenza" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoDomicilio" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaDomicilio" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneDomicilio" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapDomicilio" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEmail" regex="mailRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtEmailPEC" regex="mailRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCellulare" regex="digits15Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtTelefono" regex="digits15Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<!-- Persona giuridica -->
+        	<rule name="txtPartitaIVA" regex="codFiscPIvaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtRagioneSociale" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlFamigliaMerceologica" regex="alfanumerico2Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlCategoriaMerceologica" regex="ddlCategoriaMerceologicaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtNumeroAutorizzazione" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoSedeLegale" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaSedeLegale" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneSedeLegale" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapSedeLegale" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtIndirizzoSedeOperativa" regex="descrizioneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlProvinciaSedeOperativa" regex="ddlProvinciaRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="ddlComuneSedeOperativa" regex="ddlComuneRegex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        	<rule name="txtCapSedeOperativa" regex="digits5Regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+        	</rule>
+        </ruleset> 			
+    </action>
+     
+	<action url="seUsersSearch.do" screen="seUsers_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersSearchAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeSearchFlowAction">
+           	<result value="search" screen="seUsers_search.screen" />
+           	<result value="add" screen="seUsersAdd.do" />
+           	<result value="download" writer="fileCsv" content-type="plain/txt" inScope="true" attach="filename"/>
+        </flow>
+           <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			<rule name="tx_utenzaattiva" regex="flag_Y_N_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset>
+    </action>
+    
+    
+    <!-- PG150420 Inizio-->
+    <action url="seUsersEnable.do" screen="seUsers_enable.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersEnableAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeEnableFlowAction">
+           	<result value="enable" screen="seUsers_enable.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+	</action>
+  <!-- PG150420 Fine-->
+
+	<action url="seUsersSblocca.do" screen="seUsers_sblocca.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersSbloccaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeSbloccaFlowAction">
+           	<result value="sblocca" screen="seUsers_sblocca.screen" />
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+	</action>
+	
+	<action url="seUsersResetPswd.do" screen="seusers_resetpswd.screen">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersResetPswdAction</action-class>
+    </action>
+
+<!-- GESTIONE UTENZE FINE -->
+
+    <action url="ritorna.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+		<description>Action per la gestione del ritorno ad altro screen con viewstate</description>
+        <action-class>org.seda.payer.manager.adminusers.actions.RitornaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.RitornaFlowAction">
+           	<result value="adminusers_search" screen="usersSearch.do" />
+           	<result value="seusers_search" screen="seUsersSearch.do" />
+        </flow>
+    </action>  
+
+<!-- GESTIONE UTENZA / PARTITA IVA -->
+    
+	<action url="seUsersAddPersonaFisica.do" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersAddPersonaFisicaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeAddFlowAction">
+           	<result value="add" screen="seUsersAdd.do" />
+           	<result value="pfisica" screen="seUsers_personafisicaAdd.screen"/>
+			<result value="pgiuridica" screen="seUsersAddPersonaGiuridica.do"/>          
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+    </action>
+
+	<action url="seUsersEditPersonaFisica.do" screen="seUsers_personafisicaEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersEditPersonaFisicaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeEditFlowAction">
+           	<result value="edit" screen="seUsersEdit.do" />
+           	<result value="pfisica" screen="seUsers_personafisicaEdit.screen"/>
+			<result value="pgiuridica" screen="seUsersEditPersonaGiuridica.do"/>       
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+          	
+    </action>
+    
+    	<action url="seUsersAddPersonaGiuridica.do" screen="seUsers_personagiuridicaAdd.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersAddPersonaGiuridicaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeAddFlowAction">
+           	<result value="add" screen="seUsersAdd.do" />
+           	<result value="pfisica" screen="seUsersAddPersonaFisica.do"/>
+			<result value="pgiuridica" screen="seUsers_personagiuridicaAdd.screen"/>          
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+          
+    </action>
+
+	<action url="seUsersEditPersonaGiuridica.do" screen="seUsers_personagiuridicaEdit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersEditPersonaGiuridicaAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeEditFlowAction">
+           	<result value="edit" screen="seUsersEdit.do" />
+           	<result value="pfisica" screen="seUsersEditPersonaFisica.do"/>
+			<result value="pgiuridica" screen="seUsers_personagiuridicaEdit.screen"/>    
+           	<result value="ritorna" screen="ritorna.do" />
+        </flow>
+          
+    </action>
+    
+ 	<action url="seUsersReinvioPUK.do" screen="seUsers_search.screen" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersReinvioPUKAction</action-class>     
+    </action>
+    
+    
+    <action url="seUsersReinvioModuloAutorizzazione.do" screen="seUsers_search.screen" flow="false">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.SeUsersReinvioModuloAutorizzazioneAction</action-class>     
+    </action>
+    
+    <action url="anabollecusersreports.do" screen="anabollecusersreports.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.AnaBollECUsersReports</action-class>
+        <flow class="org.seda.payer.manager.flows.DispatchFlowEC">
+			<result value="init" screen="anabollecusersreports.screen"/>
+			<result value="avantiEC" redirect="urlRedirectEC"/>
+			<result value="DownloadCsv" writer="AnaBollLogReportsPageList_csv" content-type="plain/txt" inScope="true" attach="nome_file_csv"/>
+		</flow>
+		<ruleset>
+        	<rule name="codicefiscale" regex="codicefisc_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="fatal"/>
+        	</rule>
+        </ruleset> 			
+    </action>
+    
+    <action url="gruppoAgenziaSearch.do" screen="gruppoAgenzia_search.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+	    </role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.GruppoAgenziaSearchAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.SeSearchFlowAction">
+           	<result value="search" screen="gruppoAgenzia_search.screen" />
+           	<result value="add" screen="gruppoAgenziaEdit.do?codop=add" />
+        </flow>
+           <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="order" regex="codice64char_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset>
+    </action>
+    
+    
+    <action url="gruppoAgenziaEdit.do" screen="gruppoAgenzia_edit.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+		</role-collection>
+        <action-class>org.seda.payer.manager.adminusers.actions.GruppoAgenziaEditAction</action-class>
+        <flow class="org.seda.payer.manager.adminusers.actions.GruppoAgenziaFlowAction">
+           	<result value="edit" screen="gruppoAgenzia_edit.screen" />
+           	<result value="add" screen="gruppoAgenzia_edit.screen" />
+           	<result value="ritorna" screen="gruppoAgenziaSearch.do" />
+           	<result value="search" screen="gruppoAgenziaSearch.do" />
+           	<result value="cancella" screen="gruppoAgenzia_cancel.screen" />
+        </flow>
+         <ruleset>
+        	<rule name="pageNumber" regex="num8_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+        	<rule name="rowsPerPage" regex="num3_regex">
+        		<missing severity="continue"/>
+        		<malformed severity="continue"><rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank"/></malformed>
+        	</rule>
+			
+        </ruleset> 			
+    </action>
+    
+</actions-mapping>   

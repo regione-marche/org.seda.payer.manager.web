@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+	  <default>/applications/templates/default/default.jsp</default>
+	
+	  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+	  
+	  <template name="errori">
+		<url>/applications/templates/default/error_template.jsp</url>
+	  </template>
+	
+	  <screen name="gestioneuffici" template="default">
+	    <parameter key="pagetitle" value="manager.gestioneuffici.search.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/gestioneuffici/include/GestioneUffici.jsp" />
+	   <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+	  </screen>
+	  
+	   <screen name="gestioneufficiedit" template="default">
+	    <parameter key="pagetitle" value="manager.gestioneuffici.edit.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/gestioneuffici/include/GestioneUffici_var.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+	  </screen>
+	  
+	  <screen name="gestioneufficiadd" template="default">
+	    <parameter key="pagetitle" value="manager.gestioneuffici.add.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/gestioneuffici/include/GestioneUffici_var.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+	  </screen>
+	  
+	  <screen name="gestioneufficicancel" template="default">
+	    <parameter key="pagetitle" value="manager.gestioneuffici.cancel.title" direct="true" />
+	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/gestioneuffici/include/GestioneUffici_cancel.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+	  </screen>
+
+  </templates>

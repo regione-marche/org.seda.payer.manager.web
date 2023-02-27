@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+ 		<regexset>
+ 			<regex name="numcell_regex">
+ 				<pattern>^\d{1,20}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="email_regex">
+ 				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+ 			<regex name="codice18char_regex">
+ 				<pattern>^\w{1,18}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="num3_regex">
+ 				<pattern>^\d{1,3}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="num15_regex">
+ 				<pattern>^\d{1,15}$</pattern>
+ 				<description>digits</description>
+ 			</regex>
+ 			<regex name="ip_regex">
+ 				<pattern>^\b(?:\d{1,3}\.){3}\d{1,3}\b$</pattern>
+ 				<description>ip</description>
+ 			</regex>
+ 			<regex name="descrizione64_regex">
+ 				<pattern>^[\w\t \?+().,;'* \$ % @ = -]{0,64}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 		</regexset>
+ 	</global-ruleset>
+
+
+
+    <action url="ricercaAnagrafiche.do" screen="ricercaAnag.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaAnagAction</action-class>
+    </action>
+
+    <action url="ricercaRuoli.do" screen="ricercaRuoli.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaRuoliAction</action-class>
+    </action>
+    
+    <action url="dettaglioRuolo.do" screen="dettaglioRuolo.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.DettaglioRuoloAction</action-class>
+    </action>
+    
+    <action url="ricercaPartiteRuoli.do" screen="ricercaPartiteRuoli.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaPartiteRuoliAction</action-class>
+    </action>
+    
+    <action url="ricercaPartiteAnagrafiche.do" screen="ricercaPartiteAnagrafiche.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaPartiteAnagraficheAction</action-class>
+    </action>
+
+    <!--  
+    <action url="dettaglioPartita.do" screen="dettaglioPartita.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.DettaglioPartitaAction</action-class>
+    </action>
+	-->
+    <action url="ricercaArticoli.do" screen="ricercaArticoli.screen" flow="true">
+      <action-class>org.seda.payer.manager.ruoli.actions.RicercaArticoliAction</action-class>
+            <flow class="org.seda.payer.manager.ruoli.flows.RicercaArticoliFlow">
+            	<result value="listaArticoli" screen="ricercaArticoli.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaPartiteAnagrafiche.do"/>
+				<result value="ricercaRuoli" screen="ricercaPartiteRuoli.do"/>
+				<result value="ricercaPartite" screen="ricercaPartite.do"/>
+	        </flow>
+    </action>
+
+    <action url="ricercaPagamentiDett.do" screen="ricercaPagamentiDett.screen" flow="true">
+      <action-class>org.seda.payer.manager.ruoli.actions.RicercaPagamentiDettAction</action-class>
+            <flow class="org.seda.payer.manager.ruoli.flows.RicercaPagamentiDettFlow">
+            	<result value="listaPagamenti" screen="ricercaPagamentiDett.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaPartiteAnagrafiche.do"/>
+				<result value="ricercaRuoli" screen="ricercaPartiteRuoli.do"/>
+				<result value="ricercaPartite" screen="ricercaPartite.do"/>
+	        </flow>
+    </action>
+
+    <action url="dettaglioPartita.do" screen="dettaglioPartita.screen" flow="true">
+      <action-class>org.seda.payer.manager.ruoli.actions.DettaglioPartitaAction</action-class>
+            <flow class="org.seda.payer.manager.ruoli.flows.DettaglioPartitaFlow">
+            	<result value="dettaglioPartita" screen="dettaglioPartita.screen"/>
+				<result value="ricercaAnagrafica" screen="ricercaPartiteAnagrafiche.do"/>
+				<result value="ricercaRuoli" screen="ricercaPartiteRuoli.do"/>
+				<result value="ricercaPartite" screen="ricercaPartite.do"/>
+	        </flow>
+    </action>
+
+    <!-- 
+    <action url="ricercaArticoli.do" screen="ricercaArticoli.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaArticoliAction</action-class>
+    </action>
+     
+
+    <action url="ricercaPagamentiDett.do" screen="ricercaPagamentiDett.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaPagamentiDettAction</action-class>
+    </action>
+    -->
+
+    <action url="ricercaPartite.do" screen="ricercaPartite.screen" flow="false">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaPartiteAction</action-class>
+    </action>
+
+    <action url="ricercaPagamenti.do" screen="ricercaPagamenti.screen" flow="true">
+        <action-class>org.seda.payer.manager.ruoli.actions.RicercaPagamentiAction</action-class>
+        <flow class="org.seda.payer.manager.ruoli.flows.RicercaPagamentiFlow">
+        	<result value="ricerca" screen="ricercaPagamenti.screen"/>
+			<result value="download" writer="pagamentiCSVZIP" content-type="application/zip" inScope="false" attach="pagamentiCSVZIPD"/>
+		</flow>
+    </action>
+    
+    
+</actions-mapping>   

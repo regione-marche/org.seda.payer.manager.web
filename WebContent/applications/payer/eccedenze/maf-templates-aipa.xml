@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+
+<!-- SEZIONE ECCEDENZE -->
+
+ <screen name="ricercaEccedenze" template="default">
+    <parameter key="pagetitle" value="title.eccedenze" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/eccedenze/aipa/include/RicercaEccedenze.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+
+ <screen name="eccedenzeDettaglio" template="default">
+    <parameter key="pagetitle" value="title.eccedenze.dettaglio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/aipa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/eccedenze/aipa/include/DettaglioEccedenze.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/aipa/footer.jsp"/>
+  </screen>
+
+</templates>

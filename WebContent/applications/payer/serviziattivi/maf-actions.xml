@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<global-ruleset>
+		<regexset>
+			<regex name="passwordFtp_regex">
+				<pattern>^.{3,20}$</pattern>
+				<description></description>
+			</regex>
+            <!-- inizio LP PG200060 -->
+			<regex name="passwordFtp32_regex">
+				<pattern>^.{3,32}$</pattern>
+				<description></description>
+			</regex>
+			<!-- fine LP PG200060 -->
+			<regex name="passwordFtp50_regex">
+				<pattern>^.{3,50}$</pattern>
+				<description></description>
+			</regex><regex name="codice2char_regex">
+				<pattern>^\w{1,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1char_regex">
+				<pattern>^\w{1,1}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice2charw_regex">
+				<pattern>^[\w ]{1,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="AoM_regex">
+				<pattern>^[A|M]$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="YoN_regex">
+				<pattern>^[Y|N]$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="IoD_regex">
+				<pattern>^[I|D]$</pattern>
+				<description>IMMEDIATA|DIFFERITA</description>
+			</regex>
+			<regex name="des3_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="num3_regex">
+				<pattern>^\d{1,3}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num5_regex">
+				<pattern>^\d{1,5}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="cap_regex">
+				<pattern>^\d{5,5}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num18_regex">
+				<pattern>^\d{1,18}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num20_regex">
+				<pattern>^\d{1,20}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num8_regex">
+				<pattern>^\d{1,8}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num13regex">
+				<pattern>^\d{1,13}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num15_regex">
+				<pattern>^\d{1,15}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="num100_regex">
+				<pattern>^\d{1,100}$</pattern>
+				<description>digits</description>
+			</regex>
+			<regex name="descrizione_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione100_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione_alfanum_regex">
+				<pattern>^[a-zA-Z0-9]+(([\'\,\.\- ][a-zA-Z0-9 ])?[a-zA-Z0-9]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione100_alfanum_regex">
+				<pattern>^[a-zA-Z0-9]+(([\'\,\.\- ][a-zA-Z0-9 ])?[a-zA-Z0-9]*)*{1,100}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice3char_regex">
+				<pattern>^\w{1,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="date_regex">
+				<pattern>^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$</pattern>
+				<!--
+					^((19|20)\d\d)(0[1-9]|1[012])(0[1-9]|1[0-9]|2[0-9]|3[01])\d{18}[\.,]\d{3}$</pattern>
+				-->
+				<description></description>
+			</regex>
+			<regex name="date_yyyy_mm_dd_regex">
+				<pattern>^(19|20)\d\d([-])(0[1-9]|1[012])([-])(0[1-9]|[12][0-9]|3[01])$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice10char_regex">
+				<pattern>^\w{1,10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice20char_regex">
+				<pattern>^\w{1,20}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice30char_regex">
+				<pattern>^\w{1,30}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice4char_regex">
+				<pattern>^\w{1,4}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice3char_regex">
+				<pattern>^\w{1,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice5char_regex">
+				<pattern>^\w{1,5}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice27char_regex">
+				<pattern>^\w{1,27}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice50char_regex">
+				<pattern>^\w{1,50}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice64char_regex">
+				<pattern>^\w{1,64}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice4obblchar_regex">
+				<pattern>^\w{4,4}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice2obblchar_regex">
+				<pattern>^\w{2,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice3obblchar_regex">
+				<pattern>^\w{3,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice5obblchar_regex">
+				<pattern>^\w{5,5}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice10obblchar_regex">
+				<pattern>^\w{10,10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="username_regex">
+				<pattern>^[a-zA-Z0-9]{3,10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codicefisc_regex">
+				<!--  		<pattern>^[A-Z]{6}[]{2}[A-Z][]{2}[A-Z][]{3}[A-Z]*$</pattern> -->
+				<!-- <pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,16}$</pattern>-->
+				<pattern>^[a-zA-Z]{6}\d\d[a-zA-Z]\d\d[a-zA-Z]\d\d\d[a-zA-Z]$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione100_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,100}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione128_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,128}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione50_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,50}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione30_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,30}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione200_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,200}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione256_regex2">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione512_regex">
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,512}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="email_regex">
+				<pattern><![CDATA[^[\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}$]]></pattern>
+				<description>Indirizzo di email</description>
+			</regex>
+			<regex name="emailListBySemicolon">
+				<pattern><![CDATA[^(([\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}\x3B)*)(([\w\-\+\&\*]+(?:\.[\w\-\_\+\&\*]+)*@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,7}))$]]></pattern>
+				<description>Lista di indirizzi di email separati da punto e virgola</description>
+			</regex>
+			<regex name="indirizzo_IP_regex">
+ 				<pattern>(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)</pattern>
+ 				<description>IP</description>
+ 			</regex>
+			<regex name="codBelfiore">
+				<pattern><![CDATA[^[a-zA-Z][0-9]{3}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="codProv">
+				<pattern><![CDATA[^\d{1,3}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="codTreA">
+				<pattern><![CDATA[^[a-zA-Z]{3}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="codDueA">
+				<pattern><![CDATA[^[a-zA-Z]{2}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="codDueN">
+				<pattern><![CDATA[^[0-9]{2}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="charALF1-4_regex">
+				<pattern><![CDATA[^[a-zA-Z]{4}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="charALF1-3_regex">
+				<pattern><![CDATA[^[a-zA-Z]{3}$]]></pattern>
+				<description></description>
+			</regex>
+			<regex name="url_regex">
+				<!--
+					<pattern>^http:[/][/]|www.([a-z]|[A-Z]|[0-9]|[/.]|[~])*)$</pattern>
+				-->
+				<pattern>^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1-4obblchar_regex">
+				<pattern>^\w{1,4}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1_3obblchar_regex">
+				<pattern>^\w{1,3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1-2obblchar_regex">
+				<pattern>^\w{1,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="imposta_servizio_regex">
+				<pattern>^[0-9A-Z]{1,20}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1-2numchar_regex">
+				<pattern>^[0-9]{2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1-5obblchar_regex">
+				<pattern>^\w{1,5}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1-10obblchar_regex">
+				<pattern>^\w{1,10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice6Numobblchar_regex">
+				<pattern>^\d{6,6}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice6Aobblchar_regex">
+				<pattern>^\w{6,6}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice5Numobblchar_regex">
+				<pattern>^\d{5,5}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice2Alfobblchar_regex">
+				<pattern>^\w{2,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice1Alfobblchar_regex">
+				<pattern>^[a-zA-Z]$</pattern>
+				<description></description>
+			</regex>
+			<regex name="CF_IVA_regex">
+				<pattern>^[0-9]{11}|[a-zA-Z]{6}\d\d[a-zA-Z]\d\d[a-zA-Z]\d\d\d[a-zA-Z]$</pattern>
+				<description></description>
+			</regex>
+			<regex name="password_regex">
+				<pattern>^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}$</pattern>
+				<description>password</description>
+			</regex>
+			<regex name="IBAN_regex">
+				<pattern>^(IT|SM)\d{2}[a-zA-Z]\d{10}[0-9a-zA-Z]{12}|(IT|SM)\d{2}[a-zA-Z]\d{22}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="cod1-2A">
+				<pattern>^[a-zA-Z][a-zA-Z]$</pattern>
+				<description></description>
+			</regex>
+			<regex name="decimali4_2">
+				<pattern>^[0-9]{1,4}(\,[0-9]{0,2})?$</pattern>
+				<description></description>
+			</regex>
+			<regex name="decimali13_2">
+				<pattern>^[0-9]{1,13}(\,[0-9]{0,2})?$</pattern>
+				<description></description>
+			</regex>
+			<regex name="decimali8_2">
+				<pattern>^[0-9]{1,8}(\,[0-9]{0,2})?$</pattern>
+				<description></description>
+			</regex>
+			<regex name="decimali3_2">
+				<pattern>^[0-9]{1,3}(\,[0-9]{0,2})?$</pattern>
+				<description></description>
+			</regex>			
+			<!--<regex name="path">
+				<pattern>^[A-Za-z]://?([^\\/:\*\?"\|]+\\)*[^\\/:\*\?"\|]+$</pattern>
+				<description></description>
+			</regex>
+			--><!--<regex name="path">
+				<pattern>^[a-zA-Z][:][\]+(([/\'\,\.\- ][a-zA-Z])?[a-zA-Z]*)*{1,256}$</pattern>
+				<description></description>
+			</regex>
+			--><regex name="path">
+				<pattern>^([a-zA-Z]:)?(\\[.a-zA-Z0-9_-]+)+\\?$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice6char_regex">
+				<pattern>^[A-Za-z0-9]{6}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codiceEnteChar_regex">
+				<pattern>^[A-Z0-9]{0,6}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione256_regex">
+				<pattern>^[\d\w\t\/ \?+().àèéòùì\-',]{1,256}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione_regex128">
+				<pattern>^[\d\w\t \?+().àèéòùì\-',]{1,128}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione_regex100">
+				<pattern>^[\d\w\t \?+().àèéòùì\-',]{1,100}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="siglaProv">
+				<pattern>^[a-zA-Z]{2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="ruoli">
+				<pattern>^[a-zA-Z0-9]{4}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="uffStatale_regex">
+				<pattern>^[a-zA-Z0-9]{2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codiceUff_regex">
+				<pattern>^[\d\w ]{1,6}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codiceTpUff_regex">
+				<pattern>^[a-zA-Z0-9]{1}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="numSess_regex">
+				<pattern>^\d{1,2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="dir_regex">
+ 				<pattern>^[a-zA-Z][:](.*?/|.*?\\)?([^\./|^\.\\]+)(?:\.([^\\]*)|)$</pattern>
+ 				<description></description>
+ 			</regex>
+			<regex name="dirFtp_regex">
+ 				<pattern>^[\\a-zA-Z0-9:_/\\.]{1,50}$</pattern>
+ 				<description></description>
+ 			</regex>
+			<regex name="dir256_regex">
+ 				<pattern>^[\\a-zA-Z0-9:_/\\.]{1,256}$</pattern>
+ 				<description></description>
+ 			</regex>
+ 			<regex name="ftp_IP_DNS_regex">
+ 				<pattern>^[a-zA-Z0-9\._-]{1,50}$|^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$</pattern>
+ 				<description></description>
+ 			</regex>				
+ 			<regex name="ftp_regex">
+ 				<pattern>^(http|https|ftp)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*$</pattern>
+ 				<description></description>
+ 			</regex>
+			<regex name="ddlSocietaUtenteServizioEnte_regex">
+				<pattern>^[a-zA-Z0-9\|]{26}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="ddlSocietaUtenteEnte_regex">
+				<pattern>^[a-zA-Z0-9\|]{22}$</pattern>
+				<description></description>
+			</regex>
+			
+			<regex name="ddlSocietaUtenteServizio_regex">
+				<pattern>^[a-zA-Z0-9\|]{15}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="configutentetiposervizio_strUtentetiposervizios_regex">
+				<pattern>^[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{5}$</pattern>
+				<description></description>
+			</regex>			
+			<regex name="funzpagutentetiposervizio_strUtentetiposervizios_regex">
+				<pattern>^[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{3}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="configutentetiposervizioente_strEntetiposervizios_regex">
+				<pattern>^[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="configestrattoconto_strEntetiposervizios_regex">
+				<pattern>^[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="pathEnti_regex">
+				<pattern>^[a-zA-Z]:\[a-zA-Z0-9\//\w\d\tàèòùì_%/()? .]{0,50}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="pswEnte_regex">
+				<pattern>^[a-zA-Z0-9\.,!#%]{8,50}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codSia_regex">
+				<pattern>^[0-9A-Z]{5}$</pattern>
+				<description></description>
+			</regex>
+ 			<regex name="checkbox_Y_regex">
+ 				<pattern>^Y$</pattern>
+ 				<description>Checkbox</description>
+ 			</regex>
+ 			<regex name="descrizioneMittente_regex">
+ 				<pattern>^[\\àèìòùa-zA-Z0-9 :_/\\.,]{1,50}$</pattern>
+ 				<description>Descrizione Mittente per REE RES</description>
+ 			</regex>
+			<regex name="parametriottico_strEntetiposervizios_regex">
+				<pattern>^[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{5}\|[a-zA-Z0-9]{10}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="descrizione256_ragionesociale_regex">
+ 				<pattern><![CDATA[^[\d\w\t\/ \?+().àèéòùì\-',\& %]{1,256}$]]></pattern>
+ 				<description></description>
+ 			</regex> 
+			<regex name="codice2cifre">
+				<pattern>^[\d ]{2}$</pattern>
+				<description></description>
+			</regex>
+			<regex name="codice3cifre">
+				<pattern>^[\d ]{3}$</pattern>
+				<description></description>
+			</regex>
+ 			<regex name="descrizione256_comune_regex">
+				<pattern>^[\d\w\t\/ \?+().àèéòùìâêîôû\-',]{1,256}$</pattern>
+				<description></description>
+			</regex>
+		</regexset>
+	</global-ruleset>
+
+	<!-- ACTION MANAGEMENT - CONFIGURAZIONE TEMPLATE > SERVIZI ATTIVI  PG200360 -->
+	
+	<action url="serviziattivi.do" screen="serviziattivi_search.screen"
+		flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+			<role>AMEC</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.configurazione.actions.ServiziAttiviAction</action-class>
+		<flow class="org.seda.payer.manager.flows.DispatchFlow">
+			<result value="search" screen="serviziattivi_search.screen" />
+			<result value="edit" screen="serviziattivi_edit.screen" />
+			<result value="saveedit" screen="serviziattivi_edit.screen" />
+			<result value="cambiaProvincia" screen="serviziattivi_search.screen"/>
+			<result value="download" writer="sinteticoServiziAttivi" content-type="plain/txt" inScope="true" attach="filename"/>
+		</flow>
+	</action>
+
+</actions-mapping>

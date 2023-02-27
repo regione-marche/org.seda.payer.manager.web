@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="com.seda.payer.manager.web  " version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>org.seda.payer.manager.web</display-name>
+
+	<session-config>
+		<cookie-config>
+             <http-only>true</http-only>
+             <secure>true</secure>
+          </cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+	
+	
+	<distributable/>
+	
+	
+	
+	<filter>
+		<description>Encode the request (ASCII is the default). Moreover handles the standard form 
+		encoding of type application/ x-www-form-urlencoded. The filters translate all form data 
+		into request attributes, so the core request handling mechanism can work with every request 
+		in the same manner, instead of with special casing for different encodings. </description>
+		<display-name>EncodingManager</display-name>
+		<filter-name>EncodingManager</filter-name>
+		<filter-class>com.seda.j2ee5.maf.components.encoding.EncodingManager</filter-class>
+		<init-param>
+			<description>request encoding</description>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<description>
+		</description>
+		<display-name>ValidationManager</display-name>
+		<filter-name>ValidationManager</filter-name>
+		<filter-class>com.seda.j2ee5.maf.components.validation.ValidationManager</filter-class>
+	</filter>
+	<filter>
+		<description>
+		</description>
+		<display-name>DefenseFilter</display-name>
+		<filter-name>DefenseFilter</filter-name>
+		<filter-class>com.seda.j2ee5.maf.components.defender.DefenseFilter</filter-class>
+	</filter>
+	<filter>
+		<description>
+		</description>
+		<display-name>EntryManager</display-name>
+		<filter-name>EntryManager</filter-name>
+		<filter-class>com.seda.j2ee5.maf.core.entry.EntryManager</filter-class>
+	</filter>
+	<filter>
+		<description>Logging delle request su DB</description>
+		<display-name>LoggingManager</display-name>
+		<filter-name>LoggingManager</filter-name>
+		<filter-class>org.seda.payer.manager.components.filters.LoggingManager</filter-class>
+	</filter>
+	<filter>
+		<description>Controllo dell'applicazione</description>
+		<display-name>SecurityManager</display-name>
+		<filter-name>SecurityManager</filter-name>
+		<filter-class>org.seda.payer.manager.components.filters.SecurityManager</filter-class>
+	</filter>
+	<filter>
+		<description>Gestione dei template personalizzati</description>
+		<display-name>TemplateFilter</display-name>
+		<filter-name>TemplateFilter</filter-name>
+		<filter-class>org.seda.payer.manager.components.filters.TemplateFilter</filter-class>
+	</filter>
+	
+	<filter>
+		<description>Check presenza tag html in request</description>
+		<display-name>CheckInvalidTagFilter</display-name>
+		<filter-name>CheckInvalidTagFilter</filter-name>
+		<filter-class>org.seda.payer.manager.components.filters.CheckInvalidTagFilter</filter-class>
+	</filter>
+		<filter>
+		<description>Gestione UPLOAD FILE</description>
+		<display-name>UPLOADFilter</display-name>
+		<filter-name>UPLOADFilter</filter-name>
+		<filter-class>org.seda.payer.manager.riconciliazionemt.actions.UploadAction</filter-class>
+	</filter>
+	
+	<!-- jpivot -->
+	<filter>
+		<filter-name>JPivotController</filter-name>
+		<filter-class>com.tonbeller.wcf.controller.RequestFilter</filter-class>
+	</filter>
+	<!-- jpivot -->
+	
+	<filter>
+		<description>Gestione CORS</description>
+		<display-name>CORSFilter</display-name>
+		<filter-name>CORSFilter</filter-name>
+		<filter-class>org.seda.payer.manager.components.filters.CORSFilter</filter-class>
+	</filter>
+
+	<filter>
+		<description>Gestione LoginCAS</description>
+		<display-name>LoginCASFilter</display-name>
+		<filter-name>LoginCASFilter</filter-name>
+		<filter-class>org.seda.payer.manager.login.actions.LoginCasAction</filter-class>
+	</filter>
+
+	
+	<!-- jpivot -->
+	<filter-mapping>
+		<filter-name>JPivotController</filter-name>
+		<url-pattern>/analysis/*</url-pattern>
+	</filter-mapping>
+	<!-- jpivot -->
+	
+	<filter-mapping>
+		<filter-name>EncodingManager</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+			<filter-mapping>
+		<filter-name>CheckInvalidTagFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ValidationManager</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DefenseFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>EntryManager</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggingManager</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SecurityManager</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>TemplateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>	
+		<filter-name>UPLOADFilter</filter-name>
+		<url-pattern>/riconciliazionemt/upload.do</url-pattern>
+	</filter-mapping>	
+	
+	<filter-mapping>	
+		<filter-name>CORSFilter</filter-name>
+		<url-pattern>/ext/LoginCAS</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>	
+		<filter-name>LoginCASFilter</filter-name>
+		<url-pattern>/ext/LoginCAS</url-pattern>
+	</filter-mapping>	
+	
+
+	<listener>
+		<listener-class>com.seda.j2ee5.maf.core.application.ApplicationLoader</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.seda.j2ee5.maf.core.session.SessionManager</listener-class>
+	</listener>
+	<!-- jpivot -->
+	<listener>
+    	<listener-class>com.tonbeller.tbutils.res.ResourcesFactoryContextListener</listener-class>
+  	</listener>
+	<!-- jpivot -->
+
+
+	
+	
+	<!-- jpivot -->
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>GetChart</servlet-name>
+		<servlet-class>com.tonbeller.jpivot.chart.GetChart</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Print</servlet-name>
+		<servlet-class>com.tonbeller.jpivot.print.PrintServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>MondrianXmlaServlet</servlet-name>
+		<servlet-class>mondrian.xmla.impl.DefaultXmlaServlet</servlet-class>
+	</servlet>
+	<!-- jpivot -->
+	
+	<!--
+		************************ INTEGRAZIONE FEDERA **********************
+									FINE SERVLET
+		*******************************************************************
+	-->
+
+	<servlet>
+		<description>The MAF Front Controller Manager</description>
+		<display-name>ControllerManager</display-name>
+		<servlet-name>ControllerManager</servlet-name>
+		<servlet-class>com.seda.j2ee5.maf.core.controller.ControllerManager</servlet-class>
+		<init-param>
+			<description>The default locale used by the screen manager</description>
+			<param-name>default_locale</param-name>
+			<param-value>default</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>The MAF Web template manager</description>
+		<display-name>TemplateManager</display-name>
+		<servlet-name>TemplateManager</servlet-name>
+		<servlet-class>com.seda.j2ee5.maf.template.TemplateManager</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+
+	
+
+	<servlet-mapping>
+		<servlet-name>ControllerManager</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TemplateManager</servlet-name>
+		<url-pattern>*.screen</url-pattern>
+	</servlet-mapping>
+	<!-- jpivot -->
+	<servlet-mapping>
+		<servlet-name>MondrianXmlaServlet</servlet-name>
+		<url-pattern>/xmla</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/DisplayChart</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Print</servlet-name>
+		<url-pattern>/Print</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetChart</servlet-name>
+		<url-pattern>/GetChart</url-pattern>
+	</servlet-mapping>
+	<!--  jpivot  -->
+	
+	
+	<!--  jpivot -->
+	<context-param>
+		<param-name>com.tonbeller.wcf.controller.RequestContextFactory</param-name>
+		<param-value>com.tonbeller.wcf.controller.RequestContextFactoryImpl</param-value>
+	</context-param>
+	<!--  jpivot -->
+
+	<context-param>
+		<description>The guest profile base name</description>
+		<param-name>guest</param-name>
+		<param-value>GUEST</param-value>
+	</context-param>
+	<context-param>
+		<description>The anonymous role base name</description>
+		<param-name>anonymous</param-name>
+		<param-value>ANONYMOUS</param-value>
+	</context-param>
+	<context-param>
+		<description>The maf applications path file name</description>
+		<param-name>maf_applications</param-name>
+		<param-value>/WEB-INF/maf-applications.xml</param-value>
+	</context-param>
+	<context-param>
+		<description>The maf actions file name</description>
+		<param-name>maf_actions</param-name>
+		<param-value>maf-actions.xml</param-value>
+	</context-param>
+	<context-param>
+		<description>The maf templates file name</description>
+		<param-name>maf_templates</param-name>
+		<param-value>maf-templates.xml</param-value>
+	</context-param>
+	<context-param>
+		<description>The maf security file name</description>
+		<param-name>maf_security</param-name>
+		<param-value>maf-security.xml</param-value>
+	</context-param>
+	<context-param>
+		<description>The maf exceptions file name</description>
+		<param-name>maf_exceptions</param-name>
+		<param-value>maf-exceptions.xml</param-value>
+	</context-param>
+
+
+	<context-param>
+		<description>Activate or deactivate the EncodeParameterManager. In the value tag test this parameter to get the value from the param or the request attributes</description>
+		<param-name>encode_parameter</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Active or deactive validation form manager</description>
+		<param-name>validation</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Session attribute key that fires the ValidationManager.</description>
+		<param-name>validationKey</param-name>
+		<param-value>_validation</param-value>
+	</context-param>
+	<context-param>
+		<description>If the validation string must be encoded in base64</description>
+		<param-name>validationBase64</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>Validation attributes key containing the validation message</description>
+		<param-name>validationMessage</param-name>
+		<param-value>validator.message</param-value>
+	</context-param>
+	<context-param>
+		<description>Simple Message attributes key. This message is an arraylist of string</description>
+		<param-name>message</param-name>
+		<param-value>message</param-value>
+	</context-param>
+
+	<context-param>
+		<description>Activate or deactivate defense against CSRF</description>
+		<param-name>csrfDefender</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>The token name used by DefenseFilter to store the validation request token</description>
+		<param-name>csrfTokenName</param-name>
+		<param-value>csrfToken</param-value>
+	</context-param>
+	<context-param>
+		<description>The token length used to generate a valid csrf token</description>
+		<param-name>csrfTokenLength</param-name>
+		<param-value>32</param-value>
+	</context-param>
+	<context-param>
+		<description>If the csrf defender reject or deny the request</description>
+		<param-name>csrfDeny</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>Tell to the session fixation manager to destroy the previous session attributes</description>
+		<param-name>sfixDestroy</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>If the csrf defender skips token check for a request uri that match the application root for a active session. Default is false.</description> 
+		<param-name>csrfIgnoreRoot</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Specify the regeneration of the session (in according to the sfixDestroy specification) only if the csrfIgnoreRoot is true. 
+		Default is false.</description>
+		<param-name>csrfIgnoreRootRegenerate</param-name>
+		<param-value>true</param-value>
+	</context-param>
+ 
+
+	
+
+</web-app>

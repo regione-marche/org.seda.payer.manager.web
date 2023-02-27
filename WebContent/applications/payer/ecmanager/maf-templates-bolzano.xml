@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <screen name="default" template="default">
+    <parameter key="pagetitle" value="title.submenu" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/default/include/mainempty.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+  </screen>
+
+  <screen name="logincontribuente" template="default">
+    <parameter key="pagetitle" value="title.ecmanager" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/ecmanager/include/logincontribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
+  </screen>
+
+  
+</templates>

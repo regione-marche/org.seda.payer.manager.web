@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+	<context-root>manager</context-root>
+	
+	<resource-ref>
+		<res-ref-name>payerDataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/payerDataSource</jndi-name>
+	</resource-ref>
+
+	<!-- inizio LP PG200060 -->
+	<resource-ref>
+		<res-ref-name>payerDataSourceMySql</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/payerDataSourceMySql</jndi-name>
+	</resource-ref>
+	<!-- fine LP PG200060 -->
+
+	<resource-ref>
+		<res-ref-name>sddDataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/sddDataSource</jndi-name>
+	</resource-ref>
+
+	<resource-ref>
+		<res-ref-name>easybridgeDataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/easybridgeDataSource</jndi-name>
+	</resource-ref>
+
+	<resource-ref>
+		<res-ref-name>nodoDataSource</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/nodoDataSource</jndi-name>
+	</resource-ref>
+
+
+   
+</jboss-web>
+
+
+
+
+
+
+
+
+

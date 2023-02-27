@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<exceptions-mapping xmlns="http://exceptions.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://exceptions.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-exceptions.xsd">
+	 
+    <exception class="org.web.exceptions.TryItException" screen="tryit_error.screen"/>
+  
+</exceptions-mapping>

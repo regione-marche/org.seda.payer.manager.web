@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+  
+  <template name="errori">
+	<url>/applications/templates/default/error_template.jsp</url>
+  </template>
+  
+
+  <screen name="adminusers_search" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.search.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_search.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="adminusers_add" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.add.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_var.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="adminusers_add2" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.add2.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_var2.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="adminusers_edit" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.edit.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_var.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="adminusers_edit2" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.edit2.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_var2.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="adminusers_canc" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.canc.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/adminusers_canc.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+
+<!-- GESTIONE UTENZE INIZIO -->
+
+
+  <screen name="seUsers_add" template="default">
+	<parameter key="pagetitle" value="manager.seusers.add.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_var.jsp" />  
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="seUsers_edit" template="default">
+	<parameter key="pagetitle" value="manager.seusers.edit.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_var.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="seUsers_search" template="default">
+	<parameter key="pagetitle" value="manager.seusers.search.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_search.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="seUsers_sblocca" template="default">
+	<parameter key="pagetitle" value="manager.seusers.sblocca.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_sblocca.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+  <screen name="seusers_resetpswd" template="default">
+	<parameter key="pagetitle" value="manager.adminusers.resetpswd.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+    <parameter key="main" value="/applications/payer/adminusers/include/messages.jsp" />
+    <parameter key="results" value="/applications/payer/adminusers/include/seUsers_reset_pswd.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+  </screen>
+
+<!-- GESTIONE UTENZE FINE -->
+
+  <screen name="error" template="errori">
+  	<parameter key="header" value="/applications/templates/shared/padanatech/header.jsp"/>
+	<parameter key="content" value="/applications/templates/shared/error_content.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp"/>
+  </screen>  
+
+
+
+
+<!-- GESTIONE REGISTRAZIONE UTENTE/PARTITA IVA -->
+
+	<screen name="seUsers_personafisicaAdd" template="default">
+		<parameter key="pagetitle" value="manager.seusers.personafisicaadd.title" direct="true"/>
+	    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_personafisica.jsp" />
+	    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+	 </screen>
+	 
+	 <screen name="seUsers_personagiuridicaAdd" template="default">
+		<parameter key="pagetitle" value="manager.seusers.personagiuridicaadd.title" direct="true"/>
+	    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_personagiuridica.jsp" />
+	    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+	 </screen>
+	 
+	<screen name="seUsers_personafisicaEdit" template="default">
+		<parameter key="pagetitle" value="manager.seusers.personafisicaedit.title" direct="true"/>
+	    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_personafisica.jsp" />
+	    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+	 </screen>
+	 
+	 <screen name="seUsers_personagiuridicaEdit" template="default">
+		<parameter key="pagetitle" value="manager.seusers.personagiuridicaedit.title" direct="true"/>
+	    <parameter key="header" value="/applications/templates/shared/padanatech/header.jsp" />
+	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+	    <parameter key="main" value="/applications/payer/adminusers/include/seUsers_personagiuridica.jsp" />
+	    <parameter key="results" value="/applications/payer/adminusers/include/messages.jsp" />
+	    <parameter key="footer" value="/applications/templates/shared/padanatech/footer.jsp" />
+	 </screen>
+	
+</templates>

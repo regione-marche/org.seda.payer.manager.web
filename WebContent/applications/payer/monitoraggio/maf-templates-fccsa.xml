@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+  </template>
+  
+  <screen name="monitoraggioTransazioni" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/MonitoraggioTransazioni.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/fccsa/PopupDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+  <screen name="modificaEmailSms" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/ModificaEmailSMSUtente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+  <screen name="dettaglioTransazione" template="defaultUTF8">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/DettaglioTransazione.jsp" />
+    <parameter key="main2" value="/applications/payer/monitoraggio/fccsa/ButtonDettaglioTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+  <screen name="forzaAllineamentoTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/ForzaAllineamentoTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+ 
+ <screen name="allineaManualmenteTransazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/AllineaManualmenteTransazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen> 
+  
+  <screen name="inviaNotificaAmministratore" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/InviaNotificaAmministratore.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+  
+  <screen name="inviaNotificaContribuente" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/InviaNotificaContribuente.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+  <!--<screen name="scaricaReportCSV" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/ScaricaReportCSV.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="stampaPDFBollettini" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/StampaPDFBollettini.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+ 
+  
+  <!--<screen name="stampaReportPDF" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/StampaReportPDF.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>-->
+  
+  <screen name="richiediRiconciliazione" template="default">
+    <parameter key="pagetitle" value="title.monitoraggio" direct="true" />
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/monitoraggio/fccsa/RichiediRiconciliazione.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+  
+</templates>

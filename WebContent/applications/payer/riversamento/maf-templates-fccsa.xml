@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/default/default.jsp</default>
+
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+<!-- SEZIONE RIVERSAMENTI -->
+
+ <screen name="ricercaRiversamenti" template="default">
+    <parameter key="pagetitle" value="title.riversamento" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/RicercaRiversamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+
+ <screen name="riversamentiDettaglioImp" template="default">
+    <parameter key="pagetitle" value="title.riversamento.dettaglio" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/DettaglioRiversamentiImp.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+ <screen name="riversamentiDettaglioContr" template="default">
+    <parameter key="pagetitle" value="title.riversamento.dettaglio.contr" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/DettaglioRiversamentiContr.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+ <screen name="riversamentiSospensione" template="default">
+    <parameter key="pagetitle" value="title.riversamento" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/SospensioneRiversamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+ <screen name="alertRiversamenti" template="default">
+    <parameter key="pagetitle" value="title.riversamento" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/AlertRiversamenti.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+ <screen name="alertRiversamento" template="default">
+    <parameter key="pagetitle" value="title.riversamento" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/fccsa/header.jsp"/>
+  	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/riversamento/include/AlertRiversamento.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/fccsa/footer.jsp"/>
+  </screen>
+
+</templates>

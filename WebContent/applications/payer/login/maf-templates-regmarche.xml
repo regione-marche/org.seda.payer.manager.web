@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+
+  <default>/applications/templates/login/regmarche/LoginTemplate.jsp</default>
+
+ 	<bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+
+  	<template name="login">
+  		<url>/applications/templates/login/regmarche/LoginTemplate.jsp</url>
+  	</template>
+
+  	<template name="password">
+  		<url>/applications/templates/default/regmarche/default.jsp</url>
+  	</template>
+  
+  	<screen name="login" template="login">
+		<parameter key="pagetitle" value="manager.login.title" direct="true"/>
+		<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp" />
+  		<parameter key="content" value="/applications/payer/login/include/regmarche/login.jsp" /> 
+		<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp" />
+	</screen>
+	
+	<screen name="login_error" template="login">
+  		<parameter key="pagetitle" value="credentials.login.error.pagetitle" direct="true" /> 
+  		<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp" /> 
+  		<parameter key="content" value="/applications/payer/login/include/login_error.jsp" /> 
+  		<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp" /> 
+	</screen>
+
+ <screen name="resetpswd" template="password">
+	<parameter key="pagetitle" value="manager.default.resetpswd.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regmarche/header.jsp" />
+    <parameter key="main" value="/applications/payer/login/include/resetpswd.jsp" />
+    <parameter key="results" value="/applications/payer/login/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp" />
+  </screen>
+
+  <screen name="cambiopswd" template="password">
+	<parameter key="pagetitle" value="manager.default.cambiopswd.title" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/regmarche/header.jsp" />
+    <parameter key="main" value="/applications/payer/login/include/cambiopswd.jsp" />
+    <parameter key="results" value="/applications/payer/login/include/messages.jsp" />
+    <parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp" />
+  </screen>
+  
+   <screen name="loginerror" template="login">
+ 	<parameter key="pagetitle" value="manager.login.title" direct="true"/>
+	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp" />
+	<parameter key="content" value="/applications/payer/login/include/regmarche/login.jsp"  />
+	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp" />
+ </screen>
+  
+</templates>
+ 

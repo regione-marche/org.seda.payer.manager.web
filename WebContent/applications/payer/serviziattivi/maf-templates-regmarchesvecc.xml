@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xmlns="http://template.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
+ 
+  <default>/applications/templates/default/default.jsp</default>
+  
+  <bundle>org.seda.payer.manager.resources.TemplateStrings</bundle>
+ 
+
+  <!-- SCREEN MANAGEMENT - serviziattivi TEMPLATE > SERVIZI ATTIVI PG200360 -->
+  
+   <screen name="serviziattivi_search" template="default">
+    <parameter key="pagetitle" value="manager.serviziattivi.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/serviziattivi/include/serviziattivi_search.jsp" />
+    <parameter key="results" value="/applications/payer/serviziattivi/include/serviziattivi_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+ 
+ <screen name="serviziattivi_edit" template="default">
+    <parameter key="pagetitle" value="manager.serviziattivi.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.serviziattivi.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/regmarche/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/serviziattivi/include/serviziattivi_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/regmarche/footer.jsp"/>
+  </screen>
+
+  <!-- FINE LP PG200360 -->
+  
+</templates>
