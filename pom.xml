@@ -633,7 +633,7 @@
 			<artifactId>com.ibm.icu</artifactId>
 			<version>4.0.1.v20090822</version>
 			<scope>system</scope>
-			<systemPath>${basedir}\lib\com.ibm.icu_4.0.1.v20090822.jar</systemPath>
+			<systemPath>${basedir}/lib/com.ibm.icu_4.0.1.v20090822.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -641,7 +641,7 @@
 			<artifactId>coreapi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}\lib\coreapi.jar</systemPath>
+			<systemPath>${basedir}/lib/coreapi.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -649,7 +649,7 @@
 			<artifactId>engineapi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}\lib\engineapi.jar</systemPath>
+			<systemPath>${basedir}/lib/engineapi.jar</systemPath>
 		</dependency>
 
 
@@ -658,7 +658,7 @@
 			<artifactId>modelapi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${basedir}\lib\modelapi.jar</systemPath>
+			<systemPath>${basedir}/lib/modelapi.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -716,7 +716,7 @@
 			<artifactId>commons-httpclient-contrib-ssl</artifactId>
 			<version>3.1</version>
 			<scope>system</scope>
-			<systemPath>${basedir}\WebContent\WEB-INF\lib\commons-httpclient-contrib-ssl-3.1.jar</systemPath>
+			<systemPath>${basedir}\WebContent\WEB-INF/lib/commons-httpclient-contrib-ssl-3.1.jar</systemPath>
 		</dependency> -->
 		
 		
