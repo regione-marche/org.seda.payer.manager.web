@@ -203,6 +203,7 @@
 								</s:dropdownlist>
 							</s:div>
 
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<%-- inizio LP PG200360 --%>
 							<%-- Allineamento con PG200180 --%>
 							<s:div name="divElement932" cssclass="divRicMetadatiSingleRow">
@@ -215,9 +216,10 @@
 										<s:ddloption value="C" text="Configurazione"/>
 								</s:dropdownlist>
 							</s:div>
+						</c:if>	
 							
 						<%-- inizio PAGONET-431 --%>
-							<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
 							<s:div name="divElement933" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									maxlenght="40"
@@ -335,6 +337,7 @@
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
 							
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<%-- inizio LP PG200360 --%>
 							<%-- Allineamento con PG200180 --%>
 							<s:div name="divElement73a" cssclass="divRicMetadatiSingleRow">
@@ -350,9 +353,10 @@
 										<s:ddloption value="360" text="360 gg"/>
 								</s:dropdownlist>
 							</s:div>
+						</c:if>	
 							
-							<%-- inizio PAGONET-431 --%>
-						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
+						<%-- inizio PAGONET-431 --%>
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
 							<s:div name="divElement73b" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									maxlenght="5"
@@ -471,6 +475,7 @@
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
 							
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<s:div name="divElement723" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									maxlenght="128" 
@@ -479,7 +484,9 @@
 									text="${configutentetiposervizioente_datapagamento}"
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
-
+						</c:if>	
+						
+						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<%-- inizio LP PG200360 --%>
 							<%-- Allineamento con PG200180 --%>
 							<s:div name="divElement722" cssclass="divRicMetadatiSingleRow">
@@ -491,6 +498,7 @@
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
 							<%-- fine LP PG200360 --%>
+						</c:if>		
 								<%-- inizio SB PG210140 --%>
 							<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM'}">
 								<s:div name="divElement936" cssclass="divRicMetadatiSingleRow">
