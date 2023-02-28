@@ -15,7 +15,7 @@
     <parameter key="pagetitle" value="title.riconmovimentinn" direct="true" />
   	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
   	<parameter key="menu" value="/applications/templates/shared/menu.jsp" />
-    <parameter key="main" value="/applications/payer/riconciliazionenn/include/soris/RiconciliazioneTransazioniNodo.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazionenn/soris/RiconciliazioneTransazioniNodo.jsp" />
   	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
   </screen>
 
@@ -41,7 +41,7 @@
     <parameter key="pagetitle" value="title.riconmovimentinn" direct="true" />
     <parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
     <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
-    <parameter key="main" value="/applications/payer/riconciliazionenn/trentrisc/DettaglioIUVFlusso.jsp" />
+    <parameter key="main" value="/applications/payer/riconciliazionenn/soris/DettaglioIUVFlusso.jsp" />
     <parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
   </screen>
 
