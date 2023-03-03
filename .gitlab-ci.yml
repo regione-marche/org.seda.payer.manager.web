@@ -1,3 +1,115 @@
 include:
   - project: maggiolispa/pagamenti/pipelines/common-ci-pagonet
     file: /java-8.yml
+    
+build:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $FORCE == "true"
+    - when: never
+
+build-trentrisc:
+  extends: [build]
+  variables:
+    PROFILE: "-Ptrentrisc"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-sassari:
+  extends: [build]
+  variables:
+    PROFILE: "-Psassari"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-aosta:
+  extends: [build]
+  variables:
+    PROFILE: "-Paosta"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-creset:
+  extends: [build]
+  variables:
+    PROFILE: "-Pcreset"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-regabruzzo:
+  extends: [build]
+  variables:
+    PROFILE: "-Pregabruzzo"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-maggioli:
+  extends: [build]
+  variables:
+    PROFILE: "-Pmaggioli"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-roseto:
+  extends: [build]
+  variables:
+    PROFILE: "-Proseto"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-fccsa:
+  extends: [build]
+  variables:
+    PROFILE: "-Pfccsa"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-bolzano:
+  extends: [build]
+  variables:
+    PROFILE: "-Pbolzano"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-soris:
+  extends: [build]
+  variables:
+    PROFILE: "-Psoris"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-regmarche:
+  extends: [build]
+  variables:
+    PROFILE: "-Pregmarche"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-sviluppo:
+  extends: [build]
+  variables:
+    PROFILE: "-Psviluppo"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
+build-newsoris:
+  extends: [build]
+  variables:
+    PROFILE: "-Pnewsoris"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+
