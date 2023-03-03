@@ -107,8 +107,9 @@
 													   valueselected="${configbancadati_tipoIntegrazione}" 
 													   cssclasslabel="label85 bold textright"
 													   cssclass="seda-ui-ddl textareaman floatleft" >
-										<s:ddloption value="I" text="IMMEDIATA"/>s
+										<s:ddloption value="I" text="IMMEDIATA"/>
 										<s:ddloption value="D" text="DIFFERITA"/>
+										<s:ddloption value="S" text="IMMEDIATA SEDA"/>
 									</s:dropdownlist>
 							</s:div>
 						</s:div>
