@@ -196,6 +196,7 @@ public enum PropertiesPath {
 	, directoryIoItaliaCSVScartati
 	, directoryIoItaliaCSVValidi
 	, wsAppIOEndpointURL
+	, wsAppIOEndpointDefaultURL
 
 	;
 	
