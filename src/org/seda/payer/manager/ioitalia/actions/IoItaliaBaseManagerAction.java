@@ -1,4 +1,3 @@
-package org.seda.payer.manager.ioitalia.actions;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -512,8 +511,11 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		UserBean userBean = (UserBean)request.getSession().getAttribute(SignOnKeys.USER_BEAN);
 				
 		String templateName = userBean.getTemplate(applicationName);
-//		String wsAppIOEndpointURL = configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName));
-		String wsAppIOEndpointURL = "https://api.io.italia.it/api/v1";		
+		String wsAppIOEndpointURL = "https://api.io.italia.it/api/v1";
+		if (configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName))!=null) 
+				wsAppIOEndpointURL=configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName));
+		else if (configuration.getProperty(PropertiesPath.wsAppIOEndpointDefaultURL.format())!=null)
+				wsAppIOEndpointURL = configuration.getProperty(PropertiesPath.wsAppIOEndpointDefaultURL.format());			
 		try {
 			TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
 			SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
