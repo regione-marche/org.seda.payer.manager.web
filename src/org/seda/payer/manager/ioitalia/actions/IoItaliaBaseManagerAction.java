@@ -382,11 +382,13 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		    			}
 		    			messagesRequest.setContent(content);
 		    			messagesRequest.setFiscal_code(codFiscale);
-		    			if(messaggio.getEmail() != null && !messaggio.getEmail().equals("")) {
-		    				DefaultAddresses defaultAddresses = new DefaultAddresses();
-		    				defaultAddresses.setEmail(messaggio.getEmail());
-		    				messagesRequest.setDefault_addresses(defaultAddresses);
-		    			}
+		    			//PGNTMGR-1 - inizio
+//		    			if(messaggio.getEmail() != null && !messaggio.getEmail().equals("")) {
+//		    				DefaultAddresses defaultAddresses = new DefaultAddresses();
+//		    				defaultAddresses.setEmail(messaggio.getEmail());
+//		    				messagesRequest.setDefault_addresses(defaultAddresses);
+//		    			}
+		    			//PGNTMGR-1 - fine
 		    			// json della request messages
 			            obj = new ObjectMapper();  
 			            try {  
@@ -409,7 +411,7 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		    			if(response2.getStatus() == 201) {
 		    				messaggio.setIdInvioMessaggio(messagesResponse.getId());
 		    				messaggio.setStato("1");
-		    				
+		    				messaggio.setMessaggioErrore("");	//PGNTMGR-1
 		    			}else if(response2.getStatus() == 400) {
 				    		messaggioErrore = "400 - Invalid payload - "+messagesResponse.getDetail();
 				    	}else if(response2.getStatus() == 401) {
