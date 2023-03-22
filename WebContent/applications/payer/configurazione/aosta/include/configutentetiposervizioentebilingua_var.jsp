@@ -350,6 +350,22 @@
 							<%-- inizio LP PG210070 --%>
 						<%-- fine PAGONET-430 --%>
 							<%-- fine LP PG210070 --%>
+							
+						<s:div name="mail1" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;maxlength=8" bmodify="true"
+							name="tecnico_ente" label="mail referente tecnico Ente:"
+							text="" maxlenght="500"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					    </s:div>
+					
+					<s:div name="mail2" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;maxlength=8" bmodify="true"
+							name="referente_ente" label="mail referente dell ENTE per il servizio:"
+							text="" maxlenght="500"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+							
+							
 						</s:div>
 		
 						<s:div name="divRicercaRight" cssclass="divRicMetadatiRight">
