@@ -231,6 +231,13 @@
 										cssclass="textareaman"  />
 								</s:div>
 							</c:if>
+							
+							<s:div name="divElementLabel1" cssclass="divTitle">
+								<center>
+								<s:label name="prova" text="Dati Ente"  cssclass="lblTitlePadding bold"/>
+								</center>
+							</s:div>
+							
 								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
 										maxlenght="40"
@@ -241,25 +248,36 @@
 										cssclass="textareaman"  />
 								</s:div>
 								
-								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
+							    <s:div name="nome" cssclass="divRicMetadatiSingleRow">
+									<s:textbox validator="ignore;maxlength=8" bmodify="true"
+										name="nome" label="Nome:"
+										text="" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							    </s:div>
+							    
+								<s:div name="cognome" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
-										maxlenght="40"
-										label="Nome Struttura Ente/Ragione Sociale Fornitore:"
-										name="Nome Struttura Ente rag soc"
+										maxlenght="256" 
+										validator="ignore"
+										label="Cognome:" name="Cognome"
 										text=""
-										cssclasslabel="label85 bold textright"
-										cssclass="textareaman"  />
+										cssclasslabel="label85 bold textright" cssclass="textareaman" />
 								</s:div>
 								
-								<s:div name="mail_ref_tecnico" cssclass="divRicMetadatiSingleRow">
-									<s:textbox bmodify="true"
-										maxlenght="500"
-										label="Mail referente Tecnico ente:"
-										name="mail_ref_tecnico"
-										text=""
-										cssclasslabel="label85 bold textright"
-										cssclass="textareaman"  />
+								<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
+									<s:textbox validator="ignore;maxlength=8" bmodify="true"
+										name="referente_ente" label="Telefono ente:"
+										text="" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 								</s:div>
+								
+								<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
+									<s:textbox validator="ignore;maxlength=8" bmodify="true"
+										name="referente_ente" label="mail ente per il servizio:"
+										text="" maxlenght="500"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+								</s:div>
+								
 							<%-- fine LP PG200420 --%>
 							<%-- inizio LP PG210070 --%>
 						
@@ -379,34 +397,53 @@
 							<%-- inizio LP PG210070 --%>
 						<%-- fine PAGONET-430 --%>
 							<%-- fine LP PG210070 --%>
-							
-						<s:div name="nome" cssclass="divRicMetadatiSingleRow">
-						<s:textbox validator="ignore;maxlength=8" bmodify="true"
-							name="nome" label="Nome:"
-							text="" maxlenght="256"
-							cssclass="textareaman" cssclasslabel="label85 bold textright" />
-					    </s:div>
 					
-					<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
-						<s:textbox validator="ignore;maxlength=8" bmodify="true"
-							name="referente_ente" label="Telefono referente ente:"
-							text="" maxlenght="256"
-							cssclass="textareaman" cssclasslabel="label85 bold textright" />
-					</s:div>
+							<s:div name="divElementLabel1" cssclass="divTitle">
+								<center>
+								<s:label name="prova" text="Dati Fornitore"  cssclass="lblTitlePadding bold"/>
+								</center>
+							</s:div>
+							
+								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="40"
+										label="Nome Struttura Ente:"
+										name="Nome Struttura Ente rag soc"
+										text=""
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
 					
 					<s:div name="Nome_ref_tec" cssclass="divRicMetadatiSingleRow">
 						<s:textbox validator="ignore;maxlength=8" bmodify="true"
-							name="Nome_ref_tec" label="Nome referente tecnico:"
+							name="Nome_ref_tec" label="Nome ref. tecnico:"
 							text="" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
 					
+							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
+								<s:textbox validator="ignore;maxlength=8" bmodify="true"
+									name="cognome_ref_tec" label="Cognome ref. Tecnico:"
+									text="" maxlenght="500"
+									cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							</s:div>
+					
 					<s:div name="Telefono_Referente_Tecnico_Ente" cssclass="divRicMetadatiSingleRow">
 						<s:textbox validator="ignore;maxlength=8" bmodify="true"
-							name="Telefono_Referente_Tecnico_Ente" label="Telefono referente tecnico ente:"
+							name="Telefono_Referente_Tecnico_Ente" label="Telefono ref. tec Ente:"
 							text="" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
+				
+							    <s:div name="mail_ref_tecnico" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="500"
+										label="Mail ref. tec.:"
+										name="mail_ref_tecnico"
+										text=""
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
 							
 							
 						</s:div>
@@ -501,30 +538,7 @@
 									text="${configutentetiposervizioente_codiceUtenteSeda}"
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
-							
-							
-							<s:div name="cognome" cssclass="divRicMetadatiSingleRow">
-								<s:textbox bmodify="true"
-									maxlenght="256" 
-									validator="ignore"
-									label="Cognome:" name="cognome"
-									text=""
-									cssclasslabel="label85 bold textright" cssclass="textareaman" />
-							</s:div>
-							
-							<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
-								<s:textbox validator="ignore;maxlength=8" bmodify="true"
-									name="referente_ente" label="mail referente ente per il servizio:"
-									text="" maxlenght="500"
-									cssclass="textareaman" cssclasslabel="label85 bold textright" />
-							</s:div>
-							
-							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
-								<s:textbox validator="ignore;maxlength=8" bmodify="true"
-									name="cognome_ref_tec" label="Cognome referente Tecnico:"
-									text="" maxlenght="500"
-									cssclass="textareaman" cssclasslabel="label85 bold textright" />
-							</s:div>
+						
 							
 							<%-- inizio LP PG210070 --%>
 							<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM'}">
