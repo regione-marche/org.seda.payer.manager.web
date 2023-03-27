@@ -760,6 +760,16 @@ public class ConfigUtenteTipoServizioEnteAction extends DispatchHtmlAction {
 		String codiceUtenteSeda = (String)request.getAttribute("configutentetiposervizioente_codiceUtenteSeda");
 		String flagNotificaPagamento = (String)request.getAttribute("configutentetiposervizioente_flagNotificaPagamento")==null?"":(String)request.getAttribute("configutentetiposervizioente_flagNotificaPagamento");
 		String urlServizioWebNotificaPagamento = (String)request.getAttribute("configutentetiposervizioente_urlServizioWebNotificaPagamento")==null?"":(String)request.getAttribute("configutentetiposervizioente_urlServizioWebNotificaPagamento");
+		String strutturaEnte = (String)request.getAttribute("nome_struttura_ente");
+		String strutturaEnteFornitore = (String)request.getAttribute("nome_struttura_ente_rag_soc");
+		String nomeEnte = (String)request.getAttribute("nome_ente");
+		String nomeFornitore = (String)request.getAttribute("Nome_ref_tec");
+		String cognomeFornitore = (String)request.getAttribute("cognome_ref_tec");
+		String telefonoFornitore = (String)request.getAttribute("Telefono_Referente_Tecnico_Ente");
+		String mailFornitore = (String)request.getAttribute("mail_ref_tecnico");
+		String cognomeEnte = (String)request.getAttribute("cognome_ente");
+		String telefonoEnte = (String)request.getAttribute("telefono_ente");
+		String mailEnte = (String)request.getAttribute("mail_ente");
 
 		//inizio LP PG200060
 		//String flagPagoPA = (request.getAttribute("flagPagoPA") == null ? "" : "Y");
@@ -875,7 +885,9 @@ public class ConfigUtenteTipoServizioEnteAction extends DispatchHtmlAction {
 					    numCc, intestatarioCc, tipoDoc, flagConRange,  emailDest, emailCcn,emailMitt, desMitt, flagAllegato, codiceSia,  codiceIban,codiceSecondoIban,
 					     funzionePag, flagPagProtetta, urlServWeb, flagTipoPag, flagIntegrazioneSeda, codiceUtenteSeda, usernameAutenticazione, flagNotificaPagamento,
 					     urlServizioWebNotificaPagamento, flagPagoPA, tipoDovuto, flagStampaPagoPaPdf, giorniStampaAvvisoPagoPa, autorizzazioneStampaAvvisoPagoPa, cbillStampaAvvisoPagoPa, infoEnteStampaAvvisoPagoPa,
-					     chiaveTassonomia, causali, articolo ,codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento); 
+					     chiaveTassonomia, causali, articolo ,codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento,
+					     strutturaEnte,strutturaEnteFornitore,nomeEnte,nomeFornitore,cognomeEnte,cognomeFornitore,
+					     telefonoEnte,telefonoFornitore,mailEnte,mailFornitore); 
 				//fine LP PG200360
 				//fine LP PG180290
 				/* we prepare object for save */
@@ -955,7 +967,18 @@ public class ConfigUtenteTipoServizioEnteAction extends DispatchHtmlAction {
 				request.setAttribute("configutentetiposervizioente_codiceUtenteSeda", detailResponse.getConfigutentetiposervizioente().getCodiceUtenteSeda().trim());
 				request.setAttribute("configutentetiposervizioente_flagNotificaPagamento", detailResponse.getConfigutentetiposervizioente().getFlagNotificaPagamento());
 				request.setAttribute("configutentetiposervizioente_urlServizioWebNotificaPagamento", detailResponse.getConfigutentetiposervizioente().getUrlServizioWebNotificaPagamento());
-				request.setAttribute("chk_flagPagoPA", detailResponse.getConfigutentetiposervizioente().getFlagPagoPA().equals("Y"));	//TODO da verificare
+				request.setAttribute("configutentetiposervizioente_flagTipoPag", detailResponse.getConfigutentetiposervizioente().getFlagTipoPag());
+				request.setAttribute("nome_struttura_ente", detailResponse.getConfigutentetiposervizioente().getStrutturaEnte());
+				request.setAttribute("nome_struttura_ente_rag_soc", detailResponse.getConfigutentetiposervizioente().getStrutturaEnteFornitore());
+				request.setAttribute("nome_ente", detailResponse.getConfigutentetiposervizioente().getNomeEnte());
+				request.setAttribute("Nome_ref_tec", detailResponse.getConfigutentetiposervizioente().getNomeFornitore());
+				request.setAttribute("cognome_ref_tec", detailResponse.getConfigutentetiposervizioente().getCognomeFornitore());
+				request.setAttribute("Telefono_Referente_Tecnico_Ente", detailResponse.getConfigutentetiposervizioente().getTelefonoFornitore());
+				request.setAttribute("mail_ref_tecnico", detailResponse.getConfigutentetiposervizioente().getMailFornitore());
+				request.setAttribute("cognome_ente", detailResponse.getConfigutentetiposervizioente().getCognomeEnte());
+				request.setAttribute("telefono_ente", detailResponse.getConfigutentetiposervizioente().getTelefonoEnte());
+				request.setAttribute("mail_ente", detailResponse.getConfigutentetiposervizioente().getMailEnte());
+				
 			} catch (Exception ignore) { }
 			if (codOp.compareTo(TypeRequest.ADD_SCOPE.scope())==0) request.setAttribute("message", Messages.INS_ERR.format());
 			if (codOp.compareTo(TypeRequest.EDIT_SCOPE.scope())==0) request.setAttribute("message", Messages.GENERIC_ERR.format());

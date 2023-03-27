@@ -240,9 +240,9 @@
 							
 								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
-										maxlenght="40"
+										maxlenght="256"
 										label="Nome Struttura Ente:"
-										name="Nome Struttura Ente"
+										name="nome_struttura_ente"
 										text=""
 										cssclasslabel="label85 bold textright"
 										cssclass="textareaman"  />
@@ -250,7 +250,7 @@
 								
 							    <s:div name="nome" cssclass="divRicMetadatiSingleRow">
 									<s:textbox validator="ignore;maxlength=8" bmodify="true"
-										name="nome" label="Nome:"
+										name="nome_ente" label="Nome:"
 										text="" maxlenght="256"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 							    </s:div>
@@ -259,21 +259,21 @@
 									<s:textbox bmodify="true"
 										maxlenght="256" 
 										validator="ignore"
-										label="Cognome:" name="Cognome"
+										label="Cognome:" name="cognome_ente"
 										text=""
 										cssclasslabel="label85 bold textright" cssclass="textareaman" />
 								</s:div>
 								
 								<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
 									<s:textbox validator="ignore;maxlength=8" bmodify="true"
-										name="referente_ente" label="Telefono ente:"
+										name="telefono_ente" label="Telefono ente:"
 										text="" maxlenght="256"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 								</s:div>
 								
 								<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
-									<s:textbox validator="ignore;maxlength=8" bmodify="true"
-										name="referente_ente" label="mail ente per il servizio:"
+									<s:textbox bmodify="true"
+										name="mail_ente" label="mail ente per il servizio:"
 										text="" maxlenght="500"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 								</s:div>
@@ -406,30 +406,30 @@
 							
 								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
-										maxlenght="40"
+										maxlenght="256"
 										label="Nome Struttura Ente:"
-										name="Nome Struttura Ente rag soc"
+										name="nome_struttura_ente_rag_soc"
 										text=""
 										cssclasslabel="label85 bold textright"
 										cssclass="textareaman"  />
 								</s:div>
 					
 					<s:div name="Nome_ref_tec" cssclass="divRicMetadatiSingleRow">
-						<s:textbox validator="ignore;maxlength=8" bmodify="true"
+						<s:textbox bmodify="true"
 							name="Nome_ref_tec" label="Nome ref. tecnico:"
 							text="" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
 					
 							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
-								<s:textbox validator="ignore;maxlength=8" bmodify="true"
+								<s:textbox bmodify="true"
 									name="cognome_ref_tec" label="Cognome ref. Tecnico:"
-									text="" maxlenght="500"
+									text="" maxlenght="256"
 									cssclass="textareaman" cssclasslabel="label85 bold textright" />
 							</s:div>
 					
 					<s:div name="Telefono_Referente_Tecnico_Ente" cssclass="divRicMetadatiSingleRow">
-						<s:textbox validator="ignore;maxlength=8" bmodify="true"
+						<s:textbox bmodify="true"
 							name="Telefono_Referente_Tecnico_Ente" label="Telefono ref. tec Ente:"
 							text="" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
