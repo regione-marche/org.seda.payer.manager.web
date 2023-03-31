@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seda.payer.manager.web</groupId>
 	<artifactId>org.seda.payer.manager.web</artifactId>
-	<version>1.0</version>
+	<version>2.1.1</version>
 	<packaging>war</packaging>
 	<name>org.seda.payer.manager.web</name>
 	<description>org.seda.payer.manager.web</description>
@@ -823,26 +823,26 @@
 						</archive>  
 						<webResources>
 	                          <webResource>
-	                            <directory>profili/trentrisc/images</directory>
+	                            <directory>${project.basedir}/profili/trentrisc/images</directory>
 	                            <targetPath>images</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
 	                          
 	                          <webResource>
-	                            <directory>profili/trentrisc/styles</directory>
+	                            <directory>${project.basedir}/profili/trentrisc/styles</directory>
 	                            <targetPath>styles</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
 	                          
 	                          
 	                           <webResource>
-	                            <directory>profili/trentrisc/resources</directory>
+	                            <directory>${project.basedir}/profili/trentrisc/resources</directory>
 	                            <targetPath>resources</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
 	                          
 	                          <webResource>
-	                            <directory>profili/trentrisc/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/trentrisc/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -887,7 +887,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/sassari/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/sassari/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -932,7 +932,7 @@
 						</archive>  
 						<webResources>
 							<webResource>
-								<directory>profili/aosta/WEB-INF</directory>
+								<directory>${project.basedir}/profili/aosta/WEB-INF</directory>
 								<targetPath>/WEB-INF</targetPath>
 								<include>**/*</include>
 							</webResource>
@@ -975,7 +975,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/creset/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/creset/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1018,7 +1018,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/regabruzzo/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/regabruzzo/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1061,7 +1061,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/maggioli/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/maggioli/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1105,7 +1105,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/roseto/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/roseto/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1149,7 +1149,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/fccsa/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/fccsa/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1192,7 +1192,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/bolzano/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/bolzano/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1236,7 +1236,7 @@
 							</archive>  
 						<webResources>
 							<webResource>
-							<directory>profili/soris/WEB-INF</directory>
+							<directory>${project.basedir}/profili/soris/WEB-INF</directory>
 							<targetPath>/WEB-INF</targetPath>
 							<include>**/*</include>
 							</webResource>
@@ -1279,7 +1279,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/regmarche/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/regmarche/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
@@ -1354,7 +1354,7 @@
                               </archive>  
                           <webResources>
 	                           <webResource>
-	                            <directory>profili/newsoris/WEB-INF</directory>
+	                            <directory>${project.basedir}/profili/newsoris/WEB-INF</directory>
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>

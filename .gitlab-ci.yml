@@ -1,3 +1,326 @@
 include:
   - project: maggiolispa/pagamenti/pipelines/common-ci-pagonet
     file: /java-8.yml
+
+################################################
+########### override ###########################
+################################################
+
+
+
+build:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $FORCE == "true"
+    - when: never
+
+upload-to-package-registry:
+  rules:
+    - when: never
+
+################################################
+########### rules ##############################
+################################################
+
+.production-tag:
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/' #9.0.2
+      variables:
+        ENV: "prod" 
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-rc\d{1,2}$/' #9.1.0-rc1  
+      variables:
+        ENV: "prod" 
+
+.release-branch:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-\d+\.\d+\.\d+$/' #release-9.1.0
+      variables:
+        ENV: "coll"
+  
+################################################
+########### trentrisc ##########################
+################################################
+
+.rule-trentrisc:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-trentrisc-\d+\.\d+\.\d+$/' #release-trentrisc-9.1.0
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-trentriscd$/' #9.1.0-trentrisc
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"
+
+build-trentrisc:
+  extends: [build]
+  variables:
+    PROFILE: "-Ptrentrisc"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-trentrisc]
+  
+upload-to-package-registry-trentrisc:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.trentino.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-trentrisc]
+
+
+################################################
+########### sassari ############################
+################################################
+
+.rule-sassari:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-sassari-\d+\.\d+\.\d+$/' #release-9.1.0-sassari
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-sassari$/' #release-9.1.0-sassari
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"  
+
+build-sassari:
+  extends: [build]
+  variables:
+    PROFILE: "-Psassari"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-sassari]
+
+upload-to-package-registry-sassari:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.sassari.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-sassari]
+
+################################################
+########### aosta ##############################
+################################################
+
+.rule-aosta:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-aosta-\d+\.\d+\.\d+$/' #release-9.1.0-aosta
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-aosta$/' #release-9.1.0-aosta
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"
+
+build-aosta:
+  extends: [build]
+  variables:
+    PROFILE: "-Paosta"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-aosta]
+
+upload-to-package-registry-aosta:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.aosta.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-aosta]
+
+################################################
+########### creset #############################
+################################################
+
+.rule-creset:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-creset-\d+\.\d+\.\d+$/' #release-9.1.0-creset
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-creset$/' #release-9.1.0-creset
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"  
+
+build-creset:
+  extends: [build]
+  variables:
+    PROFILE: "-Pcreset"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-creset]
+
+upload-to-package-registry-creset:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.creset.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-creset]
+
+################################################
+########### maggioli ###########################
+################################################
+
+.rule-maggioli:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-maggioli-\d+\.\d+\.\d+$/' #release-9.1.0-maggioli
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-maggioli$/' #release-9.1.0-maggioli
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"  
+
+build-maggioli:
+  extends: [build]
+  variables:
+    PROFILE: "-Pmaggioli"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-maggioli]
+
+upload-to-package-registry-maggioli:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.maggioli.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-maggioli]
+
+################################################
+########### roseto #############################
+################################################
+
+.rule-roseto:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-roseto-\d+\.\d+\.\d+$/' #release-9.1.0-roseto
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-roseto$/' #release-9.1.0-roseto
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"  
+
+build-roseto:
+  extends: [build]
+  variables:
+    PROFILE: "-Proseto"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-roseto]
+
+upload-to-package-registry-roseto:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.roseto.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-roseto]
+
+################################################
+########### bolzano ############################
+################################################
+
+.rule-bolzano:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-bolzano-\d+\.\d+\.\d+$/' #release-9.1.0-bolzano
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-bolzano$/' #release-9.1.0-bolzano
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"  
+
+build-bolzano:
+  extends: [build]
+  variables:
+    PROFILE: "-Pbolzano"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-bolzano]
+
+upload-to-package-registry-bolzano:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.bolzano.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-bolzano]
+
+################################################
+########### soris ##############################
+################################################
+
+.rule-soris:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-soris-\d+\.\d+\.\d+$/' #release-9.1.0-soris
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-soris$/' #release-9.1.0-soris
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"
+
+build-soris:
+  extends: [build]
+  variables:
+    PROFILE: "-Psoris"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-soris]
+
+upload-to-package-registry-soris:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.soris.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-soris]
+
+################################################
+########### regmarche ##########################
+################################################
+
+.rule-regmarche:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-regmarche-\d+\.\d+\.\d+$/' #release-9.1.0-regmarche
+      variables:
+        DEPLOY: "true"
+        ENV: "coll"
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+-regmarche$/' #release-9.1.0-regmarche
+      variables:
+        DEPLOY: "true"
+        ENV: "prod"
+
+build-regmarche:
+  extends: [build]
+  variables:
+    PROFILE: "-Pregmarche"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-regmarche]
+
+upload-to-package-registry-regmarche:
+  extends: [upload-to-package-registry]
+  variables:
+    UPLOAD_FILE: "org.seda.payer.regmarche.manager.web.war"
+  rules:
+    - !reference [.production-tag]
+    - !reference [.release-branch]
+    - !reference [.rule-regmarche]

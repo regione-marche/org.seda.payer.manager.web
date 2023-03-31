@@ -382,11 +382,13 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		    			}
 		    			messagesRequest.setContent(content);
 		    			messagesRequest.setFiscal_code(codFiscale);
-		    			if(messaggio.getEmail() != null && !messaggio.getEmail().equals("")) {
-		    				DefaultAddresses defaultAddresses = new DefaultAddresses();
-		    				defaultAddresses.setEmail(messaggio.getEmail());
-		    				messagesRequest.setDefault_addresses(defaultAddresses);
-		    			}
+		    			//PGNTMGR-1 - inizio
+//		    			if(messaggio.getEmail() != null && !messaggio.getEmail().equals("")) {
+//		    				DefaultAddresses defaultAddresses = new DefaultAddresses();
+//		    				defaultAddresses.setEmail(messaggio.getEmail());
+//		    				messagesRequest.setDefault_addresses(defaultAddresses);
+//		    			}
+		    			//PGNTMGR-1 - fine
 		    			// json della request messages
 			            obj = new ObjectMapper();  
 			            try {  
@@ -409,7 +411,7 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		    			if(response2.getStatus() == 201) {
 		    				messaggio.setIdInvioMessaggio(messagesResponse.getId());
 		    				messaggio.setStato("1");
-		    				
+		    				messaggio.setMessaggioErrore("");	//PGNTMGR-1
 		    			}else if(response2.getStatus() == 400) {
 				    		messaggioErrore = "400 - Invalid payload - "+messagesResponse.getDetail();
 				    	}else if(response2.getStatus() == 401) {
@@ -512,8 +514,11 @@ public class IoItaliaBaseManagerAction extends BaseManagerAction {
 		UserBean userBean = (UserBean)request.getSession().getAttribute(SignOnKeys.USER_BEAN);
 				
 		String templateName = userBean.getTemplate(applicationName);
-//		String wsAppIOEndpointURL = configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName));
-		String wsAppIOEndpointURL = "https://api.io.italia.it/api/v1";		
+		String wsAppIOEndpointURL = "https://api.io.italia.it/api/v1";
+		if (configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName))!=null) 
+				wsAppIOEndpointURL=configuration.getProperty(PropertiesPath.wsAppIOEndpointURL.format(templateName));
+		else if (configuration.getProperty(PropertiesPath.wsAppIOEndpointDefaultURL.format())!=null)
+				wsAppIOEndpointURL = configuration.getProperty(PropertiesPath.wsAppIOEndpointDefaultURL.format());			
 		try {
 			TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
 			SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
