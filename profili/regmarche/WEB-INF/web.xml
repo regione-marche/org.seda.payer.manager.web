@@ -127,8 +127,7 @@
 		<url-pattern>/federaCohesion/*</url-pattern>
 	</filter-mapping>
 	
-	</filter-mapping>
-		<filter-mapping>
+	<filter-mapping>
 		<filter-name>CheckInvalidTagFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
