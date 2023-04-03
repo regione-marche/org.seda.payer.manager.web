@@ -9,14 +9,15 @@
 	<name>org.seda.payer.manager.web</name>
 	<description>org.seda.payer.manager.web</description>
 
-<parent>
+	<parent>
       <groupId>it.maggioli.informatica.base.pom</groupId>
       <artifactId>pagonet-base</artifactId>
       <version>1.0</version>
+      <relativePath/>
    </parent>
 	
 		
-<properties>
+	<properties>
 	   <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
 	</properties>
 
@@ -180,20 +181,15 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		
-		
 
-<!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
-<dependency>
-    <groupId>org.reactivestreams</groupId>
-    <artifactId>reactive-streams</artifactId>
-    <version>1.0.3</version>
-    <scope>compile</scope>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
+		<dependency>
+		    <groupId>org.reactivestreams</groupId>
+		    <artifactId>reactive-streams</artifactId>
+		    <version>1.0.3</version>
+		    <scope>compile</scope>
+		</dependency>
 
-
-		
-		
 		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -784,6 +780,16 @@
             <artifactId>glassfish-corba-omgapi</artifactId>
             <version>4.2.1</version>
         </dependency>
+        
+        
+         <!-- https://mvnrepository.com/artifact/com.googlecode.owasp-java-html-sanitizer/owasp-java-html-sanitizer -->
+	<dependency>
+	    <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+	    <artifactId>owasp-java-html-sanitizer</artifactId>
+	    <version>20220608.1</version>
+	</dependency>
+        
+        
 	</dependencies>
 	
 	
@@ -850,9 +856,6 @@
 	                          
 	                          
                         </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -897,10 +900,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -946,13 +946,7 @@
 								<include>**/*</include>
 							</webResource>
 						</webResources>
-												
-						<attachClasses>true</attachClasses>  
-
-						
-						
-
-                        </configuration>
+						</configuration>
                     </plugin>
                    </plugins>
         </build>
@@ -994,10 +988,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1040,10 +1031,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1086,10 +1074,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1133,10 +1118,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1180,10 +1162,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1226,10 +1205,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1273,10 +1249,7 @@
 							<targetPath>/WEB-INF</targetPath>
 							<include>**/*</include>
 							</webResource>
-						</webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+						</webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1319,10 +1292,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1354,10 +1324,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1400,10 +1367,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>
-                        
-                        
-                        <attachClasses>true</attachClasses>  
+                        </webResources>  
                         </configuration>
                     </plugin>
                    </plugins>

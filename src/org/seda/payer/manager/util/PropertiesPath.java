@@ -197,6 +197,7 @@ public enum PropertiesPath {
 	, directoryIoItaliaCSVValidi
 	, wsAppIOEndpointURL
 	, wsAppIOEndpointDefaultURL
+	, allowElementsOWASP
 
 	;
 	
