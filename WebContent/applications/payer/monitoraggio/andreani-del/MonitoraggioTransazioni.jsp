@@ -368,8 +368,9 @@
 							text="${tx_id_terminale_pos_fisico}" maxlenght="8"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
+						
 				</s:div>
-
+				
 			</s:div>
 
 			<s:div name="divRicercaBottoni" cssclass="divRicBottoni">
