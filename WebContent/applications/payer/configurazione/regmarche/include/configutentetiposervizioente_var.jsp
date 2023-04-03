@@ -249,10 +249,8 @@
 							</c:if>
 							
 							
-							<s:div name="struttEnteLabel" cssclass="divTitle">
-								<center>
-								<s:label name="prova" text="Dati Ente"/>
-								</center>
+							<s:div name="LabelDatiEnte" cssclass="divTitle">
+								<s:label name="datiEnte" text="Dati Ente" cssclass="lblTitlePadding checkleft bold"/>
 							</s:div>
 							
 								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
@@ -419,10 +417,8 @@
 							</s:div>
 						</c:if>
 						
-												<s:div name="struttFornLabel" cssclass="divTitle">
-								<center>
-								<s:label name="prova" text="Dati Fornitore"/>
-								</center>
+							<s:div name="LabelDatiForn" cssclass="divTitle">
+								<s:label name="datiForn" text="Dati Fornitore" cssclass="lblTitlePadding checkleft bold"/>
 							</s:div>
 							
 								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
