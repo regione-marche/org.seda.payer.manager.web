@@ -1038,6 +1038,17 @@ public class ServiziAttiviAction extends BaseManagerAction {
 		    String cbillStampaAvvisoPagoPa = detailResponse.getConfigutentetiposervizioente().getCbillStampaAvvisoPagoPa();
 		    String infoEnteStampaAvvisoPagoPa = detailResponse.getConfigutentetiposervizioente().getInfoEnteStampaAvvisoPagoPa(); 
 		    String chiaveTassonomiaOLD = detailResponse.getConfigutentetiposervizioente().getChiaveTassonomia();
+		    String strutturaEnte = detailResponse.getConfigutentetiposervizioente().getStrutturaEnte();
+		    String strutturaEnteFornitore = detailResponse.getConfigutentetiposervizioente().getStrutturaEnteFornitore();
+		    String nomeEnte = detailResponse.getConfigutentetiposervizioente().getNomeEnte();
+		    String nomeFornitore = detailResponse.getConfigutentetiposervizioente().getNomeFornitore();
+		    String cognomeFornitore = detailResponse.getConfigutentetiposervizioente().getCognomeFornitore();
+		    String telefonoFornitore = detailResponse.getConfigutentetiposervizioente().getTelefonoFornitore();
+		    String mailFornitore = detailResponse.getConfigutentetiposervizioente().getMailFornitore();
+		    String cognomeEnte = detailResponse.getConfigutentetiposervizioente().getCognomeEnte();
+		    String telefonoEnte = detailResponse.getConfigutentetiposervizioente().getTelefonoEnte();
+		    String mailEnte = detailResponse.getConfigutentetiposervizioente().getMailEnte();
+			
 		    
 		    boolean bAggiorna = false;
 		    String chiaveTassonomia = (String) request.getAttribute("configutentetiposervizioente_chiaveTassonomia");
@@ -1112,8 +1123,10 @@ public class ServiziAttiviAction extends BaseManagerAction {
 				    numCc, intestatarioCc, tipoDoc, flagConRange,  emailDest, emailCcn,emailMitt, desMitt, flagAllegato, codiceSia,  codiceIban,codiceSecondoIban,
 				     funzionePag, flagPagProtetta, urlServWeb, flagTipoPag, flagIntegrazioneSeda, codiceUtenteSeda, usernameAutenticazione, flagNotificaPagamento,
 				     urlServizioWebNotificaPagamento, flagPagoPA, tipoDovuto, flagStampaPagoPaPdf, giorniStampaAvvisoPagoPa, autorizzazioneStampaAvvisoPagoPa, cbillStampaAvvisoPagoPa, infoEnteStampaAvvisoPagoPa,
-				     chiaveTassonomia, causali, articolo, codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento); 
-		
+				     chiaveTassonomia, causali, articolo, codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento,
+				     strutturaEnte,strutturaEnteFornitore,nomeEnte,nomeFornitore,cognomeEnte,cognomeFornitore,telefonoEnte,
+				     telefonoFornitore,mailEnte,mailFornitore); 
+			
 			//fine SB PG210140
 			/* we prepare object for save */
 			ConfigUtenteTipoServizioEnteSaveRequest saveRequest = new ConfigUtenteTipoServizioEnteSaveRequest(configUtente,codOp);
