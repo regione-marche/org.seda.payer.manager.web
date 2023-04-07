@@ -258,15 +258,15 @@
 										maxlenght="256"
 										label="Nome Struttura Ente:"
 										name="nome_struttura_ente"
-										text=""
+										text="${requestScope.nome_struttura_ente}"
 										cssclasslabel="label85 bold textright"
 										cssclass="textareaman"  />
 								</s:div>
 								
 							    <s:div name="nome" cssclass="divRicMetadatiSingleRow">
-									<s:textbox validator="ignore;maxlength=8" bmodify="true"
+									<s:textbox bmodify="true"
 										name="nome_ente" label="Nome ente:"
-										text="" maxlenght="256"
+										text="${requestScope.nome_ente}" maxlenght="256"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 							    </s:div>
 							    
@@ -275,21 +275,21 @@
 										maxlenght="256" 
 										validator="ignore"
 										label="Cognome ente:" name="cognome_ente"
-										text=""
+										text="${requestScope.cognome_ente}"
 										cssclasslabel="label85 bold textright" cssclass="textareaman" />
 								</s:div>
 								
 								<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
-									<s:textbox validator="ignore;maxlength=8" bmodify="true"
+									<s:textbox bmodify="true"
 										name="telefono_ente" label="Telefono ente:"
-										text="" maxlenght="256"
+										text="${requestScope.telefono_ente}" maxlenght="256"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 								</s:div>
 								
 								<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
 										name="mail_ente" label="mail ente:"
-										text="" maxlenght="500"
+										text="${requestScope.mail_ente}" maxlenght="500"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
 								</s:div>
 							
@@ -426,7 +426,7 @@
 										maxlenght="256"
 										label="Nome str. for. :"
 										name="nome_struttura_ente_rag_soc"
-										text=""
+										text="${requestScope.nome_struttura_ente_rag_soc}"
 										cssclasslabel="label85 bold textright"
 										cssclass="textareaman"  />
 								</s:div>
@@ -434,21 +434,21 @@
 					<s:div name="Nome_ref_tec" cssclass="divRicMetadatiSingleRow">
 						<s:textbox bmodify="true"
 							name="Nome_ref_tec" label="Nome ref. tec.:"
-							text="" maxlenght="256"
+							text="${requestScope.Nome_ref_tec}" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
 					
 							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									name="cognome_ref_tec" label="Cognome ref. tec.:"
-									text="" maxlenght="256"
+									text="${requestScope.cognome_ref_tec}" maxlenght="256"
 									cssclass="textareaman" cssclasslabel="label85 bold textright" />
 							</s:div>
 					
 					<s:div name="Telefono_Referente_Tecnico_Ente" cssclass="divRicMetadatiSingleRow">
 						<s:textbox bmodify="true"
 							name="Telefono_Referente_Tecnico_Ente" label="Telefono ref. tec.:"
-							text="" maxlenght="256"
+							text="${requestScope.Telefono_Referente_Tecnico_Ente}" maxlenght="256"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
 				
@@ -457,7 +457,7 @@
 										maxlenght="500"
 										label="Mail ref. tec.:"
 										name="mail_ref_tecnico"
-										text=""
+										text="${requestScope.mail_ref_tecnico}"
 										cssclasslabel="label85 bold textright"
 										cssclass="textareaman"  />
 								</s:div>

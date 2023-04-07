@@ -232,11 +232,11 @@
 								</s:div>
 							</c:if>
 							
-							<s:div name="divElementLabel1" cssclass="divTitle">
+						<!--  <s:div name="divElementLabel1" cssclass="divTitle">
 								<center>
 								<s:label name="prova" text="Dati Ente"  cssclass="lblTitlePadding bold"/>
 								</center>
-							</s:div>
+							  </s:div>
 							
 								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
 									<s:textbox bmodify="true"
@@ -276,7 +276,7 @@
 										name="mail_ente" label="mail ente per il servizio:"
 										text="" maxlenght="500"
 										cssclass="textareaman" cssclasslabel="label85 bold textright" />
-								</s:div>
+								</s:div> -->
 								
 							<%-- fine LP PG200420 --%>
 							<%-- inizio LP PG210070 --%>
@@ -398,7 +398,7 @@
 						<%-- fine PAGONET-430 --%>
 							<%-- fine LP PG210070 --%>
 					
-							<s:div name="divElementLabel1" cssclass="divTitle">
+				<!--	    <s:div name="divElementLabel1" cssclass="divTitle">
 								<center>
 								<s:label name="prova" text="Dati Fornitore"  cssclass="lblTitlePadding bold"/>
 								</center>
@@ -445,8 +445,8 @@
 										cssclass="textareaman"  />
 								</s:div>
 							
-							
-						</s:div>
+							-->
+						</s:div> 
 		
 						<s:div name="divRicercaRight" cssclass="divRicMetadatiRight">
 							
