@@ -851,15 +851,7 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-<<<<<<< HEAD
-	                        </webResources>  
-=======
-	                          
-	                       
-	                          
-	                          
                         </webResources>
->>>>>>> refs/remotes/origin/develop
                         </configuration>
                     </plugin>
                    </plugins>
