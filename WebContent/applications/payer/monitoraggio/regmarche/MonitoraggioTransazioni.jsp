@@ -184,8 +184,7 @@
 							disable="${ddlUtenteEnteDisabled}" onclick="" text=""
 							type="submit" cssclass="btnimgStyle" title="Aggiorna" validate="false" /></noscript>
 					</s:div>
-
-
+					
 				</s:div>
 
 				<s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">
@@ -196,6 +195,13 @@
 							name="tx_codice_transazione" label="Id Transazione:"
 							message="[accept=Id Transazione: Inserire un Id Transazione valido]"
 							text="${tx_codice_transazione}" />
+					</s:div>
+					
+					<s:div name="codiceFiscale" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;maxlength=35" bmodify="true"
+							name="tx_codice_fiscale" label="Codice Fiscale:"
+							text="${tx_codice_fiscale}" maxlenght="16"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
 
 					<s:div name="divElement5" cssclass="divRicMetadatiSingleRow">

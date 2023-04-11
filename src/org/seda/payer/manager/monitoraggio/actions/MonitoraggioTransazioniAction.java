@@ -445,6 +445,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		recuperaTransazioniRequest.setTx_codice_transazione(isNull(request.getAttribute(Field.TX_CODICE_TRANSAZIONE.format())));
 		recuperaTransazioniRequest.setTx_data_a(getDataByPrefix("tx_data_a",request));
 		recuperaTransazioniRequest.setTx_data_da(getDataByPrefix("tx_data_da",request));
+		recuperaTransazioniRequest.setTx_codice_fiscale(getDataByPrefix("tx_codice_fiscale", request));
+		
 		if (request.getAttribute("tx_data_accr_da")==null ||
 				request.getAttribute("tx_data_accr_a")==null) {
 			recuperaTransazioniRequest.setTx_data_accr_a("");
