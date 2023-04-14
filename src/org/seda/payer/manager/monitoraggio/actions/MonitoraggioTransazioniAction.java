@@ -102,6 +102,17 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			request.setAttribute(Field.TX_LISTA_PAGEINFO.format(), session.getAttribute("session_lista_transazioni.pageInfo"));
 			request.setAttribute(Field.TX_LISTA_GROUPED.format(), session.getAttribute("session_lista_transazioni.grouped"));					
 		}
+		
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
+		RecuperaTransazioniResponseType listaTransazioni = null;
+		try {
+			listaTransazioni = getListaTransazioni(request, session);
+		} catch (FaultType e2) {
+			e2.printStackTrace();
+		} catch (RemoteException e2) {
+			e2.printStackTrace();
+		}
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
 
 		switch(firedButton) {
 		case TX_BUTTON_CERCA: 
@@ -122,142 +133,64 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						setFormMessage("monitoraggioTransazioniForm", "Valorizzare solo uno dei campi Id.Trans.Atm o Codice I.U.R.", request);
 					}
 					else {	
-						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
-						RecuperaTransazioniResponseType listaTransazioni = getListaTransazioni(request, session);
-						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
-						if(listaTransazioni != null)
-						{
-							ResponseType response = listaTransazioni.getResponse();
-							ResponseTypeRetCode rc = response.getRetCode();
-							if(rc.equals(ResponseTypeRetCode.value1))
-							{
-								PageInfo pageInfo = this.getPageInfo(listaTransazioni.getPageInfo());
-								if(pageInfo != null)
+						
+						
+							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
+							
+							if (tipoQuery.equals("A") || tipoQuery.equals("C")) {// PAGONET-437
+								
+								if(listaTransazioni != null)
 								{
-									if(pageInfo.getNumRows() > 0)
+									ResponseType response = listaTransazioni.getResponse();
+									ResponseTypeRetCode rc = response.getRetCode();
+									
+									
+									if(rc.equals(ResponseTypeRetCode.value1))
 									{
-										session.setAttribute("numRows", pageInfo.getNumRows());
-										String lista = listaTransazioni.getListXml();					
-										request.setAttribute(Field.TX_LISTA.format(), lista);
-										request.setAttribute(Field.TX_LISTA_PAGEINFO.format(), pageInfo);
-		
-										/* Riepilogo statistico "Importi Totali sui rispettivi Gateway" */
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] INIZIO CHIAMATA");
-										RecuperaTransazioniGroupedResponse response1 = getListaTransazioniGrouped(request, session);
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] FINE CHIAMATA");
-										List<TransazioniGrouped> listaGrouped = Arrays.asList(response1.getList());
-		
-										request.setAttribute(Field.TX_LISTA_GROUPED.format(), listaGrouped);
-										
-										session.setAttribute("session_lista_transazioni", lista);
-										session.setAttribute("session_lista_transazioni.pageInfo", pageInfo);
-										session.setAttribute("session_lista_transazioni.grouped", listaGrouped);
-		
-										double totB = 0.0, totC = 0.0, totD = 0.0, totABC = 0.0, totACD = 0.0;
-										for (TransazioniGrouped tg: listaGrouped)
+										PageInfo pageInfo = this.getPageInfo(listaTransazioni.getPageInfo());
+										if(pageInfo != null)
 										{
-											totB = totB + Double.parseDouble(tg.getCostiTransazioni());
-											totC = totC + Double.parseDouble(tg.getSpeseNotifica());
-											totD = totD + Double.parseDouble(tg.getCostiBanca());
-											totABC = totABC + Double.parseDouble(tg.getTotaleNettoBanca());
-											totACD = totACD + Double.parseDouble(tg.getTotaleNettoBollettini());
-										}
-										request.setAttribute("TotB", new Double(totB));
-										request.setAttribute("TotC", new Double(totC));
-										request.setAttribute("TotD", new Double(totD));
-										request.setAttribute("TotABC", new Double(totABC));
-										request.setAttribute("TotACD", new Double(totACD));
-		
-										request.setAttribute(Field.GROUPED_TOTAL.format(), response1.getTotale());
-		
-										/* Riepilogo statistico ripartizione oneri per ente */
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] INIZIO CHIAMATA");
-										RecuperaTransazioniGroupedOneriResponse response3 = getListaTransazioniGroupedOneri(request, session);
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] FINE CHIAMATA");
-		
-										if(response3.getList()!=null){								
-											List<ModuloIntegrazionePagamentiOneriGrouped> listaOneriGrouped = Arrays.asList(response3.getList());
-		
-											request.setAttribute(Field.TX_LISTA_ONERI_GROUPED.format(), listaOneriGrouped);
-		
-											BigDecimal totImportoOnere = new BigDecimal(0);
-											BigDecimal totImportoContabileInIngresso = new BigDecimal(0);
-											BigDecimal totImportoContabileInUscita = new BigDecimal(0);
-											for (ModuloIntegrazionePagamentiOneriGrouped tg: listaOneriGrouped)
+											if(pageInfo.getNumRows() > 0)
 											{
-												totImportoOnere=totImportoOnere.add(tg.getImportoOnere());
-												totImportoContabileInIngresso=totImportoContabileInIngresso.add(tg.getImportoContabileInIngresso());
-												totImportoContabileInUscita=totImportoContabileInUscita.add(tg.getImportoContabileInUscita());
-											}
-		
-											request.setAttribute(Field.IMPORTOONERE.format(), totImportoOnere);
-											request.setAttribute(Field.IMPORTOCONTABILEININGRESSO.format(), totImportoContabileInIngresso);
-											request.setAttribute(Field.IMPORTOCONTABILEINUSCITA.format(), totImportoContabileInUscita);
-										}									
-										/* Riepilogo statistico transazioni completate con successo */
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] INIZIO CHIAMATA");
-										RecuperaTransazioniGroupedSuccessResponse response2 = getListaTransazioniGroupedSuccess(request, session);
-										System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] FINE CHIAMATA");
-										TransazioniGroupedSuccess[] listTraSucc = response2.getList();
-		
-										if (listTraSucc!=null && listTraSucc.length>0)
-										{
-											List<TransazioniGroupedSuccess> listaGroupedSuccess =Arrays.asList(listTraSucc);
-											request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), listaGroupedSuccess);
-		
-											int totPGNum = 0, totECNum = 0, totBol = 0;
-											double totPGImp = 0.0, totECImp = 0.0;
-											for (TransazioniGroupedSuccess tgs: listaGroupedSuccess)
-											{
-												totPGNum = totPGNum + tgs.getNumeroBollettiniPG();
-												totPGImp = totPGImp + Double.parseDouble(tgs.getImportoPG());
-												totECNum = totECNum + tgs.getNumeroBollettiniEC();
-												totECImp = totECImp + Double.parseDouble(tgs.getImportoEC());
-												totBol = totBol + tgs.getNumeroBollettini();
-											}
-											request.setAttribute("TotPGNum", new Integer(totPGNum));
-											request.setAttribute("TotPGImp", new Double(totPGImp));
-											request.setAttribute("TotECNum", new Integer(totECNum));
-											request.setAttribute("TotECImp", new Double(totECImp));
-											request.setAttribute("TotBol", new Integer(totBol));
-		
-											request.setAttribute(Field.GROUPED_SUCCESS_TOTAL.format(), response2.getTotale());
-		
+												session.setAttribute("numRows", pageInfo.getNumRows());
+												String lista = listaTransazioni.getListXml();					
+												request.setAttribute(Field.TX_LISTA.format(), lista);
+												request.setAttribute(Field.TX_LISTA_PAGEINFO.format(), pageInfo);
+												session.setAttribute("session_lista_transazioni", lista);
+												session.setAttribute("session_lista_transazioni.pageInfo", pageInfo);
+												
 										}
-										else
-										{
-											request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), null);
-		
-											request.setAttribute("TotPGNum", new Integer(0));
-											request.setAttribute("TotPGImp", new Double(0.0));
-											request.setAttribute("TotECNum", new Integer(0));
-											request.setAttribute("TotECImp", new Double(0.0));
-											request.setAttribute("TotBol", new Integer(0));
-		
-											request.setAttribute(Field.GROUPED_SUCCESS_TOTAL.format(), new Integer(0));
-										}
+										else 
+											setFormMessage("monitoraggioTransazioniForm", "Nessuna transazione trovata", request);
 									}
-									else 
-										setFormMessage("monitoraggioTransazioniForm", Messages.NO_DATA_FOUND.format(), request);
-									//setMessage(Messages.NO_DATA_FOUND.format());
+									else
+									{
+										//String messaggio = response.getRetMessage(); 
+										//setMessage((messaggio == null || messaggio.equals("")) ? "Errore generico" : messaggio);
+										setFormMessage("monitoraggioTransazioniForm", response.getRetMessage() , request);
+										
+									}
+				
+									System.out.println("[MANAGER - MonitoraggioTransazioniAction -  FINE CICLI dentro IF");
 								}
 								else 
-									setFormMessage("monitoraggioTransazioniForm", "Errore generico - PageInfo null", request);
-								//setMessage("Errore generico - PageInfo null");
+									setFormMessage("monitoraggioTransazioniForm", Messages.TX_NO_TRANSACTIONS.format() , request);
+								//setMessage(Messages.TX_NO_TRANSACTIONS.format());
 							}
-							else
-							{
-								//String messaggio = response.getRetMessage(); 
-								//setMessage((messaggio == null || messaggio.equals("")) ? "Errore generico" : messaggio);
-								setFormMessage("monitoraggioTransazioniForm", response.getRetMessage() , request);
+							else 
+								setFormMessage("monitoraggioTransazioniForm", Messages.NO_DATA_FOUND.format(), request);
+							//setMessage(Messages.NO_DATA_FOUND.format());
 							}
-		
-							System.out.println("[MANAGER - MonitoraggioTransazioniAction -  FINE CICLI dentro IF");
+								
+								
+							if(tipoQuery.equals("B") || tipoQuery.equals("A")) {
+									recuperaGruppoDa(request,session);
+							}
+								
 						}
-						else 
-							setFormMessage("monitoraggioTransazioniForm", Messages.TX_NO_TRANSACTIONS.format() , request);
-						//setMessage(Messages.TX_NO_TRANSACTIONS.format());
-					}
+							
+						
+						
 				}
 
 			} catch (FaultType e) {
@@ -425,6 +358,107 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		return null;
 	}
 	
+	private void recuperaGruppoDa(HttpServletRequest request, HttpSession session)throws FaultType, RemoteException {
+		
+
+		/* Riepilogo statistico "Importi Totali sui rispettivi Gateway" */
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] INIZIO CHIAMATA");
+		RecuperaTransazioniGroupedResponse response1 = getListaTransazioniGrouped(request, session);
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] FINE CHIAMATA");
+		List<TransazioniGrouped> listaGrouped = Arrays.asList(response1.getList());
+
+		request.setAttribute(Field.TX_LISTA_GROUPED.format(), listaGrouped);
+		
+		
+		
+		session.setAttribute("session_lista_transazioni.grouped", listaGrouped);
+
+		double totB = 0.0, totC = 0.0, totD = 0.0, totABC = 0.0, totACD = 0.0;
+		for (TransazioniGrouped tg: listaGrouped)
+		{
+			totB = totB + Double.parseDouble(tg.getCostiTransazioni());
+			totC = totC + Double.parseDouble(tg.getSpeseNotifica());
+			totD = totD + Double.parseDouble(tg.getCostiBanca());
+			totABC = totABC + Double.parseDouble(tg.getTotaleNettoBanca());
+			totACD = totACD + Double.parseDouble(tg.getTotaleNettoBollettini());
+		}
+		request.setAttribute("TotB", new Double(totB));
+		request.setAttribute("TotC", new Double(totC));
+		request.setAttribute("TotD", new Double(totD));
+		request.setAttribute("TotABC", new Double(totABC));
+		request.setAttribute("TotACD", new Double(totACD));
+
+		request.setAttribute(Field.GROUPED_TOTAL.format(), response1.getTotale());
+
+		/* Riepilogo statistico ripartizione oneri per ente */
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] INIZIO CHIAMATA");
+		RecuperaTransazioniGroupedOneriResponse response3 = getListaTransazioniGroupedOneri(request, session);
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] FINE CHIAMATA");
+
+		if(response3.getList()!=null){								
+			List<ModuloIntegrazionePagamentiOneriGrouped> listaOneriGrouped = Arrays.asList(response3.getList());
+
+			request.setAttribute(Field.TX_LISTA_ONERI_GROUPED.format(), listaOneriGrouped);
+
+			BigDecimal totImportoOnere = new BigDecimal(0);
+			BigDecimal totImportoContabileInIngresso = new BigDecimal(0);
+			BigDecimal totImportoContabileInUscita = new BigDecimal(0);
+			for (ModuloIntegrazionePagamentiOneriGrouped tg: listaOneriGrouped)
+			{
+				totImportoOnere=totImportoOnere.add(tg.getImportoOnere());
+				totImportoContabileInIngresso=totImportoContabileInIngresso.add(tg.getImportoContabileInIngresso());
+				totImportoContabileInUscita=totImportoContabileInUscita.add(tg.getImportoContabileInUscita());
+			}
+
+			request.setAttribute(Field.IMPORTOONERE.format(), totImportoOnere);
+			request.setAttribute(Field.IMPORTOCONTABILEININGRESSO.format(), totImportoContabileInIngresso);
+			request.setAttribute(Field.IMPORTOCONTABILEINUSCITA.format(), totImportoContabileInUscita);
+		}									
+		/* Riepilogo statistico transazioni completate con successo */
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] INIZIO CHIAMATA");
+		RecuperaTransazioniGroupedSuccessResponse response2 = getListaTransazioniGroupedSuccess(request, session);
+		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] FINE CHIAMATA");
+		TransazioniGroupedSuccess[] listTraSucc = response2.getList();
+
+		if (listTraSucc!=null && listTraSucc.length>0)
+		{
+			List<TransazioniGroupedSuccess> listaGroupedSuccess =Arrays.asList(listTraSucc);
+			request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), listaGroupedSuccess);
+
+			int totPGNum = 0, totECNum = 0, totBol = 0;
+			double totPGImp = 0.0, totECImp = 0.0;
+			for (TransazioniGroupedSuccess tgs: listaGroupedSuccess)
+			{
+				totPGNum = totPGNum + tgs.getNumeroBollettiniPG();
+				totPGImp = totPGImp + Double.parseDouble(tgs.getImportoPG());
+				totECNum = totECNum + tgs.getNumeroBollettiniEC();
+				totECImp = totECImp + Double.parseDouble(tgs.getImportoEC());
+				totBol = totBol + tgs.getNumeroBollettini();
+			}
+			request.setAttribute("TotPGNum", new Integer(totPGNum));
+			request.setAttribute("TotPGImp", new Double(totPGImp));
+			request.setAttribute("TotECNum", new Integer(totECNum));
+			request.setAttribute("TotECImp", new Double(totECImp));
+			request.setAttribute("TotBol", new Integer(totBol));
+
+			request.setAttribute(Field.GROUPED_SUCCESS_TOTAL.format(), response2.getTotale());
+
+		}
+		else
+		{
+			request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), null);
+
+			request.setAttribute("TotPGNum", new Integer(0));
+			request.setAttribute("TotPGImp", new Double(0.0));
+			request.setAttribute("TotECNum", new Integer(0));
+			request.setAttribute("TotECImp", new Double(0.0));
+			request.setAttribute("TotBol", new Integer(0));
+
+			request.setAttribute(Field.GROUPED_SUCCESS_TOTAL.format(), new Integer(0));
+		}
+	
+		
+	}
 	
 	private RecuperaTransazioniResponseType getListaTransazioni(HttpServletRequest request, HttpSession session) throws FaultType, RemoteException {
 
@@ -433,6 +467,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		int rowsPerPage = request.getAttribute(Field.ROWS_PER_PAGE.format()) == null ? getDefaultListRows(request) : isNullInt(request.getAttribute(Field.ROWS_PER_PAGE.format()));
 		int pageNumber = request.getAttribute(Field.PAGE_NUMBER.format()) == null ? 1 : isNullInt(request.getAttribute(Field.PAGE_NUMBER.format()));
 		String order = isNull(request.getAttribute(Field.ORDER_BY.format()));
+		String codiceFiscale = isNull(request.getAttribute("tx_codice_fiscale"));
 
 		recuperaTransazioniRequest.setOrder(order);
 		recuperaTransazioniRequest.setPageNumber(pageNumber);
@@ -445,7 +480,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		recuperaTransazioniRequest.setTx_codice_transazione(isNull(request.getAttribute(Field.TX_CODICE_TRANSAZIONE.format())));
 		recuperaTransazioniRequest.setTx_data_a(getDataByPrefix("tx_data_a",request));
 		recuperaTransazioniRequest.setTx_data_da(getDataByPrefix("tx_data_da",request));
-		recuperaTransazioniRequest.setTx_codice_fiscale(getDataByPrefix("tx_codice_fiscale", request));
+		recuperaTransazioniRequest.setTx_codice_fiscale(codiceFiscale); // PAGONET-437
 		
 		if (request.getAttribute("tx_data_accr_da")==null ||
 				request.getAttribute("tx_data_accr_a")==null) {

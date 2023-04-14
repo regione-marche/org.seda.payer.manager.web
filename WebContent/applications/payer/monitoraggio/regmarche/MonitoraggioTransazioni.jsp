@@ -453,6 +453,17 @@
 							</s:dropdownlist>
 						</c:if>
 					</s:div>
+					
+					<s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
+							<s:dropdownlist name="tx_scelta_query" disable="false"
+								cssclass="tbddlMax floatleft"
+								cssclasslabel="label85 bold textright" label="Tipo Vista:"
+								valueselected="${tx_scelta_query}">
+								<s:ddloption value="A" text="Tutte" />
+								<s:ddloption value="C" text="Lista Transazioni" />
+								<s:ddloption value="B" text="Report Riepilogo" />
+							</s:dropdownlist>
+					</s:div>
 
 					<s:div name="divElement9a" cssclass="divRicMetadatiSingleRow">
 						<s:textbox validator="ignore;maxlength=8" bmodify="true"
