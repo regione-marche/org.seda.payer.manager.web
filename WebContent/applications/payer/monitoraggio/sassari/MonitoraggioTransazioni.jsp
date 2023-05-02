@@ -512,7 +512,7 @@
 							<s:then>
 								<c:if test="${appRiconciliazioneUteEnabled}">
 									<s:hyperlink
-										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?keyQuadratura={29}&tx_button_cerca=cerca"
+										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?chiaveTransazione={1}&tx_button_cerca=cerca"
 										text="Si" cssclass="blacklink" />
 								</c:if>
 								<c:if test="${!appRiconciliazioneUteEnabled}">
