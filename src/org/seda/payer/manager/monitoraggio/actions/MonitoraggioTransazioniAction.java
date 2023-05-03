@@ -369,8 +369,6 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 		request.setAttribute(Field.TX_LISTA_GROUPED.format(), listaGrouped);
 		
-		
-		
 		session.setAttribute("session_lista_transazioni.grouped", listaGrouped);
 
 		double totB = 0.0, totC = 0.0, totD = 0.0, totABC = 0.0, totACD = 0.0;
@@ -729,6 +727,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		//PG170010_001 GG 15022017 - fine
 		
 		parametriRicerca.setTx_recuperate(isNull(request.getAttribute(Field.TX_RECUPERATE.format())));  //PG200050_001 SB
+		
+		parametriRicerca.setTx_codice_fiscale(isNull(request.getAttribute(Field.TX_CODICE_FISCALE.format()))); // PAGONET-437
 		
 		return parametriRicerca;
 	}

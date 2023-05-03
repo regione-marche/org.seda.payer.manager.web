@@ -184,7 +184,8 @@
 							disable="${ddlUtenteEnteDisabled}" onclick="" text=""
 							type="submit" cssclass="btnimgStyle" title="Aggiorna" validate="false" /></noscript>
 					</s:div>
-					
+
+
 				</s:div>
 
 				<s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">
@@ -203,6 +204,7 @@
 							text="${tx_codice_fiscale}" maxlenght="16"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
+					
 
 					<s:div name="divElement5" cssclass="divRicMetadatiSingleRow">
 						<s:dropdownlist name="tx_canale_pagamento" disable="false"
@@ -505,7 +507,6 @@
 
 <c:if test="${!empty tx_lista_transazioni}">
 	<fmt:setLocale value="it_IT" />
-
 	<s:div name="divTableTitle1" cssclass="divTableTitle bold">
 		Elenco Transazioni
 	</s:div>
@@ -518,7 +519,7 @@
 			border="1" usexml="true" rowperpage="${applicationScope.rowsPerPage}"
 			viewstate="">
 
-			<%--Per Lepida rimando sempre alla pagina di dettaglio, senza aprire la popup Json poichè non è stampabile --%>
+			<%--Per Lepida rimando sempre alla pagina di dettaglio, senza aprire la popup Json poich non  stampabile --%>
 			<s:dgcolumn label="Id">
 				<s:hyperlink
 					href="dettaglioTransazione.do?tx_codice_transazione_hidden={1}"
@@ -915,13 +916,28 @@
 			</s:dgcolumn>
 
 		</s:datagrid>
+	
+	</s:div>
 
+</c:if>		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+<c:if test="${!empty listaTransazioniGroupedSuccess}">
 		<s:div name="divTableTitle2" cssclass="divTableTitle bold">
 			Riepilogo statistico
 		</s:div>
-
-
-		<c:if test="${!empty listaTransazioniGroupedSuccess}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="0">
 				<s:thead>
@@ -1007,8 +1023,22 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
-		<c:if test="${userProfile!='AMEN'}">
+		<c:if test="${userProfile!='AMEN' && !empty tx_lista_transazioni}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1171,8 +1201,12 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
-		
-		
-	</s:div>
 
-</c:if>
+      
+
+   
+
+
+
+
+
