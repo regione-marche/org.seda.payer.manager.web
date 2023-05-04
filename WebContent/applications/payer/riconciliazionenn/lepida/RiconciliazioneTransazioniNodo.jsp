@@ -463,6 +463,13 @@
 							</s:div>
 						</s:div>
 					</s:div>
+					
+					<s:div name="divElement14f" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;accept=^(?:(?!').)*$;maxlength=64" bmodify="true"
+							name="chiaveTransazione" label="Id Transazione:"
+							text="${chiaveTransazione}" maxlenght="64" cssclass="textareaman"
+							cssclasslabel="label85 bold textright" />
+					</s:div>
 
 				</s:div>
 
