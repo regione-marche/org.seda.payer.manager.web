@@ -184,7 +184,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 								
 								
 							if(tipoQuery.equals("B") || tipoQuery.equals("A")) {
-									recuperaGruppoDa(request,session);
+									recuperaGruppoDa(request,session,tipoQuery);
 							}
 								
 						}
@@ -358,42 +358,46 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		return null;
 	}
 	
-	private void recuperaGruppoDa(HttpServletRequest request, HttpSession session)throws FaultType, RemoteException {
+	private void recuperaGruppoDa(HttpServletRequest request, HttpSession session,String tipoQuery)throws FaultType, RemoteException {
 		
 
 		/* Riepilogo statistico "Importi Totali sui rispettivi Gateway" */
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] INIZIO CHIAMATA");
 		RecuperaTransazioniGroupedResponse response1 = getListaTransazioniGrouped(request, session);
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGrouped()] FINE CHIAMATA");
-		List<TransazioniGrouped> listaGrouped = Arrays.asList(response1.getList());
-
-		request.setAttribute(Field.TX_LISTA_GROUPED.format(), listaGrouped);
 		
-		session.setAttribute("session_lista_transazioni.grouped", listaGrouped);
-
-		double totB = 0.0, totC = 0.0, totD = 0.0, totABC = 0.0, totACD = 0.0;
-		for (TransazioniGrouped tg: listaGrouped)
-		{
-			totB = totB + Double.parseDouble(tg.getCostiTransazioni());
-			totC = totC + Double.parseDouble(tg.getSpeseNotifica());
-			totD = totD + Double.parseDouble(tg.getCostiBanca());
-			totABC = totABC + Double.parseDouble(tg.getTotaleNettoBanca());
-			totACD = totACD + Double.parseDouble(tg.getTotaleNettoBollettini());
+		if(response1.getList()!=null && (tipoQuery.equals("A") || tipoQuery.equals("B"))) {
+		
+			List<TransazioniGrouped> listaGrouped = Arrays.asList(response1.getList());
+	
+			request.setAttribute(Field.TX_LISTA_GROUPED.format(), listaGrouped);
+			
+			session.setAttribute("session_lista_transazioni.grouped", listaGrouped);
+	
+			double totB = 0.0, totC = 0.0, totD = 0.0, totABC = 0.0, totACD = 0.0;
+			for (TransazioniGrouped tg: listaGrouped)
+			{
+				totB = totB + Double.parseDouble(tg.getCostiTransazioni());
+				totC = totC + Double.parseDouble(tg.getSpeseNotifica());
+				totD = totD + Double.parseDouble(tg.getCostiBanca());
+				totABC = totABC + Double.parseDouble(tg.getTotaleNettoBanca());
+				totACD = totACD + Double.parseDouble(tg.getTotaleNettoBollettini());
+			}
+			request.setAttribute("TotB", new Double(totB));
+			request.setAttribute("TotC", new Double(totC));
+			request.setAttribute("TotD", new Double(totD));
+			request.setAttribute("TotABC", new Double(totABC));
+			request.setAttribute("TotACD", new Double(totACD));
+	
+			request.setAttribute(Field.GROUPED_TOTAL.format(), response1.getTotale());
 		}
-		request.setAttribute("TotB", new Double(totB));
-		request.setAttribute("TotC", new Double(totC));
-		request.setAttribute("TotD", new Double(totD));
-		request.setAttribute("TotABC", new Double(totABC));
-		request.setAttribute("TotACD", new Double(totACD));
-
-		request.setAttribute(Field.GROUPED_TOTAL.format(), response1.getTotale());
-
+		
 		/* Riepilogo statistico ripartizione oneri per ente */
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] INIZIO CHIAMATA");
 		RecuperaTransazioniGroupedOneriResponse response3 = getListaTransazioniGroupedOneri(request, session);
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedOneri()] FINE CHIAMATA");
 
-		if(response3.getList()!=null){								
+		if(response3.getList()!=null && (tipoQuery.equals("A") || tipoQuery.equals("B"))) {							
 			List<ModuloIntegrazionePagamentiOneriGrouped> listaOneriGrouped = Arrays.asList(response3.getList());
 
 			request.setAttribute(Field.TX_LISTA_ONERI_GROUPED.format(), listaOneriGrouped);
@@ -411,14 +415,28 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			request.setAttribute(Field.IMPORTOONERE.format(), totImportoOnere);
 			request.setAttribute(Field.IMPORTOCONTABILEININGRESSO.format(), totImportoContabileInIngresso);
 			request.setAttribute(Field.IMPORTOCONTABILEINUSCITA.format(), totImportoContabileInUscita);
-		}									
+		}
+		else {
+			
+			BigDecimal totImportoOnere = new BigDecimal(0);
+			BigDecimal totImportoContabileInIngresso = new BigDecimal(0);
+			BigDecimal totImportoContabileInUscita = new BigDecimal(0);
+			
+			request.setAttribute(Field.IMPORTOONERE.format(), totImportoOnere);
+			request.setAttribute(Field.IMPORTOCONTABILEININGRESSO.format(), totImportoContabileInIngresso);
+			request.setAttribute(Field.IMPORTOCONTABILEINUSCITA.format(), totImportoContabileInUscita);
+			
+			request.setAttribute(Field.TX_LISTA_ONERI_GROUPED.format(), new Integer(0));
+		}
+		
+		
 		/* Riepilogo statistico transazioni completate con successo */
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] INIZIO CHIAMATA");
 		RecuperaTransazioniGroupedSuccessResponse response2 = getListaTransazioniGroupedSuccess(request, session);
 		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioniGroupedSuccess()] FINE CHIAMATA");
 		TransazioniGroupedSuccess[] listTraSucc = response2.getList();
 
-		if (listTraSucc!=null && listTraSucc.length>0)
+		if (listTraSucc!=null && listTraSucc.length>0 && (tipoQuery.equals("A") || tipoQuery.equals("B")))
 		{
 			List<TransazioniGroupedSuccess> listaGroupedSuccess =Arrays.asList(listTraSucc);
 			request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), listaGroupedSuccess);
