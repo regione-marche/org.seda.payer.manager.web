@@ -202,7 +202,8 @@
 										<s:ddloption value="Y" text="Si"/>
 								</s:dropdownlist>
 							</s:div>
-
+							
+							
 						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<%-- inizio LP PG200360 --%>
 							<%-- Allineamento con PG200180 --%>
@@ -216,8 +217,8 @@
 										<s:ddloption value="C" text="Configurazione"/>
 								</s:dropdownlist>
 							</s:div>
-						</c:if>	
-							
+						</c:if>
+						
 						<%-- inizio PAGONET-431 --%>
 						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
 							<s:div name="divElement933" cssclass="divRicMetadatiSingleRow">
@@ -246,6 +247,53 @@
 									cssclass="textareaman"  />
 								</s:div>
 							</c:if>
+							
+							
+							<s:div name="LabelDatiEnte" cssclass="divTitle">
+								<s:label name="datiEnte" text="Dati Ente" cssclass="lblTitlePadding checkleft bold"/>
+							</s:div>
+							
+								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256"
+										label="Nome Struttura Ente:"
+										name="nome_struttura_ente"
+										text="${requestScope.nome_struttura_ente}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+								
+							    <s:div name="nome" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="nome_ente" label="Nome ente:"
+										text="${requestScope.nome_ente}" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							    </s:div>
+							    
+								<s:div name="cognome" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256" 
+										validator="ignore"
+										label="Cognome ente:" name="cognome_ente"
+										text="${requestScope.cognome_ente}"
+										cssclasslabel="label85 bold textright" cssclass="textareaman" />
+								</s:div>
+								
+								<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="telefono_ente" label="Telefono ente:"
+										text="${requestScope.telefono_ente}" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+								</s:div>
+								
+								<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="mail_ente" label="mail ente:"
+										text="${requestScope.mail_ente}" maxlenght="500"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+								</s:div>
+							
+							
 							<%-- fine SB PG210140 --%>
 							<%-- inizio LP PG200360 --%>
 						<s:div name="divElementUnicaTassonomia" cssclass="divRicMetadatiUnicaTassonomiaCFECFS">
@@ -337,6 +385,7 @@
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
 							
+							
 						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM'}">
 							<%-- inizio LP PG200360 --%>
 							<%-- Allineamento con PG200180 --%>
@@ -353,7 +402,8 @@
 										<s:ddloption value="360" text="360 gg"/>
 								</s:dropdownlist>
 							</s:div>
-						</c:if>	
+						</c:if>
+									
 							
 						<%-- inizio PAGONET-431 --%>
 						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
@@ -366,6 +416,53 @@
 									cssclasslabel="label85 bold textright"  />
 							</s:div>
 						</c:if>
+						
+							<s:div name="LabelDatiForn" cssclass="divTitle">
+								<s:label name="datiForn" text="Dati Fornitore" cssclass="lblTitlePadding checkleft bold"/>
+							</s:div>
+							
+								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256"
+										label="Nome str. for. :"
+										name="nome_struttura_ente_rag_soc"
+										text="${requestScope.nome_struttura_ente_rag_soc}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+					
+					<s:div name="Nome_ref_tec" cssclass="divRicMetadatiSingleRow">
+						<s:textbox bmodify="true"
+							name="Nome_ref_tec" label="Nome ref. tec.:"
+							text="${requestScope.Nome_ref_tec}" maxlenght="256"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+					
+							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
+								<s:textbox bmodify="true"
+									name="cognome_ref_tec" label="Cognome ref. tec.:"
+									text="${requestScope.cognome_ref_tec}" maxlenght="256"
+									cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							</s:div>
+					
+					<s:div name="Telefono_Referente_Tecnico_Ente" cssclass="divRicMetadatiSingleRow">
+						<s:textbox bmodify="true"
+							name="Telefono_Referente_Tecnico_Ente" label="Telefono ref. tec.:"
+							text="${requestScope.Telefono_Referente_Tecnico_Ente}" maxlenght="256"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+				
+							    <s:div name="mail_ref_tecnico" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="500"
+										label="Mail ref. tec.:"
+										name="mail_ref_tecnico"
+										text="${requestScope.mail_ref_tecnico}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+						
+						
 						<%-- fine PAGONET-431 --%>
 							<%-- fine LP PG200360 --%>
 							<%-- inizio SB PG210140 --%>

@@ -94,6 +94,7 @@
 
 
 <title><template:include parameter="pagetitle"/></title>
+<link rel="icon"  href="../applications/templates/shared/trentrisc/img/favicon.ico"  type="image/x-icon"  />
 </head>
 <body>
 	<div id="container" class="containerGreen">
