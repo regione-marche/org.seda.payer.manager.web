@@ -34,6 +34,7 @@ public enum PropertiesPath {
 	defaultListRows,
 	wsCompany,
 	wsBollettino,
+	wsTotemTipologiaImposta,
 	urlOnline,
 	defaultnode,
 	wsMenu,

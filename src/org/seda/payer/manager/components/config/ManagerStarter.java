@@ -109,6 +109,7 @@ public class ManagerStarter implements ApplicationStarter {
 					WSCache.initiateGatewaysServer(configuration.getProperty(PropertiesPath.wsGatewaysServer.format(PropertiesPath.defaultnode.format())));
 					WSCache.initiateCompanyServer(configuration.getProperty(PropertiesPath.wsCompany.format(PropertiesPath.defaultnode.format())));
 					WSCache.initiateBollettinoServer(configuration.getProperty(PropertiesPath.wsBollettino.format(PropertiesPath.defaultnode.format())));
+					WSCache.initiateTotemTipologiaImpostaServer(configuration.getProperty(PropertiesPath.wsTotemTipologiaImposta.format(PropertiesPath.defaultnode.format())));
 					WSCache.initiateMenuServer(configuration.getProperty(PropertiesPath.wsMenu.format(PropertiesPath.defaultnode.format())));
 					WSCache.initiateSecurityServer(configuration.getProperty(PropertiesPath.wsSecurity.format(PropertiesPath.defaultnode.format())));
 					WSCache.initiateAnagServiziServer(configuration.getProperty(PropertiesPath.wsAnagServizi.format(PropertiesPath.defaultnode.format())));

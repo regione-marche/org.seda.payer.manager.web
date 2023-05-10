@@ -248,6 +248,10 @@
 				<pattern><![CDATA[^[a-zA-Z]{3}$]]></pattern>
 				<description></description>
 			</regex>
+			<regex name="charALF2-4_regex">
+				<pattern><![CDATA[^[a-zA-Z]{2,4}$]]></pattern>
+				<description></description>
+			</regex>
 			<regex name="url_regex">
 				<!--
 					<pattern>^http:[/][/]|www.([a-z]|[A-Z]|[0-9]|[/.]|[~])*)$</pattern>
@@ -268,7 +272,7 @@
 				<description></description>
 			</regex>
 			<regex name="imposta_servizio_regex">
-				<pattern>^[0-9A-Z]{1,20}$</pattern>
+				<pattern>^[0-9\*]{0,4}$</pattern>
 				<description></description>
 			</regex>
 			<regex name="codice1-2numchar_regex">
@@ -352,7 +356,7 @@
 				<description></description>
 			</regex>
 			<regex name="codiceEnteChar_regex">
-				<pattern>^[A-Z0-9]{0,6}$</pattern>
+				<pattern>^[a-zA-Z0-9\*]{0,6}$</pattern>
 				<description></description>
 			</regex>
 			<regex name="descrizione256_regex">
@@ -670,6 +674,45 @@
 		</ruleset>
 	</action>
 
+	<action url="totem.do" screen="totem_search.screen"
+		flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.configurazione.actions.TotemAction</action-class>
+		<flow class="org.seda.payer.manager.flows.DispatchFlow">
+			<result value="search" screen="totem_search.screen" />
+			<result value="add" screen="totem_add.screen" />
+			<result value="edit" screen="totem_edit.screen" />
+			<result value="saveadd" screen="totem_add.screen" />
+			<result value="saveedit" screen="totem_edit.screen" />
+			<result value="richiestacanc" screen="totem_richiestacanc.screen" />
+			<result value="cancel" screen="totem_canc.screen" />
+		</flow>
+		<ruleset>
+			<rule name="codice_ente" regex="codiceEnteChar_regex"> 
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+			<rule name="imposta_servizio" regex="imposta_servizio_regex">
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule> 
+			<rule name="tipologia_imposta" regex="descrizione256_regex"> <!-- metti regex giuste -->
+				<missing severity="continue" />
+				<malformed severity="continue">
+					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
+				</malformed>
+			</rule>
+		</ruleset>
+	</action>
 
 
 	<action url="anagprovcom.do" screen="anagProvCom_search.screen"
