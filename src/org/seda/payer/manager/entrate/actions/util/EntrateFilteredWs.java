@@ -1495,6 +1495,13 @@ public class EntrateFilteredWs implements Serializable {
         tributo.setIBANPostale(wrsTrib.getString(19));
         //fine LP PG210130
         tributo.setCodiceTipologiaServizio(wrsTrib.getString(20)); //LP PG22XX05
+        
+        //inizio SB PGNTMGR-8
+        tributo.setMetadatiPagoPATariTefaKey(wrsTrib.getString(21));
+        tributo.setMetadatiPagoPATariTefaValue(wrsTrib.getString(22));
+        //fine SB PGNTMGR-8
+        
+        
         tributi.add(tributo);
       }
     } catch (Exception ex) {

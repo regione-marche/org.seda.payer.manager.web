@@ -5,7 +5,7 @@
 	<default>
 		<config-path>/WebContent/applications</config-path>
 		<applid>login</applid>
-		<ignored-ext>.css .js .jpg .gif .pdf .png .PNG .jks .xml .jsp .properties</ignored-ext>
+		<ignored-ext>.css .js .jpg .gif .pdf .png .PNG .jks .xml .jsp .ico .properties </ignored-ext>
 		<ignored-subcontext>/MetadataPublisherServlet /metadata /AssertionConsumerService /metadataAR /metadataGW /DisplayChart /GetChart /Print /xmla /SingleLogoutService /ext/bolzanoExt</ignored-subcontext>
 	</default>
 	<security enabled="true">

@@ -198,6 +198,7 @@ public enum PropertiesPath {
 	, wsAppIOEndpointURL
 	, wsAppIOEndpointDefaultURL
 	, allowElementsOWASP
+	, skipTarget
 
 	;
 	

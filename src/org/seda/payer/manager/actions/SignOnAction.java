@@ -47,6 +47,7 @@ public class SignOnAction extends BaseManagerAction {
 		HttpSession session = request.getSession();
 		template = getTemplateCurrentApplication(request, request.getSession())==null?"":getTemplateCurrentApplication(request, request.getSession());
 		//inizio SB PG21XX04 
+		session.setAttribute("template", template);
 		PropertiesTree configuration = null;
 //		SystemVariable sv = new SystemVariable();
 //		
