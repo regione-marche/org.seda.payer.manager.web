@@ -64,12 +64,6 @@
 		<filter-class>org.seda.payer.manager.components.filters.TemplateFilter</filter-class>
 	</filter>
 	<filter>
-		<description>Check presenza tag html in request</description>
-		<display-name>ChekInvalidTagFilter</display-name>
-		<filter-name>ChekInvalidTagFilter</filter-name>
-		<filter-class>org.seda.payer.manager.components.filters.CheckInvalidTagFilter</filter-class>
-	</filter>
-	<filter>
 		<description>Gestione UPLOAD FILE</description>
 		<display-name>UPLOADFilter</display-name>
 		<filter-name>UPLOADFilter</filter-name>
@@ -108,10 +102,6 @@
 	<filter-mapping>
 		<filter-name>EncodingManager</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>ChekInvalidTagFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ValidationManager</filter-name>
