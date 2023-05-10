@@ -125,6 +125,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				loadListaGatewayXml_DDL(request, session, getParamCodiceSocieta(), getParamCodiceUtente(), false);
 				LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), siglaProvincia, getParamCodiceEnte(), getParamCodiceUtente(), false);
 				String messageDate = controlloDate(request);
+				
 				if(getTemplateCurrentApplication(request, session).equals("regmarche") && messageDate !=null) {
 					setFormMessage("monitoraggioTransazioniForm", messageDate , request);
 				}else {
@@ -133,7 +134,6 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						setFormMessage("monitoraggioTransazioniForm", "Valorizzare solo uno dei campi Id.Trans.Atm o Codice I.U.R.", request);
 					}
 					else {	
-						
 						
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
 							
@@ -185,12 +185,9 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 								
 							if(tipoQuery.equals("B") || tipoQuery.equals("A")) {
 									recuperaGruppoDa(request,session,tipoQuery);
-							}
+						    }
 								
-						}
-							
-						
-						
+					  }
 				}
 
 			} catch (FaultType e) {
@@ -472,7 +469,6 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 			request.setAttribute(Field.GROUPED_SUCCESS_TOTAL.format(), new Integer(0));
 		}
-	
 		
 	}
 	

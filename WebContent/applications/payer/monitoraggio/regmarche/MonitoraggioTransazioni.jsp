@@ -1189,7 +1189,7 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if> 
+		</c:if> <!-- PAGONET-437 -->
 
       
 
