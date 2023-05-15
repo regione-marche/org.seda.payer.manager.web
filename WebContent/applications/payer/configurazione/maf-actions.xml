@@ -682,7 +682,7 @@
 			<role>AMUT</role>
 			<role>AMEN</role>
 		</role-collection>
-		<action-class>org.seda.payer.manager.configurazione.actions.TotemAction</action-class>
+		<action-class>org.seda.payer.manager.configurazione.actions.TotemTipologiaImpostaAction</action-class>
 		<flow class="org.seda.payer.manager.flows.DispatchFlow">
 			<result value="search" screen="totem_search.screen" />
 			<result value="add" screen="totem_add.screen" />

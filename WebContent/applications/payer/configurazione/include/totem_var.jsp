@@ -67,16 +67,15 @@
 										cssclasslabel="label85 bold textright" cssclass="textareaman"
 										name="tipologia_imposta" disable="false" valueselected="">
 										<s:ddloption value="" text="" />
-										<s:ddloption value="01-TARSU" text="01-TARSU" />
-										<s:ddloption value="02-COSAP" text="02-COSAP" />
-										<s:ddloption value="03-CIMP" text="03-CIMP" />
-										<s:ddloption value="04-INGIUNZIONI" text="04-INGIUNZIONI" />
-										<s:ddloption value="05-VERBALI_CDS" text="05-VERBALI_CDS" />
-										<s:ddloption value="06-SANZIONI_CDS" text="06-SANZIONI_CDS" />
-										<s:ddloption value="07-ICI_VIOLAZIONE"
-											text="07-ICI_VIOLAZIONE" />
-										<s:ddloption value="08-BORSELLINO" text="08-BORSELLINO" />
-										<s:ddloption value="09-BOLLO" text="09-BOLLO" />
+										<s:ddloption value="01" text="01 - TARSU" />
+										<s:ddloption value="02" text="02 - COSAP" />
+										<s:ddloption value="03" text="03 - CIMP" />
+										<s:ddloption value="04" text="04 - INGIUNZIONI" />
+										<s:ddloption value="05" text="05 - VERBALI_CDS" />
+										<s:ddloption value="06" text="06 - SANZIONI_CDS" />
+										<s:ddloption value="07" text="07 - ICI_VIOLAZIONE" />
+										<s:ddloption value="08" text="08 - BORSELLINO" />
+										<s:ddloption value="09" text="09 - BOLLO" />
 									</s:dropdownlist>
 								</s:div>
 							</s:div>
@@ -116,16 +115,15 @@
 											cssclasslabel="label85 bold textright" cssclass="textareaman"
 											name="tipologia_imposta" disable="false" valueselected="">
 											<s:ddloption value="" text="" />
-											<s:ddloption value="01-TARSU" text="01-TARSU" />
-											<s:ddloption value="02-COSAP" text="02-COSAP" />
-											<s:ddloption value="03-CIMP" text="03-CIMP" />
-											<s:ddloption value="04-INGIUNZIONI" text="04-INGIUNZIONI" />
-											<s:ddloption value="05-VERBALI_CDS" text="05-VERBALI_CDS" />
-											<s:ddloption value="06-SANZIONI_CDS" text="06-SANZIONI_CDS" />
-											<s:ddloption value="07-ICI_VIOLAZIONE"
-												text="07-ICI_VIOLAZIONE" />
-											<s:ddloption value="08-BORSELLINO" text="08-BORSELLINO" />
-											<s:ddloption value="09-BOLLO" text="09-BOLLO" />
+											<s:ddloption value="01" text="01 - TARSU" />
+											<s:ddloption value="02" text="02 - COSAP" />
+											<s:ddloption value="03" text="03 - CIMP" />
+											<s:ddloption value="04" text="04 - INGIUNZIONI" />
+											<s:ddloption value="05" text="05 - VERBALI_CDS" />
+											<s:ddloption value="06" text="06 - SANZIONI_CDS" />
+											<s:ddloption value="07" text="07 - ICI_VIOLAZIONE" />
+											<s:ddloption value="08" text="08 - BORSELLINO" />
+											<s:ddloption value="09" text="09 - BOLLO" />
 										</s:dropdownlist>
 									</s:div>
 								</s:div>
