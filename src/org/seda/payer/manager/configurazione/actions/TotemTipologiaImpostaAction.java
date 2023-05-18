@@ -3,18 +3,25 @@ package org.seda.payer.manager.configurazione.actions;
 import com.seda.data.spi.PageInfo;
 
 import java.util.Enumeration;
+import java.util.Properties;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.sql.Types;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
 import org.seda.payer.manager.actions.DispatchHtmlAction;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.util.PropertiesPath;
 import org.seda.payer.manager.ws.WSCache;
+
+
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
 import com.seda.j2ee5.maf.core.action.ActionException;
@@ -41,6 +48,8 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 		this.configuration = (PropertiesTree) (request.getSession().getServletContext()
 				.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
 
+		
+		
 		rowsPerPage = (request.getParameter("rowsPerPage") == null) ? getDefaultListRows()
 				: Integer.parseInt(request.getParameter("rowsPerPage"));
 		pageNumber = (request.getParameter("pageNumber") == null) ? 1
@@ -74,6 +83,14 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 			request.setAttribute("imposta_servizio", "");
 			request.setAttribute("tipologia_imposta", "");
 		}
+		
+		
+		// carico la DDL:
+		request.setAttribute("elencoTipologiaImposta", loadTipologiaImpostaLista());
+		
+		
+		
+		
 	}
 
 	@Override
@@ -354,6 +371,58 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 		return sXML;
 	}
 
+	private String loadTipologiaImpostaLista() {
+		try {
+			SortedMap<String, String> hmTipologiaImpostaSorted = new TreeMap<String, String>();
+
+			Properties paramProps = this.configuration.getProterties();
+			 
+			Enumeration<Object> enumKeys = paramProps.keys();
+			while (enumKeys.hasMoreElements()) {
+				String key = (String) enumKeys.nextElement();
+				
+				if (key.startsWith(PropertiesPath.paramTotemTipologiaImposta.format())) {
+					String codTipologiaImposta = key.replace(PropertiesPath.paramTotemTipologiaImposta.format(), "");
+					String descrTipologiaImposta = paramProps.getProperty(key);
+					hmTipologiaImpostaSorted.put(codTipologiaImposta, descrTipologiaImposta);
+				}
+			}
+
+			WebRowSetImpl rowSet = new WebRowSetImpl();
+			RowSetMetaDataImpl rsMdData = new RowSetMetaDataImpl();
+
+			rsMdData.setColumnCount(2);
+			rsMdData.setColumnType(1, Types.VARCHAR);
+			rsMdData.setColumnType(2, Types.VARCHAR);
+
+			rowSet.setMetaData(rsMdData);
+			for (String sKey : hmTipologiaImpostaSorted.keySet()) {
+				rowSet.moveToInsertRow();
+				rowSet.updateString(1, sKey);
+				rowSet.updateString(2, hmTipologiaImpostaSorted.get(sKey));
+
+				rowSet.insertRow();
+			}
+
+			rowSet.moveToCurrentRow();
+
+			String appo = Convert.webRowSetToString(rowSet);
+			try {
+				rowSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			rowSet = null;
+			return appo;
+
+		} catch (Exception e) {
+			System.out.println(
+					"loadTipologiaImpostaLista - ERRORE durante il caricamento delle tipologie imposta da file di properties.");
+		}
+
+		return "";
+	}
+	
 	protected int getDefaultListRows() {
 		int defaultListRows = 4;
 		PropertiesTree configuration = (PropertiesTree) context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);

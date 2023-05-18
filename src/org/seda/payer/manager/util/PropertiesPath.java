@@ -202,6 +202,7 @@ public enum PropertiesPath {
 	, wsAppIOEndpointDefaultURL
 	, allowElementsOWASP
 	, skipTarget
+	, paramTotemTipologiaImposta
 	
 	;
 	
