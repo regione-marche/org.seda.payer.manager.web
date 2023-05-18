@@ -43,7 +43,7 @@
 									<s:div name="divElement1" cssclass="divRicMetadatiLeft">
 										<!-- validator -->
 										<s:textbox bmodify="false"
-											validator="required;minlength=6;accept=^[a-zA-Z0-9]{6}$;maxlength=6"
+											validator="required;minlength=6;accept=^[0-9]{6}|[*]{6}$;maxlength=6"
 											label="Codice Ente:" maxlenght="6" showrequired="true"
 											name="codice_ente" text="${requestScope.codice_ente}"
 											cssclass="textareaman colordisabled"
@@ -52,7 +52,7 @@
 									</s:div>
 									<s:div name="divElement2" cssclass="divRicMetadatiLeft">
 										<s:textbox bmodify="false"
-											validator="required;minlength=2;accept=^[0-9]{2,4}$;maxlength=4"
+											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2,4}$;maxlength=4"
 											label="Imposta Servizio" maxlenght="4" showrequired="true"
 											name="imposta_servizio"
 											text="${requestScope.imposta_servizio}"
@@ -90,7 +90,7 @@
 								<s:div name="divRicercaMetadatiTop" cssclass="divRicMetadatiTop">
 									<s:div name="divElement12" cssclass="divRicMetadatiLeft">
 										<s:textbox bmodify="true"
-											validator="required;minlength=6;accept=^[a-zA-Z0-9\*]{6}$;maxlength=6"
+											validator="required;minlength=6;accept=^[0-9]{6}|[*]{6}$;maxlength=6"
 											label="Codice ente:" maxlenght="6" showrequired="true"
 											name="codice_ente" text="${requestScope.codice_ente}"
 											cssclass="textareaman"
@@ -99,7 +99,7 @@
 									</s:div>
 									<s:div name="divElement_" cssclass="divRicMetadatiLeft">
 										<s:textbox bmodify="true"
-											validator="required;minlength=2;accept=^[0-9\*]{2,4}$;maxlength=4"
+											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2,4}$;maxlength=4"
 											label="Imposta Servizio:" maxlenght="4" showrequired="true"
 											name="imposta_servizio"
 											text="${requestScope.imposta_servizio}"
