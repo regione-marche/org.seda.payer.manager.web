@@ -1331,6 +1331,10 @@
                 <s:th cssclass="seda-ui-datagridheadercell ">Iban Bancario</s:th>
                 <s:th cssclass="seda-ui-datagridheadercell ">Iban Postale</s:th>
                 <%-- fine LP PG210130 --%>
+                 <%-- inizio SB PGNTMGR-8 --%>
+                <s:th cssclass="seda-ui-datagridheadercell ">TARI/TEFA Chiave</s:th>
+                <s:th cssclass="seda-ui-datagridheadercell ">TARI/TEFA Valore</s:th>
+                <%-- FINE SB PGNTMGR-8 --%>
                 <s:th cssclass="seda-ui-datagridheadercell width-100perc">Note</s:th>
                 <s:th cssclass="seda-ui-datagridheadercell"></s:th>
 
@@ -1529,6 +1533,36 @@
                       cssclasslabel="display_none" />
                   </s:td>
                   <%-- fine LP PG210130 --%>
+                  <%-- inizio SB PGNTMGR-8 --%>
+                  <s:td cssclass="seda-ui-datagridcell">
+                    <s:textbox
+                      name="trib_${loop.index}_tariTefaKey"
+                      label="TARI/TEFA Chiave"
+                      text="${u.metadatiPagoPATariTefaKey}"
+    		          bdisable="${editDocumento.readonly || editDocumento.delete || editDocumento.modalitaAggiornamento}" 
+                      maxlenght="15"
+                      validator="ignore;minlength=0;maxlength=15"
+                      message="[accept=TARI/TEFA Chiave ${loop.index + 1}: TARI/TEFA Chiave!]"
+                      showrequired="false"
+                      bmodify="true"
+                      cssclass="textareaman width-8em"
+                      cssclasslabel="display_none" />
+                  </s:td>
+                  <s:td cssclass="seda-ui-datagridcell">
+                    <s:textbox
+                      name="trib_${loop.index}_tariTefaValue"
+                      label="TARI/TEFA Valore"
+                      text="${u.metadatiPagoPATariTefaValue}"
+    		          bdisable="${editDocumento.readonly || editDocumento.delete || editDocumento.modalitaAggiornamento}" 
+                      maxlenght="15"
+                      validator="ignore;minlength=0;maxlength=15"
+                      message="[accept=TARI/TEFA Valore ${loop.index + 1}: TARI/TEFA Valore!]"
+                      showrequired="false"
+                      bmodify="true"
+                      cssclass="textareaman width-8em"
+                      cssclasslabel="display_none" />
+                  </s:td>
+                  <%-- FINE SB PGNTMGR-8 --%>
                   
                   <s:td cssclass="seda-ui-datagridcell">
                     <s:textbox

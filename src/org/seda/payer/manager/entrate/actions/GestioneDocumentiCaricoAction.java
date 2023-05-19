@@ -1493,6 +1493,10 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
 		setFormValidationMessage("frmAction", "Non è stato valorizzato l'iban bancario per il tributo #" + (i + 1));
       }
       trib.setIBANPostale(request.getParameter(String.format("trib_%d_ibanPostale", i)));
+      //inizio SB PGNTMGR-8
+      trib.setMetadatiPagoPATariTefaKey(request.getParameter(String.format("trib_%d_tariTefaKey", i)));
+      trib.setMetadatiPagoPATariTefaValue(request.getParameter(String.format("trib_%d_tariTefaValue", i)));
+      //fine SB PGNTMGR-8
       //fine LP PG210130
       trib.setNoteTributo(request.getParameter(String.format("trib_%d_noteTributo", i)));
       //inizio LP PG200360
