@@ -84,7 +84,7 @@
 
 							<s:div name="divElement3" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
-								cssclass="textareaman" validator="required;"
+								cssclass="textareaman" validator="required;accept=${configurazione_descrizione_regex100}"
 									maxlenght="100" showrequired="true"
 									label="Desc.Comune:" name="anagprovcom_descrizioneComune"
 									text="${anagprovcom_descrizioneComune}"
@@ -106,7 +106,7 @@
 							
 							<s:div name="divElement112" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
-								cssclass="textareaman" validator="ignore;"
+								cssclass="textareaman" validator="ignore; accept=${configurazione_descrizione_regex100}"
 									maxlenght="100" showrequired="true"
 									label="Descr.Prov.DE:" name="anagprovcom_descrizioneProvinciaDE"
 									text="${requestScope.anagprovcom_descrizioneProvinciaDE}"
@@ -140,7 +140,7 @@
 							
 							<s:div name="divElement111" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
-								cssclass="textareaman" validator="ignore;"
+								cssclass="textareaman" validator="ignore;accept=${configurazione_descrizione_regex100}"
 									maxlenght="100" showrequired="true"
 									label="Desc.Comune DE:" name="anagprovcom_descrizioneComuneDE"
 									text="${requestScope.anagprovcom_descrizioneComuneDE}"

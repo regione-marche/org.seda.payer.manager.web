@@ -130,7 +130,9 @@
 							label="Nome Macro Area:" maxlenght="150"
 							cssclasslabel="label160 bold textright"
 							cssclass="textArea150Tassonomia"
-							text="${tassonomia_searchnomeMacroArea}" />
+							text="${tassonomia_searchnomeMacroArea}" 
+							validator="ignore;accept=${configurazione_descrizione256_regex}"
+							/>
 					</s:div>
 					<%-- TIPOLOGIA SERVIZIO --%>
 					<s:div name="divElementCR3" cssclass="divRicMetadatiSingleRow">
@@ -138,7 +140,9 @@
 							label="Tipologia Servizio:" maxlenght="150"
 							cssclasslabel="label160 bold textright"
 							cssclass="textArea150Tassonomia"
-							text="${tassonomia_searchtipoServizio}" />
+							text="${tassonomia_searchtipoServizio}" 
+							validator="ignore;accept=${configurazione_descrizione256_regex}"
+							/>
 					</s:div>
 					<%-- PERIODO DI VALIDITA' --%>
 					<s:div name="divElementCR4" cssclass="divRicMetadatiSingleRow">
