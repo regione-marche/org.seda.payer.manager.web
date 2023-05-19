@@ -64,10 +64,13 @@
 
 								<s:div name="divElement2" cssclass="divRicMetadatiCenter">
 									<s:dropdownlist label="Tipologia Imposta:"
+										validator="required;minlength=2;accept=^[0-9]{2}$;maxlength=2"
 										cssclasslabel="label85 bold textright" cssclass="textareaman"
-										name="tipologia_imposta" disable="false" valueselected=""
-										cachedrowset="elencoTipologiaImposta" usexml="true">
-										<s:ddloption value="" text="Tutte" />
+										name="tipologia_imposta" disable="false"
+										valueselected="${requestScope.tipologia_imposta}"
+										cachedrowset="elencoTipologiaImposta" usexml="true"
+										message="[accept=Tipologia Imposta: ${msg_configurazione_imposta_servizio}]">
+										<s:ddloption value="" text="" />
 										<s:ddloption value="{1}" text="{1} - {2}" />
 									</s:dropdownlist>
 								</s:div>
@@ -94,9 +97,7 @@
 										<s:textbox bmodify="true"
 											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2,4}$;maxlength=4"
 											label="Imposta Servizio:" maxlenght="4" showrequired="true"
-											name="imposta_servizio"
-											text="${requestScope.imposta_servizio}"
-											cssclass="textareaman"
+											name="imposta_servizio" text="" cssclass="textareaman"
 											message="[accept=Imposta Servizio: ${msg_configurazione_imposta_servizio}]"
 											cssclasslabel="label85 bold floatleft textright" />
 									</s:div>
@@ -104,13 +105,15 @@
 
 								<s:div name="divElement3" cssclass="divRicMetadatiCenter">
 									<s:div name="divElement7" cssclass="divRicMetadatiSingleRow">
-									<s:dropdownlist label="Tipologia Imposta:"
-										cssclasslabel="label85 bold textright" cssclass="textareaman"
-										name="tipologia_imposta" disable="false" valueselected=""
-										cachedrowset="elencoTipologiaImposta" usexml="true">
-										<s:ddloption value="" text="Tutte" />
-										<s:ddloption value="{1}" text="{1} - {2}" />
-									</s:dropdownlist>
+										<s:dropdownlist label="Tipologia Imposta:"
+											validator="required;minlength=2;accept=^[0-9]{2}$;maxlength=2"
+											cssclasslabel="label85 bold textright" cssclass="textareaman"
+											name="tipologia_imposta" disable="false" valueselected=""
+											cachedrowset="elencoTipologiaImposta" usexml="true"
+											message="[accept=Tipologia Imposta: ${msg_configurazione_imposta_servizio}]">
+											<s:ddloption value="" text="" />
+											<s:ddloption value="{1}" text="{1} - {2}" />
+										</s:dropdownlist>
 									</s:div>
 								</s:div>
 								<s:div name="divRicercaLeft" cssclass="divRicMetadatiRight">

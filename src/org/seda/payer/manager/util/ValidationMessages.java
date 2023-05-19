@@ -24,6 +24,7 @@ public enum ValidationMessages {
 	msg_configurazione_numero_1_9,
 	msg_configurazione_codice_ente,
 	msg_configurazione_imposta_servizio,
+	msg_configurazione_tipologia_imposta,
 	msg_configurazione_importo_3_2,
 	msg_configurazione_importo_4_2,
 	msg_configurazione_importo_6_2,

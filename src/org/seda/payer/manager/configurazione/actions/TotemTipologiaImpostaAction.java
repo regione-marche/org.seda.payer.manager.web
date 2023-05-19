@@ -13,14 +13,12 @@ import java.sql.Types;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 import org.seda.payer.manager.actions.DispatchHtmlAction;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.util.PropertiesPath;
 import org.seda.payer.manager.ws.WSCache;
-
 
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
@@ -48,8 +46,6 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 		this.configuration = (PropertiesTree) (request.getSession().getServletContext()
 				.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
 
-		
-		
 		rowsPerPage = (request.getParameter("rowsPerPage") == null) ? getDefaultListRows()
 				: Integer.parseInt(request.getParameter("rowsPerPage"));
 		pageNumber = (request.getParameter("pageNumber") == null) ? 1
@@ -83,14 +79,9 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 			request.setAttribute("imposta_servizio", "");
 			request.setAttribute("tipologia_imposta", "");
 		}
-		
-		
+
 		// carico la DDL:
 		request.setAttribute("elencoTipologiaImposta", loadTipologiaImpostaLista());
-		
-		
-		
-		
 	}
 
 	@Override
@@ -183,9 +174,10 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 			String firedButtonReset = (String) request.getAttribute("tx_button_reset");
 			if (firedButton != null) {
 				if (firedButton.equals("Indietro") && (request.getAttribute("codice_ente") != null)
-						&& (request.getAttribute("imposta_servizio") != null)) {
+						&& (request.getAttribute("tipologia_imposta") != null)) {
 					request.setAttribute("codice_ente", null);
 					request.setAttribute("imposta_servizio", null);
+					request.setAttribute("tipologia_imposta", null);
 					index(request);
 				}
 			} else if (firedButtonReset != null) {
@@ -207,9 +199,11 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 			String firedButtonReset = (String) request.getAttribute("tx_button_reset");
 			if (firedButton != null) {
 				if (firedButton.equals("Indietro") && (request.getAttribute("codice_ente") != null)
-						&& (request.getAttribute("imposta_servizio") != null)) {
+						&& (request.getAttribute("imposta_servizio") != null)
+						&& (request.getAttribute("tipologia_imposta") != null)) {
 					request.setAttribute("codice_ente", null);
 					request.setAttribute("imposta_servizio", null);
+					request.setAttribute("tipologia_imposta", null);
 					index(request);
 				}
 			} else if (firedButtonReset != null) {
@@ -376,11 +370,11 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 			SortedMap<String, String> hmTipologiaImpostaSorted = new TreeMap<String, String>();
 
 			Properties paramProps = this.configuration.getProterties();
-			 
+
 			Enumeration<Object> enumKeys = paramProps.keys();
 			while (enumKeys.hasMoreElements()) {
 				String key = (String) enumKeys.nextElement();
-				
+
 				if (key.startsWith(PropertiesPath.paramTotemTipologiaImposta.format())) {
 					String codTipologiaImposta = key.replace(PropertiesPath.paramTotemTipologiaImposta.format(), "");
 					String descrTipologiaImposta = paramProps.getProperty(key);
@@ -422,7 +416,7 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 
 		return "";
 	}
-	
+
 	protected int getDefaultListRows() {
 		int defaultListRows = 4;
 		PropertiesTree configuration = (PropertiesTree) context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);

@@ -705,7 +705,7 @@
 					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />
 				</malformed>
 			</rule> 
-			<rule name="tipologia_imposta" regex="descrizione256_regex"> <!-- metti regex giuste -->
+			<rule name="tipologia_imposta" regex="codDueN"> 
 				<missing severity="continue" />
 				<malformed severity="continue">
 					<rule-action class="com.seda.j2ee5.maf.defender.action.impl.Blank" />

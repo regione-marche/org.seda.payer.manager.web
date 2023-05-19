@@ -31,7 +31,7 @@
 				<s:div name="divElement3" cssclass="divRicMetadatiLeft">
 					<s:dropdownlist label="Tipologia imposta:"
 						cssclasslabel="label85 bold textright" cssclass="textareaman"
-						name="tipologia_imposta" disable="false" valueselected=""
+						name="tipologia_imposta" disable="false" valueselected="${tipologia_imposta}"
 						cachedrowset="elencoTipologiaImposta" usexml="true">
 						<s:ddloption value="" text="Tutte" />
 						<s:ddloption value="{1}" text="{1} - {2}" />
