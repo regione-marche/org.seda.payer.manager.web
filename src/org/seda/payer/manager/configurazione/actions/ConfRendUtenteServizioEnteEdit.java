@@ -225,6 +225,7 @@ public class ConfRendUtenteServizioEnteEdit extends BaseManagerAction{
 		request.setAttribute("passwordWebService", bean.getPasswordWebServiceEnte());
 		//inizio LP PG200060
 		request.setAttribute("passwordZip", bean.getPasswordZip());
+		request.setAttribute("rendquattrocento", bean.getTracciatoQuattrocento());
 		//fine LP PG200060
 		
 	}
