@@ -272,7 +272,7 @@ public class TotemTipologiaImpostaAction extends DispatchHtmlAction {
 		TotemTipologiaImpostaDetailResponse res = null;
 		TotemTipologiaImpostaDetailRequest in = new TotemTipologiaImpostaDetailRequest(codiceEnte, impostaServizio);
 		in.setCodiceEnte(codiceEnte == null ? "" : codiceEnte);
-		in.setCodiceEnte(impostaServizio == null ? "" : impostaServizio);
+		in.setImpostaServizio(impostaServizio == null ? "" : impostaServizio);
 		res = WSCache.totemTipologiaImpostaServer.getTotemTipologiaImpostaSelect(in, request);
 		return res;
 	}
