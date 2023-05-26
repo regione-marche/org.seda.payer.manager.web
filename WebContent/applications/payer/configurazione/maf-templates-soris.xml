@@ -118,6 +118,57 @@
   	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
   </screen>
  
+<!--TOTEM--> 
+    <screen name="totem_search" template="default">
+    <parameter key="pagetitle" value="manager.totem.search.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/totem_search.jsp" />
+    <parameter key="results" value="/applications/payer/configurazione/include/totem_list.jsp" />
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+  
+  
+   <screen name="totem_add" template="default">
+    <parameter key="pagetitle" value="manager.totem.add.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.totem.add.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/totem_var.jsp" />
+    <parameter key="formaction" value="manager.totem.add.formaction" direct="true"/>    
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+  
+	
+   <screen name="totem_edit" template="default">
+    <parameter key="pagetitle" value="manager.totem.edit.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.totem.edit.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/totem_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+
+ 
+  <screen name="totem_richiestacanc" template="default">
+    <parameter key="pagetitle" value="manager.totem.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.totem.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="message" value="manager.totem.canc.message" direct="true" />
+    <parameter key="main" value="/applications/payer/configurazione/include/totem_var.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
+ 
+   
+   <screen name="totem_canc" template="default">
+    <parameter key="pagetitle" value="manager.totem.canc.title" direct="true"/>
+    <parameter key="contenttitle" value="manager.totem.canc.title" direct="true"/>
+  	<parameter key="header" value="/applications/templates/shared/soris/header.jsp"/>
+    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
+    <parameter key="main" value="/applications/payer/configurazione/include/messages.jsp" />        
+  	<parameter key="footer" value="/applications/templates/shared/soris/footer.jsp"/>
+  </screen>
 
 <!--ANAGRAFICA SERVIZI-->
 

@@ -34,6 +34,7 @@ public enum PropertiesPath {
 	defaultListRows,
 	wsCompany,
 	wsBollettino,
+	wsTotemTipologiaImposta,
 	urlOnline,
 	defaultnode,
 	wsMenu,
@@ -192,6 +193,8 @@ public enum PropertiesPath {
 	, wsLogRequest
 	//fine LP PG21X007
 
+	,totemTipologiaImposta
+	
 	, directoryIoItaliaCSV  //PG210160
 	, directoryIoItaliaCSVScartati
 	, directoryIoItaliaCSVValidi
@@ -199,7 +202,8 @@ public enum PropertiesPath {
 	, wsAppIOEndpointDefaultURL
 	, allowElementsOWASP
 	, skipTarget
-
+	, paramTotemTipologiaImposta
+	
 	;
 	
 	private static ResourceBundle rb;
