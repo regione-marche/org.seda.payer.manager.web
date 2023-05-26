@@ -52,7 +52,7 @@
 									</s:div>
 									<s:div name="divElement2" cssclass="divRicMetadatiLeft">
 										<s:textbox bmodify="false"
-											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2,4}$;maxlength=4"
+											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2}$;maxlength=4"
 											label="Imposta Servizio" maxlenght="4" showrequired="true"
 											name="imposta_servizio"
 											text="${requestScope.imposta_servizio}"
@@ -95,7 +95,7 @@
 									</s:div>
 									<s:div name="divElement_" cssclass="divRicMetadatiLeft">
 										<s:textbox bmodify="true"
-											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2,4}$;maxlength=4"
+											validator="required;minlength=2;accept=^[a-zA-Z0-9]{2,4}|[*]{2}$;maxlength=4"
 											label="Imposta Servizio:" maxlenght="4" showrequired="true"
 											name="imposta_servizio" text="" cssclass="textareaman"
 											message="[accept=Imposta Servizio: ${msg_configurazione_imposta_servizio}]"
