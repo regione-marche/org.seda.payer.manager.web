@@ -360,15 +360,15 @@
 				<description></description>
 			</regex>
 			<regex name="descrizione256_regex">
-				<pattern>^[\d\w\t\/ \?+().àèéòùì\-',]{1,256}$</pattern>
+				<pattern>^[\d\w\t\/ \?+().àèéòùìçâêîôûäëïöüÇÂÊÎÔÛÄËÏÖÜß\-',]{1,256}$</pattern>
 				<description></description>
 			</regex>
 			<regex name="descrizione_regex128">
-				<pattern>^[\d\w\t \?+().àèéòùì\-',]{1,128}$</pattern>
+				<pattern>^[\d\w\t \?+().àèéòùìçâêîôûäëïöüÇÂÊÎÔÛÄËÏÖÜß\-',]{1,128}$</pattern>
 				<description></description>
 			</regex>
 			<regex name="descrizione_regex100">
-				<pattern>^[\d\w\t \?+().àèéòùì\-',]{1,100}$</pattern>
+				<pattern>^[\d\w\t \?+().àèéòùìçâêîôûäëïöüÇÂÊÎÔÛÄËÏÖÜß\-',]{1,100}$</pattern>
 				<description></description>
 			</regex>
 			<regex name="siglaProv">

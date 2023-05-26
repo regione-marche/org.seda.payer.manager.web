@@ -266,6 +266,10 @@ public class BaseRiconciliazioneNodoAction extends BaseManagerAction {
 		if (chiaveQuad.equals("")) { 
 			chiaveQuad = "0";
 		}
+		
+		//PGNTMGR-7
+		String chiaveTra = (request.getParameter(Field.CHIAVE_TRANSAZIONE.format()) == null) ? "" : request.getParameter(Field.CHIAVE_TRANSAZIONE.format());
+		
 		recuperaMovimentiNodoRequest.setKeyQuadratura(Integer.parseInt(chiaveQuad));
 		recuperaMovimentiNodoRequest.setStatoSquadratura((request.getParameter(Field.STATO_SQUADRATURA.format()) == null) ? "" : request.getParameter(Field.STATO_SQUADRATURA.format()));
 		recuperaMovimentiNodoRequest.setKeyGateway("");
@@ -329,7 +333,8 @@ public class BaseRiconciliazioneNodoAction extends BaseManagerAction {
 		recuperaMovimentiNodoRequest.setRecuperateFlusso((request.getParameter(Field.RECUPERATE_FLUSSO.format()) == null) ? "" : request.getParameter(Field.RECUPERATE_FLUSSO.format()));
 		//fine LP PG200200
 		recuperaMovimentiNodoRequest.setEsitoInvioWs((request.getParameter(Field.ESITO_INVIO_WS.format()) == null) ? "" : request.getParameter(Field.ESITO_INVIO_WS.format()));
-		recuperaMovimentiNodoRequest.setEsitoInvioConservazione((request.getParameter(Field.ESITO_INVIO_CONSERVAZIONE.format()) == null) ? "" : request.getParameter(Field.ESITO_INVIO_CONSERVAZIONE.format())); // TODO
+		recuperaMovimentiNodoRequest.setEsitoInvioConservazione((request.getParameter(Field.ESITO_INVIO_CONSERVAZIONE.format()) == null) ? "" : request.getParameter(Field.ESITO_INVIO_CONSERVAZIONE.format()));
+		recuperaMovimentiNodoRequest.setChiaveTransazione(chiaveTra);	//PGNTMGR-7
 		return WSCache.commonsServer.recuperaMovimentiNodo(recuperaMovimentiNodoRequest, request);
 	}
 
