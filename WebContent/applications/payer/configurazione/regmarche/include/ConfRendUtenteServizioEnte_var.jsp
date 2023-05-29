@@ -113,12 +113,12 @@
 					</s:div>
 					<%-- Fine aggiunta PG110260 --%>
 					
-					<s:div name="divElement53" cssclass="divRicMetadatiSingleRow">
-						<s:list bradio="false" bchecked="${chk_rendicontazionequattrocento}" validator="ignore" 
+			<!--		<s:div name="divElement53" cssclass="divRicMetadatiSingleRow">
+						<s:list bradio="false" bchecked="${rendquattrocento}" validator="ignore" 
 						 cssclasslabel="bold checklabel label200" cssclass="checkleft"
 						name="rendquattrocento" groupname="rendquattrocento" 
 						text="Rendicontazione 400 caratteri" value="Y"/>
-					</s:div>
+					</s:div> -->
 					
 					
 					<!-- REE_NREEMAXB DIMENSIONE MASSIMA ALLEGATO  IN KB -->
