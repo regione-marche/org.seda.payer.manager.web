@@ -174,6 +174,8 @@ public class ConfRendUtenteServizioEnteEdit extends BaseManagerAction{
 		request.setAttribute("chk_invioFtp",  bean.getFlagAbilitazioneInvioFtp().equals("Y")); 
 		request.setAttribute("chk_invioWebService",  bean.getFlagAbilitazioneInvioWebService().equals("Y"));
 		request.setAttribute("chk_flagTrcComandiPolizia",  bean.getFlagTracciatoComandiPolizia().equals("Y"));	//PG200280
+		//request.setAttribute("rendquattrocento", bean.getTracciatoQuattrocento().equals("Y"));
+		
 		
 		//aggiunta PG110260
 		request.setAttribute("chk_rendicontazioneSeda", bean.getFlagTipoRendicontazione().equals("Y")); 
@@ -226,7 +228,6 @@ public class ConfRendUtenteServizioEnteEdit extends BaseManagerAction{
 		//inizio LP PG200060
 		request.setAttribute("passwordZip", bean.getPasswordZip());
 		//fine LP PG200060
-		
 	}
 
 }

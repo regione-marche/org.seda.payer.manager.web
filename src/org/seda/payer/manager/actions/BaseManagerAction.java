@@ -2786,6 +2786,7 @@ public class BaseManagerAction extends HtmlAction {
 		String utenteWebService = (request.getAttribute("utenteWebService") == null ? "" : (String)request.getAttribute("utenteWebService"));
 		String passwordWebService = (request.getAttribute("passwordWebService") == null ? "" : (String)request.getAttribute("passwordWebService"));
 		String flagTrcComandiPolizia = (request.getAttribute("flagTrcComandiPolizia") == null ? "N" : "Y");	//PG200280
+		String rendicontazioneQuattrocento = (request.getAttribute("rendquattrocento") == null ? "N" : "Y");
 		
 		param.put("codiceSocieta", codiceSocieta);
 		param.put("codiceUtente", codiceUtente);
@@ -2813,6 +2814,7 @@ public class BaseManagerAction extends HtmlAction {
 		param.put("utenteWebService", utenteWebService);
 		param.put("passwordWebService", passwordWebService);
 		param.put("flagTrcComandiPolizia", flagTrcComandiPolizia);	//PG200280
+		param.put("rendquattrocento", rendicontazioneQuattrocento);
 
 		/*
 		 * Setto le tre check-box di invio email , invio ftp e invio webservice
@@ -2822,6 +2824,7 @@ public class BaseManagerAction extends HtmlAction {
 		request.setAttribute("chk_invioWebService",  invioWebService.equals("Y"));
 		request.setAttribute("chk_senzaCarico",  senzaCarico.equals("Y"));
 		request.setAttribute("chk_codContrib",  numDocCodContrib.equals("Y"));
+		request.setAttribute("rendquattrocento",  rendicontazioneQuattrocento.equals("Y"));
 		
 		request.setAttribute("chk_flagTrcComandiPolizia",  flagTrcComandiPolizia.equals("Y"));	//PG200280
 		
@@ -2848,6 +2851,7 @@ public class BaseManagerAction extends HtmlAction {
 			request.setAttribute("disabled_invioWebService",  false ); // PG180010
 //			request.setAttribute("disabled_flagTrcComandiPolizia",  false );	//PG200280
 		}
+		
 		//Fine aggiunta PG110260
 		
 		
@@ -2913,6 +2917,7 @@ public class BaseManagerAction extends HtmlAction {
 		String invioEmail = (request.getAttribute("invioEmail") == null ? "N" : "Y");
 		String rendicontazioneSeda = (request.getAttribute("rendicontazioneSeda") == null ? "N" : "Y"); //PG110260
 		String formatoFileRend = (request.getAttribute("formatoFileRend") == null ? "" : (String)request.getAttribute("formatoFileRend"));
+		String tracciatoQuattrocento = (request.getAttribute("rendquattrocento") == null ? "N" : "Y");
 
 		String invioFtp = "";
 		if (request.getAttribute("senzaCarico") != null && request.getAttribute("senzaCarico").equals("Y") && !template.equals("aosta")){
@@ -2989,6 +2994,7 @@ public class BaseManagerAction extends HtmlAction {
 		param.put("passwordZip", passwordZip);
 		//fine LP PG200060
 		param.put("flagTrcComandiPolizia", flagTrcComandiPolizia);	//PG200280
+		param.put("tracciatoQuattrocento", tracciatoQuattrocento);
 		
 		/*
 		 * Setto le tre check-box di invio email , invio ftp e invio webservice
@@ -3023,6 +3029,7 @@ public class BaseManagerAction extends HtmlAction {
 			request.setAttribute("chk_invioWebService",  false ); 
 			request.setAttribute("disabled_invioWebService",  true );
 			
+			
 //			//PG200280 GG - inizio
 //			request.setAttribute("chk_flagTrcComandiPolizia",  false ); 
 //			request.setAttribute("disabled_flagTrcComandiPolizia",  true );
@@ -3033,9 +3040,11 @@ public class BaseManagerAction extends HtmlAction {
 			request.setAttribute("disabled_invioFtp",  false ); //anomalia PG110260  
 			request.setAttribute("disabled_invioWebService",  false ); 
 //			request.setAttribute("disabled_flagTrcComandiPolizia",  false );	//PG200280
+			request.setAttribute("rendquattrocento", rendicontazioneSeda.equals("Y"));
 
 		}
 		//Fine aggiunta PG110260
+		
 		
 		return param;
 	}
@@ -3287,7 +3296,7 @@ public class BaseManagerAction extends HtmlAction {
 			bean.setImpServ("");
 			bean.setFlagCodContrib("");
 			bean.setCodTributo("");
-			bean.setFormatoFileRend("");
+			bean.setFormatoFileRend((String) p.get("formatoFileRend"));
 			bean.setFlagAbilitazioneInvioWebService("");
 			bean.setUrlWebServiceEnte("");
 			bean.setUtenteWebServiceEnte("");
@@ -3297,6 +3306,8 @@ public class BaseManagerAction extends HtmlAction {
 		if (template.equalsIgnoreCase("trentrisc")) {
 			bean.setFlagTracciatoComandiPolizia((String) p.get("flagTrcComandiPolizia"));
 		}
+		
+		bean.settracciatoQuattrocento((String) p.get("rendquattrocento"));
 		return bean;
 	}
 
@@ -3355,7 +3366,7 @@ public class BaseManagerAction extends HtmlAction {
 			bean.setFlagCodContrib("");
 			bean.setCodTributo("");
 			
-			bean.setFormatoFileRend("");
+			bean.setFormatoFileRend((String) p.get("formatoFileRend"));
 			bean.setFlagAbilitazioneInvioWebService("");
 			bean.setUrlWebServiceEnte("");
 			bean.setUtenteWebServiceEnte("");
@@ -3366,6 +3377,9 @@ public class BaseManagerAction extends HtmlAction {
 		if (template.equalsIgnoreCase("trentrisc")) {
 			bean.setFlagTracciatoComandiPolizia((String) p.get("flagTrcComandiPolizia"));
 		}
+		
+		bean.setTracciatoQuattrocento((String) p.get("tracciatoQuattrocento"));
+		
 		return bean;
 	}
 
