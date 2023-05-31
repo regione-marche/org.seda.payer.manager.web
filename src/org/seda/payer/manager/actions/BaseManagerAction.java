@@ -3040,7 +3040,7 @@ public class BaseManagerAction extends HtmlAction {
 			request.setAttribute("disabled_invioFtp",  false ); //anomalia PG110260  
 			request.setAttribute("disabled_invioWebService",  false ); 
 //			request.setAttribute("disabled_flagTrcComandiPolizia",  false );	//PG200280
-			request.setAttribute("rendquattrocento", rendicontazioneSeda.equals("Y"));
+			request.setAttribute("rendquattrocento", tracciatoQuattrocento.equals("Y"));
 
 		}
 		//Fine aggiunta PG110260
