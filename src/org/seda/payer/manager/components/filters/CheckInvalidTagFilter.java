@@ -46,6 +46,7 @@ public class CheckInvalidTagFilter implements Filter {
 		if(allowElementsString.length()>0)
 			allowElements = allowElementsString.split(";");
 		
+		
 		chain.doFilter(new FilteredRequest(request, allowElements), response);
 		return;
 	}
@@ -69,7 +70,16 @@ public class CheckInvalidTagFilter implements Filter {
         public String sanitize(String input) {
             String result = "";
 
-            result = policy.sanitize(input);
+            result = policy.sanitize(input)	            		
+            		.replace("&#64;", "@")
+            		.replace("&#33;", "!")
+            		.replace("&#35;", "#")
+            		.replace("&#36;", "$")
+            		.replace("&#37;", "%")
+            		.replace("&#38;", "&")
+            		.replace("&#42;", "*")
+            		.replace("&#43;", "+");
+            
             
             return result;
         }
