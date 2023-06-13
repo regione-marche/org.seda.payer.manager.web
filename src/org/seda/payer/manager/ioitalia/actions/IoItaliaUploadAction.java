@@ -37,7 +37,8 @@ public class IoItaliaUploadAction extends IoItaliaBaseManagerAction implements F
 //	private String ente;
 //	private String codSoc;
 	private static final long serialVersionUID = 1L;
-
+	private static final long MAX_FILE_SIZE = 1024 * 1024 * 100;
+	
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain arg2)
 			throws IOException, ServletException {
@@ -47,7 +48,6 @@ public class IoItaliaUploadAction extends IoItaliaBaseManagerAction implements F
 		String resultMex = "";
 		String rootPathCSV = null;
 		String rootScartati = null;
-//		String fileName = "";
 		int fileCaricati = 0;
 //		soc = (String) request.getSession().getAttribute("tx_societa_s");
 //		ente = (String) request.getSession().getAttribute("tx_ente_s");
@@ -89,19 +89,27 @@ public class IoItaliaUploadAction extends IoItaliaBaseManagerAction implements F
 							LocalDateTime ldt = LocalDateTime.now();
 							String etichetta = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSS")).concat(item.getName());
 							
-							if (getEstensioneFile(item.getName()).equalsIgnoreCase("csv")) {
-
-								File file = new File(folderCSV, etichetta);
-								item.write(file);
-								resultMex = "File caricato con successo";
-//								fileName = file.getName();
-
-							} else {
+							// check estensione file (solo CSV ammesso) && check estensioni multiple
+							if (getEstensioneFile(item.getName()).equalsIgnoreCase("csv") && item.getName().split("[.]").length == 2) {	
 								
+								// check dimensione file
+								if(item.getSize() <= MAX_FILE_SIZE) {
+									File file = new File(folderCSV, etichetta);
+								        item.write(file);
+								        resultMex = "File caricato con successo";							
+								} else {
+									File file = new File(rootScartati, etichetta);
+									item.write(file);
+									resultMex = "Il file &egrave; troppo grande: 50MB superati";
+								}						
+							} else if (!getEstensioneFile(item.getName()).equalsIgnoreCase("csv")) {								
 								File file = new File(rootScartati, etichetta);
 								item.write(file);
 								resultMex = "Estensione errata: Il file non &egrave; un CSV";
-//								fileName = file.getName();
+							} else {
+								File file = new File(rootScartati, etichetta);
+								item.write(file);
+								resultMex = "Non è ammesso il carattere \".\" nel nome del file";
 							}
 						}
 					}

@@ -207,6 +207,7 @@ public enum Field {
 	, ESITO_INVIO_WS
 	//fine LP PG200200
 	, ESITO_INVIO_CONSERVAZIONE
+	,TX_CODICE_FISCALE
 	;
 	
     private static ResourceBundle rb;

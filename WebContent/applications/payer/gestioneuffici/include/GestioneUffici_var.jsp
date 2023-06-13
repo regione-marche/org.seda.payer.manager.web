@@ -44,7 +44,7 @@
 						<s:textbox bmodify="true" name="descrde"
 							label="Descrizione DE:" maxlenght="100" 
 							cssclasslabel="label85 bold textright"
-							cssclass="textareaman" validator="ignore;maxlength=100;"
+							cssclass="textareaman" validator="ignore;maxlength=100;accept=${configurazione_descrizione_regex100}"
 							text="${requestScope.descrde}" />
 					</s:div>
 				</s:div>

@@ -165,7 +165,7 @@
 							
 							<s:div name="divElement7" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true" maxlenght="256"
-								cssclass="textareaman" validator="ignore;"
+								cssclass="textareaman" validator="ignore;accept=${configurazione_descrizione256_regex}"
 									label="Descr.Ente:" name="anagente_descrizioneEnte"
 									text="${anagente_descrizioneEnte}"
 									cssclasslabel="label85 bold textright"/>

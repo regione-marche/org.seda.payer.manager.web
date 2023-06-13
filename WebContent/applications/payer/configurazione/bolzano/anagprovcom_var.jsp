@@ -106,7 +106,7 @@
 							
 							<s:div name="divElement112" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
-								cssclass="textareaman" validator="ignore;"
+								cssclass="textareaman" validator="ignore;accept=${configurazione_descrizione_regex100}"
 									maxlenght="100" showrequired="true"
 									label="Descr.Prov.DE:" name="anagprovcom_descrizioneProvinciaDE"
 									text="${requestScope.anagprovcom_descrizioneProvinciaDE}"

@@ -4,6 +4,7 @@
 package org.seda.payer.manager.configurazione.actions;
 
 import java.io.BufferedInputStream;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +23,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import javax.sql.rowset.WebRowSet;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.actions.BaseManagerAction.FiredButton;
 import org.seda.payer.manager.components.security.UserBean;
@@ -31,9 +34,14 @@ import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.util.PropertiesPath;
 import org.seda.payer.manager.ws.WSCache;
+import com.seda.payer.pgec.webservice.abilitacanalepagamentotiposervizioente.dati.AbilitaCanalePagamentoTipoServizioEnteResponse;
+import com.seda.payer.pgec.webservice.abilitacanalepagamentotiposervizioente.dati.AbilitaCanalePagamentoTipoServizioEnteResponsePageInfo;
+import com.seda.payer.pgec.webservice.abilitacanalepagamentotiposervizioente.dati.AbilitaCanalePagamentoTipoServizioEnteSearchRequest;
+import com.seda.payer.pgec.webservice.abilitacanalepagamentotiposervizioente.dati.AbilitaCanalePagamentoTipoServizioEnteSearchResponse;
 
-import com.esed.payer.archiviocarichi.webservice.integraecdifferito.dati.Tributo;
+
 import com.seda.commons.properties.tree.PropertiesTree;
+import com.seda.commons.string.Convert;
 import com.seda.data.spi.PageInfo;
 import com.seda.j2ee5.maf.components.servicelocator.ServiceLocator;
 import com.seda.j2ee5.maf.components.servicelocator.ServiceLocatorException;
@@ -47,8 +55,7 @@ import com.seda.payer.pgec.webservice.ConfRendUtenteServizioEnte.dati.ConfRendUt
 import com.seda.payer.pgec.webservice.ConfRendUtenteServizioEnte.dati.ConfRendUtenteServizioEnteGetRecordResponseType;
 import com.seda.payer.pgec.webservice.bollettino.dati.BollettinoSearchRequest;
 import com.seda.payer.pgec.webservice.bollettino.dati.BollettinoSearchResponse;
-import com.seda.payer.pgec.webservice.commons.dati.RecuperaTransazioniCsvRequest;
-import com.seda.payer.pgec.webservice.commons.dati.RecuperaTransazioniCsvResponse;
+
 import com.seda.payer.pgec.webservice.configtassonomia.dati.ConfigTassonomiaListaRequest;
 import com.seda.payer.pgec.webservice.configtassonomia.dati.ConfigTassonomiaListaResponse;
 import com.seda.payer.pgec.webservice.configutentetiposervizioente.dati.ConfigUtenteTipoServizioEnte;
@@ -786,8 +793,6 @@ public class ServiziAttiviAction extends BaseManagerAction {
 			request.setAttribute("chk_flagPagoPA", response.getConfigutentetiposervizioente().getFlagPagoPA().equals("Y"));	//TODO da verificare
 			request.setAttribute("configutentetiposervizioente_tipoDovuto", response.getConfigutentetiposervizioente().getTipoDovuto());
 			
-			
-			
 			request.setAttribute("configutentetiposervizioente_giorniStampaAvvisoPagoPa", response.getConfigutentetiposervizioente().getGiorniStampaAvvisoPagoPa());
 			
 			request.setAttribute("configutentetiposervizioente_autorizzazioneStampaAvvisoPagoPa", response.getConfigutentetiposervizioente().getAutorizzazioneStampaAvvisoPagoPa());
@@ -801,7 +806,20 @@ public class ServiziAttiviAction extends BaseManagerAction {
 		    request.setAttribute("configutentetiposervizioente_codiceContabilita", response.getConfigutentetiposervizioente().getCodiceContabilita());
 		    
 		    request.setAttribute("configutentetiposervizioente_datapagamento", response.getConfigutentetiposervizioente().getDataDicituraPagamento());  //SB PG210170
-		    
+		    //inizio CD PAGO438
+		    request.setAttribute("nome_struttura_ente", response.getConfigutentetiposervizioente().getStrutturaEnte());
+			request.setAttribute("nome_struttura_ente_rag_soc", response.getConfigutentetiposervizioente().getStrutturaEnteFornitore());
+			request.setAttribute("nome_ente", response.getConfigutentetiposervizioente().getNomeEnte());
+			request.setAttribute("Nome_ref_tec", response.getConfigutentetiposervizioente().getNomeFornitore());
+			request.setAttribute("cognome_ref_tec", response.getConfigutentetiposervizioente().getCognomeFornitore());
+			request.setAttribute("Telefono_Referente_Tecnico_Ente", response.getConfigutentetiposervizioente().getTelefonoFornitore());
+			request.setAttribute("mail_ref_tecnico", response.getConfigutentetiposervizioente().getMailFornitore());
+			request.setAttribute("cognome_ente", response.getConfigutentetiposervizioente().getCognomeEnte());
+			request.setAttribute("telefono_ente", response.getConfigutentetiposervizioente().getTelefonoEnte());
+			request.setAttribute("mail_ente", response.getConfigutentetiposervizioente().getMailEnte());
+		//	request.setAttribute("configutentetiposervizioente_statoAttivo", response.getConfigutentetiposervizioente().getStatoAttivo());
+
+			//fine CD PAGO438
 		    String flagPagoPa = "";
 		    switch(response.getConfigutentetiposervizioente().getFlagStampaAvvisoPagoPa()) { 
 		    case "N" : flagPagoPa = "No"; break;
@@ -933,11 +951,47 @@ public class ServiziAttiviAction extends BaseManagerAction {
 				request.setAttribute("modello3_urlIntegrazione", "");
 			}
 			
+			//servizioAttivo
+			AbilitaCanalePagamentoTipoServizioEnteSearchResponse searchResponse = null;
+			AbilitaCanalePagamentoTipoServizioEnteResponse abilitaCanalePagamentoTipoServizioEnteResponse = null;
+			AbilitaCanalePagamentoTipoServizioEnteSearchRequest inAbilita = new AbilitaCanalePagamentoTipoServizioEnteSearchRequest();
+			inAbilita.setPageNumber(1);
+			inAbilita.setRowsPerPage(20);
+			inAbilita.setCompanyCode(companyCode);
+			inAbilita.setUserCode(userCode);
+			inAbilita.setChiaveEnte(chiaveEnte);
+			inAbilita.setCodiceTipologiaServizio(codiceTipologiaServizio);
+							
+			searchResponse = WSCache.abilitazTributiServer.getAbilitaCanalePagamentoTipoServizioEntes(inAbilita,request);
+			abilitaCanalePagamentoTipoServizioEnteResponse = searchResponse.getResponse();
+			WebRowSet listaRecord = null;
+			listaRecord = Convert.stringToWebRowSet(abilitaCanalePagamentoTipoServizioEnteResponse.getListXml());
+			listaRecord.first();
+			
+			String statoAttivo = "N";
+			if (listaRecord != null) 
+			{
+				while (listaRecord.next()) 
+				{
+					statoAttivo = listaRecord.getString(6);
+					if(statoAttivo.equals("Y")) 
+						break; 
+				}
+			}
+			
+			if(statoAttivo.equals("Y")) 
+				statoAttivo = "ATTIVO"; 
+			if(statoAttivo.equals("N")) 
+				statoAttivo = "NON ATTIVO";
+			
+			request.setAttribute("configutentetiposervizioente_statoAttivo", statoAttivo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return null;
+		
 	}
 
 	public Object saveedit(HttpServletRequest request) throws ActionException {
@@ -1038,6 +1092,17 @@ public class ServiziAttiviAction extends BaseManagerAction {
 		    String cbillStampaAvvisoPagoPa = detailResponse.getConfigutentetiposervizioente().getCbillStampaAvvisoPagoPa();
 		    String infoEnteStampaAvvisoPagoPa = detailResponse.getConfigutentetiposervizioente().getInfoEnteStampaAvvisoPagoPa(); 
 		    String chiaveTassonomiaOLD = detailResponse.getConfigutentetiposervizioente().getChiaveTassonomia();
+		    String strutturaEnte = detailResponse.getConfigutentetiposervizioente().getStrutturaEnte();
+		    String strutturaEnteFornitore = detailResponse.getConfigutentetiposervizioente().getStrutturaEnteFornitore();
+		    String nomeEnte = detailResponse.getConfigutentetiposervizioente().getNomeEnte();
+		    String nomeFornitore = detailResponse.getConfigutentetiposervizioente().getNomeFornitore();
+		    String cognomeFornitore = detailResponse.getConfigutentetiposervizioente().getCognomeFornitore();
+		    String telefonoFornitore = detailResponse.getConfigutentetiposervizioente().getTelefonoFornitore();
+		    String mailFornitore = detailResponse.getConfigutentetiposervizioente().getMailFornitore();
+		    String cognomeEnte = detailResponse.getConfigutentetiposervizioente().getCognomeEnte();
+		    String telefonoEnte = detailResponse.getConfigutentetiposervizioente().getTelefonoEnte();
+		    String mailEnte = detailResponse.getConfigutentetiposervizioente().getMailEnte();
+			
 		    
 		    boolean bAggiorna = false;
 		    String chiaveTassonomia = (String) request.getAttribute("configutentetiposervizioente_chiaveTassonomia");
@@ -1106,14 +1171,27 @@ public class ServiziAttiviAction extends BaseManagerAction {
 			}
 			
 			 String dataDicituraPagamento = (String)request.getAttribute("configutentetiposervizioente_datapagamento")==null?"":(String)request.getAttribute("configutentetiposervizioente_datapagamento"); //SB PG210170
-			    
-			
+			 //inizio cd pago438
+			 strutturaEnte = (String)request.getAttribute("nome_struttura_ente")==null?"":(String)request.getAttribute("nome_struttura_ente"); 
+			 strutturaEnteFornitore = (String)request.getAttribute("nome_struttura_ente_rag_soc")==null?"":(String)request.getAttribute("nome_struttura_ente_rag_soc");  
+			 nomeEnte = (String)request.getAttribute("nome_ente")==null?"":(String)request.getAttribute("nome_ente");  
+			 nomeFornitore = (String)request.getAttribute("Nome_ref_tec")==null?"":(String)request.getAttribute("Nome_ref_tec");  
+			 cognomeEnte = (String)request.getAttribute("cognome_ente")==null?"":(String)request.getAttribute("cognome_ente");  
+			 cognomeFornitore =(String)request.getAttribute("cognome_ref_tec")==null?"":(String)request.getAttribute("cognome_ref_tec"); 
+			 telefonoEnte = (String)request.getAttribute("telefono_ente")==null?"":(String)request.getAttribute("telefono_ente"); 
+			 telefonoFornitore = (String)request.getAttribute("Telefono_Referente_Tecnico_Ente")==null?"":(String)request.getAttribute("Telefono_Referente_Tecnico_Ente"); 
+			 mailEnte = (String)request.getAttribute("mail_ente")==null?"":(String)request.getAttribute("mail_ente"); 
+			 mailFornitore = (String)request.getAttribute("mail_ref_tecnico")==null?"":(String)request.getAttribute("mail_ref_tecnico"); 
+			//fine cd pago 438 
+			 
 			ConfigUtenteTipoServizioEnte configUtente = new ConfigUtenteTipoServizioEnte(companyCode, codiceUtente, chiaveEnte,  codiceTipologiaServizio, tipoBol,
 				    numCc, intestatarioCc, tipoDoc, flagConRange,  emailDest, emailCcn,emailMitt, desMitt, flagAllegato, codiceSia,  codiceIban,codiceSecondoIban,
 				     funzionePag, flagPagProtetta, urlServWeb, flagTipoPag, flagIntegrazioneSeda, codiceUtenteSeda, usernameAutenticazione, flagNotificaPagamento,
 				     urlServizioWebNotificaPagamento, flagPagoPA, tipoDovuto, flagStampaPagoPaPdf, giorniStampaAvvisoPagoPa, autorizzazioneStampaAvvisoPagoPa, cbillStampaAvvisoPagoPa, infoEnteStampaAvvisoPagoPa,
-				     chiaveTassonomia, causali, articolo, codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento); 
-		
+				     chiaveTassonomia, causali, articolo, codiceContabilita, capitolo, annoCompetenza, dataDicituraPagamento,
+				     strutturaEnte,strutturaEnteFornitore,nomeEnte,nomeFornitore,cognomeEnte,cognomeFornitore,telefonoEnte,
+				     telefonoFornitore,mailEnte,mailFornitore); 
+			
 			//fine SB PG210140
 			/* we prepare object for save */
 			ConfigUtenteTipoServizioEnteSaveRequest saveRequest = new ConfigUtenteTipoServizioEnteSaveRequest(configUtente,codOp);
@@ -1187,6 +1265,19 @@ public class ServiziAttiviAction extends BaseManagerAction {
 				request.setAttribute("configutentetiposervizioente_flagNotificaPagamento", detailResponse.getConfigutentetiposervizioente().getFlagNotificaPagamento());
 				request.setAttribute("configutentetiposervizioente_urlServizioWebNotificaPagamento", detailResponse.getConfigutentetiposervizioente().getUrlServizioWebNotificaPagamento());
 				request.setAttribute("chk_flagPagoPA", detailResponse.getConfigutentetiposervizioente().getFlagPagoPA().equals("Y"));	//TODO da verificare
+				//inizio cd Pago438
+				request.setAttribute("nome_struttura_ente", detailResponse.getConfigutentetiposervizioente().getStrutturaEnte());
+				request.setAttribute("nome_struttura_ente_rag_soc", detailResponse.getConfigutentetiposervizioente().getStrutturaEnteFornitore());
+				request.setAttribute("nome_ente", detailResponse.getConfigutentetiposervizioente().getNomeEnte());
+				request.setAttribute("Nome_ref_tec", detailResponse.getConfigutentetiposervizioente().getNomeFornitore());
+				request.setAttribute("cognome_ref_tec", detailResponse.getConfigutentetiposervizioente().getCognomeFornitore());
+				request.setAttribute("Telefono_Referente_Tecnico_Ente", detailResponse.getConfigutentetiposervizioente().getTelefonoFornitore());
+				request.setAttribute("mail_ref_tecnico", detailResponse.getConfigutentetiposervizioente().getMailFornitore());
+				request.setAttribute("cognome_ente", detailResponse.getConfigutentetiposervizioente().getCognomeEnte());
+				request.setAttribute("telefono_ente", detailResponse.getConfigutentetiposervizioente().getTelefonoEnte());
+				request.setAttribute("mail_ente", detailResponse.getConfigutentetiposervizioente().getMailEnte());
+				
+				//fine cd pago438
 			} catch (Exception ignore) { }
 			if (codOp.compareTo(TypeRequest.ADD_SCOPE.scope())==0) request.setAttribute("message", Messages.INS_ERR.format());
 			if (codOp.compareTo(TypeRequest.EDIT_SCOPE.scope())==0) request.setAttribute("message", Messages.GENERIC_ERR.format());
@@ -1195,6 +1286,8 @@ public class ServiziAttiviAction extends BaseManagerAction {
 		}
 		
 	}
+	
+	
 	
 	protected int getDefaultListRows()
 	{

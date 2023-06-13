@@ -87,7 +87,7 @@
 						<s:textbox bmodify="true" name="tx_descrde"
 							label="Descrizione DE:" maxlenght="100" 
 							cssclasslabel="label85 bold textright"
-							cssclass="textareaman" validator="ignore;accept=^[0-9a-zA-Z\-]{1,100}$"
+							cssclass="textareaman" validator="ignore;accept=^[0-9a-zA-Z-àèéòùìçâêîôûëïüïüäß\-]{1,100}$"
 							message=""
 							text="${requestScope.tx_descrde}" />
 
