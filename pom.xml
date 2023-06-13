@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seda.payer.manager.web</groupId>
 	<artifactId>org.seda.payer.manager.web</artifactId>
-	<version>2.13.0</version>
+	<version>2.14.0</version>
 	<packaging>war</packaging>
 	<name>org.seda.payer.manager.web</name>
 	<description>org.seda.payer.manager.web</description>
@@ -131,7 +131,7 @@
 		<dependency>
 			<groupId>com.seda.payer.pgec.webservice.client</groupId>
 			<artifactId>com.seda.payer.pgec.webservice.client</artifactId>
-			<version>2.4.0</version>
+			<version>2.5.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -162,7 +162,7 @@
 		<dependency>
 			<groupId>com.seda.payer.ottico.webservice.client</groupId>
 			<artifactId>com.seda.payer.ottico.webservice.client</artifactId>
-			<version>1.0</version>
+			<version>2.1.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>com.esed.payer.archiviocarichi.webservice.client</groupId>
 			<artifactId>com.esed.payer.archiviocarichi.webservice.client</artifactId>
-			<version>2.1.0</version>
+			<version>2.2.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -571,7 +571,7 @@
 		<dependency>
 			<groupId>com.seda.payer.integraente.webservice.client</groupId>
 			<artifactId>com.seda.payer.integraente.webservice.client</artifactId>
-			<version>1.0</version>
+			<version>2.1.0</version>
 			<scope>compile</scope>
 		</dependency>
 
