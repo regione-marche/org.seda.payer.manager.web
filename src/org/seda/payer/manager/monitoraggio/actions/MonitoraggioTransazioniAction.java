@@ -103,17 +103,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			request.setAttribute(Field.TX_LISTA_GROUPED.format(), session.getAttribute("session_lista_transazioni.grouped"));					
 		}
 		
-		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
 		RecuperaTransazioniResponseType listaTransazioni = null;
-		try {
-			listaTransazioni = getListaTransazioni(request, session);
-		} catch (FaultType e2) {
-			e2.printStackTrace();
-		} catch (RemoteException e2) {
-			e2.printStackTrace();
-		}
-		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
-
+		
 		switch(firedButton) {
 		case TX_BUTTON_CERCA: 
 		case TX_BUTTON_CONFERMA_RICONCILIAZIONE:
@@ -134,7 +125,11 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						setFormMessage("monitoraggioTransazioniForm", "Valorizzare solo uno dei campi Id.Trans.Atm o Codice I.U.R.", request);
 					}
 					else {	
-						
+							
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
+							listaTransazioni = getListaTransazioni(request, session);
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
+							
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
 							
 							if (tipoQuery.equals("A") || tipoQuery.equals("C")) {// PAGONET-437
