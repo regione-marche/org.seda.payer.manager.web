@@ -103,13 +103,26 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			request.setAttribute(Field.TX_LISTA_GROUPED.format(), session.getAttribute("session_lista_transazioni.grouped"));					
 		}
 		
-		RecuperaTransazioniResponseType listaTransazioni = null;
-		
+
 		switch(firedButton) {
 		case TX_BUTTON_CERCA: 
 		case TX_BUTTON_CONFERMA_RICONCILIAZIONE:
 			
 			try {
+
+
+						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
+						RecuperaTransazioniResponseType listaTransazioni = null;
+						try {
+							listaTransazioni = getListaTransazioni(request, session);
+						} catch (FaultType e2) {
+							e2.printStackTrace();
+						} catch (RemoteException e2) {
+							e2.printStackTrace();
+						}
+						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
+
+
 				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
 				//loadTipologiaServizioXml_DDL(request, session, getParamCodiceSocieta(), false);
 				loadTipologiaServizioXml_DDL_2(request, session, getParamCodiceSocieta(),getParamCodiceUtente(),getParamCodiceEnte(), false);
@@ -131,6 +144,10 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
 							
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
+
+							if(tipoQuery.equals("") || tipoQuery==null) {
+								tipoQuery = "C"; // C
+							}
 							
 							if (tipoQuery.equals("A") || tipoQuery.equals("C")) {// PAGONET-437
 								
@@ -315,7 +332,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			
 			String template = getTemplateCurrentApplication(request, request.getSession());
 			if(template.equals("aosta")||template.equals("aostaFR")) {
-			    String[] specialChars = { "à", "â", "ä", "ç", "Ã©","è", "é", "ë", "ï", "î", "ö", "ô", "û", "ü", "ù", "æ", "Â", "Ä", "Ê", "Ë", "Î", "Ï", "Ô", "Ö", "Û", "Ü", "À", "Ç", "É", "È", "Ê", "Ô", "Æ"};
+			    String[] specialChars = { "", "", "", "", "Ã©","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 			    String[] standardChars = { "a", "a", "a", "c", "e","e", "e", "e", "i", "i", "o", "o", "u", "u", "u", "a", "A", "A", "E", "E", "I", "I", "O", "O", "U", "U", "A", "C", "E", "E", "E", "O", "A"};
 				for (int i = 0; i < specialChars.length; i++) {
 			        file = file.replaceAll(specialChars[i], standardChars[i]);
@@ -777,7 +794,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if(!sDataDaIsNullOrEmpty) {
 		        dataDa.add(Calendar.DAY_OF_MONTH, 90);
 		        if (dataDa.before(dataA))
-		        	return "Il massimo range di giorni consentito è di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 90 giorni";
 	        }
 	        
 	        
@@ -788,7 +805,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if(!sDataAccrDaIsNullOrEmpty) {
 	        	dataAccrDa.add(Calendar.DAY_OF_MONTH, 90);
 		        if (dataAccrDa.before(dataAccrA))
-		        	return "Il massimo range di giorni consentito è di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 90 giorni";
 	        }
         
         return null;
