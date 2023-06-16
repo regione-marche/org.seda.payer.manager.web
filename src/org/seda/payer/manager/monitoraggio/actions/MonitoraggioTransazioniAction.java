@@ -138,7 +138,11 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						setFormMessage("monitoraggioTransazioniForm", "Valorizzare solo uno dei campi Id.Trans.Atm o Codice I.U.R.", request);
 					}
 					else {	
-						
+							
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
+							listaTransazioni = getListaTransazioni(request, session);
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
+							
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
 
 							if(tipoQuery.equals("") || tipoQuery==null) {
