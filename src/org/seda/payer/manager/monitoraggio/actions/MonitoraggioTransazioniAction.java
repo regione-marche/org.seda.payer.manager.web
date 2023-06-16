@@ -146,7 +146,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
 
 							if(tipoQuery.equals("") || tipoQuery==null) {
-								tipoQuery = "C"; // C
+								tipoQuery = "A"; // C
 							}
 							
 							if (tipoQuery.equals("A") || tipoQuery.equals("C")) {// PAGONET-437
