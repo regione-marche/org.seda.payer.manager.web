@@ -957,7 +957,7 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-			
+		</c:if>
 			
 
 	    <c:if test="${userProfile!='AMEN'}" >
@@ -1063,7 +1063,7 @@
 			</s:table>
 			</c:if>
 		 </c:if>
-	  </c:if>
+	  
 	
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
