@@ -371,6 +371,19 @@
 				</s:div>
 
 			</s:div>
+			
+			
+					   <s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
+							<s:dropdownlist name="tx_scelta_query" disable="false"
+								cssclass="tbddlMax floatleft"
+								cssclasslabel="label85 bold textright" label="Tipo Vista:"
+								valueselected="${tx_scelta_query}">
+								<s:ddloption value="A" text="Tutte" />
+								<s:ddloption value="C" text="Lista Transazioni" />
+								<s:ddloption value="B" text="Report Riepilogo" />
+							</s:dropdownlist>
+					   </s:div>
+			
 
 			<s:div name="divRicercaBottoni" cssclass="divRicBottoni">
 
@@ -852,13 +865,18 @@
 			</s:dgcolumn>
 
 		</s:datagrid>
-
-		<s:div name="divTableTitle2" cssclass="divTableTitle bold">
-			Riepilogo statistico
+		
 		</s:div>
+
+  </c:if>	
+
+
 
 
 		<c:if test="${!empty listaTransazioniGroupedSuccess}">
+		  	<s:div name="divTableTitle2" cssclass="divTableTitle bold">
+				Riepilogo statistico
+			</s:div>
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="0">
 				<s:thead>
@@ -946,6 +964,7 @@
 		</c:if>
 
 		<c:if test="${userProfile!='AMEN'}">
+		  <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1045,7 +1064,8 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
+		  </c:if>
+	   </c:if>
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
@@ -1108,8 +1128,3 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
-		
-		
-	</s:div>
-
-</c:if>
