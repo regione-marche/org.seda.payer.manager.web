@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -110,18 +111,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			
 			try {
 
-
-						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
-						RecuperaTransazioniResponseType listaTransazioni = null;
-						try {
-							listaTransazioni = getListaTransazioni(request, session);
-						} catch (FaultType e2) {
-							e2.printStackTrace();
-						} catch (RemoteException e2) {
-							e2.printStackTrace();
-						}
-						System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
-
+				RecuperaTransazioniResponseType listaTransazioni = null;
 
 				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
 				//loadTipologiaServizioXml_DDL(request, session, getParamCodiceSocieta(), false);
@@ -144,6 +134,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
 							
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
+							
 
 							if(tipoQuery.equals("") || tipoQuery==null) {
 								tipoQuery = "A"; // C
@@ -269,7 +260,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 		case TX_BUTTON_DOWNLOAD:
 
-			String file="";
+			StringBuilder file = new StringBuilder();
 			String pathFile="";
 			request.setAttribute("download", "Y");
 			
@@ -297,7 +288,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						while (dis.available() != 0) {
 							buffered.append(dis.readLine()+"\n");
 						}
-						file = buffered.toString();
+						file.append(buffered.toString());
+						//file = buffered.toString();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} finally {
@@ -327,19 +319,21 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				e.printStackTrace();
 			}  
 			System.out.println("File pronto per la JSP");
-			//aggiustamento carattere \r perso ne webservice 
-			file = file.replaceAll("\n", "\r\n");
+			//aggiustamento carattere \r perso ne webservice  Pattern.compile("there").matcher(sb).replaceAll("niru")
+			//file = file.replace("\n", "\r\n");
+			Pattern.compile("\n").matcher(file).replaceAll("\r\n");
 			
 			String template = getTemplateCurrentApplication(request, request.getSession());
 			if(template.equals("aosta")||template.equals("aostaFR")) {
 			    String[] specialChars = { "", "", "", "", "é","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 			    String[] standardChars = { "a", "a", "a", "c", "e","e", "e", "e", "i", "i", "o", "o", "u", "u", "u", "a", "A", "A", "E", "E", "I", "I", "O", "O", "U", "U", "A", "C", "E", "E", "E", "O", "A"};
 				for (int i = 0; i < specialChars.length; i++) {
-			        file = file.replaceAll(specialChars[i], standardChars[i]);
+			        //file = file.replaceAll(specialChars[i], standardChars[i]);
+			        Pattern.compile(specialChars[i]).matcher(file).replaceAll(standardChars[i]);
 			    }	
 			}
 			
-			request.setAttribute("sinteticoTransazioniCsv", file);
+			request.setAttribute("sinteticoTransazioniCsv", file.toString());
 			request.setAttribute("filename","sinteticoTransazioni.csv");
 
 			File delfile = new File(pathFile);
@@ -367,6 +361,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		return null;
 	}
 	
+	
+
 	private void recuperaGruppoDa(HttpServletRequest request, HttpSession session,String tipoQuery)throws FaultType, RemoteException {
 		
 
@@ -447,7 +443,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 		if (listTraSucc!=null && listTraSucc.length>0 && (tipoQuery.equals("A") || tipoQuery.equals("B")))
 		{
-			List<TransazioniGroupedSuccess> listaGroupedSuccess =Arrays.asList(listTraSucc);
+			List<TransazioniGroupedSuccess> listaGroupedSuccess = Arrays.asList(listTraSucc);
 			request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), listaGroupedSuccess);
 
 			int totPGNum = 0, totECNum = 0, totBol = 0;
