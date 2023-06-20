@@ -368,12 +368,10 @@
 							text="${tx_id_terminale_pos_fisico}" maxlenght="8"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
-				</s:div>
-
-			</s:div>
-			
-			
-					   <s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
+					
+					
+					
+						<s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
 							<s:dropdownlist name="tx_scelta_query" disable="false"
 								cssclass="tbddlMax floatleft"
 								cssclasslabel="label85 bold textright" label="Tipo Vista:"
@@ -383,6 +381,15 @@
 								<s:ddloption value="B" text="Report Riepilogo" />
 							</s:dropdownlist>
 					   </s:div>
+					
+					
+					
+					
+				</s:div>
+				
+
+			</s:div>
+
 			
 
 			<s:div name="divRicercaBottoni" cssclass="divRicBottoni">
