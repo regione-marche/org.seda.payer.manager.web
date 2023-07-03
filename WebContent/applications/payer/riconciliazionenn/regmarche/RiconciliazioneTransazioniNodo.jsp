@@ -668,6 +668,15 @@
 						</s:dropdownlist>
 					</s:div>
 					
+					
+				  <s:div name="divElement14e" cssclass="divRicMetadatiSingleRow">
+					<s:textbox validator="maxlength=100" maxlenght="100"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" 
+							bmodify="true" name="tx_codice_IUV" label="cod. IUV:"
+							text="${tx_codice_IUV}" />
+				  </s:div>
+					
+					
 					<s:div name="divElement14f" cssclass="divRicMetadatiSingleRow">
 						<s:textbox validator="ignore;accept=^(?:(?!').)*$;maxlength=64" bmodify="true"
 							name="chiaveTransazione" label="Id Transazione:"
