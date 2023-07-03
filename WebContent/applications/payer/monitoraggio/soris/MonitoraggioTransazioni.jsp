@@ -373,6 +373,18 @@
 							text="${tx_id_terminale_pos_fisico}" maxlenght="8"
 							cssclass="textareaman" cssclasslabel="label85 bold textright" />
 					</s:div>
+					
+					<s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
+							<s:dropdownlist name="tx_scelta_query" disable="false"
+								cssclass="tbddlMax floatleft"
+								cssclasslabel="label85 bold textright" label="Tipo Vista:"
+								valueselected="${tx_scelta_query}">
+								<s:ddloption value="A" text="Tutte" />
+								<s:ddloption value="C" text="Lista Transazioni" />
+								<s:ddloption value="B" text="Report Riepilogo" />
+							</s:dropdownlist>
+					</s:div>
+					
 				</s:div>
 
 			</s:div>
@@ -518,7 +530,7 @@
 							<s:then>
 								<c:if test="${appRiconciliazioneUteEnabled}">
 									<s:hyperlink
-										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?keyQuadratura={29}&tx_button_cerca=cerca"
+										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?chiaveTransazione={1}&tx_button_cerca=cerca"
 										text="Si" cssclass="blacklink" />
 								</c:if>
 								<c:if test="${!appRiconciliazioneUteEnabled}">
@@ -837,13 +849,25 @@
 			</s:dgcolumn>
 
 		</s:datagrid>
+		
+		</s:div>
 
+   </c:if>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<c:if test="${!empty listaTransazioniGroupedSuccess}">
 		<s:div name="divTableTitle2" cssclass="divTableTitle bold">
 			Riepilogo statistico
 		</s:div>
-
-
-		<c:if test="${!empty listaTransazioniGroupedSuccess}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="0">
 				<s:thead>
@@ -868,8 +892,7 @@
 						<s:td cssclass="seda-ui-datagridcell">Num. Boll.</s:td>
 						<s:td cssclass="seda-ui-datagridcell">Importo</s:td>
 					</s:tr>
-					<c:forEach items="${requestScope.listaTransazioniGroupedSuccess}"
-						var="grouped">
+					<c:forEach items="${requestScope.listaTransazioniGroupedSuccess}" var="grouped">
 						<s:tr cssclass="seda-ui-datagridrowpari">
 							<s:td cssclass="seda-ui-datagridcell">
 								<c:out value="${grouped.canale}" />
@@ -930,7 +953,9 @@
 			</s:table>
 		</c:if>
 
-		<c:if test="${userProfile!='AMEN'}">
+
+	     <c:if test="${userProfile!='AMEN'}" >
+	       <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -958,8 +983,7 @@
 						<s:td cssclass="seda-ui-datagridcell">(A-B-C)</s:td>
 						<s:td cssclass="seda-ui-datagridcell">(A-C-D)</s:td>
 					</s:tr>
-					<c:forEach items="${requestScope.listaTransazioniGrouped}"
-						var="grouped">
+					<c:forEach items="${requestScope.listaTransazioniGrouped}" var="grouped">
 						<s:tr cssclass="seda-ui-datagridrowpari">
 							<s:td cssclass="seda-ui-datagridcell">
 								<c:out value="${grouped.carta}" />
@@ -1030,7 +1054,9 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
+		   </c:if>
+		 </c:if>
+	
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
@@ -1093,8 +1119,4 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
-		
-		
-	</s:div>
-
-</c:if>
+	

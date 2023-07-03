@@ -197,6 +197,14 @@
 							message="[accept=Id Transazione: Inserire un Id Transazione valido]"
 							text="${tx_codice_transazione}" />
 					</s:div>
+					
+					<s:div name="codiceFiscale" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;maxlength=35" bmodify="true"
+							name="tx_codice_fiscale" label="Codice Fiscale:"
+							text="${tx_codice_fiscale}" maxlenght="16"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+					
 
 					<s:div name="divElement5" cssclass="divRicMetadatiSingleRow">
 						<s:dropdownlist name="tx_canale_pagamento" disable="false"
@@ -447,6 +455,17 @@
 							</s:dropdownlist>
 						</c:if>
 					</s:div>
+					
+					<s:div name="tipoQuery" cssclass="divRicMetadatiSingleRow">
+							<s:dropdownlist name="tx_scelta_query" disable="false"
+								cssclass="tbddlMax floatleft"
+								cssclasslabel="label85 bold textright" label="Tipo Vista:"
+								valueselected="${tx_scelta_query}">
+								<s:ddloption value="A" text="Tutte" />
+								<s:ddloption value="C" text="Lista Transazioni" />
+								<s:ddloption value="B" text="Report Riepilogo" />
+							</s:dropdownlist>
+					</s:div>
 
 					<s:div name="divElement9a" cssclass="divRicMetadatiSingleRow">
 						<s:textbox validator="ignore;maxlength=8" bmodify="true"
@@ -488,7 +507,6 @@
 
 <c:if test="${!empty tx_lista_transazioni}">
 	<fmt:setLocale value="it_IT" />
-
 	<s:div name="divTableTitle1" cssclass="divTableTitle bold">
 		Elenco Transazioni
 	</s:div>
@@ -501,7 +519,7 @@
 			border="1" usexml="true" rowperpage="${applicationScope.rowsPerPage}"
 			viewstate="">
 
-			<%--Per Lepida rimando sempre alla pagina di dettaglio, senza aprire la popup Json poichè non è stampabile --%>
+			<%--Per Lepida rimando sempre alla pagina di dettaglio, senza aprire la popup Json poich non  stampabile --%>
 			<s:dgcolumn label="Id">
 				<s:hyperlink
 					href="dettaglioTransazione.do?tx_codice_transazione_hidden={1}"
@@ -607,7 +625,7 @@
 							<s:then>
 								<c:if test="${appRiconciliazioneUteEnabled}">
 									<s:hyperlink
-										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?keyQuadratura={29}&tx_button_cerca=cerca"
+										href="../riconciliazionenn/riconciliazioneTransazioniNodo.do?chiaveTransazione={1}&tx_button_cerca=cerca"
 										text="Si" cssclass="blacklink" />
 								</c:if>
 								<c:if test="${!appRiconciliazioneUteEnabled}">
@@ -898,13 +916,28 @@
 			</s:dgcolumn>
 
 		</s:datagrid>
+	
+	</s:div>
 
+</c:if>		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+<c:if test="${!empty listaTransazioniGroupedSuccess}">
 		<s:div name="divTableTitle2" cssclass="divTableTitle bold">
 			Riepilogo statistico
 		</s:div>
-
-
-		<c:if test="${!empty listaTransazioniGroupedSuccess}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="0">
 				<s:thead>
@@ -990,8 +1023,10 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
-
-		<c:if test="${userProfile!='AMEN'}">
+		
+		
+	   <c:if test="${userProfile!='AMEN'}" >
+	     <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1091,9 +1126,10 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
+		 </c:if>
+	 </c:if>
 		
-		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
+		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}"> 
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1153,9 +1189,13 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
-		
-		
-	</s:div>
+		</c:if> <!-- PAGONET-437 -->
 
-</c:if>
+      
+
+   
+
+
+
+
+

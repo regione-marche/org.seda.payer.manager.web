@@ -23,6 +23,7 @@
 			var  invioFtpCB = document.getElementById('invioFtp');
 			var  invioFtpHidden = document.getElementById('invioFtpHidden');
 			var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
+			var rendquattrocento = document.getElementById('rendquattrocento');
 			 
 			if(rendicontazioneSedaCB.checked){ 
 				invioFtpCB.checked = true;
@@ -85,6 +86,16 @@
 						text="Invio Ftp" value="Y" disable="${disabled_invioFtp}" />
 					</s:div>
 					
+
+					<!-- aggiunta anomalia PG110260-->
+					<c:if test="${disabled_invioFtp}">
+						<input type="hidden" id="invioFtpHidden" name="invioFtp" value="Y" /> 
+					</c:if>
+					<c:if test="${not disabled_invioFtp}">
+						<input type="hidden" id="invioFtpHidden" name="invioFtpHidden" value="Y" /> 
+					</c:if>
+					<!-- FINE aggiunta anomalia PG110260-->
+					
 					
 					<!-- aggiunta anomalia PG110260-->
 					<c:if test="${disabled_invioFtp}">
@@ -94,6 +105,9 @@
 						<input type="hidden" id="invioFtpHidden" name="invioFtpHidden" value="Y" /> 
 					</c:if>
 					<!-- FINE aggiunta anomalia PG110260-->
+					
+					
+					
 					 
 					<%-- aggiunta PG110260 --%>
 					<!-- RES_FRESTREN FLAG TIPOLOGIA RENDICONTAZIONE (Y = RENDICONTAZIONE SEDA; N = RENDICONTAZIONE STANDARD -->
@@ -111,6 +125,13 @@
 					</s:div>
 					<%-- Fine aggiunta PG110260 --%>
 					
+			  	<s:div name="divElement53" cssclass="divRicMetadatiSingleRow">
+						<s:list bradio="false" bchecked="${rendquattrocento}" validator="ignore" 
+						 cssclasslabel="bold checklabel label200" cssclass="checkleft"
+						name="rendquattrocento" groupname="rendquattrocento" 
+						text="Rendicontazione 400 caratteri" value="Y"/>
+					</s:div>
+					
 										
 					<!-- REE_NREEMAXB DIMENSIONE MASSIMA ALLEGATO  IN KB -->
 					<s:div name="divElement15" cssclass="divRicMetadatiSingleRow">
@@ -120,7 +141,29 @@
 							cssclass="textareaman" validator="ignore;digits;minlength=1;maxlength=5"
 							text="${emailAttachMaxSizeKb}" />
 					</s:div>
+					
+					
+					
+					<!-- RES_CRESFFRE Formato file rendicontazione -->
+					<s:div name="divElement16" cssclass="divRicMetadatiSingleRow">
+						<s:dropdownlist label="Formato file:" 
+								cssclasslabel="label85 bold textright" cssclass="textareaman" 
+								name="formatoFileRend" disable="false"  
+								validator="ignore" showrequired="true"
+						    	valueselected="${formatoFileRend}">
+						    	<s:ddloption text="Selezionare uno degli elementi" value="" />
+								<s:ddloption value="TXT" text="TXT"/>
+								<s:ddloption value="XML" text="XML"/>
+						</s:dropdownlist>
+					</s:div>
+					
+					
+					
+					
+					
 				</s:div>
+				
+				
 
 
 				
