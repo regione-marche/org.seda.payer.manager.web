@@ -10,6 +10,21 @@
 	 
 			var  invioEmailCB = document.getElementById('invioEmail');
 			var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
+
+			var  rendQuattrocento = document.getElementById('rendquattrocento');
+			var  formatoFileRend = document.getElementById('formatoFileRend');
+			var  rendicontazioneSeda = document.getElementById('rendicontazioneSeda');
+
+			if(rendicontazioneSeda.checked) {
+				    formatoFileRend.value = "TXT"
+				    formatoFileRend.disabled = true;
+					rendQuattrocento.checked = false;
+					rendQuattrocento.disabled = true;	
+			}else {
+				 formatoFileRend.disabled = false;
+				 rendQuattrocento.disabled = false;	
+
+				}
 			 
 			if(rendicontazioneSedaCB.checked){ 
 				invioEmailCB.checked = false;

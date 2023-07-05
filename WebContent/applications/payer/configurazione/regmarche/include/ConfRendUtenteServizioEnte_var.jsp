@@ -9,16 +9,39 @@
 
 	function rendicontazioneSedaOnClick() {
 	 
-			var  invioEmailCB = document.getElementById('invioEmail');
-			var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
-			 
-			if(rendicontazioneSedaCB.checked){ 
-				invioEmailCB.checked = false;
-				invioEmailCB.disabled = true;
-			}
-			else{ 
-				invioEmailCB.disabled = false;
-			}
+		var  invioEmailCB = document.getElementById('invioEmail');
+		var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
+		var  invioWS = document.getElementById('invioWebService');
+		var  formatoFileRend = document.getElementById('formatoFileRend');
+		var  rendQuattrocento = document.getElementById('rendquattrocento');
+		var  formatoFileRend = document.getElementById('formatoFileRend');
+		var  rendicontazioneSeda = document.getElementById('rendicontazioneSeda');
+
+		if(rendicontazioneSeda.checked) {
+			    formatoFileRend.value = "TXT"
+			    formatoFileRend.disabled = true;
+				rendQuattrocento.checked = false;
+				rendQuattrocento.disabled = true;	
+		}else {
+				 formatoFileRend.disabled = false;
+				 rendQuattrocento.disabled = false;	
+
+				}
+		 
+		if(rendicontazioneSedaCB.checked){ 
+			invioEmailCB.checked = false;
+			invioEmailCB.disabled = true;
+			invioWS.checked = false;
+			invioWS.disabled = true;
+			//formatoFileRend.value="TXT";
+			//formatoFileRend.disabled = true;
+		}
+		else{ 
+			
+			invioEmailCB.disabled = false;
+			invioWS.disabled=false;
+			formatoFileRend.disabled = false;
+		}
 
 
 			//aggiunta anomalia
