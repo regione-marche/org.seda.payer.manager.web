@@ -2839,6 +2839,7 @@ public class BaseManagerAction extends HtmlAction {
 			
 			request.setAttribute("chk_invioWebService",  false ); 	// PG180010
 			request.setAttribute("disabled_invioWebService",  true ); // PG180010
+			request.setAttribute("rendquattrocento",  false ); // PG180010
 			
 //			//PG200280 GG - inizio
 //			request.setAttribute("chk_flagTrcComandiPolizia",  false ); 

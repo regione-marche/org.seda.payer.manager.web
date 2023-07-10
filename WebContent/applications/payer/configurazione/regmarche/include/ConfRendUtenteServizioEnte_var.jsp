@@ -140,7 +140,7 @@
 						<s:list bradio="false" bchecked="${rendquattrocento}" validator="ignore" 
 						 cssclasslabel="bold checklabel label200" cssclass="checkleft"
 						name="rendquattrocento" groupname="rendquattrocento" 
-						text="Rendicontazione 400 caratteri" value="Y"/>
+						text="Rendicontazione 400 caratteri" value="Y" disable="${disabled_rendquattrocento}"/>
 					</s:div>
 					
 					
@@ -158,7 +158,7 @@
 					<s:div name="divElement16" cssclass="divRicMetadatiSingleRow">
 						<s:dropdownlist label="Formato file:" 
 								cssclasslabel="label85 bold textright" cssclass="textareaman" 
-								name="formatoFileRend" disable="false"  
+								name="formatoFileRend" disable="${disabled_formatoFile}"  
 								validator="ignore" showrequired="true"
 						    	valueselected="${formatoFileRend}">
 						    	<s:ddloption text="Selezionare uno degli elementi" value="" />
