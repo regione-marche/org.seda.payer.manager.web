@@ -187,17 +187,21 @@ public class ConfRendUtenteServizioEnteEdit extends BaseManagerAction{
 			request.setAttribute("disabled_invioFtp",  true ); //anomalia PG110260
 			
 			request.setAttribute("chk_invioWebService",  false ); 
-			request.setAttribute("disabled_invioWebService",  true ); 
+			request.setAttribute("disabled_invioWebService",  true );
 			
-//			//PG200280 GG - inizio
-//			request.setAttribute("chk_flagTrcComandiPolizia",  false ); 
-//			request.setAttribute("disabled_flagTrcComandiPolizia",  true );
-//			//PG200280 GG - fine
+			request.setAttribute("formatoFileRend", "TXT" );
+			request.setAttribute("disabled_formatoFile", true );
+
+			request.setAttribute("disabled_rendquattrocento",  true );
+			
+			
 		
 		} else{
 			request.setAttribute("disabled_invioEmail",  false );  
 			request.setAttribute("disabled_invioFtp",  false ); //anomalia PG110260
-//			request.setAttribute("disabled_flagTrcComandiPolizia",  false );	//PG200280
+			request.setAttribute("disabled_formatoFile",  false );
+			request.setAttribute("disabled_rendquattrocento",  false );
+			request.setAttribute("formatoFileRend", "TXT" );
 		}
 		//Fine aggiunta PG110260
 		
