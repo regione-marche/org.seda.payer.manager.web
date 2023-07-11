@@ -788,9 +788,9 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if (!sDataDaIsNullOrEmpty && dataDa.after(dataA))
 	        	return "La Data Transazione da deve essere antecedente o uguale alla Data Transazione a";
 	        if(!sDataDaIsNullOrEmpty) {
-		        dataDa.add(Calendar.DAY_OF_MONTH, 90);
+		        dataDa.add(Calendar.DAY_OF_MONTH, 360);
 		        if (dataDa.before(dataA))
-		        	return "Il massimo range di giorni consentito  di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 360 giorni";
 	        }
 	        
 	        
@@ -799,9 +799,9 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if (!sDataAccrDaIsNullOrEmpty && dataAccrDa.after(dataAccrA))
 	        	return "La Data Accredito da deve essere antecedente o uguale alla Data Accredito a";
 	        if(!sDataAccrDaIsNullOrEmpty) {
-	        	dataAccrDa.add(Calendar.DAY_OF_MONTH, 90);
+	        	dataAccrDa.add(Calendar.DAY_OF_MONTH, 360);
 		        if (dataAccrDa.before(dataAccrA))
-		        	return "Il massimo range di giorni consentito  di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 360 giorni";
 	        }
         
         return null;
