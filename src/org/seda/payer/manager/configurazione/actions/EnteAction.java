@@ -162,7 +162,6 @@ public class EnteAction extends DispatchHtmlAction {
 				strDescrSocieta="";
 				strDescrUtente="";
 				
-			
 			}
 			String firedButton = (String)request.getAttribute("tx_button_indietro");
 			String firedButtonN = (String)request.getAttribute("tx_button_nuovo");
@@ -221,7 +220,8 @@ public class EnteAction extends DispatchHtmlAction {
 			request.setAttribute("ente_strDescrUtente",strDescrUtente);  
 			request.setAttribute("entes", enteServizioResponse.getListXml());
 			request.setAttribute("entes.pageInfo", pageInfo);
-		
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -377,7 +377,7 @@ public class EnteAction extends DispatchHtmlAction {
 						request.setAttribute("ente_strEnte", null);
 						request.setAttribute("ente_strDescrSocieta", null);
 						request.setAttribute("ente_strDescrUtente", null);
-						request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
+					//	request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
 					
 						index(request);
 					}
@@ -421,7 +421,7 @@ public class EnteAction extends DispatchHtmlAction {
 						request.setAttribute("ente_strEnte", null);
 						request.setAttribute("ente_strDescrSocieta", null);
 						request.setAttribute("ente_strDescrUtente", null);
-						request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
+					//	request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
 						index(request);
 					}
 				}

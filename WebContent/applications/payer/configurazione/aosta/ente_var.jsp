@@ -365,7 +365,7 @@
 								<s:textbox bmodify="true"
 									validator="ignore;maxlength=35"
 									label="CodiceIPA:" name="ente_codIpaEnte"
-									maxlenght="16" showrequired="true"
+									maxlenght="50" showrequired="true"
 									text="${requestScope.ente_codIpaEnte}"
 									cssclasslabel="label85 bold floatleft textright"
 									cssclass="textareaman" />
