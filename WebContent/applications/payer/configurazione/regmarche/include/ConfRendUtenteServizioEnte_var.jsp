@@ -9,16 +9,39 @@
 
 	function rendicontazioneSedaOnClick() {
 	 
-			var  invioEmailCB = document.getElementById('invioEmail');
-			var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
-			 
-			if(rendicontazioneSedaCB.checked){ 
-				invioEmailCB.checked = false;
-				invioEmailCB.disabled = true;
-			}
-			else{ 
-				invioEmailCB.disabled = false;
-			}
+		var  invioEmailCB = document.getElementById('invioEmail');
+		var  rendicontazioneSedaCB = document.getElementById('rendicontazioneSeda');
+		var  invioWS = document.getElementById('invioWebService');
+		var  formatoFileRend = document.getElementById('formatoFileRend');
+		var  rendQuattrocento = document.getElementById('rendquattrocento');
+		var  formatoFileRend = document.getElementById('formatoFileRend');
+		var  rendicontazioneSeda = document.getElementById('rendicontazioneSeda');
+
+		if(rendicontazioneSeda.checked) {
+			    formatoFileRend.value = "TXT"
+			    formatoFileRend.disabled = true;
+				rendQuattrocento.checked = false;
+				rendQuattrocento.disabled = true;	
+		}else {
+				 formatoFileRend.disabled = false;
+				 rendQuattrocento.disabled = false;	
+
+				}
+		 
+		if(rendicontazioneSedaCB.checked){ 
+			invioEmailCB.checked = false;
+			invioEmailCB.disabled = true;
+			invioWS.checked = false;
+			invioWS.disabled = true;
+			//formatoFileRend.value="TXT";
+			//formatoFileRend.disabled = true;
+		}
+		else{ 
+			
+			invioEmailCB.disabled = false;
+			invioWS.disabled=false;
+			formatoFileRend.disabled = false;
+		}
 
 
 			//aggiunta anomalia
@@ -117,7 +140,7 @@
 						<s:list bradio="false" bchecked="${rendquattrocento}" validator="ignore" 
 						 cssclasslabel="bold checklabel label200" cssclass="checkleft"
 						name="rendquattrocento" groupname="rendquattrocento" 
-						text="Rendicontazione 400 caratteri" value="Y"/>
+						text="Rendicontazione 400 caratteri" value="Y" disable="${disabled_rendquattrocento}"/>
 					</s:div>
 					
 					
@@ -135,7 +158,7 @@
 					<s:div name="divElement16" cssclass="divRicMetadatiSingleRow">
 						<s:dropdownlist label="Formato file:" 
 								cssclasslabel="label85 bold textright" cssclass="textareaman" 
-								name="formatoFileRend" disable="false"  
+								name="formatoFileRend" disable="${disabled_formatoFile}"  
 								validator="ignore" showrequired="true"
 						    	valueselected="${formatoFileRend}">
 						    	<s:ddloption text="Selezionare uno degli elementi" value="" />

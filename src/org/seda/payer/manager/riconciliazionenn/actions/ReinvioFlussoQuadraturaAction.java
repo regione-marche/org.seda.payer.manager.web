@@ -124,7 +124,7 @@ public class ReinvioFlussoQuadraturaAction extends BaseManagerAction {
 						System.out.println("ReinvioFlussoQuadraturaAction - InviaFlussoNodoResponseType - Retmessage : " + out.getResponse().getRetmessage());
 				       	System.out.println("ReinvioFlussoQuadraturaAction - InviaFlussoNodoResponseType - RetCode : " + out.getResponse().getRetcode());
 						if(out.getResponse().getRetcode().getValue().equals("00")) {
-							String esitoQuadratura =  aggiornaEsitoQuadratura(keyQuadratura,"2","",request);
+							String esitoQuadratura =  aggiornaEsitoQuadratura(keyQuadratura,"2","",request,urlService);
 							System.out.println("EsitoQuadratura: "+esitoQuadratura);
 							if(esitoQuadratura.equals("OK")) {
 								setFormMessage("riconciliazioneTransazioniNodoForm", "Invio Eseguito" , request);
@@ -132,13 +132,13 @@ public class ReinvioFlussoQuadraturaAction extends BaseManagerAction {
 						} else {
 							String errore = "Invio Non Eseguito. RetCode : " + out.getResponse().getRetcode() + " - Retmessage :"+ out.getResponse().getRetmessage();
 							setFormMessage("riconciliazioneTransazioniNodoForm", "Invio Non Eseguito" , request);
-							aggiornaEsitoQuadratura(keyQuadratura,"1",errore,request);
+							aggiornaEsitoQuadratura(keyQuadratura,"1",errore,request,urlService);
 						}
 						//request.setAttribute("tx_button_cerca",1);
 					} catch(Exception e){
 						//Aggiorno l'esito in stato negativo
 						String errore = "Invio Non Eseguito, Exception: " + e.getMessage();
-		        		aggiornaEsitoQuadratura(keyQuadratura,"1", "Invio Non Eseguito. Errore generico",request); 
+		        		aggiornaEsitoQuadratura(keyQuadratura,"1", "Invio Non Eseguito. Errore generico",request,urlService); 
 						e.printStackTrace();
 						setFormMessage("riconciliazioneTransazioniNodoForm", errore , request);
 					}
@@ -157,7 +157,7 @@ public class ReinvioFlussoQuadraturaAction extends BaseManagerAction {
 					String errore = "Invio Non Eseguito - Url mancante";
 					System.out.println("Manca Configurazione url destinatario per invio quadratura.");	
 					//Aggiorno l'esito in stato negativo
-	        		aggiornaEsitoQuadratura(keyQuadratura,"1", errore ,request); 
+	        		aggiornaEsitoQuadratura(keyQuadratura,"1", errore ,request,urlService); 
 	        		setFormMessage("riconciliazioneTransazioniNodoForm", errore , request);
 				}
 			} else {
@@ -165,7 +165,7 @@ public class ReinvioFlussoQuadraturaAction extends BaseManagerAction {
 				String errore = "Invio Non Eseguito - Dati ente mancanti";
 				System.out.println("Ente Response nullo");	
 				//Aggiorno l'esito in stato negativo
-        		aggiornaEsitoQuadratura(keyQuadratura,"1", errore,request); 
+        		aggiornaEsitoQuadratura(keyQuadratura,"1", errore,request,urlService); 
         		setFormMessage("riconciliazioneTransazioniNodoForm", errore , request);
 			}	
 		} catch (FaultType e) {
@@ -182,11 +182,15 @@ public class ReinvioFlussoQuadraturaAction extends BaseManagerAction {
 		return null;
 	}
 	
-	private String aggiornaEsitoQuadratura(Long chiaveQuadratura, String esito , String errore, HttpServletRequest request) {
+	private String aggiornaEsitoQuadratura(Long chiaveQuadratura, String esito , String errore, HttpServletRequest request, String urlWS) {
 		try {
 			AggiornaEsitoQuadraturaNodoRequest in = new AggiornaEsitoQuadraturaNodoRequest();
 			in.setChiaveQuadratura(chiaveQuadratura);
 			in.setEsito(esito);
+			
+			if(!errore.trim().equals(""))
+				errore = urlService + " / " + errore;
+			
 			in.setErrore(errore);
 			
 			AggiornaEsitoQuadraturaNodoResponse out = new AggiornaEsitoQuadraturaNodoResponse();
