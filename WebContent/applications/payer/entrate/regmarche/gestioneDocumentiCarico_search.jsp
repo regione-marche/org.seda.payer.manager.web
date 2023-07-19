@@ -274,7 +274,7 @@
 							  	cssclass="tbddlMax floatleft" cssclasslabel="label85 bold textright">
 								<s:ddloption value="" text="tutti i documenti"/>
 								<s:ddloption value="S" text="Saldato"/>
-								<s:ddloption value="P" text="Parzialmente Movimentato"/>
+								<s:ddloption value="P" text="Non Saldato"/>
 							</s:dropdownlist>
 						</s:div>
 					</s:div>	
