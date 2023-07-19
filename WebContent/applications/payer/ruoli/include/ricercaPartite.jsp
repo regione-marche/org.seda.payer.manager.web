@@ -299,7 +299,6 @@
 								<s:ddloption value="" text="tutti gli stati partita"/>
 								<s:ddloption value="S" text="Saldato"/>
 								<s:ddloption value="P" text="Parzialmente Movimentato"/>
-								<s:ddloption value="N" text="Non Movimentato"/>
 							</s:dropdownlist>
 						</s:div>
 						<s:div name="divElement5" cssclass="divRicMetadatiDoubleRow">
