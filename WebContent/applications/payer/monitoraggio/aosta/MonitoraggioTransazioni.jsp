@@ -17,6 +17,10 @@
 
 <script type="text/javascript">
 	function setFiredButton(buttonName) {
+
+		
+
+		
 		var buttonFired = document.getElementById('fired_button_hidden');
 		if (buttonFired != null)
 			buttonFired.value = buttonName;
@@ -370,7 +374,7 @@
 								cssclass="tbddlMax floatleft"
 								cssclasslabel="label85 bold textright" label="Tipo Vista:"
 								valueselected="${tx_scelta_query}">
-								<s:ddloption value="A" text="Tutte" />
+								<s:ddloption value="A" text="Lista Completa" />
 								<s:ddloption value="C" text="Lista Transazioni" />
 								<s:ddloption value="B" text="Report Riepilogo" />
 							</s:dropdownlist>
@@ -958,9 +962,10 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
+			
 
 	    <c:if test="${userProfile!='AMEN'}" >
-	   	  <c:if test="${requestScope.tx_scelta_query == 'A' || requestScope.tx_scelta_query == 'B'}" >
+	      <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1060,8 +1065,10 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
-	  </c:if>
+			</c:if>
+		 </c:if>
+	  
+	
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"

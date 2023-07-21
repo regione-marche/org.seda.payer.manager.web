@@ -291,7 +291,7 @@
 					<s:div name="divElement12" cssclass="divRicMetadatiSingleRow">
 						<s:dropdownlist name="tx_mostra" disable="false" cssclass="tbddl"
 							cssclasslabel="label85 bold textright" label="Stato:"
-							valueselected="${tx_mostra}">
+							valueselected="${(tx_mostra==null) ? '1' : tx_mostra}">
 							<s:ddloption value="" text="Tutte le transazioni" />
 							<s:ddloption value="1" text="Transazioni concluse con Successo" />
 							<s:ddloption value="3"
@@ -460,8 +460,8 @@
 							<s:dropdownlist name="tx_scelta_query" disable="false"
 								cssclass="tbddlMax floatleft"
 								cssclasslabel="label85 bold textright" label="Tipo Vista:"
-								valueselected="${tx_scelta_query}">
-								<s:ddloption value="A" text="Tutte" />
+								valueselected="${(tx_scelta_query==null) ? 'C' : tx_scelta_query}">
+								<s:ddloption value="A" text="Lista Completa" />
 								<s:ddloption value="C" text="Lista Transazioni" />
 								<s:ddloption value="B" text="Report Riepilogo" />
 							</s:dropdownlist>
@@ -1026,7 +1026,7 @@
 		
 		
 	   <c:if test="${userProfile!='AMEN'}" >
-	   	  <c:if test="${tx_scelta_query == 'A' || tx_scelta_query == 'B'}" >
+	     <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1126,7 +1126,7 @@
 					</s:tr>
 				</s:tbody>
 			</s:table>
-		</c:if>
+		 </c:if>
 	 </c:if>
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}"> 

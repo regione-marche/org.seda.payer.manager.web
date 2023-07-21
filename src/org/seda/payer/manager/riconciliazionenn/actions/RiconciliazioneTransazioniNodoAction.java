@@ -320,9 +320,9 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         if (!sDataFlussoDaIsNullOrEmpty && dataFlussoDa.after(dataFlussoA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
         if(!sDataFlussoDaIsNullOrEmpty) {
-	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 90);
+	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
 	        if (dataFlussoDa.before(dataFlussoA))
-	        	return "Il massimo range di giorni consentito è di 90 giorni";
+	        	return "Il massimo range di giorni consentito è di 360 giorni";
         }
         
         if(!sDataCreaDaIsNullOrEmpty && sDataCreaAIsNullOrEmpty)
@@ -330,9 +330,9 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))      
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
         if(!sDataCreaDaIsNullOrEmpty) {
-	        dataCreaDa.add(Calendar.DAY_OF_MONTH, 90);
+	        dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
 	        if (dataCreaDa.before(dataCreaA))
-	        	return "Il massimo range di giorni consentito è di 90 giorni";
+	        	return "Il massimo range di giorni consentito è di 360 giorni";
 	     }
         
         return null;

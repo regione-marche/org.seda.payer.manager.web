@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -103,22 +104,15 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			request.setAttribute(Field.TX_LISTA_GROUPED.format(), session.getAttribute("session_lista_transazioni.grouped"));					
 		}
 		
-		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
-		RecuperaTransazioniResponseType listaTransazioni = null;
-		try {
-			listaTransazioni = getListaTransazioni(request, session);
-		} catch (FaultType e2) {
-			e2.printStackTrace();
-		} catch (RemoteException e2) {
-			e2.printStackTrace();
-		}
-		System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
 
 		switch(firedButton) {
 		case TX_BUTTON_CERCA: 
 		case TX_BUTTON_CONFERMA_RICONCILIAZIONE:
 			
 			try {
+
+				RecuperaTransazioniResponseType listaTransazioni = null;
+
 				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
 				//loadTipologiaServizioXml_DDL(request, session, getParamCodiceSocieta(), false);
 				loadTipologiaServizioXml_DDL_2(request, session, getParamCodiceSocieta(),getParamCodiceUtente(),getParamCodiceEnte(), false);
@@ -134,8 +128,17 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						setFormMessage("monitoraggioTransazioniForm", "Valorizzare solo uno dei campi Id.Trans.Atm o Codice I.U.R.", request);
 					}
 					else {	
-						
+							
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] INIZIO CHIAMATA");
+							listaTransazioni = getListaTransazioni(request, session);
+							System.out.println("[MANAGER - MonitoraggioTransazioniAction - getListaTransazioni()] FINE CHIAMATA");
+							
 							String tipoQuery = isNull(request.getAttribute("tx_scelta_query"));
+							
+
+							if(tipoQuery.equals("") || tipoQuery==null) {
+								tipoQuery = "C";
+							}
 							
 							if (tipoQuery.equals("A") || tipoQuery.equals("C")) {// PAGONET-437
 								
@@ -257,7 +260,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 		case TX_BUTTON_DOWNLOAD:
 
-			String file="";
+			StringBuilder file = new StringBuilder();
 			String pathFile="";
 			request.setAttribute("download", "Y");
 			
@@ -285,7 +288,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 						while (dis.available() != 0) {
 							buffered.append(dis.readLine()+"\n");
 						}
-						file = buffered.toString();
+						file.append(buffered.toString());
+						//file = buffered.toString();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} finally {
@@ -315,19 +319,21 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				e.printStackTrace();
 			}  
 			System.out.println("File pronto per la JSP");
-			//aggiustamento carattere \r perso ne webservice 
-			file = file.replaceAll("\n", "\r\n");
+			//aggiustamento carattere \r perso ne webservice  Pattern.compile("there").matcher(sb).replaceAll("niru")
+			//file = file.replace("\n", "\r\n");
+			Pattern.compile("\n").matcher(file).replaceAll("\r\n");
 			
 			String template = getTemplateCurrentApplication(request, request.getSession());
 			if(template.equals("aosta")||template.equals("aostaFR")) {
-			    String[] specialChars = { "à", "â", "ä", "ç", "Ã©","è", "é", "ë", "ï", "î", "ö", "ô", "û", "ü", "ù", "æ", "Â", "Ä", "Ê", "Ë", "Î", "Ï", "Ô", "Ö", "Û", "Ü", "À", "Ç", "É", "È", "Ê", "Ô", "Æ"};
+			    String[] specialChars = { "", "", "", "", "Ã©","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 			    String[] standardChars = { "a", "a", "a", "c", "e","e", "e", "e", "i", "i", "o", "o", "u", "u", "u", "a", "A", "A", "E", "E", "I", "I", "O", "O", "U", "U", "A", "C", "E", "E", "E", "O", "A"};
 				for (int i = 0; i < specialChars.length; i++) {
-			        file = file.replaceAll(specialChars[i], standardChars[i]);
+			        //file = file.replaceAll(specialChars[i], standardChars[i]);
+			        Pattern.compile(specialChars[i]).matcher(file).replaceAll(standardChars[i]);
 			    }	
 			}
 			
-			request.setAttribute("sinteticoTransazioniCsv", file);
+			request.setAttribute("sinteticoTransazioniCsv", file.toString());
 			request.setAttribute("filename","sinteticoTransazioni.csv");
 
 			File delfile = new File(pathFile);
@@ -355,6 +361,8 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		return null;
 	}
 	
+	
+
 	private void recuperaGruppoDa(HttpServletRequest request, HttpSession session,String tipoQuery)throws FaultType, RemoteException {
 		
 
@@ -435,7 +443,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 
 		if (listTraSucc!=null && listTraSucc.length>0 && (tipoQuery.equals("A") || tipoQuery.equals("B")))
 		{
-			List<TransazioniGroupedSuccess> listaGroupedSuccess =Arrays.asList(listTraSucc);
+			List<TransazioniGroupedSuccess> listaGroupedSuccess = Arrays.asList(listTraSucc);
 			request.setAttribute(Field.TX_LISTA_GROUPED_SUCCESS.format(), listaGroupedSuccess);
 
 			int totPGNum = 0, totECNum = 0, totBol = 0;
@@ -780,9 +788,9 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if (!sDataDaIsNullOrEmpty && dataDa.after(dataA))
 	        	return "La Data Transazione da deve essere antecedente o uguale alla Data Transazione a";
 	        if(!sDataDaIsNullOrEmpty) {
-		        dataDa.add(Calendar.DAY_OF_MONTH, 90);
+		        dataDa.add(Calendar.DAY_OF_MONTH, 360);
 		        if (dataDa.before(dataA))
-		        	return "Il massimo range di giorni consentito è di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 360 giorni";
 	        }
 	        
 	        
@@ -791,9 +799,9 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 	        if (!sDataAccrDaIsNullOrEmpty && dataAccrDa.after(dataAccrA))
 	        	return "La Data Accredito da deve essere antecedente o uguale alla Data Accredito a";
 	        if(!sDataAccrDaIsNullOrEmpty) {
-	        	dataAccrDa.add(Calendar.DAY_OF_MONTH, 90);
+	        	dataAccrDa.add(Calendar.DAY_OF_MONTH, 360);
 		        if (dataAccrDa.before(dataAccrA))
-		        	return "Il massimo range di giorni consentito è di 90 giorni";
+		        	return "Il massimo range di giorni consentito  di 360 giorni";
 	        }
         
         return null;

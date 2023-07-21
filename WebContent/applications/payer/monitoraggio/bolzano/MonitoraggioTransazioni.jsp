@@ -916,7 +916,7 @@
 		</c:if>
 
 	   <c:if test="${userProfile!='AMEN'}" >
-	   	  <c:if test="${tx_scelta_query == 'A' || tx_scelta_query == 'B'}" >
+	     <c:if test="${!empty listaTransazioniGrouped}" >
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
 				cellpadding="3">
 				<s:thead>
@@ -1017,7 +1017,7 @@
 				</s:tbody>
 			</s:table>
 		</c:if>
-	</c:if>
+	 </c:if>
 		
 		<c:if test="${!empty requestScope.listaTransazioniOneriGrouped}">
 			<s:table cssclass="seda-ui-datagrid" border="1" cellspacing="0"
