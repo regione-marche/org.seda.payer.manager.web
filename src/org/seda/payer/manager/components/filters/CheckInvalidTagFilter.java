@@ -78,6 +78,7 @@ public class CheckInvalidTagFilter implements Filter {
             		.replace("&#37;", "%")
             		.replace("&#38;", "&")
             		.replace("&#42;", "*")
+            		.replace("&#39;", "'")
             		.replace("&#43;", "+");
             
             
