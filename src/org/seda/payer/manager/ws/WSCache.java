@@ -15,6 +15,8 @@ public class WSCache {
 	public static String securityKey;
 	public static String directoryFlussi;
 	public static BollettinoServer bollettinoServer= null;
+	public static TotemTipologiaImpostaServer totemTipologiaImpostaServer= null;
+
 	public static AnagServiziServer anagServiziServer = null;
 	public static AnagProvComServer anagProvComServer = null;
 	public static RendicontaEnteServer rendicontaEnteServer = null;
@@ -164,6 +166,15 @@ public class WSCache {
 		return (bollettinoServer != null);	
 	}
 
+	public static boolean initiateTotemTipologiaImpostaServer(String address) throws Exception {
+		try {
+			totemTipologiaImpostaServer = new TotemTipologiaImpostaServer(address);
+		} catch (Exception e) {
+			throw e;
+		}
+		return (totemTipologiaImpostaServer != null);	
+	}
+	
 	public static boolean initiateMenuServer(String address) throws Exception {
 		try {
 			menuServer = new MenuServer(address);

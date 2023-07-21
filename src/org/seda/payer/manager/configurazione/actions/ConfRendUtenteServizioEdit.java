@@ -170,6 +170,7 @@ public class ConfRendUtenteServizioEdit extends BaseManagerAction{
 		request.setAttribute("chk_invioWebService",  bean.getFlagAbilitazioneInvioWebService().equals("Y"));
 		
 		request.setAttribute("chk_flagTrcComandiPolizia",  bean.getFlagTracciatoComandiPolizia().equals("Y"));	//PG200280
+		request.setAttribute("rendquattrocento", bean.gettracciatoQuattrocento().equals("Y"));
 		
 		//aggiunta PG110260
 		request.setAttribute("chk_rendicontazioneSeda", bean.getFlagTipoRendicontazione().equals("Y")); 
@@ -181,21 +182,25 @@ public class ConfRendUtenteServizioEdit extends BaseManagerAction{
 			request.setAttribute("disabled_invioFtp",  true ); //anomalia PG110260
 			
 			request.setAttribute("chk_invioWebService",  false ); 
-			request.setAttribute("disabled_invioWebService",  true ); 
+			request.setAttribute("disabled_invioWebService",  true );
 			
-//			//PG200280 GG - inizio
-//			request.setAttribute("chk_flagTrcComandiPolizia",  false ); 
-//			request.setAttribute("disabled_flagTrcComandiPolizia",  true );
-//			//PG200280 GG - fine
+			request.setAttribute("formatoFileRend", "TXT" );
+			request.setAttribute("disabled_formatoFile",  true );
+
+			request.setAttribute("disabled_rendquattrocento",  true );
 
 		} else{
 			request.setAttribute("disabled_invioEmail",  false );  
 			
 			request.setAttribute("disabled_invioFtp",  false ); //anomalia PG110260
 			
-			request.setAttribute("disabled_invioWebService",  false ); 
+			request.setAttribute("disabled_invioWebService",  false );
 			
-//			request.setAttribute("disabled_flagTrcComandiPolizia",  false );	//PG200280
+			request.setAttribute("disabled_formatoFile",  false );
+			
+			request.setAttribute("disabled_rendquattrocento",  false );
+			
+			request.setAttribute("formatoFileRend", "TXT" );
 		}
 		//Fine aggiunta PG110260
 		request.setAttribute("emailDestinatario", bean.getEmailDestinatario());
@@ -221,8 +226,7 @@ public class ConfRendUtenteServizioEdit extends BaseManagerAction{
 		request.setAttribute("formatoFileRend", bean.getFormatoFileRend());
 		request.setAttribute("urlWebService", bean.getUrlWebServiceEnte());
 		request.setAttribute("utenteWebService", bean.getUtenteWebServiceEnte());
-		request.setAttribute("passwordWebService", bean.getPasswordWebServiceEnte());
-				
+		request.setAttribute("passwordWebService", bean.getPasswordWebServiceEnte());		
 	}
 
 }

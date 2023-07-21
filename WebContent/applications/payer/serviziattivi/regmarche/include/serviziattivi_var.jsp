@@ -162,6 +162,18 @@
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
 							</s:div>
 							<%-- fine SB PG210170 --%>
+							
+							<!-- inizio cd pago438 -->
+							<s:div name="statoAttivo" cssclass="divRicMetadatiSingleRow">
+								<s:textbox bmodify="false"
+									validator="ignore"
+									label="Stato Attivo" name="configutentetiposervizioente_statoAttivo"
+									text="${configutentetiposervizioente_statoAttivo}"
+									cssclasslabel="label85 bold textleft"
+									cssclass="textareaman colordisabled "/>   
+							</s:div>
+							<!-- fine cd pago438 -->  
+							
 						</s:div>
 		
 						<s:div name="divRicercaCenter" cssclass="divRicMetadatiCenter">
@@ -202,6 +214,54 @@
 									<s:ddloption  value="{1}" text="{1}"/>
 								</s:dropdownlist>
 							</s:div>
+							
+							<!-- DATI ENTE -->
+							<!-- Inizio CD pago438 -->
+							<s:div name="LabelDatiEnte" cssclass="divTitle">
+								<s:label name="datiEnte" text="Dati Ente" cssclass="lblTitlePadding checkleft bold"/>
+							</s:div>
+							
+								<s:div name="nomeStrutturaEnte" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256"
+										label="Nome Struttura Ente:"
+										name="nome_struttura_ente"
+										text="${requestScope.nome_struttura_ente}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+								
+							    <s:div name="nome" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="nome_ente" label="Nome ente:"
+										text="${requestScope.nome_ente}" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							    </s:div>
+							    
+								<s:div name="cognome" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256" 
+										validator="ignore"
+										label="Cognome ente:" name="cognome_ente"
+										text="${requestScope.cognome_ente}"
+										cssclasslabel="label85 bold textright" cssclass="textareaman" />
+								</s:div>
+								
+								<s:div name="Telefono_Referente_Ente" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="telefono_ente" label="Telefono ente:"
+										text="${requestScope.telefono_ente}" maxlenght="256"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+								</s:div>
+								
+								<s:div name="mailEnte" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										name="mail_ente" label="mail ente:"
+										text="${requestScope.mail_ente}" maxlenght="500"
+										cssclass="textareaman" cssclasslabel="label85 bold textright" />
+								</s:div>
+								
+								<!-- fine CD pago438 -->
 							
 							<%-- inizio SB PG210140 --%>
 							<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM'}">
@@ -261,6 +321,54 @@
 									cssclasslabel="label85 bold textright"
 									cssclass="textareaman colordisabled" />
 							</s:div>
+							
+							<!-- DATI FORNITORE -->
+							<!-- inizio CD pago438 -->
+									<s:div name="LabelDatiForn" cssclass="divTitle">
+								<s:label name="datiForn" text="Dati Fornitore" cssclass="lblTitlePadding checkleft bold"/>
+							</s:div>
+							
+								<s:div name="nomeStrutturaEnteRagionesoc" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="256"
+										label="Nome str. for. :"
+										name="nome_struttura_ente_rag_soc"
+										text="${requestScope.nome_struttura_ente_rag_soc}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+					
+					<s:div name="Nome_ref_tec" cssclass="divRicMetadatiSingleRow">
+						<s:textbox bmodify="true"
+							name="Nome_ref_tec" label="Nome ref. tec.:"
+							text="${requestScope.Nome_ref_tec}" maxlenght="256"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+					
+							<s:div name="cognome_ref_tec" cssclass="divRicMetadatiSingleRow">
+								<s:textbox bmodify="true"
+									name="cognome_ref_tec" label="Cognome ref. tec.:"
+									text="${requestScope.cognome_ref_tec}" maxlenght="256"
+									cssclass="textareaman" cssclasslabel="label85 bold textright" />
+							</s:div>
+					
+					<s:div name="Telefono_Referente_Tecnico_Ente" cssclass="divRicMetadatiSingleRow">
+						<s:textbox bmodify="true"
+							name="Telefono_Referente_Tecnico_Ente" label="Telefono ref. tec.:"
+							text="${requestScope.Telefono_Referente_Tecnico_Ente}" maxlenght="256"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" />
+					</s:div>
+				
+							    <s:div name="mail_ref_tecnico" cssclass="divRicMetadatiSingleRow">
+									<s:textbox bmodify="true"
+										maxlenght="500"
+										label="Mail ref. tec.:"
+										name="mail_ref_tecnico"
+										text="${requestScope.mail_ref_tecnico}"
+										cssclasslabel="label85 bold textright"
+										cssclass="textareaman"  />
+								</s:div>
+								<!-- fine CD pago438 -->
 							
 							<%-- inizio SB PG210140 --%>
 							<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM'}">

@@ -74,7 +74,9 @@
 									  label="Desc.Gateway" name="gatewaypagamento_descrizioneGateway" 
 									  text="${gatewaypagamento_descrizioneGateway}" cssclasslabel="label85 bold textright"
 									  message="[accept=Desc.Gateway: ${msg_configurazione_descrizione_regex}]"
-									  cssclass="textareaman" maxlenght="256"/>	
+									  cssclass="textareaman" maxlenght="256"
+									  validator="ignore;accept=${configurazione_descrizione256_regex}"
+									  />	
 					</s:div>
 					<s:div name="divElement2" cssclass="divRicMetadatiSingleRow">
 					<s:textbox bmodify="true" validator="ignore;url;minlength=1;maxlength=256"  

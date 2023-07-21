@@ -85,7 +85,7 @@
 							<%-- Descrizione Altra Lingua Italiana--%>
 							<s:div name="divElementCR2" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true" name="gruppo_descrizioneAltraLingua"
-									validator="required;" showrequired="true"
+									validator="required; accept=${configurazione_descrizione_regex100}" showrequired="true"
 									label="Descrizione Lingua Francese:" maxlenght="100"
 									cssclasslabel="label200 bold textright"
 									cssclass="textAreaGruppo"

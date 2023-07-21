@@ -667,6 +667,22 @@
 							<s:ddloption value="1" text="Non Notificate" />
 						</s:dropdownlist>
 					</s:div>
+					
+					
+				  <s:div name="divElement14e" cssclass="divRicMetadatiSingleRow">
+					<s:textbox validator="maxlength=100" maxlenght="100"
+							cssclass="textareaman" cssclasslabel="label85 bold textright" 
+							bmodify="true" name="tx_codice_IUV" label="cod. IUV:"
+							text="${tx_codice_IUV}" />
+				  </s:div>
+					
+					
+					<s:div name="divElement14f" cssclass="divRicMetadatiSingleRow">
+						<s:textbox validator="ignore;accept=^(?:(?!').)*$;maxlength=64" bmodify="true"
+							name="chiaveTransazione" label="Id Transazione:"
+							text="${chiaveTransazione}" maxlenght="64" cssclass="textareaman"
+							cssclasslabel="label85 bold textright" />
+					</s:div>
 <!-- 
 					<s:div name="divElement12" cssclass="divRicMetadatiDoubleRow">
 						<s:div name="divElement12a" cssclass="labelData">
@@ -1018,7 +1034,7 @@
 			<%-- inizio LP PG200200 --%>
 			<s:if right="{31}" control="eq" left="Y">
 				<s:then>
-					<s:hyperlink href="dettaglioIUVFlusso.do${formParameters}&idflusso={17}&societa={3}&data={18}&numrt={27}&iuvsca={10}&idquad={1}&flusso_errore={36}&tx_button_cerca=1"
+					<s:hyperlink href="dettaglioIUVFlusso.do${formParameters}&idflusso={17}&societa={3}&data={18}&numrt={27}&iuvsca={10}&idquad={1}&flusso_errore={37}&tx_button_cerca=1"
 					imagesrc="../applications/templates/riconciliazionemt/img/details.png" 
 					alt="Lista I.U.V. nel Flusso" text="" cssclass="hlStyle" />
 				</s:then>

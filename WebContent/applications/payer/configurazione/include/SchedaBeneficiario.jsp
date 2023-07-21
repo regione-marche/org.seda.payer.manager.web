@@ -274,7 +274,7 @@ Messaggio di errore
 					<s:div name="divElement51" cssclass="divRicMetadatiSingleRow">
 								<s:textbox name="im_descBeneficiario" label="Descrizione:" bmodify="true" text="${requestScope.im_descBeneficiario}" 
 										   cssclass="textareaman" cssclasslabel="label85 bold textright"  
-								           maxlenght="256" validator="ignore" />
+								           maxlenght="256" validator="ignore;accept=${configurazione_descrizione256_regex}" />
 					</s:div>
 					
 
@@ -325,7 +325,7 @@ Messaggio di errore
 					<s:div name="divElement6" cssclass="divRicMetadatiSingleRow">
 								<s:textbox name="im_indirizzo" label="Indirizzo:" bmodify="true" text="${requestScope.im_indirizzo}" 
 										   cssclass="textareaman" cssclasslabel="label85 bold textright"  
-								           maxlenght="256" validator="ignore" />
+								           maxlenght="256" validator="ignore;accept=${configurazione_descrizione256_regex}" />
 					</s:div>
 
 					<s:div name="divElement7" cssclass="divRicMetadatiSingleRow">
