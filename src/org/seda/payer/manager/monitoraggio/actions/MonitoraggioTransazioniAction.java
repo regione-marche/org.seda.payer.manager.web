@@ -111,6 +111,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			
 			try {
 
+				String messageDate = null;
 				RecuperaTransazioniResponseType listaTransazioni = null;
 
 				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
@@ -118,7 +119,12 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				loadTipologiaServizioXml_DDL_2(request, session, getParamCodiceSocieta(),getParamCodiceUtente(),getParamCodiceEnte(), false);
 				loadListaGatewayXml_DDL(request, session, getParamCodiceSocieta(), getParamCodiceUtente(), false);
 				LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), siglaProvincia, getParamCodiceEnte(), getParamCodiceUtente(), false);
-				String messageDate = controlloDate(request);
+				
+				if(request.getParameterMap().size() == 3) {
+					messageDate = null;
+				}else {
+					messageDate = controlloDate(request);
+				}
 				
 				if(getTemplateCurrentApplication(request, session).equals("regmarche") && messageDate !=null) {
 					setFormMessage("monitoraggioTransazioniForm", messageDate , request);
