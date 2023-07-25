@@ -577,10 +577,12 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		//PG160170_001 GG 15022017 - inizio
 		//Il campo di ricerca Chiave Quadratura contiene l'identificativo del flusso di quadratura
 		
-		// Controllo che siano tutti numeri 
-		boolean isDigits = Field.TX_CHIAVE_QUADRATURA.format().matches("\\d+");
+		// Controllo che siano tutti numeri
+		String regex = "\\d+";
 		
-		if(isDigits) {
+		String isDigits = (String)request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format());
+		
+		if(isDigits.matches(regex)) {
 			recuperaTransazioniRequest.setTx_idFlussoQuadratura(isNull(request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format())));		
 		}
 		else {
