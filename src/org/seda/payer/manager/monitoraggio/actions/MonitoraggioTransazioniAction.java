@@ -120,9 +120,12 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				loadListaGatewayXml_DDL(request, session, getParamCodiceSocieta(), getParamCodiceUtente(), false);
 				LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), siglaProvincia, getParamCodiceEnte(), getParamCodiceUtente(), false);
 				
-				if(request.getParameterMap().size() == 3) {
+				try {
+
+				if(request.getAttribute("jump").equals("1")) {
 					messageDate = null;
-				}else {
+				 }
+				}catch(Exception e) {
 					messageDate = controlloDate(request);
 				}
 				

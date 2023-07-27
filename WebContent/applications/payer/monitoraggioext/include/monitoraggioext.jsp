@@ -251,7 +251,7 @@
 				<s:if left="{17}" control="eq" right="Y">
 					<s:then>
 						<s:hyperlink
-						href="../monitoraggio/monitoraggioTransazioni.do?tx_codice_transazione={1}&tx_button_cerca=1"
+						href="../monitoraggio/monitoraggioTransazioni.do?tx_codice_transazione={1}&tx_button_cerca=1&jump=1"
 						text="{1}" cssclass="blacklink"
 						alt="Dettaglio Transazione {1}" />
 					</s:then>
