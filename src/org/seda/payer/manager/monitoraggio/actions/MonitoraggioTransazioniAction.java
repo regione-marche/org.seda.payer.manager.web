@@ -111,6 +111,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 			
 			try {
 
+				String messageDate = null;
 				RecuperaTransazioniResponseType listaTransazioni = null;
 
 				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
@@ -118,7 +119,15 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 				loadTipologiaServizioXml_DDL_2(request, session, getParamCodiceSocieta(),getParamCodiceUtente(),getParamCodiceEnte(), false);
 				loadListaGatewayXml_DDL(request, session, getParamCodiceSocieta(), getParamCodiceUtente(), false);
 				LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), siglaProvincia, getParamCodiceEnte(), getParamCodiceUtente(), false);
-				String messageDate = controlloDate(request);
+				
+				try {
+
+				if(request.getAttribute("jump").equals("1")) {
+					messageDate = null;
+				 }
+				}catch(Exception e) {
+					messageDate = controlloDate(request);
+				}
 				
 				if(getTemplateCurrentApplication(request, session).equals("regmarche") && messageDate !=null) {
 					setFormMessage("monitoraggioTransazioniForm", messageDate , request);
@@ -547,6 +556,7 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		recuperaTransazioniRequest.setTx_user_sms(isNull(request.getAttribute(Field.TX_USER_SMS.format())));
 		//PG160170_001 GG 15022017 - inizio
 		//recuperaTransazioniRequest.setTx_chiave_quadratura(isNullInt(request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format())));
+		
 		recuperaTransazioniRequest.setTx_chiave_quadratura(0);
 		//PG160170_001 GG 15022017 - fine
 	
@@ -569,7 +579,18 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		
 		//PG160170_001 GG 15022017 - inizio
 		//Il campo di ricerca Chiave Quadratura contiene l'identificativo del flusso di quadratura
-		recuperaTransazioniRequest.setTx_idFlussoQuadratura(isNull(request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format())));
+		
+		// Controllo che siano tutti numeri
+		String regex = "\\d+";
+		
+		String isDigits = (String)request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format());
+		
+		if(isDigits.matches(regex)) {
+			recuperaTransazioniRequest.setTx_idFlussoQuadratura(isNull(request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format())));		
+		}
+		else {
+			recuperaTransazioniRequest.setTx_idFlussoQuadratura("");
+		}
 		recuperaTransazioniRequest.setTx_recuperate(isNull(request.getAttribute(Field.TX_RECUPERATE.format())));   //PG200050_001 SB
 		//PG160170_001 GG 15022017 - fine
 
