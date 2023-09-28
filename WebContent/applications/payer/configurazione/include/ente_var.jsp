@@ -310,6 +310,22 @@
 								
 							</s:div>
 							
+							
+						    <!--inizio CD pago-580 -->
+							
+							<s:div name="divElement711_b" cssclass="divRicMetadatiSingleRow">
+								
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+							</s:div>
+								
+							<!--fine CD pago-580 -->
+							
 							<s:div name="divElement712" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									validator="ignore;accept=${configurazione_email_regex};maxlength=50"
@@ -740,6 +756,21 @@
 
 							</s:div>
 							
+							 <!--inizio CD pago-580 -->
+							
+							<s:div name="divElement736_b" cssclass="divRicMetadatiSingleRow">
+								
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+							</s:div>
+								
+							<!--fine CD pago-580 -->
+							
 							<s:div name="divElement737" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									validator="ignore;accept=${configurazione_email_regex};maxlength=50"
@@ -747,8 +778,6 @@
 									label="Email Admin:" name="ente_emailAdmin"
 									text="${ente_emailAdmin}"
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
-								
-								
 								
 							</s:div>
 							
