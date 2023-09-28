@@ -11,6 +11,10 @@
 		<url>/applications/templates/default/error_template.jsp</url>
 	  </template>
 	  
+	  <template name="defaultUTF8">
+		<url>/applications/templates/default/defaultUTF8.jsp</url>
+	  </template>
+	  
 	  <!-- Start Screen Bolzano -->
 	  
 	  <screen name="ioitaliaconf" template="default">
@@ -45,7 +49,7 @@
 	   	<parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
 	  </screen>
 	  
-	  <screen name="ioitalianewmessage" template="default">
+	  <screen name="ioitalianewmessage" template="defaultUTF8">
 	    <parameter key="pagetitle" value="manager.ioitalia.search.title" direct="true" />
 	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
 	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
@@ -53,7 +57,7 @@
 	   	<parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
 	  </screen>
 	  
-	  <screen name="ioitaliamessageedit" template="default">
+	  <screen name="ioitaliamessageedit" template="defaultUTF8">
 	    <parameter key="pagetitle" value="manager.ioitalia.search.title" direct="true" />
 	  	<parameter key="header" value="/applications/templates/shared/bolzano/header.jsp"/>
 	    <parameter key="menu" value="/applications/templates/shared/menu.jsp" />
