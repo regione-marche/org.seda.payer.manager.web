@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seda.payer.manager.web</groupId>
 	<artifactId>org.seda.payer.manager.web</artifactId>
-	<version>2.19.0</version>
+	<version>2.20.0</version>
 	<packaging>war</packaging>
 	<name>org.seda.payer.manager.web</name>
 	<description>org.seda.payer.manager.web</description>
@@ -48,7 +48,7 @@
 					<archive>
 						<manifestEntries>
 						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
-							<Dependencies>com.seda.compatibility,com.seda.data:1.0,org.eclipse.birt.runtime,org.apache.log4j</Dependencies>
+							<Dependencies>org.eclipse.birt.runtime,org.apache.log4j</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -58,6 +58,76 @@
 
 	<dependencies>
 	
+		<dependency>
+			<groupId>com.seda.payer.core</groupId>
+			<artifactId>com.seda.payer.core</artifactId>
+			<version>2.9.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.pgec.webservice.client</groupId>
+			<artifactId>com.seda.payer.pgec.webservice.client</artifactId>
+			<version>2.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.ottico.webservice.client</groupId>
+			<artifactId>com.seda.payer.ottico.webservice.client</artifactId>
+			<version>2.2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.bancadati.webservice.client</groupId>
+			<artifactId>com.seda.payer.bancadati.webservice.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.gateways.webservice.client</groupId>
+			<artifactId>com.seda.payer.gateways.webservice.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.security.webservice.client</groupId>
+			<artifactId>com.seda.security.webservice.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.impostasoggiorno.webservice.client</groupId>
+			<artifactId>com.seda.payer.impostasoggiorno.webservice.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.integraente.webservice.client</groupId>
+			<artifactId>com.seda.payer.integraente.webservice.client</artifactId>
+			<version>2.2.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.payer.notifiche.webservice.client</groupId>
+			<artifactId>com.seda.payer.notifiche.webservice.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.seda.emailsender.webservices.client</groupId>
+			<artifactId>com.seda.emailsender.webservices.client</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
@@ -106,13 +176,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.seda.commons</groupId>
-			<artifactId>com.seda.commons</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
@@ -120,20 +183,6 @@
 		    <version>1.5</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>com.seda.j2ee5.maf</groupId>
-			<artifactId>com.seda.j2ee5.maf</artifactId>
-			<version>1.1</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.payer.pgec.webservice.client</groupId>
-			<artifactId>com.seda.payer.pgec.webservice.client</artifactId>
-			<version>2.6.0</version>
-			<scope>compile</scope>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
 		<dependency>
@@ -156,13 +205,6 @@
 			<groupId>net.sf.flexjson</groupId>
 			<artifactId>flexjson</artifactId>
 			<version>3.3</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.payer.ottico.webservice.client</groupId>
-			<artifactId>com.seda.payer.ottico.webservice.client</artifactId>
-			<version>2.1.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -191,16 +233,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.seda.payer.bancadati.webservice.client</groupId>
-			<artifactId>com.seda.payer.bancadati.webservice.client</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>com.esed.payer.archiviocarichi.webservice.client</groupId>
 			<artifactId>com.esed.payer.archiviocarichi.webservice.client</artifactId>
-			<version>2.2.0</version>
+			<version>2.3.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -208,13 +243,6 @@
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.4.10</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.payer.gateways.webservice.client</groupId>
-			<artifactId>com.seda.payer.gateways.webservice.client</artifactId>
-			<version>1.0</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -423,20 +451,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.seda.security.webservice.client</groupId>
-			<artifactId>com.seda.security.webservice.client</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.tag</groupId>
-			<artifactId>com.seda.tag</artifactId>
-			<version>1.1</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- <dependency> -->
 		<!-- <groupId>javax.servlet</groupId> -->
 		<!-- <artifactId>jstl</artifactId> -->
@@ -502,27 +516,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.seda.payer.core</groupId>
-			<artifactId>com.seda.payer.core</artifactId>
-			<version>2.7.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.data</groupId>
-			<artifactId>com.seda.data</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.payer.impostasoggiorno.webservice.client</groupId>
-			<artifactId>com.seda.payer.impostasoggiorno.webservice.client</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>icar-sp-inf3-j2ee-integration-kit</groupId>
 			<artifactId>icar-sp-inf3-j2ee-integration-kit</artifactId>
 			<version>1.0</version>
@@ -546,15 +539,6 @@
 			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/jstl-1.2-1.jar</systemPath>
 		</dependency>
 
-
-
-		<dependency>
-			<groupId>com.seda.payer.commons</groupId>
-			<artifactId>com.seda.payer.commons</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -568,39 +552,11 @@
 			<version>67.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.seda.payer.integraente.webservice.client</groupId>
-			<artifactId>com.seda.payer.integraente.webservice.client</artifactId>
-			<version>2.1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.payer.notifiche.webservice.client</groupId>
-			<artifactId>com.seda.payer.notifiche.webservice.client</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.seda.emailsender.webservices.client</groupId>
-			<artifactId>com.seda.emailsender.webservices.client</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- <dependency> -->
 		<!-- <groupId>org.eclipse.birt.runtime</groupId> -->
 		<!-- <artifactId>org.eclipse.birt.runtime</artifactId> -->
 		<!-- <version>4.5.0a</version> -->
 		<!-- </dependency> -->
-
-		<dependency>
-			<groupId>com.seda.compatibility</groupId>
-			<artifactId>com.seda.compatibility</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>xml-apis</groupId>
@@ -763,8 +719,14 @@
 		<dependency>
 			<groupId>com.esed.log.req</groupId>
 			<artifactId>com.esed.log.req</artifactId>
-			<version>1.0</version>
+			<version>1.2.0</version>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				</exclusion>
+			</exclusions> 
 		</dependency> 
 		
 		
