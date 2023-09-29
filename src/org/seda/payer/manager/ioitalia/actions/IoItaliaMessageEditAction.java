@@ -1,5 +1,6 @@
 package org.seda.payer.manager.ioitalia.actions;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -141,6 +142,16 @@ public class IoItaliaMessageEditAction extends IoItaliaBaseManagerAction {
 					
 					oggettoMessaggio = (String) request.getAttribute("tx_oggetto");
 					corpoMessaggio = (String) request.getAttribute("tx_corpo");
+					System.out.println("Corpo prima: " +corpoMessaggio);
+					try {
+		                byte[] stringBytesSource = corpoMessaggio.
+		                        getBytes("ISO-8859-1");
+		                corpoMessaggio = new String(stringBytesSource, "UTF-8");
+		            } catch (UnsupportedEncodingException e) {
+		                throw new RuntimeException(e);
+		            }
+					//corpoMessaggio = corpoMessaggio.replace("€", "&euro;");
+					System.out.println("Corpo dopo: "+corpoMessaggio);
 					avvisoPagoPA = (String) request.getAttribute("tx_avviso");
 					if(request.getAttribute("tx_importo") != null && !request.getAttribute("tx_importo").equals("")) {
 						String imp = ((String)request.getAttribute("tx_importo")).trim().replace(',', '.');
@@ -239,6 +250,16 @@ public class IoItaliaMessageEditAction extends IoItaliaBaseManagerAction {
 					
 					oggettoMessaggio = (String) request.getAttribute("tx_oggetto");
 					corpoMessaggio = (String) request.getAttribute("tx_corpo");
+					System.out.println("Corpo prima: " +corpoMessaggio);
+					try {
+		                byte[] stringBytesSource = corpoMessaggio.
+		                        getBytes("ISO-8859-1");
+		                corpoMessaggio = new String(stringBytesSource, "UTF-8");
+		            } catch (UnsupportedEncodingException e) {
+		                throw new RuntimeException(e);
+		            }
+					//corpoMessaggio = corpoMessaggio.replace("€", "&euro;");
+					System.out.println("Corpo dopo: "+corpoMessaggio);
 					avvisoPagoPA = (String) request.getAttribute("tx_avviso");
 					if(request.getAttribute("tx_importo") != null && !request.getAttribute("tx_importo").equals("")) {
 						String imp = ((String)request.getAttribute("tx_importo")).trim().replace(',', '.');
