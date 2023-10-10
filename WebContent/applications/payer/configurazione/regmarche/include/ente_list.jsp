@@ -32,6 +32,9 @@
     				<seda:then>{4}</seda:then>
     			</seda:if> 
     		</seda:dgcolumn>
+    		
+    		<seda:dgcolumn index="10" label="Cod Ente Ipa" />   <!-- cd pago-580 -->
+    		
 			<seda:dgcolumn label="Azioni">
 			
 			 	<seda:hyperlink
