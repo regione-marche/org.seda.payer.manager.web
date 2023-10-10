@@ -223,7 +223,7 @@
 						<c:if test="${fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'SPOM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'CDSM' || fn:substring(configutentetiposervizioente_tipoBol,0,4) == 'PREA'}">
 							<s:div name="divElement933" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
-									maxlenght="40"
+									maxlenght="50"
 									label="Autorizzazione CCP:"
 									name="configutentetiposervizioente_autorizzazioneStampaAvvisoPagoPa"
 									text="${requestScope.configutentetiposervizioente_autorizzazioneStampaAvvisoPagoPa}"
