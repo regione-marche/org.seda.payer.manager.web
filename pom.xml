@@ -48,7 +48,7 @@
 					<archive>
 						<manifestEntries>
 						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
-							<Dependencies>org.eclipse.birt.runtime,org.apache.log4j</Dependencies>
+							<Dependencies>org.eclipse.birt.runtime</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -151,13 +151,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5</version>
-		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
