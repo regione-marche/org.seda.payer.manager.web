@@ -18,8 +18,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.seda.payer.manager.adminusers.actions.SeUsersEditAction;
 import org.seda.payer.manager.adminusers.util.ProfiloUtil;
 import org.seda.payer.manager.components.security.UserBean;
@@ -53,6 +51,8 @@ import com.esed.payer.archiviocarichi.webservice.integraecdifferito.dati.StampaD
 import com.esed.payer.archiviocarichi.webservice.integraecdifferito.dati.Tributo;
 import com.esed.payer.archiviocarichi.webservice.integraecdifferito.dati.VariazioneEcRequest;
 import com.esed.payer.archiviocarichi.webservice.integraecdifferito.dati.VariazioneEcResponse;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 //import com.google.gson.Gson;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.validator.ValidationMessage;
@@ -79,9 +79,9 @@ import com.seda.payer.pgec.webservice.configtassonomia.dati.ConfigTassonomiaList
 import org.seda.payer.manager.adminusers.util.Error;
 
 /**
- TODO:LUCIANO: CFunzionalità CRUD per DocumentiCarico.
+ TODO:LUCIANO: CFunzionalitï¿½ CRUD per DocumentiCarico.
  A partire da esempio di:
-  {@link RicercaDocumentiCarichiAction} ( che verrà quindi eliminata )
+  {@link RicercaDocumentiCarichiAction} ( che verrï¿½ quindi eliminata )
   {@link BaseEntrateAction}
   {@link AnagEnteAction}
  
@@ -90,7 +90,7 @@ import org.seda.payer.manager.adminusers.util.Error;
 
  
  
- Funzionalità implementate (stato)[eventi]:
+ Funzionalitï¿½ implementate (stato)[eventi]:
  >ListaDocumenti
  >>paginazione (ordinamento, numero pagine, pagina corrente)
       [avanzamento pagina, pagina diretta changed, num righe changed]
@@ -108,13 +108,13 @@ import org.seda.payer.manager.adminusers.util.Error;
  >> messaggio avvenuto salvataggio edit
  
  Nota: TODO:PROVINCIA
- La provincia non può essere anche estera? Non dispongo della sigla/descrizione provincia.
+ La provincia non puï¿½ essere anche estera? Non dispongo della sigla/descrizione provincia.
  In caso di comune estero EE, i campi nazione,provincia,comune, dovrebbero essere gestiti in modo testo? 
  Per esempio vedi: {@link SeUsersEditAction} e {@link ProfiloUtil}
  */
 
 public class GestioneDocumentiCaricoAction extends HtmlAction {
-  static Logger logger = Logger.getLogger(GestioneDocumentiCaricoAction.class);
+  private static LoggerWrapper logger = CustomLoggerManager.get(GestioneDocumentiCaricoAction.class);
 
   private static final long serialVersionUID = 1L;
 
@@ -418,7 +418,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
       request.setAttribute("listaImpostaServizio", filteredDsListaDocumenti
           .getListaImpostaServizio());
     } else if (screen == Screen.ADD || screen == Screen.EDIT || screen == Screen.DELETE) {
-      // TODO:LUCIANO: può essere utile cambiare i nomi? es: listaUtentiTes
+      // TODO:LUCIANO: puï¿½ essere utile cambiare i nomi? es: listaUtentiTes
       request.setAttribute("listaSocUtenteEnte", filteredDsDocumento.getListaSocUtenteEnte());
       request.setAttribute("listaTipologieServizio", filteredDsDocumento
           .getListaTipologieServizio());
@@ -530,7 +530,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
   /** La request contiene dati del "Filtro Documenti" oppure filtroReset.
    * Se filtroReset tutti i parametri vanno ignorati... 
    * Analizzo eventi di "reload lista" che potrebbero invalidare
-   * alcuni valori a valle, es: ricarico lista Utenti Società -> Utente ed Ente potrebbero
+   * alcuni valori a valle, es: ricarico lista Utenti Societï¿½ -> Utente ed Ente potrebbero
    * non appartenere alla lista ricaricata. */
   void onFiltroDocumentiRequest() throws ConfigurazioneException {
 
@@ -891,7 +891,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     if (filteredDsDocumento.findUtenteSel() != null)
       codUtente = filteredDsDocumento.findUtenteSel().getCodUtente();
     req.setCodiceUtente(codUtente);
-    // Nota: questo è il codUtenteEnte es: "99999" e non il codUtente="ANE00000123"
+    // Nota: questo ï¿½ il codUtenteEnte es: "99999" e non il codUtente="ANE00000123"
     req.setCodiceEnte(editDocumento.getCodUtenteEnte());
 
     req.setTipoUfficio(editDocumento.getTipoUfficio());
@@ -912,7 +912,6 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     try {
       CancellazioneEcResponse wsResponse = EntrateFilteredWs
           .deleteDocumentoCarico(req, request);
-      logger.setLevel(Level.ALL);
       logger.debug(wsResponse.getMessaggioEsito());
 
       String esito = wsResponse.getCodiceEsito();
@@ -925,7 +924,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
             messEsito));
         setMessage(messEsito);
 
-        // nella JSP il button ELIMINA non lo visualizzo più 
+        // nella JSP il button ELIMINA non lo visualizzo piï¿½ 
         editDocumento.mode = Mode.READONLY;
       } else {
         setErrorMessage(wsResponse.getMessaggioEsito());
@@ -1137,7 +1136,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
 						screen=Screen.STAMPA;
 						request.setAttribute("pdfAvviso", targetPdf);
 					} else {
-						setFormValidationMessage("gestioneDocumentiCaricoForm", "Non è stato possibile produrre la stampa dell'avviso per documento " + stampaDocumento.getNumeroDocumento() + " codice fiscale " + stampaDocumento.getCodiceFiscale() + ".");
+						setFormValidationMessage("gestioneDocumentiCaricoForm", "Non ï¿½ stato possibile produrre la stampa dell'avviso per documento " + stampaDocumento.getNumeroDocumento() + " codice fiscale " + stampaDocumento.getCodiceFiscale() + ".");
 					}
 				} else {
 					//Visualizzo a video il messaggio
@@ -1345,7 +1344,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
 //      try {
 //        double d = df.parse(impBollettino.replace(".", ",")).doubleValue();
 //        documento.setImpBollettinoTotaleDocumento(BigDecimal.valueOf(d));
-////    	documento.setImpBollettinoTotaleDocumento(new BigDecimal(Double.toString(d)));	//GG probabilmente più preciso
+////    	documento.setImpBollettinoTotaleDocumento(new BigDecimal(Double.toString(d)));	//GG probabilmente piï¿½ preciso
 //      } catch (ParseException e) {
 //        documento.setImpBollettinoTotaleDocumento(null);
 //      }
@@ -1407,8 +1406,8 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     if(request.getParameter("anagrafica_email")!=null && !request.getParameter("anagrafica_email").equals("")){
     	bValid = checkValiditaMail(request,request.getParameter("anagrafica_email"),error);
 		if(!bValid && !error.isErrorvisible()){
-			error.addErrorvalue("L'email "+request.getParameter("anagrafica_email")+" non è valida");
-			setFormValidationMessage("frmAction", "L'email "+request.getParameter("anagrafica_email")+" non è valida");
+			error.addErrorvalue("L'email "+request.getParameter("anagrafica_email")+" non ï¿½ valida");
+			setFormValidationMessage("frmAction", "L'email "+request.getParameter("anagrafica_email")+" non ï¿½ valida");
 		}else if(error.isErrorvisible()){
 			setFormValidationMessage("frmAction", error.getErrorvalue());
 		}
@@ -1417,8 +1416,8 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     if(request.getParameter("anagrafica_emailPec")!=null && !request.getParameter("anagrafica_emailPec").equals("")){
     	bValid = checkValiditaMail(request,request.getParameter("anagrafica_emailPec"),error);
 		if(!bValid && !error.isErrorvisible()){
-			error.addErrorvalue("L'email "+request.getParameter("anagrafica_emailPec")+" non è valida");
-			setFormValidationMessage("frmAction", "L'email PEC "+request.getParameter("anagrafica_emailPec")+" non è valida");
+			error.addErrorvalue("L'email "+request.getParameter("anagrafica_emailPec")+" non ï¿½ valida");
+			setFormValidationMessage("frmAction", "L'email PEC "+request.getParameter("anagrafica_emailPec")+" non ï¿½ valida");
 		}else if(error.isErrorvisible()){
 			setFormValidationMessage("frmAction", error.getErrorvalue());
 		}
@@ -1490,7 +1489,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     	  ibanBancario = ibanBancario.trim();
       trib.setIBANBancario(ibanBancario);
       if(bEnteDiverso && (ibanBancario == null || ibanBancario.length() == 0)) {
-		setFormValidationMessage("frmAction", "Non è stato valorizzato l'iban bancario per il tributo #" + (i + 1));
+		setFormValidationMessage("frmAction", "Non ï¿½ stato valorizzato l'iban bancario per il tributo #" + (i + 1));
       }
       trib.setIBANPostale(request.getParameter(String.format("trib_%d_ibanPostale", i)));
       //inizio SB PGNTMGR-8
@@ -1506,7 +1505,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     	  codiceTipologiaServizio = codiceTipologiaServizio.trim();
       trib.setCodiceTipologiaServizio(codiceTipologiaServizio);
       if(bEnteDiverso && (codiceTipologiaServizio == null || codiceTipologiaServizio.length() == 0)) {
-		setFormValidationMessage("frmAction", "Non è stato valorizzato il codice tipologia servizio per il tributo #" + (i + 1));
+		setFormValidationMessage("frmAction", "Non ï¿½ stato valorizzato il codice tipologia servizio per il tributo #" + (i + 1));
       }
       //fine LP PG22XX05
       }
@@ -1578,13 +1577,13 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
   void onSaveDocumentoCommit() {
 
     try {
-      // Questa è la request da inviare al webservice 
+      // Questa ï¿½ la request da inviare al webservice 
       InserimentoEcRequest inserimentoEcRequest = new InserimentoEcRequest();
       String codUtente = "";
       if (filteredDsDocumento.findUtenteSel() != null)
         codUtente = filteredDsDocumento.findUtenteSel().getCodUtente();
       inserimentoEcRequest.setCodiceUtente(codUtente);
-      // Nota: questo è il codUtenteEnte es: "99999" e non il codUtente="ANE00000123"
+      // Nota: questo ï¿½ il codUtenteEnte es: "99999" e non il codUtente="ANE00000123"
       inserimentoEcRequest.setCodiceEnte(editDocumento.getCodUtenteEnte());
 
       inserimentoEcRequest.setTipoUfficio(editDocumento.getTipoUfficio());
@@ -1634,7 +1633,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
   /** mi chiedono di aggiornare il documento */
   void onUpdateDocumentoCommit() {
     try {
-      // Questa è la request da inviare al webservice 
+      // Questa ï¿½ la request da inviare al webservice 
       VariazioneEcRequest req = new VariazioneEcRequest();
       String codUtente = "";
       if (filteredDsDocumento.findUtenteSel() != null)
@@ -1669,15 +1668,15 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
       //fine LP PG22XX05
       for (Tributo trib : editDocumento.listaTributi) {
         if (trib.getAnnoTributo().trim().equals("")){
-            setFormValidationMessage("frmAction", "Anno tributo: Questo valore è obbligatorio");
+            setFormValidationMessage("frmAction", "Anno tributo: Questo valore ï¿½ obbligatorio");
             valid=false;
         }
         if (trib.getCodiceTributo().trim().equals("")){
-            setFormValidationMessage("frmAction", "Codice Tributo: Questo valore è obbligatorio");
+            setFormValidationMessage("frmAction", "Codice Tributo: Questo valore ï¿½ obbligatorio");
             valid=false;
         }
         if (trib.getImpTributo()==null){
-            setFormValidationMessage("frmAction", "Importo Tributo: Questo valore è obbligatorio");
+            setFormValidationMessage("frmAction", "Importo Tributo: Questo valore ï¿½ obbligatorio");
             valid=false;
         }
         //inizio LP PG210130
@@ -1686,7 +1685,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     	        //inizio LP PG22XX05
         		if(!idDominioPrincipale.equals(trib.getIdentificativoDominio().trim())) {
             	//fine LP PG22XX05
-	                setFormValidationMessage("frmAction", "Iban Bancario: Questo valore è obbligatorio");
+	                setFormValidationMessage("frmAction", "Iban Bancario: Questo valore ï¿½ obbligatorio");
 	                valid=false;
 	    	    //inizio LP PG22XX05
         		}
@@ -1700,7 +1699,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     	        //inizio LP PG22XX05
         		if(!idDominioPrincipale.equals(trib.getIdentificativoDominio().trim())) {
             	//fine LP PG22XX05
-	                setFormValidationMessage("frmAction", "Codice Tipologia Servizio: Questo valore è obbligatorio");
+	                setFormValidationMessage("frmAction", "Codice Tipologia Servizio: Questo valore ï¿½ obbligatorio");
 	                valid=false;
 	    	    //inizio LP PG22XX05
         		}
@@ -1716,11 +1715,11 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
       i = 0;
       for (Scadenza scad : editDocumento.listaScadenze) {
           if (scad.getDataScadenzaRata()==null){
-              setFormValidationMessage("frmAction", "Data Scadenza: Questo valore è obbligatorio");
+              setFormValidationMessage("frmAction", "Data Scadenza: Questo valore ï¿½ obbligatorio");
               valid=false;
           }
           if (scad.getImpBollettinoRata()==null){
-              setFormValidationMessage("frmAction", "Importo Boll. Rata: Questo valore è obbligatorio");
+              setFormValidationMessage("frmAction", "Importo Boll. Rata: Questo valore ï¿½ obbligatorio");
               valid=false;
           }
         i++;
@@ -1828,7 +1827,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     // campi forniti dall'elenco documenti: link documento per edit/delete 
     id.codSocieta = request.getParameter("codSocieta");
     id.codUtente = request.getParameter("codUtente");
-    // non è chiame primaria, lo ottengo in seguito dalla lettura es:"ANE00000123
+    // non ï¿½ chiame primaria, lo ottengo in seguito dalla lettura es:"ANE00000123
 //    id.codEnte = request.getParameter("codEnte");
 
     // fa parte della chiave del documento es:"99999""
@@ -2200,7 +2199,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
    * primo.
    * 
    * <p> Invece il secondo che scrive dovrebbe essere messo in condizione di scegliere:
-   * "è stata effettuata una modifica in contemporanea da un altro utente, come procedo? 
+   * "ï¿½ stata effettuata una modifica in contemporanea da un altro utente, come procedo? 
    * ricarica dal DB, sovrascrivi DB, merge intelligente."
    *
    * Nota: se serve posso Aggiungere campi a questi bean specifici per l'edit (es: info di valdazione) 
@@ -2262,7 +2261,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     
 
     /** alcuni campi sono disabilitati anche in CREATE... es:in base al 
-     * profilo utente che non può modificare il codSocieta. */
+     * profilo utente che non puï¿½ modificare il codSocieta. */
     public boolean isCreate() {
       return mode == Mode.CREATE;
     }
@@ -2288,7 +2287,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
     }
 
     public boolean isConfigurazioneIuvDisable() {
-      //La configurazione IUV è recuperata dalla configurazione del ws archivio carichi e non è editabile
+      //La configurazione IUV ï¿½ recuperata dalla configurazione del ws archivio carichi e non ï¿½ editabile
       //return configurazione.getFlagGenerazioneIUV().equals("N");
       return true;
     }
@@ -2380,7 +2379,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
   }
 
 
-  /** Screen relativo a questa Action... È lo screen che sarà utilizzato come view dello stato attuale,
+  /** Screen relativo a questa Action... ï¿½ lo screen che sarï¿½ utilizzato come view dello stato attuale,
    * (quindi result della {@link GestioneDocumentiCaricoFlow}). Come parametro di input
    * mi dice ache lo screen dal quale arriva la richiesta/evento client.*/
   static public class Screen {
@@ -2422,7 +2421,7 @@ public class GestioneDocumentiCaricoAction extends HtmlAction {
 			  return validatore.validaMail("",email, request);
 			  
 		  }catch(Exception e){
-			  error.addErrorvalue("Si è verificato un problema durante la verifica della mail. Riprovare più tardi");		
+			  error.addErrorvalue("Si ï¿½ verificato un problema durante la verifica della mail. Riprovare piï¿½ tardi");		
 			  e.printStackTrace();
 		  }
 		  return false;

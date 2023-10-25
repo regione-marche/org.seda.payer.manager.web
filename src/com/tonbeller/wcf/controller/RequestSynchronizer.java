@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 public class RequestSynchronizer implements Serializable{
 
 	private static final String WEBKEY = "requestSynchronizer";
-	  private static Logger logger = Logger.getLogger(RequestSynchronizer.class);
+	  private static LoggerWrapper logger = CustomLoggerManager.get(RequestSynchronizer.class);
 
 	  /** 
 	   * the uri that shows the content of the current request. The busy.jsp
@@ -140,8 +142,7 @@ public class RequestSynchronizer implements Serializable{
 	  }
 
 	  private void logInfo(String id) {
-	    if (logger.isInfoEnabled())
-	      logger.info("Log " + id + " Thread = " + Thread.currentThread().getName() + ", resultURI = "
+		logger.info("Log " + id + " Thread = " + Thread.currentThread().getName() + ", resultURI = "
 	          + resultURI + ", currentThread = " + currentThread);
 	  }
 }
