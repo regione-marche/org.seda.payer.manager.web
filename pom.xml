@@ -51,7 +51,7 @@
 					<archive>
 						<manifestEntries>
 						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
-							<Dependencies>org.eclipse.birt.runtime</Dependencies>
+							<Dependencies></Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -156,6 +156,11 @@
 			<artifactId>it.regulus.util</artifactId>
 			<version>1.0</version>
 			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.birt.runtime</groupId>
+			<artifactId>org.eclipse.birt.runtime</artifactId>
 		</dependency>
 
 		<dependency>
