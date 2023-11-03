@@ -116,11 +116,11 @@
 							cssclasslabel="label85 bold textright"
 							label="Pertinenza:" valueselected="${tx_pertinenza}">
 							<s:ddloption text="Tutti gli enti" value="" />
-							<s:ddloption text="Comune di Torino" value="06954" />
-							<s:ddloption text="Regione Piemonte" value="73348" />
-							<!-- SVILUPPO_001_LP -->
-							<s:ddloption text="Sanzioni C.D.S Ingiunzioni" value="81711" />
-							<!-- FINE SVILUPPO_001_LP -->
+							<s:ddloption text="Comune di Beinasco" value="81721" />
+                            <s:ddloption text="Comune di Grugliasco" value="81711" />
+							<s:ddloption text="Comune di San Mauro Torinese" value="81030" />
+                            <s:ddloption text="Comune di Torino" value="06954" />
+                            <s:ddloption text="Regione Piemonte" value="73348" />
 						</s:dropdownlist>
 					</s:div>
 				</s:div>
@@ -212,6 +212,21 @@
 				
 				<s:if right="{8}" control="eq" left="73348" >
 					<s:then>Regione Piemonte</s:then>
+					<s:else></s:else>
+				</s:if>
+				
+				<s:if right="{8}" control="eq" left="81721" >
+					<s:then>Comune di Beinasco</s:then>
+					<s:else></s:else>
+				</s:if>
+				
+				<s:if right="{8}" control="eq" left="81711" >
+					<s:then>Comune di Grugliasco</s:then>
+					<s:else></s:else>
+				</s:if>
+				
+				<s:if right="{8}" control="eq" left="81030" >
+					<s:then>Comune di San Mauro Torinese</s:then>
 					<s:else></s:else>
 				</s:if>
 				
