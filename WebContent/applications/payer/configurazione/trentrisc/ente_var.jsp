@@ -324,8 +324,8 @@
 
 							</s:div>
 							
-							
-							<s:div name="divElementLabel8a" cssclass="divTitle">
+							<!-- non più utilizzato  -->
+							<%-- <s:div name="divElementLabel8a" cssclass="divTitle">
 								<center>
 								<s:label name="provaa" text="Configurazione MyPay"  cssclass="lblTitlePadding bold"/>
 								</center>
@@ -355,7 +355,7 @@
 									text="${ente_passwordSha256Ente}"
 									message="[accept=Pwd Sha256: ${msg_configurazione_alfanumerici}]"
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
-							</s:div>
+							</s:div> --%>
 							
 							
 						</s:div>
@@ -393,6 +393,23 @@
 								
 								
 							</s:div>
+							
+							
+								<!--inizio CD PAGO 580 -->
+							
+								<s:div name="divElement711_b" cssclass="divRicMetadatiSingleRow">
+								
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+								
+								</s:div>
+							<!--fine CD PAGO 580 -->
+							
 							
 							<s:div name="divElement712" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
@@ -898,6 +915,20 @@
 
 							</s:div>
 							
+							
+								<!--inizio CD PAGO 580 -->
+							
+								<s:div name="divElement736_b" cssclass="divRicMetadatiSingleRow">
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+								</s:div>
+							<!--fine CD PAGO 580 -->
+						
 							<s:div name="divElement737" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									validator="ignore;accept=${configurazione_email_regex};maxlength=50"
@@ -905,9 +936,6 @@
 									label="Email Admin:" name="ente_emailAdmin"
 									text="${ente_emailAdmin}"
 									cssclasslabel="label85 bold textright" cssclass="textareaman" />
-								
-								
-								
 							</s:div>
 							
 							<s:div name="divElement738" cssclass="divRicMetadatiSingleRow">

@@ -333,7 +333,7 @@
 			<s:dgcolumn index="7" label="Ente" asc="ENTA" desc="ENTD" />
 			<s:dgcolumn label="Id Transazione" asc="TRAA" desc="TRAD" >
 				<s:hyperlink
-				href="../monitoraggio/monitoraggioTransazioni.do?tx_codice_transazione={1}&tx_button_cerca=1"
+				href="../monitoraggio/monitoraggioTransazioni.do?tx_codice_transazione={1}&tx_button_cerca=1&jump=1"
 				text="{1}" cssclass="blacklink"
 				alt="Dettaglio Transazione {1}" />
 			</s:dgcolumn>
