@@ -10,7 +10,7 @@
             var passwordField = document.getElementById('j_password');
             var errorMessages = document.getElementById('errorMessages');
             var passwordRegex = /^[A-Za-z\d@#$%]{4,}$/;
-            var userRegex = /^[0-9a-zA-Z\-]{1,20}$/;
+            var userRegex = /^[0-9a-zA-Z\-_]{1,20}$/;
 
             var passwordIsValid = passwordRegex.test(passwordField.value);
             var usernameIsValid = userRegex.test(userField.value);
