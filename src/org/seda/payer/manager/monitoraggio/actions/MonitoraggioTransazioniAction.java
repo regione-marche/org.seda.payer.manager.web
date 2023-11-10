@@ -581,16 +581,16 @@ public class MonitoraggioTransazioniAction extends BaseManagerAction {
 		//Il campo di ricerca Chiave Quadratura contiene l'identificativo del flusso di quadratura
 		
 		// Controllo che siano tutti numeri
-		String regex = "\\d+";
+		//String regex = "\\d+";
 		
-		String isDigits = (String)request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format());
+		//String isDigits = (String)request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format());
 		
-		if(isDigits.matches(regex)) {
+		//if(isDigits.matches(regex)) {
 			recuperaTransazioniRequest.setTx_idFlussoQuadratura(isNull(request.getAttribute(Field.TX_CHIAVE_QUADRATURA.format())));		
-		}
-		else {
-			recuperaTransazioniRequest.setTx_idFlussoQuadratura("");
-		}
+		//}
+		//else {
+		//	recuperaTransazioniRequest.setTx_idFlussoQuadratura("");
+		//}
 		recuperaTransazioniRequest.setTx_recuperate(isNull(request.getAttribute(Field.TX_RECUPERATE.format())));   //PG200050_001 SB
 		//PG160170_001 GG 15022017 - fine
 
