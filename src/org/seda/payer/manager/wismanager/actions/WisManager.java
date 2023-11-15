@@ -96,7 +96,7 @@ public class WisManager extends BaseManagerAction {
 			{
 				switch(firedButton) {
 					case TX_BUTTON_WIS:
-						// inizializza le proprietà
+						// inizializza le proprietï¿½
 						UserBean user = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);				
 						String sNome = user.getNome();
 						String sCognome = user.getCognome();
@@ -128,7 +128,7 @@ public class WisManager extends BaseManagerAction {
 						
 							//setto il tokencsrf
 							String tokenName = CSRFContext.getInstance().getTokenName();
-							String tokenValue = CSRFUtil.getTokenFromSession(session, CSRFContext.getInstance().getTokenNameSave());
+							String tokenValue = CSRFUtil.getTokenFromSession(session, tokenName);
 							String tokenCsrf = tokenName + "=" + tokenValue;
 							
 							//recupero la url corrente
@@ -245,14 +245,14 @@ public class WisManager extends BaseManagerAction {
 					else
 					{
 						System.out.println("verificaAutorizzazioneStruttura - ERRORE - " + res.getRetCode());
-						request.setAttribute("errorMessage", "Si è verificato un errore durante il controllo della struttura. Riprovare più tardi.");
+						request.setAttribute("errorMessage", "Si ï¿½ verificato un errore durante il controllo della struttura. Riprovare piï¿½ tardi.");
 						return false;
 					}
 				}
 				else
 				{
 					System.out.println("verificaAutorizzazioneStruttura - ERRORE");
-					request.setAttribute("errorMessage", "Si è verificato un errore durante il controllo della struttura. Riprovare più tardi.");
+					request.setAttribute("errorMessage", "Si ï¿½ verificato un errore durante il controllo della struttura. Riprovare piï¿½ tardi.");
 					return false;
 				}
 		} catch (Exception e) {

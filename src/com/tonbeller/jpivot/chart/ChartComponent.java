@@ -25,7 +25,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 
-import org.apache.log4j.Logger;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryLabelPosition;
@@ -60,6 +59,8 @@ import org.jfree.util.TableOrder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.jpivot.core.ModelChangeEvent;
 import com.tonbeller.jpivot.core.ModelChangeListener;
 import com.tonbeller.jpivot.olap.model.Cell;
@@ -86,7 +87,7 @@ import com.tonbeller.wcf.utils.XmlUtils;
  *
  */
 public class ChartComponent extends ComponentSupport implements ModelChangeListener {
-	private static Logger logger = Logger.getLogger(ChartComponent.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(ChartComponent.class);
 
 	String ref;
 	Document document;

@@ -347,7 +347,7 @@
 	<context-param>
 		<description>Activate or deactivate defense against CSRF</description>
 		<param-name>csrfDefender</param-name>
-		<param-value>true</param-value>
+		<param-value>false</param-value>
 	</context-param>
 
 	<context-param>

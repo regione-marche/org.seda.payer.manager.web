@@ -18,7 +18,6 @@ import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.util.PropertiesPath;
 import org.seda.payer.manager.ws.WSCache;
 
-import com.seda.commons.logger.sysout.SysOutLogger;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.j2ee5.maf.core.application.ApplicationBinderFactory;

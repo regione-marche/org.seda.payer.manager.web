@@ -5,14 +5,10 @@ import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.ws.WSCache;
@@ -37,7 +33,7 @@ public class BaseEntrateAction extends BaseManagerAction {
 
 	private static final long serialVersionUID = 1L;
 
-	//la classe BaseManagerAction non è ben strutturata --> viene ereditata, ma in parte bypassata da questa classe
+	//la classe BaseManagerAction non ï¿½ ben strutturata --> viene ereditata, ma in parte bypassata da questa classe
 	public static final String testoErrore = "errore generico";
 	public static final String testoErroreColl = "errore: errore di collegamento al servizio web";
 	
