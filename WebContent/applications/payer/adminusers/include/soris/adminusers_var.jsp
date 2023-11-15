@@ -77,10 +77,11 @@
 							cssclass="tbddl floatleft" cssclasslabel="label65 bold floatleft textright" 
 							label="Pertinenza:" valueselected="${tx_pertinenza}"	>
 							<s:ddloption text="Tutti gli enti" value="" />
-							<s:ddloption text="Comune di Torino" value="06954" />
-							<s:ddloption text="Regione Piemonte" value="73348" />
-							<!-- SVILUPPO_001_LP -->
-							<s:ddloption text="Sanzioni C.D.S Ingiunzioni" value="81711" />
+							<s:ddloption text="Comune di Beinasco" value="81721" />
+                            <s:ddloption text="Comune di Grugliasco" value="81711" />
+							<s:ddloption text="Comune di San Mauro Torinese" value="81030" />
+                            <s:ddloption text="Comune di Torino" value="06954" />
+                            <s:ddloption text="Regione Piemonte" value="73348" />
 							<!-- FINE SVILUPPO_001_LP -->
 						</s:dropdownlist>
 					</s:div>
