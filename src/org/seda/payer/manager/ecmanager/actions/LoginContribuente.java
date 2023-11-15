@@ -143,7 +143,7 @@ public class LoginContribuente extends BaseManagerAction {
 								return null;
 							}
 							else if (!sCodFiscaleContribuente.equals(codFisc.trim())) {
-								setFormMessage("form_ecmanager", "Il Codice Fiscale inserito non è lo stesso associato ai dati in Input", request);
+								setFormMessage("form_ecmanager", "Il Codice Fiscale inserito non ï¿½ lo stesso associato ai dati in Input", request);
 								return null;
 							}
 
@@ -164,7 +164,7 @@ public class LoginContribuente extends BaseManagerAction {
 
 				PropertiesTree configuration = (PropertiesTree)context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);
 
-				// inizializza le proprietà
+				// inizializza le proprietï¿½
 				UserBean user = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);				
 				String sNome = user.getNome();
 				String sCognome = user.getCognome();
@@ -183,7 +183,7 @@ public class LoginContribuente extends BaseManagerAction {
 
 				//setto il tokencsrf
 				String tokenName = CSRFContext.getInstance().getTokenName();
-				String tokenValue = CSRFUtil.getTokenFromSession(session, CSRFContext.getInstance().getTokenNameSave());
+				String tokenValue = CSRFUtil.getTokenFromSession(session, tokenName);
 				String tokenCsrf = tokenName + "=" + tokenValue;
 
 				

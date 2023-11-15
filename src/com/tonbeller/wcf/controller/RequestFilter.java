@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.apache.logging.log4j.ThreadContext;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.tbutils.testenv.Environment;
 import com.tonbeller.wcf.utils.DomUtils;
 import com.tonbeller.wcf.utils.JDK13Utils;
@@ -25,7 +26,7 @@ import com.tonbeller.wcf.utils.UrlUtils;
 
 public class RequestFilter implements Filter, Serializable{
 
-	private static Logger logger = Logger.getLogger(RequestFilter.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(RequestFilter.class);
 
 	  static final String NEXTVIEW = RequestFilter.class.getName() + ".nextview";
 	  static final String ISNEW = RequestFilter.class.getName() + ".isnew";
@@ -188,8 +189,7 @@ public class RequestFilter implements Filter, Serializable{
 	    private void forward(String uri) throws IOException {
 	      uri = UrlUtils.redirectURI(request, uri);
 	      uri = UrlUtils.forceExtension(uri, forceExtension);
-	      if (logger.isInfoEnabled())
-	        logger.info("redirecting to " + uri);
+		  logger.info("redirecting to " + uri);
 	      response.sendRedirect(uri);
 	    }
 
@@ -224,7 +224,7 @@ public class RequestFilter implements Filter, Serializable{
 	    HttpServletResponse response = (HttpServletResponse) res;
 
 	    HttpSession session = request.getSession(true);
-	    MDC.put("SessionID", session.getId());
+	    ThreadContext.put("SessionID", session.getId());
 
 	    String cpath = request.getContextPath();
 	    request.setAttribute(CONTEXT, cpath);
@@ -234,8 +234,7 @@ public class RequestFilter implements Filter, Serializable{
 	      // set locale for JSTL tags
 	      Config.set(request, Config.FMT_LOCALE, context.getLocale());
 	      // log if necessary
-	      if (logger.isInfoEnabled())
-	        logRequest(request);
+	      logRequest(request);
 
 	      if (passThru(req)) {
 	        chain.doFilter(req, res);
@@ -246,8 +245,7 @@ public class RequestFilter implements Filter, Serializable{
 	      long t1 = System.currentTimeMillis();
 	      RequestSynchronizer.instance(request).handleRequest(handler);
 	      long t2 = System.currentTimeMillis();
-	      if (logger.isInfoEnabled())
-	        logger.info("Request Execution total time: " + (t2 - t1) + " ms");
+	      logger.info("Request Execution total time: " + (t2 - t1) + " ms");
 	    } catch (Throwable e) {
 	      PrintWriter out = null;
 	      try {

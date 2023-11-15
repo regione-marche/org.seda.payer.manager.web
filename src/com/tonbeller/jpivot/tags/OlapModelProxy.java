@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
-import org.apache.log4j.Logger;
-
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.jpivot.core.ModelChangeEvent;
 import com.tonbeller.jpivot.core.ModelChangeListener;
 import com.tonbeller.jpivot.olap.model.OlapException;
@@ -24,7 +24,7 @@ public class OlapModelProxy  extends OlapModelDecorator implements HttpSessionBi
 	ArrayList listeners = new ArrayList();
 	  public static final String DEFAULT_NAME = "default";
 
-	  private static final Logger logger = Logger.getLogger(OlapModelProxy.class);
+	  private static LoggerWrapper logger = CustomLoggerManager.get(OlapModelProxy.class);
 
 	  private ModelChangeListener modelChangeListener = new ModelChangeListener() {
 	    public void modelChanged(ModelChangeEvent e) {
@@ -52,7 +52,6 @@ public class OlapModelProxy  extends OlapModelDecorator implements HttpSessionBi
 
 	    public void initialize() throws Exception {
 	      try {
-	        if (logger.isInfoEnabled())
 	          logger.info("initializing: " + model);
 	        model.initialize();
 	      } catch (OlapException e) {
@@ -62,21 +61,18 @@ public class OlapModelProxy  extends OlapModelDecorator implements HttpSessionBi
 	    }
 
 	    public void destroy() throws Exception {
-	      if (logger.isInfoEnabled())
 	        logger.info("destroying: " + model);
 	      model.destroy();
 	    }
 
 	    public void show() throws OlapException {
-	      if (logger.isInfoEnabled())
-	        logger.info("activating: " + model);
+			logger.info("activating: " + model);
 	      model.addModelChangeListener(modelChangeListener);
 	      setDelegate(model);
 	      fireStructureChanged();
 	    }
 
 	    public void hide() throws OlapException {
-	      if (logger.isInfoEnabled())
 	        logger.info("deactivating: " + model);
 	      model.removeModelChangeListener(modelChangeListener);
 	      setDelegate(Empty.EMPTY_MODEL);

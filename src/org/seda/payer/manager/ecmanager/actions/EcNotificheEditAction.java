@@ -4,18 +4,20 @@ package org.seda.payer.manager.ecmanager.actions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.seda.payer.manager.ecmanager.actions.util.Notifica;
 import org.seda.payer.manager.ecmanager.actions.util.NotificaResponseWrapper;
 import org.seda.payer.manager.ecmanager.actions.util.NotificatoreHelper;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.j2ee5.maf.core.action.ActionException;
 
 @SuppressWarnings("serial")
 public class EcNotificheEditAction extends AnaBollettinoManagerBaseManagerAction  {
-	private static Logger log = Logger.getLogger(EcNotificheListaAction.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(EcNotificheListaAction.class);
 	
 	public Object service(HttpServletRequest request) throws ActionException {
 		super.service(request);
@@ -55,7 +57,7 @@ public class EcNotificheEditAction extends AnaBollettinoManagerBaseManagerAction
 		
 		String operationNotificatore = "/gestioneNotifiche/cercaDettaglio/"+chiaveTabellaNotifica+".json";
 		try {			
-			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0, log);
+			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0);
 
 			ResponseEntity<NotificaResponseWrapper> rssResponse = notificatore.selNotifica(notifica,bearer);
 			if (rssResponse!=null)

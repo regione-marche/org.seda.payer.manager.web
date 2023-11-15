@@ -9,11 +9,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 public class WcfController extends Controller implements Serializable {
 
-	private static Logger logger = Logger.getLogger(WcfController.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(WcfController.class);
 	  private List requestListeners = new LinkedList();
 
 	  WcfController() {

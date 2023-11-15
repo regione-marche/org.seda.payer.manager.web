@@ -7,7 +7,6 @@ import java.net.Proxy.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,17 +25,20 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class NotificatoreHelper {
 	
+	private static LoggerWrapper logger = CustomLoggerManager.get(NotificatoreHelper.class);
+
 	private String endPoint = "";
 	private String operation = "";
 	private RestTemplate restTemplate = null;
 	private boolean proxy=false;
     private String proxyAddress;
 	private int portNumber;
-	private Logger logger;
 	private ObjectMapper objectMapper = null;
 	
 	/**
@@ -68,14 +70,13 @@ public class NotificatoreHelper {
 	 * @param proxyAddress proxy address
 	 * @param port         proxy port
 	 */
-	public NotificatoreHelper(String endPoint, String operation, boolean proxy, String proxyAddress, int port, Logger log) {
+	public NotificatoreHelper(String endPoint, String operation, boolean proxy, String proxyAddress, int port) {
 		super();
 		this.proxy=proxy;
 		this.proxyAddress=proxyAddress;
 		this.portNumber=port;
 		this.endPoint=endPoint;
 		this.operation=operation;
-		this.logger=log;
 		if (restTemplate == null) {
 			init();
 		}
