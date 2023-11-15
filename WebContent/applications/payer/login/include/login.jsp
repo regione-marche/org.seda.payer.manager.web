@@ -48,7 +48,7 @@
 			message="[accept=username: caratteri non ammessi"/></p>
 			<p><s:textbox label="Password" bpassword="true" autocomplete="off" bmodify="true" name="j_password" text="${param.j_password}" 
 			validator="required;accept=^[A-Za-z\d@#$%^&+=!*.,]{4,}$" cssclass="login_textarea_label" cssclasslabel="login_textarea_label left"
-			message="[accept=Password: caratteri non ammessi]"/>
+			message="[accept=Password: caratteri non ammessi]" maxlenght="15"/>
 			
 			</p>
 			<p><s:button id="btnLogin" type="submit" text="Login" onclick="return validateForm()" cssclass="btnBlue"/></p>
