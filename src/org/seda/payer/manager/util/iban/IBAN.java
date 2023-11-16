@@ -17,6 +17,9 @@ package org.seda.payer.manager.util.iban;
 import java.math.BigInteger;
 import java.util.logging.Level;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
+
 /**
  * Utility class to validate IBAN codes.
  * 
@@ -42,7 +45,7 @@ public class IBAN {
 	private static final BigInteger BD_98 = new BigInteger("98");
 	private String invalidCause = null;
 	private String iban;
-	private static transient final java.util.logging.Logger log = java.util.logging.Logger.getLogger(IBAN.class.getName());
+	private static LoggerWrapper logger = CustomLoggerManager.get(IBAN.class);
 	
 	/**
 	 * Get the IBAN
@@ -107,7 +110,7 @@ public class IBAN {
 			return false;
 		}
 		bban.append(code.substring(0, 4));
-		if (log.isLoggable(Level.FINE)) log.fine("bban: "+bban);
+		logger.debug("bban: "+bban);
 		
 		String workString = translateChars(bban);
 		int mod = modulo97(workString);

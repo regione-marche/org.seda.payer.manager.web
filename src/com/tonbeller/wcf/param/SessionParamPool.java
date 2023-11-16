@@ -22,8 +22,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.log4j.Logger;
-
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.tbutils.res.Resources;
 
 /**
@@ -71,7 +71,7 @@ public class SessionParamPool implements Map, Serializable {
 	  private static final String SQL_VALUE_MAP = "sqlValueMap";
 	  private static final String PARAM_POOL = "paramPool";
 
-	  private static final Logger logger = Logger.getLogger(SessionParamPool.class);
+	  private static LoggerWrapper logger = CustomLoggerManager.get(SessionParamPool.class);
 	  private SqlValueMap sqlValueMap;
 	  private Map map = new HashMap();
 

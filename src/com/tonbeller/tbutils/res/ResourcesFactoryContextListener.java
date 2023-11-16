@@ -8,11 +8,13 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.jsp.jstl.core.Config;
 
-import org.apache.log4j.Logger;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
+
 
 public class ResourcesFactoryContextListener implements ServletContextListener, Serializable {
 
-	private static Logger logger = Logger.getLogger(ResourcesFactoryContextListener.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(ResourcesFactoryContextListener.class);
 
 	  public void contextInitialized(ServletContextEvent e) {
 	    try {
