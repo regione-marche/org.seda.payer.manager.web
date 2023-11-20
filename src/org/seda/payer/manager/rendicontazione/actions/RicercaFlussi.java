@@ -288,7 +288,7 @@ public class RicercaFlussi extends BaseManagerAction {
 		in.setDataCreazioneA(dataCreazioneA == null ? "" : dataCreazioneA);
 		in.setCodiceProvincia(codiceProvincia == null ? "": codiceProvincia);
 		in.setIdMovimentoCassa(idMovimentoCassa == null ? "": idMovimentoCassa);
-		in.setCodicePSP(codicePSP == null ? "" : codicePSP); //PG190180_001 - 20190520
+		in.setCodicePSP(codicePSP == null ? "" : codicePSP); //PG1360180_001 - 201360520
 		in.setMovimentoCassa(movimentoCassa == null ? "": movimentoCassa);
 		in.setGiornaleCassa(giornaleCassa == null ? "": giornaleCassa);
 		
@@ -338,9 +338,9 @@ public class RicercaFlussi extends BaseManagerAction {
         if (!sDataPagDaIsNullOrEmpty && dataPagDa.after(dataPagA))
         	return "La Data Pagamento da deve essere antecedente o uguale alla Data Pagamento a";
         if(!sDataPagDaIsNullOrEmpty) {
-	        dataPagDa.add(Calendar.DAY_OF_MONTH, 90);
+	        dataPagDa.add(Calendar.DAY_OF_MONTH, 360);
 	        if (dataPagDa.before(dataPagA))
-	        	return "Il massimo range di giorni consentito è di 90 giorni";
+	        	return "Il massimo range di giorni consentito è di 360 giorni";
         }
         
         if(!sDataFlussoDaIsNullOrEmpty && sDataFlussoAIsNullOrEmpty)
@@ -348,9 +348,9 @@ public class RicercaFlussi extends BaseManagerAction {
         if (!sDataFlussoDaIsNullOrEmpty && dataFlussoDa.after(dataFlussoA))
         	return "La Data Creazione Flusso da deve essere antecedente o uguale alla Data Creazione Flusso a";
         if(!sDataFlussoDaIsNullOrEmpty) {
-	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 90);
+	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
 	        if (dataFlussoDa.before(dataFlussoA))
-	        	return "Il massimo range di giorni consentito è di 90 giorni";
+	        	return "Il massimo range di giorni consentito è di 360 giorni";
         }        
         return null;
         

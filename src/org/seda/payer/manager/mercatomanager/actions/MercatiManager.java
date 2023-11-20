@@ -65,7 +65,7 @@ public class MercatiManager extends MercatoBaseManagerAction {
 				
 				PropertiesTree configuration = (PropertiesTree)context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);
 				
-				// inizializza le proprietà
+				// inizializza le proprietï¿½
 				UserBean user = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);				
 				String sNome = user.getNome();
 				String sCognome = user.getCognome();
@@ -73,7 +73,7 @@ public class MercatiManager extends MercatoBaseManagerAction {
 				
 				//setto il tokencsrf
 				String tokenName = CSRFContext.getInstance().getTokenName();
-				String tokenValue = CSRFUtil.getTokenFromSession(session, CSRFContext.getInstance().getTokenNameSave());
+				String tokenValue = CSRFUtil.getTokenFromSession(session, tokenName);
 				String tokenCsrf = tokenName + "=" + tokenValue;
 				
 				//recupero la url corrente

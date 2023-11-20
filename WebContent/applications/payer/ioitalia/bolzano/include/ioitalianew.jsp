@@ -69,6 +69,14 @@
 	});
 </script>
 
+<style>
+.txtArea{
+	float:left;
+	margin-bottom:20px;	
+	max-width: 800px;
+}
+</style>
+
 <s:div name="div_selezione" cssclass="div_align_center divSelezione">
 	<s:div name="divRicercaTopName" cssclass="divRicercaTop">
 		<s:form name="form_selezione" action="ioitalianewmessage.do?vista=ioitalia"
@@ -242,14 +250,22 @@
 					</s:div>
 				</div>
 				<div style="padding: 10px;">
-					<s:div name="divElement9" cssclass="divRicMetadatiSingleRow">
-						<s:textbox bmodify="true" name="tx_corpo_s"
-							label="Corpo messaggio:" showrequired="true"
-							validator="required;minlength=80;maxlength=10000;"
-							cssclasslabel="label85 bold textright"
-							cssclass="textareaman tbddlMax780"
-							text="${tx_corpo_s}" />
-					</s:div>
+<%-- 					<s:div name="divElement9" cssclass="divRicMetadatiSingleRow"> --%>
+<%-- 						<s:textbox bmodify="true" name="tx_corpo_s" --%>
+<%-- 							label="Corpo messaggio:" showrequired="true" --%>
+<%-- 							validator="required;minlength=80;maxlength=10000;" --%>
+<%-- 							cssclasslabel="label85 bold textright" --%>
+<%-- 							cssclass="textareaman tbddlMax780" --%>
+<%-- 							text="${tx_corpo_s}" /> --%>
+<%-- 					</s:div> --%>
+				<s:div name="divElement9" cssclass="divRicMetadatiSingleRow">
+	                <s:textarea name="tx_corpo_s" label="Corpo messaggio:" text="${tx_corpo_s}"
+	                bmodify="true" row="6" col="104" 
+	                cssclasslabel="label85 bold textright" 
+	                cssclass = "txtArea"
+	                />
+	            
+	            </s:div>
 				</div>
 				<div style="clear: left;">
 					<s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">

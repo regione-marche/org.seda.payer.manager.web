@@ -5,6 +5,7 @@ package org.seda.payer.manager.configurazione.actions;
 
 
 import java.rmi.RemoteException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -151,6 +152,7 @@ public class EnteAction extends DispatchHtmlAction {
 			String strDescrSocieta= (String)request.getAttribute("ente_companyCode");
 			String strDescrUtente= (String)request.getAttribute("ente_strDescrUtente");
 			String firedButtonReset = (String)request.getAttribute("tx_button_reset");
+			
 			if (firedButtonReset!=null){				
 				resetParametri(request);
 				companyCode="";
@@ -159,6 +161,7 @@ public class EnteAction extends DispatchHtmlAction {
 				strEnte="";
 				strDescrSocieta="";
 				strDescrUtente="";
+				
 			}
 			String firedButton = (String)request.getAttribute("tx_button_indietro");
 			String firedButtonN = (String)request.getAttribute("tx_button_nuovo");
@@ -169,6 +172,7 @@ public class EnteAction extends DispatchHtmlAction {
 					strEnte = request.getParameter("");
 					strDescrSocieta = request.getParameter("");
 					strDescrUtente = request.getParameter("");
+					
 			}
 //inizio LP PG200060
 			//Fabrizio 04/05/2015
@@ -186,6 +190,7 @@ public class EnteAction extends DispatchHtmlAction {
 				session.setAttribute("ente_strEnte", (String)request.getAttribute("ente_strEnte"));
 				session.setAttribute("ente_companyCode", (String)request.getAttribute("ente_companyCode"));
 				session.setAttribute("ente_strDescrUtente", (String)request.getAttribute("ente_strDescrUtente"));
+			
 			}
 			//fine Fabrizio 04/05/2015
 //fine LP PG200060
@@ -212,11 +217,12 @@ public class EnteAction extends DispatchHtmlAction {
 			//request.setAttribute("ente_chiaveEnte", .getChiaveEnte());
 			request.setAttribute("ente_strEnte", strEnte);
 			request.setAttribute("ente_strDescrSocieta",strDescrSocieta);
-			request.setAttribute("ente_strDescrUtente",strDescrUtente);
-			
+			request.setAttribute("ente_strDescrUtente",strDescrUtente);  
 			request.setAttribute("entes", enteServizioResponse.getListXml());
 			request.setAttribute("entes.pageInfo", pageInfo);
-			request.setAttribute("ente_strEnte", strEnte);
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -286,6 +292,7 @@ public class EnteAction extends DispatchHtmlAction {
 			request.setAttribute("ente_flagRuoli", response.getEnte().getFlagRuoli());
 			request.setAttribute("ente_directoryFtpFlussiRimbEcc", response.getEnte().getDirFtpFlussiRimbEcc());
 			request.setAttribute("ente_directoryFtpFlussiCbi", response.getEnte().getDirFtpFlussiCbi());
+			request.setAttribute("ente_codIpaEnte", response.getEnte().getCodIpaEnte());
 			//inizio LP PG200060
 			String template = getTemplateCurrentApplication(request, request.getSession());
 			if(!template.equalsIgnoreCase("regmarche")) {
@@ -370,6 +377,8 @@ public class EnteAction extends DispatchHtmlAction {
 						request.setAttribute("ente_strEnte", null);
 						request.setAttribute("ente_strDescrSocieta", null);
 						request.setAttribute("ente_strDescrUtente", null);
+					//	request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
+					
 						index(request);
 					}
 				}
@@ -412,6 +421,7 @@ public class EnteAction extends DispatchHtmlAction {
 						request.setAttribute("ente_strEnte", null);
 						request.setAttribute("ente_strDescrSocieta", null);
 						request.setAttribute("ente_strDescrUtente", null);
+					//	request.setAttribute("ente_codIpaEnte", null);  //cd pago 580 
 						index(request);
 					}
 				}
@@ -633,7 +643,6 @@ public class EnteAction extends DispatchHtmlAction {
 		in.setStrEnte(strEnte == null ? "" : strEnte);
 		in.setStrDescrSocieta(strDescrSocieta == null ? "" : strDescrSocieta);
 		in.setStrDescrUtente(strDescrUtente == null ? "" : strDescrUtente);
-		
 		res = WSCache.enteServer.getEntes(in, request);
 		return res;
 	}

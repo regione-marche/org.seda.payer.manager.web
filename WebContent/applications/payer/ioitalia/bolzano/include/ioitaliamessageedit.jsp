@@ -69,6 +69,14 @@
 	});
 </script>
 
+<style>
+.txtArea{
+	float:left;
+	margin-bottom:20px;	
+	max-width: 800px;
+}
+</style>
+
 <div style="display: none">
 	<c:choose>
 		<c:when test="${tx_esito == '0'}">
@@ -186,13 +194,21 @@
 					</s:div>
 			
 			<br />
+<%-- 					<s:div name="divElement11" cssclass="divRicMetadatiSingleRow"> --%>
+<%-- 						<s:textbox bmodify="${!tx_check}" bdisable="${tx_check}" name="tx_corpo" --%>
+<%-- 							label="Corpo messaggio:" --%>
+<%-- 							cssclasslabel="label160 bold textright floatleft" --%>
+<%-- 							cssclass="textareaman tbddlMax780" showrequired="true" --%>
+<%-- 							text="${tx_corpo}" validator="required;minlength=80;maxlength=10000"/> --%>
+<%-- 					</s:div> --%>
 					<s:div name="divElement11" cssclass="divRicMetadatiSingleRow">
-						<s:textbox bmodify="${!tx_check}" bdisable="${tx_check}" name="tx_corpo"
-							label="Corpo messaggio:"
-							cssclasslabel="label160 bold textright floatleft"
-							cssclass="textareaman tbddlMax780" showrequired="true"
-							text="${tx_corpo}" validator="required;minlength=80;maxlength=10000"/>
-					</s:div>
+	                <s:textarea name="tx_corpo" label="Corpo messaggio:" text="${tx_corpo}"
+	                bmodify="${!tx_check}" row="6" col="104" 
+	                cssclasslabel="label160 bold textright floatleft" 
+	                cssclass = "txtArea"
+	                />
+	            
+	            </s:div>
 			<br />
 			<s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">
 				<s:div name="divElement10" cssclass="divRicMetadatiSingleRow">

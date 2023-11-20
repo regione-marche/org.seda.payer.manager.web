@@ -54,7 +54,7 @@ public class LoginUffManager extends BaseManagerAction {
 
 				PropertiesTree configuration = (PropertiesTree)context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);
 
-				// inizializza le proprietà
+				// inizializza le proprietï¿½
 				UserBean user = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);				
 				String sNome = user.getNome();
 				String sCognome = user.getCognome();
@@ -63,7 +63,7 @@ public class LoginUffManager extends BaseManagerAction {
 
 				//setto il tokencsrf
 				String tokenName = CSRFContext.getInstance().getTokenName();
-				String tokenValue = CSRFUtil.getTokenFromSession(session, CSRFContext.getInstance().getTokenNameSave());
+				String tokenValue = CSRFUtil.getTokenFromSession(session, tokenName);
 				String tokenCsrf = tokenName + "=" + tokenValue;
 				
 				//String idDocumento = (String)request.getAttribute("idDoc");

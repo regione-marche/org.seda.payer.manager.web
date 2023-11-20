@@ -11,13 +11,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 import org.seda.payer.manager.components.config.ManagerStarter;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.PropertiesPath;
 
-
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.j2ee5.maf.core.security.SignOnKeys;
 import com.seda.j2ee5.maf.util.MAFAttributes;
@@ -36,7 +36,7 @@ public class AuthenticationFilter implements Filter {
 	private boolean isAuthenticationRequest=false;
 	
 
-	public static Logger logger = Logger.getLogger(AuthenticationFilter.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(AuthenticationFilter.class);
 
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -51,8 +51,8 @@ public class AuthenticationFilter implements Filter {
 			if(session!=null){
 				UserBean userBean = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);
 				/*
-				 * Se è presente uno UserBean valido si tratta di una richiesta relativa 
-				 * ad sessione già autenticata e trattata precedentemente da questo filtro
+				 * Se ï¿½ presente uno UserBean valido si tratta di una richiesta relativa 
+				 * ad sessione giï¿½ autenticata e trattata precedentemente da questo filtro
 				 * e faccio il chain
 				 */
 				if(isValid(userBean))
