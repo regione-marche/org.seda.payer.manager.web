@@ -25,16 +25,16 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.seda.payer.manager.util.PropertiesPath;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.tbutils.res.Resources;
 
+@Deprecated
 public class LogHandler {
 
-  private static Logger logger = Logger.getLogger(LogHandler.class);
+  private static LoggerWrapper logger = CustomLoggerManager.get(LogHandler.class);
 
   public static final String DEFAULT = "default";
   public static final String NOLOG = "nolog";
@@ -196,9 +196,6 @@ public class LogHandler {
     else
       logProps = loadConfig(name);
 
-    LogManager.resetConfiguration();
-    PropertyConfigurator.configure(logProps);
-
     System.out.println("--- Applied new logging configuration ---");
     logger.error("Test error message");
     logger.debug("Test debug message");
@@ -259,13 +256,13 @@ public class LogHandler {
   }
 
   public String version() {
-    Package p = LogManager.class.getPackage();
+    // Package p = LogManager.class.getPackage();
     StringBuffer version = new StringBuffer();
-    version.append(p.getImplementationVendor());
-    version.append(' ');
-    version.append(p.getImplementationTitle());
-    version.append(' ');
-    version.append(p.getImplementationVersion());
+    // version.append(p.getImplementationVendor());
+    // version.append(' ');
+    // version.append(p.getImplementationTitle());
+    // version.append(' ');
+    // version.append(p.getImplementationVersion());
 
     return version.toString();
   }
@@ -298,10 +295,10 @@ public class LogHandler {
    * which level is set for the root logger. May be empty 
    */
   public String getRootLoggerLevel() {
-    Logger logger = Logger.getRootLogger();
+    // Logger logger = Logger.getRootLogger();
 
-    if (logger.getLevel() != null)
-      return logger.getLevel().toString();
+    // if (logger.getLevel() != null)
+    //   return logger.getLevel().toString();
     return "";
   }
 }

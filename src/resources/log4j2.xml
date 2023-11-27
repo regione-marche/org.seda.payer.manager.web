@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c - %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="org-seda-manager-web-ws"
+                	  fileName="../standalone/log/org-seda-manager-web-ws.log"
+                	  filePattern="mgp.%i.log.gz"
+                	  ignoreExceptions="false" filePermissions="rw-rw-r--">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+			<!-- <JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/> -->
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+        <RollingFile name="org-seda-manager-web-ws-error"
+                	 fileName="../standalone/log/org-seda-manager-web-ws-error.log"
+                	 filePattern="org-seda-manager-web-ws-error.%i.log"
+                     ignoreExceptions="false" filePermissions="rw-rw-r--">
+			<JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="200MB" />
+            </Policies>
+            <ThresholdFilter level="ERROR"/>
+        </RollingFile>
+        <RollingFile name="org-seda-manager-web-ws-debug"
+                	 fileName="../standalone/log/org-seda-manager-web-ws-debug.log"
+                	 filePattern="org-seda-manager-web-ws-error.%i.log"
+                     ignoreExceptions="false" filePermissions="rw-rw-r--">
+			<JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500MB" />
+            </Policies>
+            <ThresholdFilter level="DEBUG"/>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+		<Logger name="org.seda.payer.manager" level="DEBUG" additivity="false">
+			<AppenderRef ref="org-seda-manager-web-ws" />
+            <AppenderRef ref="org-seda-manager-web-ws-debug" />
+            <AppenderRef ref="org-seda-manager-web-ws-error" />
+		</Logger>         
+        <Root level="INFO" >
+            <AppenderRef ref="STDOUT" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -420,23 +420,6 @@
 							</s:then>
 							<s:else></s:else>
 						</s:if>
-						<s:if
-							right="${sessionScope.j_user_bean.invioFlussiRendicontazioneViaWsEnabled}"
-							control="eq" left="true" 
-							operator="and" 
-							secondright="{14}{18}" secondcontrol="eq" secondleft="NN"
-							>
-							<%-- Fine modifica PG110260 --%>
-							<s:then>
-								<s:hyperlink
-									cssclass="hlStyle"
-									href="inviaFlusso.do?chiaveRendicontazione={8}&tx_tipo_invio_flusso=WS&nomeFile={9}"
-									imagesrc="../applications/templates/rendicontazione/img/{18}_invioWS.png"
-									alt="Invio del flusso {9} via Web Service" text="" />
-							</s:then>
-							<s:else></s:else>
-						</s:if>
-
 					</s:dgcolumn>
 				</s:thendatagrid>
 			</s:ifdatagrid>

@@ -349,6 +349,18 @@
 								
 							</s:div>
 							
+							<!--inizio CD PAGO 580 -->
+								<s:div name="divElement711_b" cssclass="divRicMetadatiSingleRow">
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+								</s:div>
+							<!--fine CD PAGO 580 -->
+							
 							<s:div name="divElement712" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
 									validator="ignore;accept=${configurazione_email_regex};maxlength=50"
@@ -826,6 +838,20 @@
 									cssclass="textareaman" />
 
 							</s:div>
+							
+								<!--inizio CD PAGO 580 -->
+							<s:div name="divElement711_b" cssclass="divRicMetadatiSingleRow">
+								
+								<s:textbox bmodify="true"
+									validator="ignore;maxlength=35"
+									label="CodiceIPA:" name="ente_codIpaEnte"
+									maxlenght="50" showrequired="true"
+									text="${requestScope.ente_codIpaEnte}"
+									cssclasslabel="label85 bold floatleft textright"
+									cssclass="textareaman" />
+							</s:div>
+								
+							<!--fine CD PAGO 580 -->
 							
 							<s:div name="divElement737" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
