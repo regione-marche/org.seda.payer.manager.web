@@ -30,7 +30,7 @@
         </RollingFile>
         <RollingFile name="org-seda-manager-web-ws-debug"
                 	 fileName="../standalone/log/org-seda-manager-web-ws-debug.log"
-                	 filePattern="org-seda-manager-web-ws-error.%i.log"
+                	 filePattern="org-seda-manager-web-ws-debug.%i.log"
                      ignoreExceptions="false" filePermissions="rw-rw-r--">
 			<JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/>
             <Policies>
