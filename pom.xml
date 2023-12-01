@@ -351,6 +351,7 @@
 			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/wcf.jar</systemPath>
+			
 		</dependency>
 
 		<dependency>
@@ -475,13 +476,6 @@
 		</dependency>
 		
 		
-		<dependency>
-			<groupId>icar-sp-inf3-j2ee-integration-kit</groupId>
-			<artifactId>icar-sp-inf3-j2ee-integration-kit</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/WebContent/WEB-INF/lib/icar-sp-inf3-j2ee-integration-kit.jar</systemPath>
-		</dependency>
 
 		<dependency>
 			<groupId>esapi</groupId>
@@ -544,6 +538,12 @@
 			<groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
 			<artifactId>owasp-java-html-sanitizer</artifactId>
 		</dependency>
+        
+        <dependency>
+        <groupId>commons-configuration</groupId>
+        <artifactId>commons-configuration</artifactId>
+        <version>1.10</version>
+    </dependency>
         
 	</dependencies>
 
