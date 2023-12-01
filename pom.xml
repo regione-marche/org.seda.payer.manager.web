@@ -51,7 +51,7 @@
 					<archive>
 						<manifestEntries>
 						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
-							<Dependencies></Dependencies>
+							<Dependencies>org.eclipse.birt.runtime</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -158,10 +158,10 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.eclipse.birt.runtime</groupId>
 			<artifactId>org.eclipse.birt.runtime</artifactId>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
