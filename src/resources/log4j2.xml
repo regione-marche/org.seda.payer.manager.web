@@ -8,7 +8,7 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
         <RollingFile name="org-seda-manager-web-ws"
-                	  fileName="../standalone/log/org-seda-manager-web-ws.log"
+                	  fileName="${sys:jboss.server.log.dir}/org-seda-manager-web-ws.log"
                 	  filePattern="mgp.%i.log.gz"
                 	  ignoreExceptions="false" filePermissions="rw-rw-r--">
             <PatternLayout pattern="${LOG_PATTERN}"/>
@@ -19,7 +19,7 @@
             <DefaultRolloverStrategy max="10" />
         </RollingFile>
         <RollingFile name="org-seda-manager-web-ws-error"
-                	 fileName="../standalone/log/org-seda-manager-web-ws-error.log"
+                	 fileName="${sys:jboss.server.log.dir}/org-seda-manager-web-ws-error.log"
                 	 filePattern="org-seda-manager-web-ws-error.%i.log"
                      ignoreExceptions="false" filePermissions="rw-rw-r--">
 			<JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/>
@@ -29,7 +29,7 @@
             <ThresholdFilter level="ERROR"/>
         </RollingFile>
         <RollingFile name="org-seda-manager-web-ws-debug"
-                	 fileName="../standalone/log/org-seda-manager-web-ws-debug.log"
+                	 fileName="${sys:jboss.server.log.dir}/org-seda-manager-web-ws-debug.log"
                 	 filePattern="org-seda-manager-web-ws-debug.%i.log"
                      ignoreExceptions="false" filePermissions="rw-rw-r--">
 			<JsonTemplateLayout eventTemplateUri="classpath:ElasticsearchJsonEventLayoutV1.json"/>
