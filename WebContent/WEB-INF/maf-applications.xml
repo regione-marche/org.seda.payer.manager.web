@@ -1162,6 +1162,7 @@
 			<template name="regmarche">maf-templates-regmarche.xml</template>
 			<!--PG200400-->
 			<template name="newsoris">maf-templates-soris.xml</template>
+			<template name="trentirisc">maf-templates-trentirisc.xml</template>
 			<!--FINE PG200400-->
 		</template-collection>
 		<subcontext>/blackboxconfig</subcontext>
