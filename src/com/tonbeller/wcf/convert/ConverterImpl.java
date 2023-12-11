@@ -19,11 +19,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.tonbeller.wcf.format.FormatException;
 import com.tonbeller.wcf.format.Formatter;
 import com.tonbeller.wcf.ui.XoplonCtrl;
@@ -42,7 +43,7 @@ public class ConverterImpl implements Converter, Serializable {
   HashMap handlers = new HashMap();
   Formatter formatter;
   FormatException formatException = null;
-  private static Logger logger = Logger.getLogger(ConverterImpl.class);
+  private static LoggerWrapper logger = CustomLoggerManager.get(ConverterImpl.class);
 
 
   public Formatter getFormatter() {

@@ -276,7 +276,7 @@
 			</s:div>
 			<s:div name="divLeftContatti" cssclass="divSectionLeft">
 				<s:textbox label="e-mail" name="txtEmail" tabindex="22"
-					bmodify="true" text="${requestScope.reg_profilo.email}" maxlenght="50"
+					bmodify="true" text="${requestScope.reg_profilo.email}" maxlenght="55"
 					cssclass="txtRegistrazione" cssclasslabel="lblRegistrazione"
 					validator="ignore;accept=${adminusers_email_regex}"
 					message="[accept=e-mail: ${msg_configurazione_email}]"/>
@@ -291,7 +291,7 @@
 			</s:div>
 			<s:div name="divRightContatti" cssclass="divSectionRight">
 				<s:textbox label="e-mail PEC" name="txtEmailPEC" tabindex="24"
-					bmodify="true" text="${requestScope.reg_profilo.emailPEC}" maxlenght="50"
+					bmodify="true" text="${requestScope.reg_profilo.emailPEC}" maxlenght="55"
 					cssclass="txtRegistrazione" cssclasslabel="lblRegistrazione"
 					validator="ignore;accept=${adminusers_email_regex}"
 					message="[accept=e-mail PEC: ${msg_configurazione_email}]"/>

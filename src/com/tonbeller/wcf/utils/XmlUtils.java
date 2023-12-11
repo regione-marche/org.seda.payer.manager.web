@@ -39,11 +39,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 /**
  * @author av
@@ -52,7 +54,7 @@ import org.xml.sax.SAXException;
 public class XmlUtils implements Serializable {
 
   private static final String WEBKEY = XmlUtils.class.getName();
-  private static Logger logger = Logger.getLogger(XmlUtils.class);
+  private static LoggerWrapper logger = CustomLoggerManager.get(XmlUtils.class);
 
   private XmlUtils() {
   }

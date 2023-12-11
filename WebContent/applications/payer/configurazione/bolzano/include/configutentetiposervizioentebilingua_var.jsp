@@ -292,6 +292,7 @@
 										<s:ddloption value="3" text="CDSA"/><!-- PG180110 -->
 										<s:ddloption value="4" text="SPOM3"/><!-- PG200110 -->
 										<s:ddloption value="5" text="CDSA2"/><!-- PG200090 -->
+										<s:ddloption value="6" text="SPOM4"/><!-- Restyling Bolzano - Contributo Alunni -->
 								</s:dropdownlist>
 							</s:div>
 

@@ -70,7 +70,6 @@
 		        <s:div name="divRicercaMetadatiLeft" cssclass="divRicMetadatiLeft">
 			        <s:div name="divElement1" cssclass="divRicMetadatiSingleRow">	
 						<s:textbox bmodify="true" 
-									validator="ignore;"
 									  label="Desc.Gateway" name="gatewaypagamento_descrizioneGateway" 
 									  text="${gatewaypagamento_descrizioneGateway}" cssclasslabel="label85 bold textright"
 									  message="[accept=Desc.Gateway: ${msg_configurazione_descrizione_regex}]"

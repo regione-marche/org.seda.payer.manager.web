@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import javax.sql.DataSource;
 import javax.sql.rowset.RowSetMetaDataImpl;
 import javax.sql.rowset.WebRowSet;
 
-import org.apache.log4j.Logger;
 import org.seda.payer.manager.ecmanager.actions.util.NotSel;
 import org.seda.payer.manager.ecmanager.actions.util.Notifica;
 import org.seda.payer.manager.ecmanager.actions.util.NotificaResponseWrapper;
@@ -35,8 +35,8 @@ import org.seda.payer.manager.util.PropertiesPath;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Base64;
-
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
 import com.seda.data.spi.PageInfo;
@@ -55,7 +55,7 @@ import com.sun.rowset.WebRowSetImpl;
 
 public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerAction {
 	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(EcNotificheListaAction.class);
+	private static LoggerWrapper log = CustomLoggerManager.get(EcNotificheListaAction.class);
 	private String codiceSocieta="";
 	private String cutecute="";
 	private String chiaveEnte="";
@@ -196,7 +196,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 //						dividiSocUtenteEnte(request);
 //						loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
 //						
-//						/* Tolto il controllo sul numero di righe di download TK 2015100188000055 di Soris perchè query di estrazione non complessa
+//						/* Tolto il controllo sul numero di righe di download TK 2015100188000055 di Soris perchï¿½ query di estrazione non complessa
 //						Integer maxRigheDownload = (Integer) context.getAttribute(ManagerKeys.MAXRIGHE_DOWNLOAD_BORSELLINO);
 //						if ((Integer) session.getAttribute("numRows") <= maxRigheDownload ){
 //							getLista(request,true);
@@ -229,7 +229,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 							System.out.println("Data scadenzaOld: "+ dateFormat.format(urlNotifica.getDataScadenza().getTime()));
 							System.out.println(cal.compareTo(urlNotifica.getDataScadenza()));
-							//Se il link di download è scaduto, incremento la data di scadenza di altri 7 giorni
+							//Se il link di download ï¿½ scaduto, incremento la data di scadenza di altri 7 giorni
 							if(cal.compareTo(urlNotifica.getDataScadenza())>0){
 								scaduto=true;
 								cal.add(Calendar.DATE, 7);
@@ -249,7 +249,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 						
 						//Recupero la mail dall'anagrafica di contatto
 						AnagraficaBollettino anagrafica = getAnagraficaDiContatto(notifica.getCodiceFiscale(), notifica.getCodiceUtente(), codiceSocieta);
-						//Se la mail è presente nell'anagrafica di contatto uso quella, altrimenti quella della notifica
+						//Se la mail ï¿½ presente nell'anagrafica di contatto uso quella, altrimenti quella della notifica
 						if(anagrafica!=null){
 							if(notifica.getFlagTipoMessaggio().equals("M")){
 								if(anagrafica.getMail()!=null && !anagrafica.getMail().trim().equals("")){
@@ -287,7 +287,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 						lst.add(rNotifica);
 						notifiche.setNotifiche(lst);
 								
-						NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore.trim(), operationNotificatore, false, "", 0, log);
+						NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore.trim(), operationNotificatore, false, "", 0);
 						ResponseEntity<NotificheResponseWrapper> rssResponse = notificatore.reSendNotifica(notifiche, bearer);
 						if (rssResponse!=null)
 							System.out.println( "Esito chiamata a servizio json: " + rssResponse.toString());
@@ -454,7 +454,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 		WebRowSetImpl resulSet = null;
 		//fine LP PG21XX04 Leak
 		try {			
-			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0, log);
+			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0);
 
 			ResponseEntity<NotificheResponseWrapper> rssResponse = notificatore.listNotifiche(notificheLis,bearer,getParameterSel(notSel,order,request)); //PREJAVA18_LUCAP_03082020 - aggiunta request
 			if (rssResponse!=null)
@@ -586,7 +586,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 						
 						rowSet.insertRow();
 						
-						// riposiziono all'inizio perchè vengono invertiti gli elementi 
+						// riposiziono all'inizio perchï¿½ vengono invertiti gli elementi 
 						rowSet.afterLast();
 						rowSet.moveToInsertRow();
 					}
@@ -633,7 +633,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 			
 //			1) mettere qui il codice ente da 5
 //			2) verificare la paginazione con una sola pagina ad esempio mettendo mail pec
-//			3) verificare perchè non filtra per documento
+//			3) verificare perchï¿½ non filtra per documento
 			
 			request.setAttribute("tx_societa", codiceSocieta);
 			request.setAttribute("tx_utente", cutecute);
@@ -790,7 +790,7 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 		
 		String operationNotificatore = "/gestioneNotifiche/cercaDettaglio/"+chiaveTabellaNotifica+".json";
 		try {			
-			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0, log);
+			NotificatoreHelper notificatore = new NotificatoreHelper(urlNotificatore, operationNotificatore, false, "", 0);
 
 			ResponseEntity<NotificaResponseWrapper> rssResponse = notificatore.selNotifica(notifica,bearer);
 			if (rssResponse!=null)

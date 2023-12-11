@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import javax.sql.DataSource;
-import org.apache.log4j.Logger;
 import java.util.Date;
 import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
@@ -22,6 +21,8 @@ import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 
 
@@ -36,7 +37,7 @@ public class ReportsCreator  {
 	PropertiesTree configuration;
 	//fine LP PG21XX04 Bug configuration
 
-	public static Logger logger = Logger.getLogger(ReportsCreator.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(ReportsCreator.class);
 	
 	private Level level = Level.WARNING;
 	public static String tipo_errore="";
