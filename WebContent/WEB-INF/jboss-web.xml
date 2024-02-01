@@ -14,6 +14,12 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<jndi-name>java:/payerDataSourceMySql</jndi-name>
 	</resource-ref>
+
+	<resource-ref>
+		<res-ref-name>securityDataSourcePostgres</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<jndi-name>java:/securityDataSourcePostgres</jndi-name>
+	</resource-ref>	
 	<!-- fine LP PG200060 -->
 
 	<resource-ref>
