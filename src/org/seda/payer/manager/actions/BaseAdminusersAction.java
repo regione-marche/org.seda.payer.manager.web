@@ -187,6 +187,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 	protected String blackboxposlog = "";
 	//FINE PG200120
 	
+	protected String prenotazioneFatturazione = null;
+
 	/**
 	 * Recupera la lista delle Tipologie di Servizio (codice, descrizione) ---
 	 * Le cerca in sessione e, se non ci sono le carica tramite il WS e poi le
@@ -528,7 +530,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		String param_username = (codop.equals("edit") ? "tx_username_hidden" : "tx_username");
 		
 		if (codop.equals("edit"))
-			chiaveUtente = Long.parseLong((String)request.getParameter("tx_chiaveutente_hidden"));
+			chiaveUtente = Long.parseLong(request.getParameter("tx_chiaveutente_hidden"));
 
 		//inizio LP PG200060
 		String template = getTemplateCurrentApplication(request, request.getSession());
@@ -577,6 +579,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		attivazioneEstrattoContoManager = "Y";
 		abilitazioneProfiloRiversamento = "Y";
 		
+		prenotazioneFatturazione = "Y";
 //dom R
 		mailContogestione = "Y";
 		
@@ -763,7 +766,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		azioniPerRiconciliazioneManuale = sValue;
 		attivazioneEstrattoContoManager = sValue;
 		abilitazioneProfiloRiversamento = sValue;
-
+		
+		prenotazioneFatturazione = sValue;
 //dom R
 		mailContogestione = sValue;
 		
@@ -972,6 +976,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			attivazioneEstrattoContoManager =  ( request.getParameter("attivazioneEstrattoContoManager") == null ? "N" : "Y" );
 			abilitazioneProfiloRiversamento =  ( request.getParameter("abilitazioneProfiloRiversamento") == null ? "N" : "Y" );
 			
+			prenotazioneFatturazione =  ( request.getParameter("datiPerFatturazione") == null ? "N" : "Y" );
 //dom R
 			mailContogestione = ( request.getParameter("mailContogestione") == null ? "N" : "Y" );
 				
@@ -1502,6 +1507,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		pyUser.setOperatoreUltimoAggiornamento(userBean.getUserName());
 		pyUser.setListaTipologiaServizio(formattaListaTipologieServizio(DDLTipologieServizioSel));
 		
+		pyUser.setFlagPrenotazioneFatturazione(prenotazioneFatturazione);
 		return pyUser;
 	}
 	
@@ -1702,7 +1708,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			request.setAttribute("chk_blackboxposlog",  blackboxposlog.equals("Y")); 
 			//FINE PG200120
 			
-			
+			request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
+
 		}
 	}
 
@@ -1835,6 +1842,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_gestioneuffici",  gestioneuffici.equals("Y")); //SVILUPPO_001_LUCAP_30062020
 		
 		request.setAttribute("chk_ioitalia", ioitalia.equals("Y")); // PG210160
+		
+		request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
+
 	}
 
 	protected void setDisableForm2Flags(HttpServletRequest request)
@@ -1868,6 +1878,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		//dom R
 		request.setAttribute("chk_mailContogestione",  mailContogestione.equals("Y"));
 		
+		request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
+
 	}
 
 	/**
@@ -2003,6 +2015,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		if (session.getAttribute("userAdd_blackboxpos") != null) session.removeAttribute("userAdd_blackboxpos"); 
 		if (session.getAttribute("userAdd_blackboxposlog") != null) session.removeAttribute("userAdd_blackboxposlog"); 
 		//FINE PG200120
+		
+		if (session.getAttribute("userAdd_downloadFlussiRendicontazione") != null) session.removeAttribute("userAdd_downloadFlussiRendicontazione");
+		
 		
 		//PG180010 - inizio
 		if (session.getAttribute("userAdd_riconciliazionemt") != null) session.removeAttribute("userAdd_riconciliazionemt");
@@ -3020,7 +3035,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 		//try 
 		//{
-			String password = (String)prof.getPassword();
+			String password = prof.getPassword();
 			if (codop.equals("add") && !prof.isPasswordAutogenerata() && password.equals(""))
 				return Messages.SPECIFICARE_PASSWORD.format();
 			
