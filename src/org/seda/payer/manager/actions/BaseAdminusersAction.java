@@ -975,8 +975,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			azioniPerRiconciliazioneManuale =  ( request.getParameter("azioniPerRiconciliazioneManuale") == null ? "N" : "Y" );
 			attivazioneEstrattoContoManager =  ( request.getParameter("attivazioneEstrattoContoManager") == null ? "N" : "Y" );
 			abilitazioneProfiloRiversamento =  ( request.getParameter("abilitazioneProfiloRiversamento") == null ? "N" : "Y" );
-			
-			prenotazioneFatturazione =  ( request.getParameter("datiPerFatturazione") == null ? "N" : "Y" );
+			prenotazioneFatturazione =  ( request.getParameter("prenotazioneFatturazione") == null ? "N" : "Y" );
 //dom R
 			mailContogestione = ( request.getParameter("mailContogestione") == null ? "N" : "Y" );
 				
@@ -1600,7 +1599,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			request.setAttribute("chk_attivazioneEstrattoContoManager",  attivazioneEstrattoContoManager.equals("Y"));
 			request.setAttribute("chk_abilitazioneProfiloRiversamento",  abilitazioneProfiloRiversamento.equals("Y"));
 
-// dom R			
+			// dom R
 			request.setAttribute("chk_mailContogestione",  mailContogestione.equals("Y"));
 
 			request.setAttribute("chk_configurazione",  configurazione.equals("Y"));
@@ -1727,7 +1726,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_azioniPerRiconciliazioneManuale",  azioniPerRiconciliazioneManuale.equals("Y"));
 		request.setAttribute("chk_attivazioneEstrattoContoManager",  attivazioneEstrattoContoManager.equals("Y"));
 		request.setAttribute("chk_abilitazioneProfiloRiversamento",  abilitazioneProfiloRiversamento.equals("Y"));
-//DOM R
+		//DOM R
 		request.setAttribute("chk_mailContogestione",  mailContogestione.equals("Y"));
 
 		request.setAttribute("chk_configurazione",  configurazione.equals("Y"));
@@ -1840,11 +1839,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_monitoraggiosoap", monitoraggiosoap.equals("Y"));
 //		YLM PG22XX07 FINE
 		request.setAttribute("chk_gestioneuffici",  gestioneuffici.equals("Y")); //SVILUPPO_001_LUCAP_30062020
-		
 		request.setAttribute("chk_ioitalia", ioitalia.equals("Y")); // PG210160
-		
-		request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
-
+		request.setAttribute("chk_prenotazioneFatturazione",  prenotazioneFatturazione.equals("Y"));
 	}
 
 	protected void setDisableForm2Flags(HttpServletRequest request)
@@ -1861,7 +1857,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_azioniPerRiconciliazioneManuale",  azioniPerRiconciliazioneManuale.equals("Y"));
 		request.setAttribute("chk_attivazioneEstrattoContoManager",  attivazioneEstrattoContoManager.equals("Y"));
 		request.setAttribute("chk_abilitazioneProfiloRiversamento",  abilitazioneProfiloRiversamento.equals("Y"));
-		
+
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
 		//fine LP PG200060
@@ -1951,7 +1947,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		if (session.getAttribute("userAdd_azioniPerRiconciliazioneManuale") != null) session.removeAttribute("userAdd_azioniPerRiconciliazioneManuale");
 		if (session.getAttribute("userAdd_attivazioneEstrattoContoManager") != null) session.removeAttribute("userAdd_attivazioneEstrattoContoManager");
 		if (session.getAttribute("userAdd_abilitazioneProfiloRiversamento") != null) session.removeAttribute("userAdd_abilitazioneProfiloRiversamento");
-//dom R
+		//dom R
 		if (session.getAttribute("userAdd_mailContogestione") != null) session.removeAttribute("userAdd_mailContogestione");
 		
 		if (session.getAttribute("userAdd_configurazione") != null) session.removeAttribute("userAdd_configurazione");
@@ -1964,10 +1960,10 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		//fine LP PG200360
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
-		//fine LP PG200060
-		if (session.getAttribute("userAdd_ecanagrafica") != null) session.removeAttribute("userAdd_ecanagrafica");
-		if (session.getAttribute("userAdd_ecuffmanager") != null) session.removeAttribute("userAdd_ecuffmanager");
-		//inizio LP PG200060
+			//fine LP PG200060
+			if (session.getAttribute("userAdd_ecanagrafica") != null) session.removeAttribute("userAdd_ecanagrafica");
+			if (session.getAttribute("userAdd_ecuffmanager") != null) session.removeAttribute("userAdd_ecuffmanager");
+			//inizio LP PG200060
 		}
 		//fine LP PG200060
 		if (session.getAttribute("userAdd_monitoraggio") != null) session.removeAttribute("userAdd_monitoraggio");
@@ -1985,7 +1981,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		if (session.getAttribute("userAdd_analysis") != null) session.removeAttribute("userAdd_analysis");
 		if (session.getAttribute("userAdd_ottico") != null) session.removeAttribute("userAdd_ottico");
 		if (session.getAttribute("userAdd_entrate") != null) session.removeAttribute("userAdd_entrate");
-// dom R
+		// dom R
 		if (session.getAttribute("userAdd_contogestione") != null) session.removeAttribute("userAdd_contogestione");
 		
 		if (session.getAttribute("userAdd_ruoli") != null) session.removeAttribute("userAdd_ruoli");
@@ -1996,35 +1992,35 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		if (session.getAttribute("userAdd_modello3config") != null) session.removeAttribute("userAdd_modello3config"); //PG200140
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
-		//fine LP PG200060
-		if (session.getAttribute("userAdd_walletmanager") != null) session.removeAttribute("userAdd_walletmanager");
-		if (session.getAttribute("userAdd_walletmonitoraggio") != null) session.removeAttribute("userAdd_walletmonitoraggio");
-		if (session.getAttribute("userAdd_walletanagraficacontribuenti") != null) session.removeAttribute("userAdd_walletanagraficacontribuenti");
-		if (session.getAttribute("userAdd_walletricaricheborsellino") != null) session.removeAttribute("userAdd_walletricaricheborsellino");
-		if (session.getAttribute("userAdd_walletsollecitodiscarico") != null) session.removeAttribute("userAdd_walletsollecitodiscarico");
-		if (session.getAttribute("userAdd_walletservizio") != null) session.removeAttribute("userAdd_walletservizio");
-		if (session.getAttribute("userAdd_walletconfig") != null) session.removeAttribute("userAdd_walletconfig");
-		//PG180040 - Mercati
-		if (session.getAttribute("userAdd_mercatoconfig") != null) session.removeAttribute("userAdd_mercatoconfig");
-		if (session.getAttribute("userAdd_mercatimanager") != null) session.removeAttribute("userAdd_mercatimanager");		
-		if (session.getAttribute("userAdd_monitoraggiomercati") != null) session.removeAttribute("userAdd_monitoraggiomercati");
-		
-		if (session.getAttribute("userAdd_gestioneuffici") != null) session.removeAttribute("userAdd_gestioneuffici"); //SVILUPPO_001_LUCAP_30062020
-		
-		//PG200120
-		if (session.getAttribute("userAdd_blackboxpos") != null) session.removeAttribute("userAdd_blackboxpos"); 
-		if (session.getAttribute("userAdd_blackboxposlog") != null) session.removeAttribute("userAdd_blackboxposlog"); 
-		//FINE PG200120
-		
-		if (session.getAttribute("userAdd_downloadFlussiRendicontazione") != null) session.removeAttribute("userAdd_downloadFlussiRendicontazione");
-		
-		
-		//PG180010 - inizio
-		if (session.getAttribute("userAdd_riconciliazionemt") != null) session.removeAttribute("userAdd_riconciliazionemt");
-		session.setAttribute("userAdd_associazioniDefinitiveRiconciliazionemt", associazioniDefinitiveRiconciliazionemt.equals("Y"));
-		session.setAttribute("userAdd_associazioniProvvisorieRiconciliazionemt", associazioniProvvisorieRiconciliazionemt.equals("Y"));
-		//PG180010 - fine
-		//inizio LP PG200060
+			//fine LP PG200060
+			if (session.getAttribute("userAdd_walletmanager") != null) session.removeAttribute("userAdd_walletmanager");
+			if (session.getAttribute("userAdd_walletmonitoraggio") != null) session.removeAttribute("userAdd_walletmonitoraggio");
+			if (session.getAttribute("userAdd_walletanagraficacontribuenti") != null) session.removeAttribute("userAdd_walletanagraficacontribuenti");
+			if (session.getAttribute("userAdd_walletricaricheborsellino") != null) session.removeAttribute("userAdd_walletricaricheborsellino");
+			if (session.getAttribute("userAdd_walletsollecitodiscarico") != null) session.removeAttribute("userAdd_walletsollecitodiscarico");
+			if (session.getAttribute("userAdd_walletservizio") != null) session.removeAttribute("userAdd_walletservizio");
+			if (session.getAttribute("userAdd_walletconfig") != null) session.removeAttribute("userAdd_walletconfig");
+			//PG180040 - Mercati
+			if (session.getAttribute("userAdd_mercatoconfig") != null) session.removeAttribute("userAdd_mercatoconfig");
+			if (session.getAttribute("userAdd_mercatimanager") != null) session.removeAttribute("userAdd_mercatimanager");
+			if (session.getAttribute("userAdd_monitoraggiomercati") != null) session.removeAttribute("userAdd_monitoraggiomercati");
+
+			if (session.getAttribute("userAdd_gestioneuffici") != null) session.removeAttribute("userAdd_gestioneuffici"); //SVILUPPO_001_LUCAP_30062020
+
+			//PG200120
+			if (session.getAttribute("userAdd_blackboxpos") != null) session.removeAttribute("userAdd_blackboxpos");
+			if (session.getAttribute("userAdd_blackboxposlog") != null) session.removeAttribute("userAdd_blackboxposlog");
+			//FINE PG200120
+
+			if (session.getAttribute("userAdd_downloadFlussiRendicontazione") != null) session.removeAttribute("userAdd_downloadFlussiRendicontazione");
+			if (session.getAttribute("userAdd_prenotazioneFatturazione") != null) session.removeAttribute("userAdd_prenotazioneFatturazione");
+
+			//PG180010 - inizio
+			if (session.getAttribute("userAdd_riconciliazionemt") != null) session.removeAttribute("userAdd_riconciliazionemt");
+			session.setAttribute("userAdd_associazioniDefinitiveRiconciliazionemt", associazioniDefinitiveRiconciliazionemt.equals("Y"));
+			session.setAttribute("userAdd_associazioniProvvisorieRiconciliazionemt", associazioniProvvisorieRiconciliazionemt.equals("Y"));
+			//PG180010 - fine
+			//inizio LP PG200060
 		} else  {
 			session.setAttribute("userAdd_associazioniDefinitiveRiconciliazionemt", false);
 			session.setAttribute("userAdd_associazioniProvvisorieRiconciliazionemt", false);
@@ -2046,7 +2042,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		session.setAttribute("userAdd_azioniPerRiconciliazioneManuale", azioniPerRiconciliazioneManuale);
 		session.setAttribute("userAdd_attivazioneEstrattoContoManager", attivazioneEstrattoContoManager);
 		session.setAttribute("userAdd_abilitazioneProfiloRiversamento", abilitazioneProfiloRiversamento);
-//dom R		
+		session.setAttribute("userAdd_prenotazioneFatturazione", prenotazioneFatturazione);
+		//dom R
 		session.setAttribute("userAdd_mailContogestione", mailContogestione);
 
 		session.setAttribute("userAdd_configurazione", configurazione);
@@ -2249,7 +2246,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		azioniPerRiconciliazioneManuale = (String)session.getAttribute("userAdd_azioniPerRiconciliazioneManuale" );
 		attivazioneEstrattoContoManager = (String)session.getAttribute("userAdd_attivazioneEstrattoContoManager" );
 		abilitazioneProfiloRiversamento = (String)session.getAttribute("userAdd_abilitazioneProfiloRiversamento" );
-//dom R
+		prenotazioneFatturazione = (String)session.getAttribute("userAdd_prenotazioneFatturazione" );
+		//dom R
 		mailContogestione = (String)session.getAttribute("userAdd_mailContogestione" );
 		configurazione = (String)session.getAttribute("userAdd_configurazione" );
 		adminusers = (String)session.getAttribute("userAdd_adminusers" );
@@ -2401,7 +2399,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_azioniPerRiconciliazioneManuale", pyUser.getAzioniPerRiconciliazioneManuale().equalsIgnoreCase("Y"));
 		request.setAttribute("chk_attivazioneEstrattoContoManager", pyUser.getAttivazioneEstrattoContoManager().equalsIgnoreCase("Y"));
 		request.setAttribute("chk_abilitazioneProfiloRiversamento", pyUser.getAbilitazioneProfiloRiversamento().equalsIgnoreCase("Y"));
-		
+		request.setAttribute("chk_prenotazioneFatturazione",  pyUser.getFlagPrenotazioneFatturazione().equalsIgnoreCase("Y"));
+
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
 		//fine LP PG200060
@@ -2499,7 +2498,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 				request.setAttribute("chk_azioniPerRiconciliazioneManuale", pyUser.getAzioniPerRiconciliazioneManuale().equalsIgnoreCase("Y"));
 				request.setAttribute("chk_attivazioneEstrattoContoManager", pyUser.getAttivazioneEstrattoContoManager().equalsIgnoreCase("Y"));
 				request.setAttribute("chk_abilitazioneProfiloRiversamento", pyUser.getAbilitazioneProfiloRiversamento().equalsIgnoreCase("Y"));
-				
+				request.setAttribute("chk_prenotazioneFatturazione", pyUser.getFlagPrenotazioneFatturazione().equalsIgnoreCase("Y"));
+
 				//inizio LP PG200060
 				if(!template.equals("regmarche")) {
 				//fine LP PG200060
