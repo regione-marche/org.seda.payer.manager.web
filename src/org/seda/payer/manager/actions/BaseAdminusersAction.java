@@ -578,9 +578,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		azioniPerRiconciliazioneManuale = "Y";
 		attivazioneEstrattoContoManager = "Y";
 		abilitazioneProfiloRiversamento = "Y";
-		
 		prenotazioneFatturazione = "Y";
-//dom R
+		//dom R
 		mailContogestione = "Y";
 		
 		listaApplicazioni = new Vector<String>();
@@ -766,9 +765,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		azioniPerRiconciliazioneManuale = sValue;
 		attivazioneEstrattoContoManager = sValue;
 		abilitazioneProfiloRiversamento = sValue;
-		
 		prenotazioneFatturazione = sValue;
-//dom R
+		//dom R
 		mailContogestione = sValue;
 		
 		configurazione = sValue;
@@ -976,7 +974,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			attivazioneEstrattoContoManager =  ( request.getParameter("attivazioneEstrattoContoManager") == null ? "N" : "Y" );
 			abilitazioneProfiloRiversamento =  ( request.getParameter("abilitazioneProfiloRiversamento") == null ? "N" : "Y" );
 			prenotazioneFatturazione =  ( request.getParameter("prenotazioneFatturazione") == null ? "N" : "Y" );
-//dom R
+			//dom R
 			mailContogestione = ( request.getParameter("mailContogestione") == null ? "N" : "Y" );
 				
 			listaApplicazioni = new Vector<String>();
@@ -1496,7 +1494,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		
 		pyUser.setAssociazioniProvvisorieRiconciliazionemt(associazioniProvvisorieRiconciliazionemt);
 		pyUser.setAssociazioniDefinitiveRiconciliazionemt(associazioniDefinitiveRiconciliazionemt);
-//dom R
+		//dom R
 		pyUser.setMailContoGestione(mailContogestione);
 		
 		pyUser.setEntePertinenza(entePertinenza);	//EP160510_001 GG 03112016
@@ -2056,12 +2054,12 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		//fine LP PG200360
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
-		//fine LP PG200060
-		session.setAttribute("userAdd_ecanagrafica", ecanagrafica);
-		session.setAttribute("userAdd_ecuffmanager", ecuffmanager);
-		session.setAttribute("userAdd_ecnotifiche", ecnotifiche);
-		session.setAttribute("userAdd_ecagemanager", ecagemanager);	//PG180300 20190325 CT
-		//inizio LP PG200060
+			//fine LP PG200060
+			session.setAttribute("userAdd_ecanagrafica", ecanagrafica);
+			session.setAttribute("userAdd_ecuffmanager", ecuffmanager);
+			session.setAttribute("userAdd_ecnotifiche", ecnotifiche);
+			session.setAttribute("userAdd_ecagemanager", ecagemanager);	//PG180300 20190325 CT
+			//inizio LP PG200060
 		} else  {
 			session.setAttribute("userAdd_ecanagrafica", null);
 			session.setAttribute("userAdd_ecuffmanager", null);
@@ -2091,7 +2089,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		session.setAttribute("userAdd_ottico", ottico);
 		session.setAttribute("userAdd_ruoli", ruoli);
 		session.setAttribute("userAdd_entrate", entrate);
-// dom R
+		// dom R
 		session.setAttribute("userAdd_contogestione", contogestione);
 		
 		session.setAttribute("userAdd_wismanager", wismanager);
@@ -2101,25 +2099,25 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		session.setAttribute("userAdd_modello3config", modello3config);	//PG200140
 		//inizio LP PG200060
 		if(!template.equals("regmarche")) {
-		//fine LP PG200060
-		session.setAttribute("userAdd_walletmanager", walletmanager);
-		session.setAttribute("userAdd_walletmonitoraggio", walletmonitoraggio);
-		session.setAttribute("userAdd_walletanagraficacontribuenti", walletanagraficacontribuenti);
-		session.setAttribute("userAdd_walletricaricheborsellino", walletricaricheborsellino);
-		session.setAttribute("userAdd_walletsollecitodiscarico", walletsollecitodiscarico);
-		session.setAttribute("userAdd_walletservizio", walletservizio);
-		session.setAttribute("userAdd_walletconfig", walletconfig);	
-		//PG180040 - Mercati
-		session.setAttribute("userAdd_mercatoconfig", mercatoconfig);
-		session.setAttribute("userAdd_mercatimanager", mercatimanager);
-		session.setAttribute("userAdd_monitoraggiomercati", monitoraggiomercati);
-		
-		//PG180010 - inizio
-		session.setAttribute("userAdd_riconciliazionemt", riconciliazionemt);
-		session.setAttribute("userAdd_associazioniDefinitiveRiconciliazionemt", associazioniDefinitiveRiconciliazionemt);
-		session.setAttribute("userAdd_associazioniProvvisorieRiconciliazionemt", associazioniProvvisorieRiconciliazionemt);
-		//PG180010 - fine
-		//inizio LP PG200060
+			//fine LP PG200060
+			session.setAttribute("userAdd_walletmanager", walletmanager);
+			session.setAttribute("userAdd_walletmonitoraggio", walletmonitoraggio);
+			session.setAttribute("userAdd_walletanagraficacontribuenti", walletanagraficacontribuenti);
+			session.setAttribute("userAdd_walletricaricheborsellino", walletricaricheborsellino);
+			session.setAttribute("userAdd_walletsollecitodiscarico", walletsollecitodiscarico);
+			session.setAttribute("userAdd_walletservizio", walletservizio);
+			session.setAttribute("userAdd_walletconfig", walletconfig);
+			//PG180040 - Mercati
+			session.setAttribute("userAdd_mercatoconfig", mercatoconfig);
+			session.setAttribute("userAdd_mercatimanager", mercatimanager);
+			session.setAttribute("userAdd_monitoraggiomercati", monitoraggiomercati);
+
+			//PG180010 - inizio
+			session.setAttribute("userAdd_riconciliazionemt", riconciliazionemt);
+			session.setAttribute("userAdd_associazioniDefinitiveRiconciliazionemt", associazioniDefinitiveRiconciliazionemt);
+			session.setAttribute("userAdd_associazioniProvvisorieRiconciliazionemt", associazioniProvvisorieRiconciliazionemt);
+			//PG180010 - fine
+			//inizio LP PG200060
 		} else {
 			session.setAttribute("userAdd_walletmanager", null);
 			session.setAttribute("userAdd_walletmonitoraggio", null);
@@ -2509,7 +2507,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 				//inizio LP PG200060
 				}
 				//fine LP PG200060
-//dom R
+				//dom R
 				request.setAttribute("chk_mailContogestione", pyUser.getMailContoGestione().equalsIgnoreCase("Y"));
 				
 				
@@ -2553,7 +2551,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 					request.setAttribute("chk_analysis",  listaApplicazioni.contains("analysis"));
 					request.setAttribute("chk_ottico",  listaApplicazioni.contains("ottico"));
 					request.setAttribute("chk_entrate",  listaApplicazioni.contains("entrate"));
-//dom R
+					//dom R
 					request.setAttribute("chk_contogestione",  listaApplicazioni.contains("contogestione"));
 
 					request.setAttribute("chk_ruoli",  listaApplicazioni.contains("ruoli"));
@@ -2564,20 +2562,20 @@ public class BaseAdminusersAction extends BaseManagerAction{
 					request.setAttribute("chk_modello3config",  listaApplicazioni.contains("modello3config")); //PG200140
 					//inizio LP PG200060
 					if(!template.equals("regmarche")) {
-					//fine LP PG200060
-					request.setAttribute("chk_walletmanager",  listaApplicazioni.contains("walletmanager"));
-					request.setAttribute("chk_walletmonitoraggio",  listaApplicazioni.contains("walletmonitoraggio"));
-					request.setAttribute("chk_walletanagraficacontribuenti",  listaApplicazioni.contains("walletanagraficacontribuenti"));
-					request.setAttribute("chk_walletricaricheborsellino",  listaApplicazioni.contains("walletricaricheborsellino"));
-					request.setAttribute("chk_walletsollecitodiscarico",  listaApplicazioni.contains("walletsollecitodiscarico"));
-					request.setAttribute("chk_walletservizio",  listaApplicazioni.contains("walletservizio"));
-					request.setAttribute("chk_walletconfig",  listaApplicazioni.contains("walletconfig"));
-					//PG180040 - Mercati
-					request.setAttribute("chk_mercatoconfig",  listaApplicazioni.contains("mercatoconfig"));
-					request.setAttribute("chk_mercatimanager",  listaApplicazioni.contains("mercatimanager"));
-					request.setAttribute("chk_monitoraggiomercati", listaApplicazioni.contains("monitoraggiomercati"));
-					request.setAttribute("chk_riconciliazionemt", listaApplicazioni.contains("riconciliazionemt"));
-					//inizio LP PG200060
+						//fine LP PG200060
+						request.setAttribute("chk_walletmanager",  listaApplicazioni.contains("walletmanager"));
+						request.setAttribute("chk_walletmonitoraggio",  listaApplicazioni.contains("walletmonitoraggio"));
+						request.setAttribute("chk_walletanagraficacontribuenti",  listaApplicazioni.contains("walletanagraficacontribuenti"));
+						request.setAttribute("chk_walletricaricheborsellino",  listaApplicazioni.contains("walletricaricheborsellino"));
+						request.setAttribute("chk_walletsollecitodiscarico",  listaApplicazioni.contains("walletsollecitodiscarico"));
+						request.setAttribute("chk_walletservizio",  listaApplicazioni.contains("walletservizio"));
+						request.setAttribute("chk_walletconfig",  listaApplicazioni.contains("walletconfig"));
+						//PG180040 - Mercati
+						request.setAttribute("chk_mercatoconfig",  listaApplicazioni.contains("mercatoconfig"));
+						request.setAttribute("chk_mercatimanager",  listaApplicazioni.contains("mercatimanager"));
+						request.setAttribute("chk_monitoraggiomercati", listaApplicazioni.contains("monitoraggiomercati"));
+						request.setAttribute("chk_riconciliazionemt", listaApplicazioni.contains("riconciliazionemt"));
+						//inizio LP PG200060
 					}else {
 						request.setAttribute("chk_monitoraggiocup",  listaApplicazioni.contains("monitoraggiocup"));
 						request.setAttribute("chk_monitoraggiocruss",  listaApplicazioni.contains("monitoraggiocruss"));
