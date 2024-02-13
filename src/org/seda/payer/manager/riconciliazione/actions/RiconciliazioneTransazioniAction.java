@@ -99,6 +99,9 @@ public class RiconciliazioneTransazioniAction extends BaseRiconciliazioneAction 
 					setFormMessage("riconciliazioneTransazioniForm", e.getMessage() , request);
 				}
 				break;
+			case TX_BUTTON_ESPORTADATI:
+				// TODO
+				break;
         }
         
     				

@@ -352,6 +352,8 @@ public class BaseManagerAction extends HtmlAction {
 		areaInvioRendicontazioneEnabled = userBean.getDownloadFlussiRendicontazioneEnabled() || userBean.getInvioFlussiRendicontazioneViaFtpEnabled() || userBean.getInvioFlussiRendicontazioneViaEmailEnabled() || userBean.getInvioFlussiRendicontazioneViaWsEnabled();
 		request.setAttribute("areaInvioRendicontazioneEnabled",areaInvioRendicontazioneEnabled);
 
+		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN ?
+		request.setAttribute("esportaDatiEnabled", esportaDatiEnabled);
 
 		String tx_societa = "";
 		String tx_utente = "";
