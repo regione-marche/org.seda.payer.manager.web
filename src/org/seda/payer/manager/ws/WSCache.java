@@ -72,6 +72,8 @@ public class WSCache {
 	public static ConfigGruppoServer configGruppoServer = null;
 	//	fine LP PG210040
 
+	public static PrenotazioneFatturazioneServer prenotazioneFatturazioneServer = null; // SR PGNTMGR-56
+
 	public static boolean initiateConfRendUtenteServizioEnteServer(String address) throws Exception {
 		try {
 			confRendUtenteServizioEnteServer = new ConfRendUtenteServizioEnteServer(address);
@@ -658,4 +660,17 @@ public class WSCache {
 		return (configGruppoServer != null);
 	}
 	//fine LP PG210040
+
+	// inizio SR PGNTMGR-56
+	public static boolean initiatePrenotazioneConfigurazione(String address) throws Exception
+	{
+		try	{
+			prenotazioneFatturazioneServer = new PrenotazioneFatturazioneServer(address) ;
+		} catch (Exception e) {
+			throw e;
+		}
+		return (prenotazioneFatturazioneServer != null);
+	}
+	// fine SR PGNTMGR-56
+
 }

@@ -176,6 +176,9 @@ public class ManagerStarter implements ApplicationStarter {
 					//fine LP PG210040
 					System.out.println("Fine lettura Configurazione WS");
 					//fine LP PG200360
+					// inizio SR PGNTMGR-56
+					WSCache.initiatePrenotazioneConfigurazione(configuration.getProperty(PropertiesPath.prenotazioneFatturazione.format(PropertiesPath.defaultnode.format())));
+					// fine SR PGNTMGR-56
 				}
 
 			} catch (PropertiesNodeException x) {

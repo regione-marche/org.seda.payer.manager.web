@@ -6,6 +6,9 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.PrenotazioneFatturazione;
+import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.PrenotazioneFatturazioneSaveRequest;
+import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.StatusResponse;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.ws.WSCache;
@@ -94,6 +97,16 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 					impostaFiltri(request, session);
 					//ricerca(request, session);
 				}; break;
+
+			case TX_BUTTON_ESPORTADATI: {
+				// TODO
+				impostaFiltri(request, session);
+                try {
+                    esportaDati(request, "add");
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
+            }; break;
         }	
 
 		return null;
@@ -105,7 +118,7 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 		StampaMovimentiPdfResponse stampaMovimentiPdfResponse;
 		StampaMovimentiPdfRequest  stampaMovimentiPdfRequest = new StampaMovimentiPdfRequest();
 
-// stampa singolo gateway o multigateway	0 no	1 si
+		// stampa singolo gateway o multigateway	0 no	1 si
 		String multiGTW = request.getAttribute("multiGTW")!=null?(String)request.getAttribute("multiGTW"):"0";
 		
 		
@@ -338,4 +351,40 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         return null;
         
 	}
+
+	private StatusResponse esportaDati(HttpServletRequest request, String codOp) throws RemoteException  {
+		PrenotazioneFatturazione prenotazioneFatturazione = new PrenotazioneFatturazione();
+
+		prenotazioneFatturazione.setCodiceEnte(getParamCodiceEnte());
+		prenotazioneFatturazione.setChiavePrenotazione("20022024_12_prenotazione1");
+		prenotazioneFatturazione.setContropartita("30110030");
+		prenotazioneFatturazione.setCodiceFiscale("");
+		prenotazioneFatturazione.setDataAggiunta("");
+		prenotazioneFatturazione.setDataPrenotazione(""); // non valorizzare
+		prenotazioneFatturazione.setDataInizioValiditaRegole("");
+		prenotazioneFatturazione.setDescrizioneCausale("Compenso servizio di intermediario tecnologico (nodo nazionale dei pagamenti)");
+		prenotazioneFatturazione.setDescrizioneEnte("");
+		prenotazioneFatturazione.setFlagFatturabile(""); // Y: qta da fatturare > 0, N: pari a 0
+		prenotazioneFatturazione.setImporto(""); // qta da fatturare * prezzo unitario
+		prenotazioneFatturazione.setImportoTransatoSemestreI("");
+		prenotazioneFatturazione.setImportoTransatoSemestreII("");
+		prenotazioneFatturazione.setNTransSemestreI("");
+		prenotazioneFatturazione.setNTransSemestreII("");
+		prenotazioneFatturazione.setPeriodoEsportazione("");
+		prenotazioneFatturazione.setPeriodoFatturazione("");
+		prenotazioneFatturazione.setPrezzoUnitario("0.25");
+		prenotazioneFatturazione.setQtaMassimaFatturabile("320000");
+		prenotazioneFatturazione.setQtaMinimaFatturabile("200");
+		prenotazioneFatturazione.setQtFatturare("");
+		prenotazioneFatturazione.setStatoPrenotazione("1"); // in attesa
+		prenotazioneFatturazione.setTipoDocumento("TD01");
+
+		PrenotazioneFatturazioneSaveRequest prenotazioneFatturazioneSaveRequest = new PrenotazioneFatturazioneSaveRequest(prenotazioneFatturazione, codOp);
+		prenotazioneFatturazioneSaveRequest.setPrenotazioneFatturazione(prenotazioneFatturazione);
+		StatusResponse response = WSCache.prenotazioneFatturazioneServer.savePrenotazioneFatturazione(prenotazioneFatturazioneSaveRequest, request);
+		return response;
+	}
+
+
+
 }
