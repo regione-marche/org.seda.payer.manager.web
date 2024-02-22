@@ -203,7 +203,6 @@ public enum PropertiesPath {
 	, allowElementsOWASP
 	, skipTarget
 	, paramTotemTipologiaImposta
-	, prenotazioneFatturazione	// SR PGNTMGR-56
 	;
 	
 	private static ResourceBundle rb;
