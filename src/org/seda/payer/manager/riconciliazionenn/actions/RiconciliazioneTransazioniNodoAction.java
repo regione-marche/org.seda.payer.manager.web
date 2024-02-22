@@ -1,14 +1,16 @@
 package org.seda.payer.manager.riconciliazionenn.actions;
 
 import java.rmi.RemoteException;
+import java.sql.*;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.PrenotazioneFatturazione;
-import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.PrenotazioneFatturazioneSaveRequest;
-import com.seda.payer.pgec.webservice.prenotazioneFatturazione.dati.StatusResponse;
+import com.seda.commons.security.TokenGenerator;
+import com.seda.data.helper.Helper;
+import com.seda.payer.core.exception.DaoException;
+import com.seda.payer.core.wallet.bean.EsitoRisposte;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.ws.WSCache;
@@ -35,7 +37,7 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 
 	public Object service(HttpServletRequest request) throws ActionException {
 		HttpSession session = request.getSession();
-		
+
 		tx_SalvaStato(request);
 
 		super.service(request);
@@ -99,14 +101,18 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 				}; break;
 
 			case TX_BUTTON_ESPORTADATI: {
-				// TODO
 				impostaFiltri(request, session);
-                try {
-                    esportaDati(request, "add");
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            }; break;
+				try {
+					EsitoRisposte esito = inserisciPrenotazione(request);
+					if(esito.getCodiceMessaggio().equals("OK")) {
+						// TODO
+					} else {
+						// TODO
+					}
+				} catch (DaoException e) {
+					// TODO
+				}
+            } break;
         }	
 
 		return null;
@@ -352,39 +358,38 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         
 	}
 
-	private StatusResponse esportaDati(HttpServletRequest request, String codOp) throws RemoteException  {
-		PrenotazioneFatturazione prenotazioneFatturazione = new PrenotazioneFatturazione();
+	private EsitoRisposte inserisciPrenotazione(HttpServletRequest request) throws DaoException {
+		CallableStatement callableStatement;
+		EsitoRisposte esitoRisposte = new EsitoRisposte();
 
-		prenotazioneFatturazione.setCodiceEnte(getParamCodiceEnte());
-		prenotazioneFatturazione.setChiavePrenotazione("20022024_12_prenotazione1");
-		prenotazioneFatturazione.setContropartita("30110030");
-		prenotazioneFatturazione.setCodiceFiscale("");
-		prenotazioneFatturazione.setDataAggiunta("");
-		prenotazioneFatturazione.setDataPrenotazione(""); // non valorizzare
-		prenotazioneFatturazione.setDataInizioValiditaRegole("");
-		prenotazioneFatturazione.setDescrizioneCausale("Compenso servizio di intermediario tecnologico (nodo nazionale dei pagamenti)");
-		prenotazioneFatturazione.setDescrizioneEnte("");
-		prenotazioneFatturazione.setFlagFatturabile(""); // Y: qta da fatturare > 0, N: pari a 0
-		prenotazioneFatturazione.setImporto(""); // qta da fatturare * prezzo unitario
-		prenotazioneFatturazione.setImportoTransatoSemestreI("");
-		prenotazioneFatturazione.setImportoTransatoSemestreII("");
-		prenotazioneFatturazione.setNTransSemestreI("");
-		prenotazioneFatturazione.setNTransSemestreII("");
-		prenotazioneFatturazione.setPeriodoEsportazione("");
-		prenotazioneFatturazione.setPeriodoFatturazione("");
-		prenotazioneFatturazione.setPrezzoUnitario("0.25");
-		prenotazioneFatturazione.setQtaMassimaFatturabile("320000");
-		prenotazioneFatturazione.setQtaMinimaFatturabile("200");
-		prenotazioneFatturazione.setQtFatturare("");
-		prenotazioneFatturazione.setStatoPrenotazione("1"); // in attesa
-		prenotazioneFatturazione.setTipoDocumento("TD01");
+		try (Connection conn = payerDataSource.getConnection()) {
+			callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYPRESP_INS");
+			callableStatement.setString(1, TokenGenerator.generateUUIDToken());
+			callableStatement.setString(2, getParamCodiceSocieta());
+			callableStatement.setString(3, getParamCodiceUtente());
+			callableStatement.setString(4, getParamCodiceEnte());
+			callableStatement.setString(5, new Timestamp(System.currentTimeMillis()).toString());
+			callableStatement.setString(6, userBean.getCodiceFiscale());
+			callableStatement.setString(7, "FAT");
+			callableStatement.setString(8, "2024-02-22"); // valore datetimepicker DA
+			callableStatement.setString(9, "2024-02-22");  // valore datetimepicker A
+			callableStatement.setString(10, "1"); // in attesa
+			callableStatement.setString(11, "");
 
-		PrenotazioneFatturazioneSaveRequest prenotazioneFatturazioneSaveRequest = new PrenotazioneFatturazioneSaveRequest(prenotazioneFatturazione, codOp);
-		prenotazioneFatturazioneSaveRequest.setPrenotazioneFatturazione(prenotazioneFatturazione);
-		StatusResponse response = WSCache.prenotazioneFatturazioneServer.savePrenotazioneFatturazione(prenotazioneFatturazioneSaveRequest, request);
-		return response;
-	}
+			callableStatement.registerOutParameter(12, Types.VARCHAR);
+			callableStatement.registerOutParameter(13, Types.VARCHAR);
 
-
+			callableStatement.execute();
+			esitoRisposte.setCodiceMessaggio(callableStatement.getString(12));
+			esitoRisposte.setDescrizioneMessaggio(callableStatement.getString(13));
+		} catch (SQLException e) {
+			setErrorMessage(e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			setErrorMessage(e.getMessage());
+			e.printStackTrace();
+		}
+		return esitoRisposte;
+    }
 
 }
