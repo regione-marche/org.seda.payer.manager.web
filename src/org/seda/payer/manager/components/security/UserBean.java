@@ -177,9 +177,12 @@ public class UserBean extends UserBeanSupport implements Serializable {
 	//USR_FUSRVPPN CHAR(1) 'FLAG PER CONFERMARE LA VALIDAZIONE DELLA EMAIL PEC'
 	private String flagValidazionePec = null;
 
-	//USR_CUSRUSER CHAR(1) 'FLAG ABILITAZIONE DATI FATTURAZIONE (Y/N)''
+	//USR_FUSRPRFT CHAR(1) 'FLAG ABILITAZIONE DATI FATTURAZIONE (Y/N)''
 	private String flagPrenotazioneFatturazione = null;
-	
+
+	//USR_FUSRAREL CHAR(1) 'FLAG ATTIVAZIONE RICHIESTE ELABORAZIONI (Y/N)'!
+	private String flagRichiesteElaborazioni = null;
+
 	//RE180181_001 SB - fine
 	
 	/* TIPO AUTENTICAZIONE
@@ -202,6 +205,12 @@ public class UserBean extends UserBeanSupport implements Serializable {
 	 * 	//"PYUSRTB"."USR_FUSRPRFT" IS 'FLAG ABILITAZIONE DATI FATTURAZIONE (Y/N)';
 	 */
 	private boolean flagPrenotazioneFatturazioneEnabled = false;
+
+	/**
+	 * 	//USR_FUSRAREL CHAR(1) 'FLAG ATTIVAZIONE RICHIESTE ELABORAZIONI (Y/N)'!
+	 */
+	private boolean flagRichiesteElaborazioniEnabled = false;
+
 	public String getTipoAutenticazione() {
 		return tipoAutenticazione;
 	}
@@ -461,6 +470,19 @@ public class UserBean extends UserBeanSupport implements Serializable {
 	public void setFlagPrenotazioneFatturazione(String flagPrenotazioneFatturazione) {
 		this.flagPrenotazioneFatturazione = flagPrenotazioneFatturazione;
 	}
+
+	public Boolean getFlagRichiesteElaborazioniEnabled() {
+		return flagRichiesteElaborazioniEnabled;
+	}
+
+	public String getFlagRichiesteElaborazioni() {
+		return flagRichiesteElaborazioni;
+	}
+
+	public void setFlagRichiesteElaborazioni(String flagRichiesteElaborazioni) {
+		this.flagRichiesteElaborazioni = flagRichiesteElaborazioni;
+	}
+
 	// SR PGNTMGR-56 fine
 
 	//RE180181_001 SB - fine
@@ -525,7 +547,8 @@ public class UserBean extends UserBeanSupport implements Serializable {
 		
 		associazioniDefinitiveRiconciliazionemtEnabled = (pyUser.getAssociazioniDefinitiveRiconciliazionemt() == null ? false : pyUser.getAssociazioniDefinitiveRiconciliazionemt().equalsIgnoreCase("Y"));
 		associazioniProvvisorieRiconciliazionemtEnabled = (pyUser.getAssociazioniProvvisorieRiconciliazionemt() == null ? false : pyUser.getAssociazioniProvvisorieRiconciliazionemt().equalsIgnoreCase("Y"));
-		flagPrenotazioneFatturazioneEnabled = (pyUser == null ? false : pyUser.getFlagPrenotazioneFatturazione().equalsIgnoreCase("Y"));
+		flagPrenotazioneFatturazioneEnabled = (pyUser.getFlagPrenotazioneFatturazione() == null ? false : pyUser.getFlagPrenotazioneFatturazione().equalsIgnoreCase("Y"));
+		flagRichiesteElaborazioniEnabled = (pyUser.getFlagRichiesteElaborazioni() == null ? false : pyUser.getFlagRichiesteElaborazioni().equalsIgnoreCase("Y"));
 
 		if(listaApplicazioni.length > 0)
 		{
@@ -551,7 +574,9 @@ public class UserBean extends UserBeanSupport implements Serializable {
 		flagValidazionePec = (pyUser.getFlagValidazionePec() == null ? "N" : pyUser.getFlagValidazionePec()); 
 		//RE180181_001 SB - fine
 		flagPrenotazioneFatturazione = (pyUser.getFlagPrenotazioneFatturazione() == null ? "N" : pyUser.getFlagPrenotazioneFatturazione()); // SR PGNTMGR-56
-		}
+		flagRichiesteElaborazioni = (pyUser.getFlagRichiesteElaborazioni() == null ? "N" : pyUser.getFlagRichiesteElaborazioni()); // SR PGNTMGR-56
+
+	}
 	
 	public static boolean isValid(UserBean userBean)
 	{

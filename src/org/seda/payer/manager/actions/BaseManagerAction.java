@@ -168,6 +168,8 @@ public class BaseManagerAction extends HtmlAction {
 
 	private boolean esportaDatiEnabled = false;
 
+	private boolean richiesteElaborazioniEnabled = false;
+
 	public static enum FiredButton {
 		TX_BUTTON_DEFAULT, TX_BUTTON_EDIT, TX_BUTTON_EDIT_END, TX_BUTTON_EDIT_OPERATORE, TX_BUTTON_CERCA, TX_BUTTON_RESET,
 		TX_BUTTON_RESET_INS, TX_BUTTON_RESET_MOD,
@@ -353,8 +355,11 @@ public class BaseManagerAction extends HtmlAction {
 		areaInvioRendicontazioneEnabled = userBean.getDownloadFlussiRendicontazioneEnabled() || userBean.getInvioFlussiRendicontazioneViaFtpEnabled() || userBean.getInvioFlussiRendicontazioneViaEmailEnabled() || userBean.getInvioFlussiRendicontazioneViaWsEnabled();
 		request.setAttribute("areaInvioRendicontazioneEnabled",areaInvioRendicontazioneEnabled);
 
-		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN ?
+		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN , metti &&
 		request.setAttribute("esportaDatiEnabled", esportaDatiEnabled);
+
+		richiesteElaborazioniEnabled = userBean.getFlagRichiesteElaborazioniEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN , metti &&
+		request.setAttribute("richiesteElaborazioniEnabled", richiesteElaborazioniEnabled);
 
 		String tx_societa = "";
 		String tx_utente = "";
@@ -1039,6 +1044,15 @@ public class BaseManagerAction extends HtmlAction {
 	public void setEsportaDatiEnabled(boolean esportaDatiEnabled) {
 		this.esportaDatiEnabled = esportaDatiEnabled;
 	}
+
+	public boolean isRichiesteElaborazioniEnabled() {
+		return richiesteElaborazioniEnabled;
+	}
+
+	public void setRichiesteElaborazioniEnabled(boolean richiesteElaborazioniEnabled) {
+		this.richiesteElaborazioniEnabled = richiesteElaborazioniEnabled;
+	}
+
 	/**
 	 * Questo metodo restituisce una stringa che contiene una data nel formato
 	 * "yyyy-mm-dd" - Il parametro "prefix" è lo stesso che viene utilizzato nel

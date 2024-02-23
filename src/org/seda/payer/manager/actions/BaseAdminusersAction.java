@@ -186,8 +186,11 @@ public class BaseAdminusersAction extends BaseManagerAction{
 	protected String blackboxpos = ""; 
 	protected String blackboxposlog = "";
 	//FINE PG200120
-	
+
+	// inizio SR PGNTMGR-56
 	protected String prenotazioneFatturazione = null;
+	protected String richiesteelaborazioni = null;
+	// fine SR PGNTMGR-56
 
 	/**
 	 * Recupera la lista delle Tipologie di Servizio (codice, descrizione) ---
@@ -589,6 +592,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		listaApplicazioni.add("adminusers");
 		ecmanager =  "Y";
 		listaApplicazioni.add("ecmanager");
+
+		richiesteelaborazioni =  "Y";
+		listaApplicazioni.add("richiesteelaborazioni");
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			serviziattivi = "Y";
@@ -766,6 +772,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		attivazioneEstrattoContoManager = sValue;
 		abilitazioneProfiloRiversamento = sValue;
 		prenotazioneFatturazione = sValue;
+		richiesteelaborazioni = sValue;
 		//dom R
 		mailContogestione = sValue;
 		
@@ -927,7 +934,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			//PG200120
 			listaApplicazioni.add("blackboxpos");
 			listaApplicazioni.add("blackboxposlog");
+
 			//FINE PG200120
+			listaApplicazioni.add("richiesteelaborazioni");
 		}
 			
 		if (session != null)
@@ -1132,7 +1141,10 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			blackboxposlog = ( request.getParameter("blackboxposlog") == null ? "N" : "Y" );
 			if (blackboxposlog.equals("Y")) listaApplicazioni.add("blackboxposlog");
 			//FINE PG200120
-			
+
+			richiesteelaborazioni =  ( request.getParameter("richiesteelaborazioni") == null ? "N" : "Y" );
+			if (richiesteelaborazioni.equals("Y")) listaApplicazioni.add("richiesteelaborazioni");
+
 			request.setAttribute("userIsAMMI", false);
 		}
 	}
@@ -1704,9 +1716,11 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			request.setAttribute("chk_blackboxpos",  blackboxpos.equals("Y"));
 			request.setAttribute("chk_blackboxposlog",  blackboxposlog.equals("Y")); 
 			//FINE PG200120
-			
-			request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
 
+			// inizio SR PGNTMGR-56
+			request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
+			request.setAttribute("chk_richiesteelaborazioni",  richiesteelaborazioni.equals("Y"));
+			// fine SR PGNTMGR-56
 		}
 	}
 
@@ -1838,7 +1852,11 @@ public class BaseAdminusersAction extends BaseManagerAction{
 //		YLM PG22XX07 FINE
 		request.setAttribute("chk_gestioneuffici",  gestioneuffici.equals("Y")); //SVILUPPO_001_LUCAP_30062020
 		request.setAttribute("chk_ioitalia", ioitalia.equals("Y")); // PG210160
+
+		// inizio SR PGNTMGR-56
 		request.setAttribute("chk_prenotazioneFatturazione",  prenotazioneFatturazione.equals("Y"));
+		request.setAttribute("chk_richiesteelaborazioni",  richiesteelaborazioni.equals("Y"));
+		// fine SR PGNTMGR-56
 	}
 
 	protected void setDisableForm2Flags(HttpServletRequest request)
@@ -1871,9 +1889,10 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 		//dom R
 		request.setAttribute("chk_mailContogestione",  mailContogestione.equals("Y"));
-		
-		request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
 
+		// inizio SR PGNTMGR-56
+		request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
+		// fine SR PGNTMGR-56
 	}
 
 	/**
@@ -1951,6 +1970,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		if (session.getAttribute("userAdd_configurazione") != null) session.removeAttribute("userAdd_configurazione");
 		if (session.getAttribute("userAdd_adminusers") != null) session.removeAttribute("userAdd_adminusers");
 		if (session.getAttribute("userAdd_ecmanager") != null) session.removeAttribute("userAdd_ecmanager");
+
+		if (session.getAttribute("userAdd_richiesteelaborazioni") != null) session.removeAttribute("userAdd_richiesteelaborazioni");
+
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			if (session.getAttribute("userAdd_serviziattivi") != null) session.removeAttribute("userAdd_serviziattivi");
@@ -2047,6 +2069,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		session.setAttribute("userAdd_configurazione", configurazione);
 		session.setAttribute("userAdd_adminusers", adminusers);
 		session.setAttribute("userAdd_ecmanager", ecmanager);
+		session.setAttribute("userAdd_richiesteelaborazioni", richiesteelaborazioni);
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			session.setAttribute("userAdd_serviziattivi", serviziattivi);
@@ -2250,6 +2273,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		configurazione = (String)session.getAttribute("userAdd_configurazione" );
 		adminusers = (String)session.getAttribute("userAdd_adminusers" );
 		ecmanager = (String)session.getAttribute("userAdd_ecmanager" );
+
+		richiesteelaborazioni = (String)session.getAttribute("userAdd_richiesteelaborazioni");
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			serviziattivi = (String) session.getAttribute("userAdd_serviziattivi");
@@ -2464,6 +2489,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			//inizio LP PG200060
 			}
 			//fine LP PG200060
+
+			request.setAttribute("chk_richiesteelaborazioni",  listaApplicazioni.contains("richiesteelaborazioni"));
 		}
 	}
 
@@ -2594,6 +2621,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 					request.setAttribute("chk_blackboxposlog",  listaApplicazioni.contains("blackboxposlog"));
 					//FINE PG200120
 
+					request.setAttribute("chk_richiesteelaborazioni",  listaApplicazioni.contains("richiesteelaborazioni"));
 				}
 			}
 			else

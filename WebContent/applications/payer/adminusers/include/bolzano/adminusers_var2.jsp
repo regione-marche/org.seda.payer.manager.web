@@ -111,7 +111,7 @@
 					<%-- fine LP PG21X007 --%>
 					<s:div name="divElement93" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_ecmanager}" validator="ignore" 
-						 cssclasslabel="bold checklabel label220" cssclass="checkleft"   disable="${ecmanagerDisabled}" 
+						 cssclasslabel="bold checklabel label220" cssclass="checkleft"   disable="${ecmanagerDisabled}"
 						name="ecmanager" groupname="ecmanager" 
 						text="Estratto Conto Manager" value="Y" />
 					</s:div>
@@ -225,6 +225,7 @@
 						name="riconciliazionemt" groupname="riconciliazionemt"   disable="${riconciliazionemtDisabled}" 
 						text="Riconciliazione Movimenti Tesoreria" value="Y" />
 					</s:div>
+
 					<!-- "SE000SV"."PYUSRTB"."USR_FUSRRICO" -->
 					<s:div name="divElement201" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_associazioniDefinitiveRiconciliazionemt}" validator="ignore" 
@@ -239,6 +240,12 @@
 						text="Associazioni Provvisorie Transazioni e Flussi" value="Y" />
 					</s:div>
 
+                    <s:div name="divElement203" cssclass="divRicMetadatiSingleRow">
+                        <s:list bradio="false" bchecked="${chk_richiesteelaborazioni}" validator="ignore"
+                         cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${richiesteElaborazioniDisabled}"
+                        name="richiesteelaborazioni" groupname="richiesteelaborazioni"
+                        text="Richieste Elaborazioni" value="Y" />
+                    </s:div>
 					<%-- <s:div name="divElement61" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_entrate}" validator="ignore" 
 						 cssclasslabel="bold checklabel label220" cssclass="checkleft" onclick="toggleEntrate()"
