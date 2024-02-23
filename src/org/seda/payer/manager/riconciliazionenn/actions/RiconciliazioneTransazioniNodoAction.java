@@ -100,26 +100,25 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 					//ricerca(request, session);
 				}; break;
 
+			// inizio SR PGNTMGR-56
 			case TX_BUTTON_ESPORTADATI: {
-				impostaFiltri(request, session);
+				salvaFiltri(request, session);
 				try {
 					EsitoRisposte esito = inserisciPrenotazione(request);
-					if(esito.getCodiceMessaggio().equals("OK")) {
-						// TODO
-					} else {
-						// TODO
+					if(esito.getCodiceMessaggio() != null && esito.getCodiceMessaggio().equals("OK")) {
+						setFormMessage("riconciliazioneTransazioniNodoForm", Messages.INS_OK.format(), request);
 					}
 				} catch (DaoException e) {
-					// TODO
+					e.printStackTrace();
+					setFormMessage("riconciliazioneTransazioniNodoForm", "Errore nell'inserimento della prenotazione.", request);
 				}
             } break;
+			// fine SR PGNTMGR-56
         }	
 
 		return null;
 	}
-     
-	
-	
+
 	private String getListaMovimentiPdf(HttpServletRequest request) throws FaultType, RemoteException {
 		StampaMovimentiPdfResponse stampaMovimentiPdfResponse;
 		StampaMovimentiPdfRequest  stampaMovimentiPdfRequest = new StampaMovimentiPdfRequest();
@@ -346,7 +345,7 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         
         if(!sDataCreaDaIsNullOrEmpty && sDataCreaAIsNullOrEmpty)
         	dataCreaA = Calendar.getInstance();                 
-        if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))      
+        if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
         if(!sDataCreaDaIsNullOrEmpty) {
 	        dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
@@ -358,38 +357,43 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         
 	}
 
+	// inizio SR PGNTMGR-56
 	private EsitoRisposte inserisciPrenotazione(HttpServletRequest request) throws DaoException {
-		CallableStatement callableStatement;
 		EsitoRisposte esitoRisposte = new EsitoRisposte();
-
-		try (Connection conn = payerDataSource.getConnection()) {
-			callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYPRESP_INS");
-			callableStatement.setString(1, TokenGenerator.generateUUIDToken());
-			callableStatement.setString(2, getParamCodiceSocieta());
-			callableStatement.setString(3, getParamCodiceUtente());
-			callableStatement.setString(4, getParamCodiceEnte());
-			callableStatement.setString(5, new Timestamp(System.currentTimeMillis()).toString());
-			callableStatement.setString(6, userBean.getCodiceFiscale());
-			callableStatement.setString(7, "FAT");
-			callableStatement.setString(8, "2024-02-22"); // valore datetimepicker DA
-			callableStatement.setString(9, "2024-02-22");  // valore datetimepicker A
-			callableStatement.setString(10, "1"); // in attesa
-			callableStatement.setString(11, "");
-
-			callableStatement.registerOutParameter(12, Types.VARCHAR);
-			callableStatement.registerOutParameter(13, Types.VARCHAR);
-
-			callableStatement.execute();
-			esitoRisposte.setCodiceMessaggio(callableStatement.getString(12));
-			esitoRisposte.setDescrizioneMessaggio(callableStatement.getString(13));
-		} catch (SQLException e) {
-			setErrorMessage(e.getMessage());
-			e.printStackTrace();
-		} catch (Exception e) {
-			setErrorMessage(e.getMessage());
-			e.printStackTrace();
+		String messageDate = controlloDate(request);
+		if(messageDate != null) {
+			esitoRisposte.setCodiceMessaggio("KO");
+			esitoRisposte.setDescrizioneMessaggio(messageDate);
+			setFormMessage("riconciliazioneTransazioniNodoForm", messageDate , request);
+		} else {
+			CallableStatement callableStatement;
+			try (Connection conn = payerDataSource.getConnection()) {
+				callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYPRESP_INS");
+				callableStatement.setString(1, TokenGenerator.generateUUIDToken());
+				callableStatement.setString(2, getParamCodiceSocieta() != null ? getParamCodiceSocieta() : "");
+				callableStatement.setString(3, getParamCodiceUtente() != null ? getParamCodiceUtente() : "");
+				callableStatement.setString(4, getParamCodiceEnte() != null ? getParamCodiceEnte() : "");
+				callableStatement.setString(5, new Timestamp(System.currentTimeMillis()).toString());
+				callableStatement.setString(6, userBean.getCodiceFiscale() != null ? userBean.getCodiceFiscale() : "");
+				callableStatement.setString(7, "FAT");
+				callableStatement.setString(8, getDataByPrefix("dtFlusso_da", request) != null ? getDataByPrefix("dtFlusso_da", request) : "");
+				callableStatement.setString(9, getDataByPrefix("dtFlusso_a", request) != null ? getDataByPrefix("dtFlusso_a", request) : "" );
+				callableStatement.setString(10, "1"); // in attesa
+				callableStatement.setString(11, ""); // nome flusso (per batch)
+				callableStatement.registerOutParameter(12, Types.VARCHAR);
+				callableStatement.registerOutParameter(13, Types.VARCHAR);
+				callableStatement.execute();
+				esitoRisposte.setCodiceMessaggio(callableStatement.getString(12));
+				esitoRisposte.setDescrizioneMessaggio(callableStatement.getString(13));
+			} catch (SQLException e) {
+				setErrorMessage(e.getMessage());
+				e.printStackTrace();
+			} catch (Exception e) {
+				setErrorMessage(e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		return esitoRisposte;
     }
-
+	// fine SR PGNTMGR-56
 }
