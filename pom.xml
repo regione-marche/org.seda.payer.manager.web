@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seda.payer.manager.web</groupId>
 	<artifactId>org.seda.payer.manager.web</artifactId>
-	<version>2.25.1</version>
+	<version>2.25.2</version>
 	<packaging>war</packaging>
 	<name>org.seda.payer.manager.web</name>
 	<description>org.seda.payer.manager.web</description>
@@ -51,7 +51,7 @@
 					<archive>
 						<manifestEntries>
 						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
-							<Dependencies>org.eclipse.birt.runtime</Dependencies>
+							<Dependencies></Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -245,6 +245,12 @@
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
+			<exclusions>
+				<exclusion>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -260,6 +266,12 @@
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
+			<exclusions>
+				<exclusion>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -512,10 +524,10 @@
 			<artifactId>opensaml</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>xerces</groupId> -->
+<!-- 			<artifactId>xercesImpl</artifactId> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
