@@ -10,7 +10,7 @@
             var passwordField = document.getElementById('j_password');
             var errorMessages = document.getElementById('errorMessages');
             var passwordRegex = /^[A-Za-z\d@#$%^&+=!*.,]{4,}$/;
-            var userRegex = /^[0-9a-zA-Z\-_]{1,20}$/;
+            var userRegex = /^[0-9a-zA-Z\-_]{1,50}$/;
 
             var passwordIsValid = passwordRegex.test(passwordField.value);
             var usernameIsValid = userRegex.test(userField.value);
@@ -44,7 +44,7 @@
 			
 			<div class="loginTitle">LOGIN</div>
 			<p><s:textbox label="Username" autocomplete="off" bmodify="true" name="j_username" text="${param.j_username}" 
-			validator="required;accept=^[0-9a-zA-Z\-_]{1,20}$" cssclass="login_textarea_label" cssclasslabel="login_textarea_label left" 
+			validator="required;accept=^[0-9a-zA-Z\-_]{1,50}$" cssclass="login_textarea_label" cssclasslabel="login_textarea_label left"
 			message="[accept=username: caratteri non ammessi"/></p>
 			<p><s:textbox label="Password" bpassword="true" autocomplete="off" bmodify="true" name="j_password" text="${param.j_password}" 
 			validator="required;accept=^[A-Za-z\d@#$%^&+=!*.,]{4,}$" cssclass="login_textarea_label" cssclasslabel="login_textarea_label left"
