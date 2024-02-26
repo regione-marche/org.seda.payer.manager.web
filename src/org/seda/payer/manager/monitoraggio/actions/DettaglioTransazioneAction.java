@@ -221,8 +221,9 @@ public class DettaglioTransazioneAction extends BaseManagerAction {
  						codiceIdentificativoUnivoco = codiceIdentificativoVersante.getTextContent();
  					}
  					//20072021 GG - allineamento con ws notifiche - fine
-										
-					String codiceIUVRT = identificativoUnivocoVersamentoNode.getTextContent();
+ 					String codiceIUVRT ="";
+					if(identificativoUnivocoVersamentoNode!= null && identificativoUnivocoVersamentoNode.getTextContent()!=null)					
+					 codiceIUVRT = identificativoUnivocoVersamentoNode.getTextContent();
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					//inizio LP PAGONET-323
