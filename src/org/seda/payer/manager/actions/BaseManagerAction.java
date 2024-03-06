@@ -204,6 +204,7 @@ public class BaseManagerAction extends HtmlAction {
 		,TX_BUTTON_CREATE1 // PG210160 KD
 		,TX_BUTTON_CREATE2
 		,TX_BUTTON_ESPORTADATI
+		,TX_BUTTON_CERCA_PRENOTAZIONE
 	}
 
 	public static enum ProfiloUtente {
@@ -827,6 +828,9 @@ public class BaseManagerAction extends HtmlAction {
 
 		if (request.getAttribute("tx_button_esportadati") != null)
 			return FiredButton.TX_BUTTON_ESPORTADATI;
+
+		if (request.getAttribute("tx_button_cerca_prenotazione") != null)
+			return FiredButton.TX_BUTTON_CERCA_PRENOTAZIONE;
 
 		return FiredButton.TX_BUTTON_NULL;
 

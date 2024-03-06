@@ -156,6 +156,52 @@
 									"dtChiusuraFlusso_a_hidden");
 						}
 						});
+
+        $("#dtPeriodo_da_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
+        $("#dtPeriodo_da_hidden").datepicker({
+            minDate : new Date(annoDa, 0, 1),
+            maxDate : new Date(annoA, 11, 31),
+            yearRange : annoDa + ":" + annoA,
+            showOn : "button",
+            buttonImage : "../applications/templates/shared/img/calendar.gif",
+            buttonImageOnly : true,
+            onSelect : function(dateText, inst) {
+                $("#dtPeriodo_da_day_id").val(dateText.substr(0, 2));
+                $("#dtPeriodo_da_month_id").val(dateText.substr(3, 2));
+                $("#dtPeriodo_da_year_id").val(dateText.substr(6, 4));
+            },
+            beforeShow : function(input, inst) {
+                //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
+                updateValoreDatePickerFromDdl(
+                    "dtPeriodo_da_day_id",
+                    "dtPeriodo_da_month_id",
+                    "dtPeriodo_da_year_id",
+                    "dtPeriodo_da_hidden");
+            }
+        });
+
+        $("#dtPeriodo_a_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
+        $("#dtPeriodo_a_hidden").datepicker({
+            minDate : new Date(annoDa, 0, 1),
+            maxDate : new Date(annoA, 11, 31),
+            yearRange : annoDa + ":" + annoA,
+            showOn : "button",
+            buttonImage : "../applications/templates/shared/img/calendar.gif",
+            buttonImageOnly : true,
+            onSelect : function(dateText, inst) {
+                $("#dtPeriodo_a_day_id").val(dateText.substr(0, 2));
+                $("#dtPeriodo_a_month_id").val(dateText.substr(3, 2));
+                $("#dtPeriodo_a_year_id").val(dateText.substr(6, 4));
+            },
+            beforeShow : function(input, inst) {
+                //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
+                updateValoreDatePickerFromDdl(
+                    "dtPeriodo_a_day_id",
+                    "dtPeriodo_a_month_id",
+                    "dtPeriodo_a_year_id",
+                    "dtPeriodo_a_hidden");
+            }
+        });
 	});
 
 	function setFiredButton(buttonName) {
@@ -276,6 +322,24 @@
 		<c:param name="dtFlusso_a_year">${param.dtFlusso_a_year}</c:param>
 	</c:if>
 
+	<c:if test="${!empty param.dtPeriodo_da_day}">
+        <c:param name="dtPeriodo_da_day">${param.dtPeriodo_da_day}</c:param>
+    </c:if>
+    <c:if test="${!empty param.dtPeriodo_da_month}">
+        <c:param name="dtPeriodo_da_month">${param.dtPeriodo_da_month}</c:param>
+    </c:if>
+    <c:if test="${!empty param.dtPeriodo_da_year}">
+        <c:param name="dtPeriodo_da_year">${param.dtPeriodo_da_year}</c:param>
+    </c:if>
+    <c:if test="${!empty param.dtPeriodo_a_day}">
+        <c:param name="dtPeriodo_a_day">${param.dtPeriodo_a_day}</c:param>
+    </c:if>
+    <c:if test="${!empty param.dtPeriodo_a_month}">
+        <c:param name="dtPeriodo_a_month">${param.dtPeriodo_a_month}</c:param>
+    </c:if>
+    <c:if test="${!empty param.dtPeriodo_a_year}">
+        <c:param name="dtPeriodo_a_year">${param.dtPeriodo_a_year}</c:param>
+    </c:if>
 </c:url>
 
 
@@ -285,11 +349,6 @@
 			action="richiesteElaborazioni.do" method="post"
 			hasbtn1="false" hasbtn2="false" hasbtn3="false">
 			<s:textbox name="DDLChanged" label="DDLChanged" bmodify="true" text="" cssclass="display_none" cssclasslabel="display_none" />
-			<s:textbox name="ext" label="ext" bmodify="true" text="${ext}" cssclass="display_none" cssclasslabel="display_none" />
-
-			<s:textbox name="hRowsPerPage" label="rowsPerPageRic" bmodify="true" text="${rowsPerPage}" cssclass="display_none" cssclasslabel="display_none" />
-			<s:textbox name="hPageNumber" label="pageNumberRic" bmodify="true" text="${pageNumber}" cssclass="display_none" cssclasslabel="display_none" />
-			<s:textbox name="hOrder" label="orderRic" bmodify="true" text="${order}" cssclass="display_none" cssclasslabel="display_none" />
 
 			<s:div name="divRicercaTitleName" cssclass="divRicTitle bold">Ricerca - Richieste Elaborazioni</s:div>
 			<s:div name="divRicMetadati" cssclass="divRicMetadati">
@@ -367,18 +426,111 @@
 							</s:div>
 						</s:div>
 					</s:div>
+
+                    <s:div name="divElement13" cssclass="divRicMetadatiDoubleRow">
+                        <s:div name="divElement13a" cssclass="labelData">
+                            <s:label name="label_data_creazione"
+                                cssclass="seda-ui-label label78 bold textright"
+                                text="Periodo Richiesto" />
+                        </s:div>
+
+                        <s:div name="divElement13b" cssclass="floatleft">
+                            <s:div name="divDtPeriodoDA" cssclass="divDataDa">
+                                <s:date label="Da:" cssclasslabel="labelsmall"
+                                    cssclass="dateman" prefix="dtPeriodo_da"
+                                    yearbegin="${ddlDateAnnoDa}" yearend="${ddlDateAnnoA}"
+                                    locale="IT-it" descriptivemonth="false" separator="/"
+                                    calendar="${dtPeriodo_da}">
+                                </s:date>
+                                <input type="hidden" id="dtPeriodo_da_hidden" value="" />
+                            </s:div>
+
+                            <s:div name="divDtPeriodoA" cssclass="divDataA">
+                                <s:date label="A:" cssclasslabel="labelsmall" cssclass="dateman"
+                                    prefix="dtPeriodo_a" yearbegin="${ddlDateAnnoDa}"
+                                    yearend="${ddlDateAnnoA}" locale="IT-it"
+                                    descriptivemonth="false" separator="/"
+                                    calendar="${dtPeriodo_a}"></s:date>
+                                <input type="hidden" id="dtPeriodo_a_hidden" value="" />
+                            </s:div>
+                        </s:div>
+                    </s:div>
 				</s:div>
 
 				<s:div name="divRicercaCenter" cssclass="divRicMetadatiCenter"></s:div>
-				<s:div name="divRicercaRight" cssclass="divRicMetadatiRight"></s:div>
+				<s:div name="divRicercaRight" cssclass="divRicMetadatiRight">
+                    <s:div name="divElement8" cssclass="divRicMetadatiSingleRow">
+                        <s:dropdownlist name="statoElaborazione" cssclass="tbddl floatleft"
+                            cssclasslabel="label85 bold floatleft textright" disable="false"
+                            label="Stato elaborazione:" valueselected="${statoElaborazione}">
+                            <s:ddloption value="" text="Tutte le prenotazioni" />
+                            <s:ddloption value="0" text="elaborate" />
+                            <s:ddloption value="1" text="in attesa" />
+                        </s:dropdownlist>
+                    </s:div>
+				</s:div>
 			</s:div>
 
 			<s:div name="divCentered0" cssclass="divRicBottoni">
 
-				<s:button id="tx_button_cerca" type="submit" text="Cerca" onclick="" cssclass="btnStyle" />
+				<s:button id="tx_button_cerca_prenotazione" type="submit" text="Cerca" onclick="" cssclass="btnStyle" />
 				<s:button id="tx_button_reset" type="submit" text="Reset" onclick="" cssclass="btnStyle" />
 			</s:div>
 		</s:form>
 	</s:div>
 </s:div>
 
+
+<s:div name="div_messaggi" cssclass="div_align_center">
+	<c:if test="${!empty tx_message}">
+		<s:div name="div_messaggio_info">
+			<hr />
+			<s:label name="tx_message" text="${tx_message}" />
+			<hr />
+		</s:div>
+	</c:if>
+	<c:if test="${!empty tx_error_message}">
+		<s:div name="div_messaggio_errore">
+			<hr />
+			<s:label name="tx_error_message" text="${tx_error_message}" />
+			<hr />
+		</s:div>
+	</c:if>
+</s:div>
+
+<c:if test="${!empty listaPrenotazioni}">
+	<fmt:setLocale value="it_IT" />
+	<s:div name="divRicercaFillName" cssclass="divRicercaFill bold">
+		Elenco Richieste Elaborazioni
+	</s:div>
+	<s:datagrid viewstate="" cachedrowset="listaPrenotazioni"
+		action="richiesteElaborazioni.do?vista=invioRichiesteElaborazioniLista" border="1" usexml="true"
+		rowperpage="${applicationScope.rowsPerPage}">
+
+        <s:action>
+            <c:url value="richiesteElaborazioni.do">
+                <c:if test="${!empty param.pageNumber}">
+                    <c:param name="pageNumber_hidden">${param.pageNumber}</c:param>
+                </c:if>
+                <c:if test="${!empty rowsPerPage}">
+                    <c:param name="rowsPerPage_hidden">${param.rowsPerPage}</c:param>
+                </c:if>
+                <c:if test="${!empty orderBy}">
+                    <c:param name="orderBy_hidden">${param.orderBy}</c:param>
+                </c:if>
+            </c:url>
+        </s:action>
+
+		<s:dgcolumn index="1" label="Societ&aacute;"></s:dgcolumn>
+ 		<s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>
+		<s:dgcolumn index="3" label="Ente"></s:dgcolumn>
+		<s:dgcolumn index="4" label="Data richiesta" format="dd/MM/yyyy"></s:dgcolumn>
+		<s:dgcolumn index="5" label="Periodo richiesto" css="text_align_left"></s:dgcolumn>
+		<s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
+        <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+			<s:hyperlink href="richiesteElaborazioni.do"
+			    imagesrc="../applications/templates/riconciliazionenn/img/download.png"
+				alt="Download" text="" cssclass="hlStyle" />
+		</s:dgcolumn>
+	</s:datagrid>
+</c:if>
