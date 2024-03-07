@@ -464,15 +464,14 @@
                             cssclasslabel="label85 bold floatleft textright" disable="false"
                             label="Stato elaborazione:" valueselected="${statoElaborazione}">
                             <s:ddloption value="" text="Tutte le prenotazioni" />
-                            <s:ddloption value="0" text="elaborate" />
-                            <s:ddloption value="1" text="in attesa" />
+                            <s:ddloption value="0" text="Terminata" />
+                            <s:ddloption value="1" text="In elaborazione" />
                         </s:dropdownlist>
                     </s:div>
 				</s:div>
 			</s:div>
 
 			<s:div name="divCentered0" cssclass="divRicBottoni">
-
 				<s:button id="tx_button_cerca_prenotazione" type="submit" text="Cerca" onclick="" cssclass="btnStyle" />
 				<s:button id="tx_button_reset" type="submit" text="Reset" onclick="" cssclass="btnStyle" />
 			</s:div>
@@ -506,9 +505,8 @@
 	<s:datagrid viewstate="" cachedrowset="listaPrenotazioni"
 		action="richiesteElaborazioni.do?vista=invioRichiesteElaborazioniLista" border="1" usexml="true"
 		rowperpage="${applicationScope.rowsPerPage}">
-
         <s:action>
-            <c:url value="richiesteElaborazioni.do">
+            <c:url value="" var="formParameters">
                 <c:if test="${!empty param.pageNumber}">
                     <c:param name="pageNumber_hidden">${param.pageNumber}</c:param>
                 </c:if>
@@ -518,15 +516,62 @@
                 <c:if test="${!empty orderBy}">
                     <c:param name="orderBy_hidden">${param.orderBy}</c:param>
                 </c:if>
+                <c:if test="${!empty param.tx_societa}">
+                    <c:param name="tx_societa">${param.tx_societa}</c:param>
+                </c:if>
+                <c:if test="${!empty param.tx_provincia}">
+                    <c:param name="tx_provincia">${param.tx_provincia}</c:param>
+                </c:if>
+                <c:if test="${!empty param.tx_utente}">
+                    <c:param name="tx_utente">${param.tx_utente}</c:param>
+                </c:if>
+
+                <c:if test="${!empty param.dtFlusso_da_day}">
+                    <c:param name="dtFlusso_da_day">${param.dtFlusso_da_day}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtFlusso_da_month}">
+                    <c:param name="dtFlusso_da_month">${param.dtFlusso_da_month}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtFlusso_da_year}">
+                    <c:param name="dtFlusso_da_year">${param.dtFlusso_da_year}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtFlusso_a_day}">
+                    <c:param name="dtFlusso_a_day">${param.dtFlusso_a_day}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtFlusso_a_month}">
+                    <c:param name="dtFlusso_a_month">${param.dtFlusso_a_month}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtFlusso_a_year}">
+                    <c:param name="dtFlusso_a_year">${param.dtFlusso_a_year}</c:param>
+                </c:if>
+
+                <c:if test="${!empty param.dtPeriodo_da_day}">
+                    <c:param name="dtPeriodo_da_day">${param.dtPeriodo_da_day}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtPeriodo_da_month}">
+                    <c:param name="dtPeriodo_da_month">${param.dtPeriodo_da_month}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtPeriodo_da_year}">
+                    <c:param name="dtPeriodo_da_year">${param.dtPeriodo_da_year}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtPeriodo_a_day}">
+                    <c:param name="dtPeriodo_a_day">${param.dtPeriodo_a_day}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtPeriodo_a_month}">
+                    <c:param name="dtPeriodo_a_month">${param.dtPeriodo_a_month}</c:param>
+                </c:if>
+                <c:if test="${!empty param.dtPeriodo_a_year}">
+                    <c:param name="dtPeriodo_a_year">${param.dtPeriodo_a_year}</c:param>
+                </c:if>
             </c:url>
         </s:action>
 
-		<s:dgcolumn index="1" label="Societ&aacute;"></s:dgcolumn>
- 		<s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>
-		<s:dgcolumn index="3" label="Ente"></s:dgcolumn>
-		<s:dgcolumn index="4" label="Data richiesta" format="dd/MM/yyyy"></s:dgcolumn>
+		<s:dgcolumn index="1" label="Societ&aacute;" asc="SOCA" desc="SOCD"></s:dgcolumn>
+ 		<s:dgcolumn index="2" label="Utente" css="text_align_left" asc="UTEA" desc="UTED"></s:dgcolumn>
+		<s:dgcolumn index="3" label="Ente" asc="ANEA" desc="ANED"></s:dgcolumn>
+		<s:dgcolumn index="4" label="Data richiesta" format="dd/MM/yyyy" asc="DPREA" desc="DPREDD"></s:dgcolumn>
 		<s:dgcolumn index="5" label="Periodo richiesto" css="text_align_left"></s:dgcolumn>
-		<s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
+		<s:dgcolumn index="6" label="Stato" css="text_align_right" asc="FLAGA" desc="FLAGD"></s:dgcolumn>
         <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
 			<s:hyperlink href="richiesteElaborazioni.do"
 			    imagesrc="../applications/templates/riconciliazionenn/img/download.png"

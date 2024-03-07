@@ -356,10 +356,10 @@ public class BaseManagerAction extends HtmlAction {
 		areaInvioRendicontazioneEnabled = userBean.getDownloadFlussiRendicontazioneEnabled() || userBean.getInvioFlussiRendicontazioneViaFtpEnabled() || userBean.getInvioFlussiRendicontazioneViaEmailEnabled() || userBean.getInvioFlussiRendicontazioneViaWsEnabled();
 		request.setAttribute("areaInvioRendicontazioneEnabled",areaInvioRendicontazioneEnabled);
 
-		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN , metti &&
+		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN") || userProfile.equals("AMMI");
 		request.setAttribute("esportaDatiEnabled", esportaDatiEnabled);
 
-		richiesteElaborazioniEnabled = userBean.getFlagRichiesteElaborazioniEnabled() || userProfile.equals("AMEN"); // TODO solo profili AMEN , metti &&
+		richiesteElaborazioniEnabled = userBean.getFlagRichiesteElaborazioniEnabled() || userProfile.equals("AMEN") || userProfile.equals("AMMI");
 		request.setAttribute("richiesteElaborazioniEnabled", richiesteElaborazioniEnabled);
 
 		String tx_societa = "";

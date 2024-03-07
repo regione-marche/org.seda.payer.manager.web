@@ -8,18 +8,23 @@ import com.seda.data.spi.PageInfo;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.bean.PrenotazioneFatturazionePagelist;
 import com.sun.rowset.WebRowSetImpl;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.seda.payer.manager.riconciliazionenn.actions.BaseRiconciliazioneNodoAction;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetMetaDataImpl;
+import javax.sql.rowset.WebRowSet;
 import java.sql.*;
 
 public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction {
     private static final long serialVersionUID = 1L;
     private int rowsPerPage;
     private int pageNumber;
+    private String order;
     WebRowSetImpl webRowSetImpl = null;
 
     public Object service(HttpServletRequest request) throws ActionException {
@@ -32,11 +37,12 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
 
         rowsPerPage = ((String) request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
         pageNumber = ((String) request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+        order = request.getParameter("order")  == null ? "" : request.getParameter("order");
 
         switch (getFiredButton(request)) {
+            case TX_BUTTON_CERCA:
             case TX_BUTTON_CERCA_PRENOTAZIONE: {
                 salvaFiltri(request, session);
-
                 try {
                     PrenotazioneFatturazionePagelist prenotazioneFatturazionePagelist = getPrenotazioneFatturazioneList(request);
                     PageInfo pageInfo = prenotazioneFatturazionePagelist.getPageInfo();
@@ -45,7 +51,8 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
                     } else {
                         if (pageInfo != null) {
                             if (pageInfo.getNumRows() > 0) {
-                                request.setAttribute("listaPrenotazioni", prenotazioneFatturazionePagelist.getPrenotazioneFatturazioneListXml());
+                                String lista = elaboraXmlList(prenotazioneFatturazionePagelist.getPrenotazioneFatturazioneListXml(), request, "richiesteElaborazioniForm");
+                                request.setAttribute("listaPrenotazioni", lista);
                                 request.setAttribute("listaPrenotazioni.pageInfo", pageInfo);
                             } else {
                                 request.setAttribute("listaPrenotazioni", null);
@@ -110,7 +117,7 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
 
             callableStatement.setInt(1, pageNumber);
             callableStatement.setInt(2, rowsPerPage);
-            callableStatement.setString(3, "");
+            callableStatement.setString(3, order);
 
 //            callableStatement.setString(4, getParamCodiceSocieta() != null ? getParamCodiceSocieta() : "");
 //            callableStatement.setString(5, getParamCodiceUtente() != null ? getParamCodiceUtente() : "");
@@ -141,7 +148,6 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
                 data = callableStatement.getResultSet();
                 loadWebRowSet(data);
                 prenotazioneList[0] = Convert.webRowSetToString(webRowSetImpl);
-
                 if (callableStatement.getMoreResults()) {
                     if (data != null) {
                         try {
@@ -178,6 +184,58 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
         } finally {
             DAOHelper.closeIgnoringException(resultSet);
         }
+    }
+
+    public String elaboraXmlList(String listXml, HttpServletRequest request, String nomeForm) {
+        WebRowSet rowSetNew = null;
+        CachedRowSet crsListaOriginale = null;
+        try {
+            crsListaOriginale = Convert.stringToWebRowSet(listXml);
+            ResultSetMetaData rsMdOriginale = crsListaOriginale.getMetaData();
+            int iCols = rsMdOriginale.getColumnCount();
+
+            RowSetMetaDataImpl rsMdNew = new RowSetMetaDataImpl();
+            rsMdNew.setColumnCount(iCols);
+
+            for (int i = 1; i <= iCols; i++) {
+                rsMdNew.setColumnName(i, rsMdOriginale.getColumnName(i));
+                rsMdNew.setColumnType(i, rsMdOriginale.getColumnType(i));
+                rsMdNew.setColumnTypeName(i, rsMdOriginale.getColumnTypeName(i));
+            }
+            rowSetNew = new WebRowSetImpl();
+            rowSetNew.setMetaData(rsMdNew);
+
+            if (crsListaOriginale != null) {
+                while (crsListaOriginale.next()) {
+                    rowSetNew.moveToInsertRow();
+                    // inserisco i valori delle vecchie colonne della riga attuale
+                    for (int i=1; i<=iCols; i++) {
+                        if (i != 6)
+                            rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
+                    }
+
+                    String stato = crsListaOriginale.getString(6);
+                    rowSetNew.updateString(6, stato.equals("1") ? "In elaborazione" : "Terminata");
+                    rowSetNew.insertRow();
+                }
+            }
+            rowSetNew.moveToCurrentRow();
+            return Convert.webRowSetToString(rowSetNew);
+        } catch (Exception e)  {
+            setFormMessage(nomeForm, e.getMessage() , request);
+        } finally {
+            try {
+                if(crsListaOriginale != null)  crsListaOriginale.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(rowSetNew != null)  rowSetNew.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
     }
 
 }

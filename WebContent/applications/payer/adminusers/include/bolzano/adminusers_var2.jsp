@@ -242,7 +242,7 @@
 
                     <s:div name="divElement203" cssclass="divRicMetadatiSingleRow">
                         <s:list bradio="false" bchecked="${chk_richiesteelaborazioni}" validator="ignore"
-                         cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${richiesteElaborazioniDisabled}"
+                         cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${richiesteelaborazioniDisabled}"
                         name="richiesteelaborazioni" groupname="richiesteelaborazioni"
                         text="Richieste Elaborazioni" value="Y" />
                     </s:div>
