@@ -8,7 +8,6 @@ import com.seda.data.spi.PageInfo;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.bean.PrenotazioneFatturazionePagelist;
 import com.sun.rowset.WebRowSetImpl;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.seda.payer.manager.riconciliazionenn.actions.BaseRiconciliazioneNodoAction;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
@@ -20,29 +19,44 @@ import javax.sql.rowset.RowSetMetaDataImpl;
 import javax.sql.rowset.WebRowSet;
 import java.sql.*;
 
-public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction {
+public class RichiesteElaborazioniAction extends BaseFatturazioneAction {
     private static final long serialVersionUID = 1L;
     private int rowsPerPage;
     private int pageNumber;
     private String order;
-    WebRowSetImpl webRowSetImpl = null;
 
     public Object service(HttpServletRequest request) throws ActionException {
-        HttpSession session = request.getSession();
-        tx_SalvaStato(request);
+//        super.service(request);
+//        HttpSession session = request.getSession(false);
+//
+//        tx_SalvaStato(request);
+//        aggiornamentoCombo(request, session);
+//        loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
+//        LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), "", getParamCodiceEnte(), getParamCodiceUtente(), false);
+//
+//        rowsPerPage = ((String) request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+//        pageNumber = ((String) request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+//        order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+//
+//        replyAttributes(false, request,"pageNumber","rowsPerPage","order");
         super.service(request);
+        HttpSession session = request.getSession();
+//        tx_SalvaStato(request);
+        replyAttributes(false, request,"pageNumber","rowsPerPage","order");
+
         aggiornamentoCombo(request, session);
-        loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(), false);
+        loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
         LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), "", getParamCodiceEnte(), getParamCodiceUtente(), false);
 
-        rowsPerPage = ((String) request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
-        pageNumber = ((String) request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
-        order = request.getParameter("order")  == null ? "" : request.getParameter("order");
-
         switch (getFiredButton(request)) {
-            case TX_BUTTON_CERCA:
-            case TX_BUTTON_CERCA_PRENOTAZIONE: {
-                salvaFiltri(request, session);
+            case TX_BUTTON_CERCA:{
+//            case TX_BUTTON_CERCA_PRENOTAZIONE: {
+//                salvaFiltri(request, session);
+
+                rowsPerPage = ((String) request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                pageNumber = ((String) request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+
                 try {
                     PrenotazioneFatturazionePagelist prenotazioneFatturazionePagelist = getPrenotazioneFatturazioneList(request);
                     PageInfo pageInfo = prenotazioneFatturazionePagelist.getPageInfo();
@@ -52,11 +66,15 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
                         if (pageInfo != null) {
                             if (pageInfo.getNumRows() > 0) {
                                 String lista = elaboraXmlList(prenotazioneFatturazionePagelist.getPrenotazioneFatturazioneListXml(), request, "richiesteElaborazioniForm");
-                                request.setAttribute("listaPrenotazioni", lista);
-                                request.setAttribute("listaPrenotazioni.pageInfo", pageInfo);
+                                if(lista != "") {
+                                    request.setAttribute("listaPrenotazioni", lista);
+                                    request.setAttribute("listaPrenotazioni.pageInfo", pageInfo);
+                                } else {
+                                    request.setAttribute("listaPrenotazioni", null);
+                                    setFormMessage("richiesteElaborazioniForm", Messages.NO_DATA_FOUND.format(), request);
+                                }
                             } else {
                                 request.setAttribute("listaPrenotazioni", null);
-
                                 setFormMessage("richiesteElaborazioniForm", Messages.NO_DATA_FOUND.format(), request);
                             }
                         } else {
@@ -70,7 +88,8 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
             }
             break;
             case TX_BUTTON_NULL: {
-                salvaFiltri(request, session);
+                // TODO dividiSocUtenteEnte(request);
+//                impostaFiltri(request, session);
             }
             break;
         }
@@ -83,12 +102,13 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
             System.out.println("Salvataggio filtri...");
             session.setAttribute(Field.TX_SOCIETA.format(), request.getAttribute(Field.TX_SOCIETA.format()));
             session.setAttribute(Field.TX_PROVINCIA.format(), request.getAttribute(Field.TX_PROVINCIA.format()));
-            session.setAttribute("tx_UtenteEnte", request.getAttribute("tx_UtenteEnte"));
+            session.setAttribute(Field.TX_ENTE.format(), request.getAttribute(Field.TX_ENTE.format()));
             session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_DAY.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_DAY.format()));
             session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_MONTH.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_MONTH.format()));
             session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_YEAR.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_YEAR.format()));
             session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_DAY.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_DAY.format()));
             session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_MONTH.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_MONTH.format()));
+            session.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_YEAR.format(), request.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_YEAR.format()));
             session.setAttribute(Field.DT_DATA_RICHIESTA_DA_DAY.format(), request.getAttribute(Field.DT_DATA_RICHIESTA_DA_DAY.format()));
             session.setAttribute(Field.DT_DATA_RICHIESTA_DA_MONTH.format(), request.getAttribute(Field.DT_DATA_RICHIESTA_DA_MONTH.format()));
             session.setAttribute(Field.DT_DATA_RICHIESTA_DA_YEAR.format(), request.getAttribute(Field.DT_DATA_RICHIESTA_DA_YEAR.format()));
@@ -96,13 +116,36 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
             session.setAttribute(Field.DT_DATA_RICHIESTA_A_MONTH.format(), request.getAttribute(Field.DT_DATA_RICHIESTA_A_MONTH.format()));
             session.setAttribute(Field.DT_DATA_RICHIESTA_A_YEAR.format(), request.getAttribute(Field.DT_DATA_RICHIESTA_A_YEAR.format()));
             session.setAttribute(Field.DT_FLAG_FATTURAZIONE.format(), request.getAttribute(Field.DT_FLAG_FATTURAZIONE.format()));
-            session.setAttribute(Field.DT_FLAG_FATTURAZIONE.format(), request.getAttribute(Field.DT_FLAG_FATTURAZIONE.format()));
         } catch (Exception e) {
             System.out.println("Errore salvataggio filtri : ");
             e.getMessage();
         }
     }
 
+    private void impostaFiltri(HttpServletRequest request, HttpSession session) {
+        try {
+            System.out.println("Salvataggio filtri...");
+            request.setAttribute(Field.TX_SOCIETA.format(), session.getAttribute(Field.TX_SOCIETA.format()));
+            request.setAttribute(Field.TX_PROVINCIA.format(), session.getAttribute(Field.TX_PROVINCIA.format()));
+            request.setAttribute(Field.TX_ENTE.format(), session.getAttribute(Field.TX_ENTE.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_DAY.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_DAY.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_MONTH.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_MONTH.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_YEAR.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_DA_YEAR.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_DAY.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_DAY.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_MONTH.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_MONTH.format()));
+            request.setAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_YEAR.format(), session.getAttribute(Field.DT_PERIODO_PRENOTAZIONE_A_YEAR.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_DA_DAY.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_DA_DAY.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_DA_MONTH.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_DA_MONTH.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_DA_YEAR.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_DA_YEAR.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_A_DAY.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_A_DAY.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_A_MONTH.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_A_MONTH.format()));
+            request.setAttribute(Field.DT_DATA_RICHIESTA_A_YEAR.format(), session.getAttribute(Field.DT_DATA_RICHIESTA_A_YEAR.format()));
+            request.setAttribute(Field.DT_FLAG_FATTURAZIONE.format(), session.getAttribute(Field.DT_FLAG_FATTURAZIONE.format()));
+        } catch (Exception e) {
+            System.out.println("Errore salvataggio filtri : ");
+            e.getMessage();
+        }
+    }
     private PrenotazioneFatturazionePagelist getPrenotazioneFatturazioneList(HttpServletRequest request) {
         CallableStatement callableStatement = null;
         Connection connection = null;
@@ -171,71 +214,5 @@ public class RichiesteElaborazioniAction  extends BaseRiconciliazioneNodoAction 
         return prenotazionePagelist;
     }
 
-    private void loadWebRowSet(ResultSet resultSet) throws SQLException {
-        // if rs is null means that there are no more results
-        if (resultSet == null) {
-            throw new SQLException(com.seda.data.helper.Messages.ARGUMENT_NULL.format("ResultSet"));
-        }
-        try {
-            // define a new cached rowset
-            webRowSetImpl = new WebRowSetImpl();
-            // fill data
-            webRowSetImpl.populate(resultSet);
-        } finally {
-            DAOHelper.closeIgnoringException(resultSet);
-        }
-    }
-
-    public String elaboraXmlList(String listXml, HttpServletRequest request, String nomeForm) {
-        WebRowSet rowSetNew = null;
-        CachedRowSet crsListaOriginale = null;
-        try {
-            crsListaOriginale = Convert.stringToWebRowSet(listXml);
-            ResultSetMetaData rsMdOriginale = crsListaOriginale.getMetaData();
-            int iCols = rsMdOriginale.getColumnCount();
-
-            RowSetMetaDataImpl rsMdNew = new RowSetMetaDataImpl();
-            rsMdNew.setColumnCount(iCols);
-
-            for (int i = 1; i <= iCols; i++) {
-                rsMdNew.setColumnName(i, rsMdOriginale.getColumnName(i));
-                rsMdNew.setColumnType(i, rsMdOriginale.getColumnType(i));
-                rsMdNew.setColumnTypeName(i, rsMdOriginale.getColumnTypeName(i));
-            }
-            rowSetNew = new WebRowSetImpl();
-            rowSetNew.setMetaData(rsMdNew);
-
-            if (crsListaOriginale != null) {
-                while (crsListaOriginale.next()) {
-                    rowSetNew.moveToInsertRow();
-                    // inserisco i valori delle vecchie colonne della riga attuale
-                    for (int i=1; i<=iCols; i++) {
-                        if (i != 6)
-                            rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
-                    }
-
-                    String stato = crsListaOriginale.getString(6);
-                    rowSetNew.updateString(6, stato.equals("1") ? "In elaborazione" : "Terminata");
-                    rowSetNew.insertRow();
-                }
-            }
-            rowSetNew.moveToCurrentRow();
-            return Convert.webRowSetToString(rowSetNew);
-        } catch (Exception e)  {
-            setFormMessage(nomeForm, e.getMessage() , request);
-        } finally {
-            try {
-                if(crsListaOriginale != null)  crsListaOriginale.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                if(rowSetNew != null)  rowSetNew.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return "";
-    }
 
 }

@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/tld/fmt.tld" prefix="fmt"%>
 <%@ taglib uri="/WEB-INF/tld/Seda.tld" prefix="s"%>
 <%@ taglib uri="/WEB-INF/tld/maftags.tld" prefix="m"%>
-<m:view_state id="viewstate" encodeAttributes="true" />
+<m:view_state id="RichiesteElaborazioni" encodeAttributes="true" />
 
 <script src="../applications/js/jquery-min.js"
 	type="text/javascript"></script>
@@ -19,143 +19,45 @@
 	$(function() {
 		$.datepicker.setDefaults($.datepicker.regional["it"]);
 		$("#dtFlusso_da_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
-		$("#dtFlusso_da_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtFlusso_da_day_id").val(dateText.substr(0, 2));
-								$("#dtFlusso_da_month_id").val(dateText.substr(3, 2));
-								$("#dtFlusso_da_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtFlusso_da_day_id",
-									"dtFlusso_da_month_id",
-									"dtFlusso_da_year_id",
-									"dtFlusso_da_hidden");
-						}
-						});
+		$("#dtFlusso_da_hidden").datepicker({
+            minDate : new Date(annoDa, 0, 1),
+            maxDate : new Date(annoA, 11, 31),
+            yearRange : annoDa + ":" + annoA,
+            showOn : "button",
+            buttonImage : "../applications/templates/shared/img/calendar.gif",
+            buttonImageOnly : true,
+            onSelect : function(dateText, inst) {
+                $("#dtFlusso_da_day_id").val(dateText.substr(0, 2));
+                $("#dtFlusso_da_month_id").val(dateText.substr(3, 2));
+                $("#dtFlusso_da_year_id").val(dateText.substr(6, 4));
+            },
+            beforeShow : function(input, inst) {
+                updateValoreDatePickerFromDdl("dtFlusso_da_day_id",
+                                            "dtFlusso_da_month_id",
+                                            "dtFlusso_da_year_id",
+                                            "dtFlusso_da_hidden");
+            }
+        });
 		$("#dtFlusso_a_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
-		$("#dtFlusso_a_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtFlusso_a_day_id").val(dateText.substr(0, 2));
-								$("#dtFlusso_a_month_id").val(dateText.substr(3, 2));
-								$("#dtFlusso_a_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtFlusso_a_day_id",
-									"dtFlusso_a_month_id",
-									"dtFlusso_a_year_id",
-									"dtFlusso_a_hidden");
-						}
-						});
-		$("#dtregol_da_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
-		$("#dtregol_da_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtregol_da_day_id").val(dateText.substr(0, 2));
-								$("#dtregol_da_month_id").val(dateText.substr(3, 2));
-								$("#dtregol_da_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtregol_da_day_id",
-									"dtregol_da_month_id",
-									"dtregol_da_year_id",
-									"dtregol_da_hidden");
-						}
-						});
-		$("#dtregol_a_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
-		$("#dtregol_a_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtregol_a_day_id").val(dateText.substr(0, 2));
-								$("#dtregol_a_month_id").val(dateText.substr(3, 2));
-								$("#dtregol_a_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtregol_a_day_id",
-									"dtregol_a_month_id",
-									"dtregol_a_year_id",
-									"dtregol_a_hidden");
-						}
-						});
-		$("#dtChiusuraFlusso_da_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
-		$("#dtChiusuraFlusso_da_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtChiusuraFlusso_da_day_id").val(dateText.substr(0, 2));
-								$("#dtChiusuraFlusso_da_month_id").val(dateText.substr(3, 2));
-								$("#dtChiusuraFlusso_da_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtChiusuraFlusso_da_day_id",
-									"dtChiusuraFlusso_da_month_id",
-									"dtChiusuraFlusso_da_year_id",
-									"dtChiusuraFlusso_da_hidden");
-						}
-						});
-		$("#dtChiusuraFlusso_a_hidden").datepicker("option", "dateFormat","dd/mm/yyyy");
-		$("#dtChiusuraFlusso_a_hidden").datepicker(
-						{
-							minDate : new Date(annoDa, 0, 1),
-							maxDate : new Date(annoA, 11, 31),
-							yearRange : annoDa + ":" + annoA,
-							showOn : "button",
-							buttonImage : "../applications/templates/shared/img/calendar.gif",
-							buttonImageOnly : true,
-							onSelect : function(dateText, inst) {
-								$("#dtChiusuraFlusso_a_day_id").val(dateText.substr(0, 2));
-								$("#dtChiusuraFlusso_a_month_id").val(dateText.substr(3, 2));
-								$("#dtChiusuraFlusso_a_year_id").val(dateText.substr(6, 4));
-							},
-							beforeShow : function(input, inst) {
-								//imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-							updateValoreDatePickerFromDdl(
-									"dtChiusuraFlusso_a_day_id",
-									"dtChiusuraFlusso_a_month_id",
-									"dtChiusuraFlusso_a_year_id",
-									"dtChiusuraFlusso_a_hidden");
-						}
-						});
+		$("#dtFlusso_a_hidden").datepicker({
+            minDate : new Date(annoDa, 0, 1),
+            maxDate : new Date(annoA, 11, 31),
+            yearRange : annoDa + ":" + annoA,
+            showOn : "button",
+            buttonImage : "../applications/templates/shared/img/calendar.gif",
+            buttonImageOnly : true,
+            onSelect : function(dateText, inst) {
+                $("#dtFlusso_a_day_id").val(dateText.substr(0, 2));
+                $("#dtFlusso_a_month_id").val(dateText.substr(3, 2));
+                $("#dtFlusso_a_year_id").val(dateText.substr(6, 4));
+            },
+            beforeShow : function(input, inst) {
+                updateValoreDatePickerFromDdl("dtFlusso_a_day_id",
+                                            "dtFlusso_a_month_id",
+                                            "dtFlusso_a_year_id",
+                                            "dtFlusso_a_hidden");
+            }
+        });
 
         $("#dtPeriodo_da_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
         $("#dtPeriodo_da_hidden").datepicker({
@@ -171,7 +73,6 @@
                 $("#dtPeriodo_da_year_id").val(dateText.substr(6, 4));
             },
             beforeShow : function(input, inst) {
-                //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
                 updateValoreDatePickerFromDdl(
                     "dtPeriodo_da_day_id",
                     "dtPeriodo_da_month_id",
@@ -194,7 +95,6 @@
                 $("#dtPeriodo_a_year_id").val(dateText.substr(6, 4));
             },
             beforeShow : function(input, inst) {
-                //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
                 updateValoreDatePickerFromDdl(
                     "dtPeriodo_a_day_id",
                     "dtPeriodo_a_month_id",
@@ -203,151 +103,11 @@
             }
         });
 	});
-
-	function setFiredButton(buttonName) {
-		var buttonFired = document.getElementById('fired_button_hidden');
-		if (buttonFired != null)
-			buttonFired.value = buttonName;
-	}
-
-	function setDdl(value) {
-		var txtHidden = document.getElementById('DDLChanged');
-		if (txtHidden != null)
-			txtHidden.value = value;
-	}
-
-	function callSubmit(frm1) {
-		frm1.submit();
-	}
-
-	function getCSSRule(ruleName, deleteFlag) { // Return requested style obejct
-		ruleName = ruleName.toLowerCase(); // Convert test string to lower case.
-		if (document.styleSheets) { // If browser can play with stylesheets
-			for ( var i = 0; i < document.styleSheets.length; i++) { // For each stylesheet
-				var styleSheet = document.styleSheets[i]; // Get the current Stylesheet
-				var ii = 0; // Initialize subCounter.
-				var cssRule = false; // Initialize cssRule.
-				do { // For each rule in stylesheet
-					if (styleSheet.cssRules) { // Browser uses cssRules?
-						cssRule = styleSheet.cssRules[ii]; // Yes --Mozilla Style
-					} else { // Browser usses rules?
-						cssRule = styleSheet.rules[ii]; // Yes IE style.
-					} // End IE check.
-					if (cssRule) { // If we found a rule...
-						if (cssRule.selectorText.toLowerCase() == ruleName) { //  match ruleName?
-							if (deleteFlag == 'delete') { // Yes.  Are we deleteing?
-								if (styleSheet.cssRules) { // Yes, deleting...
-									styleSheet.deleteRule(ii); // Delete rule, Moz Style
-								} else { // Still deleting.
-									styleSheet.removeRule(ii); // Delete rule IE style.
-								} // End IE check.
-								return true; // return true, class deleted.
-							} else { // found and not deleting.
-								return cssRule; // return the style object.
-							} // End delete Check
-						} // End found rule name
-					} // end found cssRule
-					ii++; // Increment sub-counter
-				} while (cssRule); // end While loop
-			} // end For loop
-		} // end styleSheet ability check
-		return false; // we found NOTHING!
-	} // end getCSSRule
-
-	function killCSSRule(ruleName) { // Delete a CSS rule
-		return getCSSRule(ruleName, 'delete'); // just call getCSSRule w/delete flag.
-	} // end killCSSRule
-
-	function addCSSRule(ruleName) { // Create a new css rule
-		if (document.styleSheets) { // Can browser do styleSheets?
-			if (!getCSSRule(ruleName)) { // if rule doesn't exist...
-				if (document.styleSheets[0].addRule) { // Browser is IE?
-					document.styleSheets[0].addRule(ruleName, null, 0); // Yes, add IE style
-				} else { // Browser is IE?
-					document.styleSheets[0].insertRule(ruleName + ' { }', 0); // Yes, add Moz style.
-				} // End browser check
-			} // End already exist check.
-		} // End browser ability check.
-		return getCSSRule(ruleName); // return rule we just created.
-	}
-
-	/*
-	function switchVisibility() {
-	   var rule =  getCSSRule('.display_none');
-	   if (rule.style.display == 'none') {
-		   rule.style.display = 'inline';
-	   } else {
-	   	rule.style.display = 'none';
-	   }
-	}
-	 */
 </script>
-
-<c:url value="" var="formParameters">
-	<c:if test="${!empty param.pageNumber}">
-		<c:param name="pageNumber_hidden">${param.pageNumber}</c:param>
-	</c:if>
-	<c:if test="${!empty rowsPerPage}">
-		<c:param name="rowsPerPage_hidden">${param.rowsPerPage}</c:param>
-	</c:if>
-	<c:if test="${!empty orderBy}">
-		<c:param name="orderBy_hidden">${param.orderBy}</c:param>
-	</c:if>
-	<c:if test="${!empty param.tx_societa}">
-		<c:param name="tx_societa">${param.tx_societa}</c:param>
-	</c:if>
-	<c:if test="${!empty param.tx_provincia}">
-		<c:param name="tx_provincia">${param.tx_provincia}</c:param>
-	</c:if>
-	<c:if test="${!empty param.tx_utente}">
-		<c:param name="tx_utente">${param.tx_utente}</c:param>
-	</c:if>
-
-	<c:if test="${!empty param.dtFlusso_da_day}">
-		<c:param name="dtFlusso_da_day">${param.dtFlusso_da_day}</c:param>
-	</c:if>
-	<c:if test="${!empty param.dtFlusso_da_month}">
-		<c:param name="dtFlusso_da_month">${param.dtFlusso_da_month}</c:param>
-	</c:if>
-	<c:if test="${!empty param.dtFlusso_da_year}">
-		<c:param name="dtFlusso_da_year">${param.dtFlusso_da_year}</c:param>
-	</c:if>
-	<c:if test="${!empty param.dtFlusso_a_day}">
-		<c:param name="dtFlusso_a_day">${param.dtFlusso_a_day}</c:param>
-	</c:if>
-	<c:if test="${!empty param.dtFlusso_a_month}">
-		<c:param name="dtFlusso_a_month">${param.dtFlusso_a_month}</c:param>
-	</c:if>
-	<c:if test="${!empty param.dtFlusso_a_year}">
-		<c:param name="dtFlusso_a_year">${param.dtFlusso_a_year}</c:param>
-	</c:if>
-
-	<c:if test="${!empty param.dtPeriodo_da_day}">
-        <c:param name="dtPeriodo_da_day">${param.dtPeriodo_da_day}</c:param>
-    </c:if>
-    <c:if test="${!empty param.dtPeriodo_da_month}">
-        <c:param name="dtPeriodo_da_month">${param.dtPeriodo_da_month}</c:param>
-    </c:if>
-    <c:if test="${!empty param.dtPeriodo_da_year}">
-        <c:param name="dtPeriodo_da_year">${param.dtPeriodo_da_year}</c:param>
-    </c:if>
-    <c:if test="${!empty param.dtPeriodo_a_day}">
-        <c:param name="dtPeriodo_a_day">${param.dtPeriodo_a_day}</c:param>
-    </c:if>
-    <c:if test="${!empty param.dtPeriodo_a_month}">
-        <c:param name="dtPeriodo_a_month">${param.dtPeriodo_a_month}</c:param>
-    </c:if>
-    <c:if test="${!empty param.dtPeriodo_a_year}">
-        <c:param name="dtPeriodo_a_year">${param.dtPeriodo_a_year}</c:param>
-    </c:if>
-</c:url>
-
 
 <s:div name="divSelezione1" cssclass="divSelezione">
 	<s:div name="divRicercaTopName" cssclass="divRicercaTop">
-		<s:form name="richiesteElaborazioniForm"
-			action="richiesteElaborazioni.do" method="post"
-			hasbtn1="false" hasbtn2="false" hasbtn3="false">
+		<s:form name="richiesteElaborazioniForm" action="richiesteElaborazioni.do" method="post" hasbtn1="false" hasbtn2="false" hasbtn3="false">
 			<s:textbox name="DDLChanged" label="DDLChanged" bmodify="true" text="" cssclass="display_none" cssclasslabel="display_none" />
 
 			<s:div name="divRicercaTitleName" cssclass="divRicTitle bold">Ricerca - Richieste Elaborazioni</s:div>
@@ -472,7 +232,7 @@
 			</s:div>
 
 			<s:div name="divCentered0" cssclass="divRicBottoni">
-				<s:button id="tx_button_cerca_prenotazione" type="submit" text="Cerca" onclick="" cssclass="btnStyle" />
+				<s:button id="tx_button_cerca" type="submit" text="Cerca" onclick="" cssclass="btnStyle" />
 				<s:button id="tx_button_reset" type="submit" text="Reset" onclick="" cssclass="btnStyle" />
 			</s:div>
 		</s:form>
@@ -497,76 +257,17 @@
 	</c:if>
 </s:div>
 
+
 <c:if test="${!empty listaPrenotazioni}">
 	<fmt:setLocale value="it_IT" />
 	<s:div name="divRicercaFillName" cssclass="divRicercaFill bold">
 		Elenco Richieste Elaborazioni
 	</s:div>
 	<s:datagrid viewstate="" cachedrowset="listaPrenotazioni"
-		action="richiesteElaborazioni.do?vista=invioRichiesteElaborazioniLista" border="1" usexml="true"
+		action="richiesteElaborazioni.do" border="1" usexml="true"
 		rowperpage="${applicationScope.rowsPerPage}">
-        <s:action>
-            <c:url value="" var="formParameters">
-                <c:if test="${!empty param.pageNumber}">
-                    <c:param name="pageNumber_hidden">${param.pageNumber}</c:param>
-                </c:if>
-                <c:if test="${!empty rowsPerPage}">
-                    <c:param name="rowsPerPage_hidden">${param.rowsPerPage}</c:param>
-                </c:if>
-                <c:if test="${!empty orderBy}">
-                    <c:param name="orderBy_hidden">${param.orderBy}</c:param>
-                </c:if>
-                <c:if test="${!empty param.tx_societa}">
-                    <c:param name="tx_societa">${param.tx_societa}</c:param>
-                </c:if>
-                <c:if test="${!empty param.tx_provincia}">
-                    <c:param name="tx_provincia">${param.tx_provincia}</c:param>
-                </c:if>
-                <c:if test="${!empty param.tx_utente}">
-                    <c:param name="tx_utente">${param.tx_utente}</c:param>
-                </c:if>
 
-                <c:if test="${!empty param.dtFlusso_da_day}">
-                    <c:param name="dtFlusso_da_day">${param.dtFlusso_da_day}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtFlusso_da_month}">
-                    <c:param name="dtFlusso_da_month">${param.dtFlusso_da_month}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtFlusso_da_year}">
-                    <c:param name="dtFlusso_da_year">${param.dtFlusso_da_year}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtFlusso_a_day}">
-                    <c:param name="dtFlusso_a_day">${param.dtFlusso_a_day}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtFlusso_a_month}">
-                    <c:param name="dtFlusso_a_month">${param.dtFlusso_a_month}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtFlusso_a_year}">
-                    <c:param name="dtFlusso_a_year">${param.dtFlusso_a_year}</c:param>
-                </c:if>
-
-                <c:if test="${!empty param.dtPeriodo_da_day}">
-                    <c:param name="dtPeriodo_da_day">${param.dtPeriodo_da_day}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtPeriodo_da_month}">
-                    <c:param name="dtPeriodo_da_month">${param.dtPeriodo_da_month}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtPeriodo_da_year}">
-                    <c:param name="dtPeriodo_da_year">${param.dtPeriodo_da_year}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtPeriodo_a_day}">
-                    <c:param name="dtPeriodo_a_day">${param.dtPeriodo_a_day}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtPeriodo_a_month}">
-                    <c:param name="dtPeriodo_a_month">${param.dtPeriodo_a_month}</c:param>
-                </c:if>
-                <c:if test="${!empty param.dtPeriodo_a_year}">
-                    <c:param name="dtPeriodo_a_year">${param.dtPeriodo_a_year}</c:param>
-                </c:if>
-            </c:url>
-        </s:action>
-
-		<s:dgcolumn index="1" label="Societ&aacute;" asc="SOCA" desc="SOCD"></s:dgcolumn>
+        <s:dgcolumn index="1" label="Societ&aacute;" asc="SOCA" desc="SOCD"></s:dgcolumn>
  		<s:dgcolumn index="2" label="Utente" css="text_align_left" asc="UTEA" desc="UTED"></s:dgcolumn>
 		<s:dgcolumn index="3" label="Ente" asc="ANEA" desc="ANED"></s:dgcolumn>
 		<s:dgcolumn index="4" label="Data richiesta" format="dd/MM/yyyy" asc="DPREA" desc="DPREDD"></s:dgcolumn>
