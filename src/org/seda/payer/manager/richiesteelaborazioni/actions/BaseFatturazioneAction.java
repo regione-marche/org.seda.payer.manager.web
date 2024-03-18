@@ -2,19 +2,13 @@ package org.seda.payer.manager.richiesteelaborazioni.actions;
 
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
-import com.seda.data.dao.DAOHelper;
-import com.seda.data.spi.PageInfo;
 import com.seda.j2ee5.maf.components.servicelocator.ServiceLocator;
 import com.seda.j2ee5.maf.components.servicelocator.ServiceLocatorException;
 import com.seda.j2ee5.maf.core.action.ActionException;
-import com.seda.payer.pgec.webservice.commons.dati.*;
-import com.seda.payer.pgec.webservice.commons.srv.FaultType;
 import com.sun.rowset.WebRowSetImpl;
 import org.seda.payer.manager.actions.BaseManagerAction;
-import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.PropertiesPath;
-import org.seda.payer.manager.ws.WSCache;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,8 +16,6 @@ import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetMetaDataImpl;
 import javax.sql.rowset.WebRowSet;
-import java.rmi.RemoteException;
-import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
@@ -33,6 +25,7 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 	protected String codiceSocieta="";
 	protected String codiceProvincia="";
 	protected String codiceUtente="";
+	protected String chiaveEnte="";
 	protected String payerDbSchema = null;
 	protected DataSource payerDataSource = null;
 	protected WebRowSetImpl webRowSetImpl = null;
@@ -98,21 +91,7 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 		}
 	}
 
-	protected void loadWebRowSet(ResultSet resultSet) throws SQLException {
-		// if rs is null means that there are no more results
-		if (resultSet == null) {
-			throw new SQLException(com.seda.data.helper.Messages.ARGUMENT_NULL.format("ResultSet"));
-		}
-		try {
-			// define a new cached rowset and fill data
-			webRowSetImpl = new WebRowSetImpl();
-			webRowSetImpl.populate(resultSet);
-		} finally {
-			DAOHelper.closeIgnoringException(resultSet);
-		}
-	}
-
-	protected String elaboraXmlList(String listXml, HttpServletRequest request, String nomeForm) {
+	protected String elaboraXmlList(String listXml, HttpServletRequest request) {
 		WebRowSet rowSetNew = null;
 		CachedRowSet crsListaOriginale = null;
 		try {
@@ -148,17 +127,17 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 			rowSetNew.moveToCurrentRow();
 			return Convert.webRowSetToString(rowSetNew);
 		} catch (Exception e)  {
-			setFormMessage(nomeForm, e.getMessage() , request);
+			setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
 		} finally {
 			try {
 				if(crsListaOriginale != null)  crsListaOriginale.close();
 			} catch (SQLException e) {
-				setFormMessage(nomeForm, e.getMessage() , request);
+				setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
 			}
 			try {
 				if(rowSetNew != null)  rowSetNew.close();
 			} catch (SQLException e) {
-				setFormMessage(nomeForm, e.getMessage() , request);
+				setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
 			}
 		}
 		return "";

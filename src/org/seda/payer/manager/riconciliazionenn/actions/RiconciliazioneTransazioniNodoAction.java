@@ -7,8 +7,8 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.seda.commons.security.TokenGenerator;
-import com.seda.data.helper.Helper;
+import com.seda.payer.core.bean.PrenotazioneFatturazione;
+import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
 import com.seda.payer.core.exception.DaoException;
 import com.seda.payer.core.wallet.bean.EsitoRisposte;
 import org.seda.payer.manager.util.Field;
@@ -366,34 +366,22 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 			esitoRisposte.setDescrizioneMessaggio(messageDate);
 			setFormMessage("riconciliazioneTransazioniNodoForm", messageDate , request);
 		} else {
-			CallableStatement callableStatement;
 			try (Connection conn = payerDataSource.getConnection()) {
-				callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYPRESP_INS");
-				callableStatement.setString(1, TokenGenerator.generateUUIDToken());
-				callableStatement.setString(2, getParamCodiceSocieta() != null ? getParamCodiceSocieta() : "");
-				callableStatement.setString(3, getParamCodiceUtente() != null ? getParamCodiceUtente() : "");
-				callableStatement.setString(4, getParamCodiceEnte() != null ? getParamCodiceEnte() : "");
-				callableStatement.setString(5, new Timestamp(System.currentTimeMillis()).toString());
-				callableStatement.setString(6, userBean.getCodiceFiscale() != null ? userBean.getCodiceFiscale() : "");
-				callableStatement.setString(7, "FAT");
-				callableStatement.setString(8, getDataByPrefix("dtFlusso_da", request) != null ? getDataByPrefix("dtFlusso_da", request) : "");
-				callableStatement.setString(9, getDataByPrefix("dtFlusso_a", request) != null ? getDataByPrefix("dtFlusso_a", request) : "" );
-				callableStatement.setString(10, "1"); // in attesa
-				callableStatement.setString(11, ""); // nome flusso (per batch)
-				callableStatement.registerOutParameter(12, Types.VARCHAR);
-				callableStatement.registerOutParameter(13, Types.VARCHAR);
-				callableStatement.execute();
-				esitoRisposte.setCodiceMessaggio(callableStatement.getString(12));
-				esitoRisposte.setDescrizioneMessaggio(callableStatement.getString(13));
+				PrenotazioneFatturazioneDao dao = new PrenotazioneFatturazioneDao(conn, payerDbSchema);
+				PrenotazioneFatturazione prenotazione = new PrenotazioneFatturazione();
+				prenotazione.setCodiceSocieta(getParamCodiceSocieta() != null ? getParamCodiceSocieta() : "");
+				prenotazione.setCodiceUtente(getParamCodiceUtente() != null ? getParamCodiceUtente() : "");
+				prenotazione.setCodiceEnte(getParamCodiceEnte() != null ? getParamCodiceEnte() : "");
+				prenotazione.setDataRichiestaDa(getDataByPrefix("dtFlusso_da", request) != null ? getDataByPrefix("dtFlusso_da", request) : "");
+				prenotazione.setDataRichiestaA(getDataByPrefix("dtFlusso_a", request) != null ? getDataByPrefix("dtFlusso_a", request) : "" );
+
+				esitoRisposte = dao.inserisciPrenotazione(prenotazione, userBean.getCodiceFiscale() != null ? userBean.getCodiceFiscale() : "");
 			} catch (SQLException e) {
 				setErrorMessage(e.getMessage());
-				e.printStackTrace();
-			} catch (Exception e) {
-				setErrorMessage(e.getMessage());
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
-		}
+        }
 		return esitoRisposte;
-    }
+	}
 	// fine SR PGNTMGR-56
 }
