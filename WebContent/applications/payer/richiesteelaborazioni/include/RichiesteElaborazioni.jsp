@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/tld/fmt.tld" prefix="fmt"%>
 <%@ taglib uri="/WEB-INF/tld/Seda.tld" prefix="s"%>
 <%@ taglib uri="/WEB-INF/tld/maftags.tld" prefix="m"%>
-<m:view_state id="viewstate" encodeAttributes="true" />
+<m:view_state id="RichiesteElaborazioni" encodeAttributes="true" />
 
 <script src="../applications/js/jquery-min.js"
 	type="text/javascript"></script>
@@ -504,10 +504,8 @@
 		Elenco Richieste Elaborazioni
 	</s:div>
 	<s:datagrid viewstate="" cachedrowset="listaPrenotazioni"
-		action="richiesteElaborazioni.do?vista=invioRichiesteElaborazioniLista" border="1" usexml="true"
+		action="richiesteElaborazioni.do?vista=RichiesteElaborazioni" border="1" usexml="true"
 		rowperpage="${applicationScope.rowsPerPage}">
-
-
 
 		<s:dgcolumn index="1" label="Societ&aacute;"></s:dgcolumn>
  		<s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>

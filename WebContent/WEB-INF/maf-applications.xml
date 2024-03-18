@@ -1424,6 +1424,7 @@
 	<application name="richiesteelaborazioni" protected="true" activate="true">
 		<profile-collection>
 			<profile>AMEN</profile>
+			<profile>AMMI</profile>
 		</profile-collection>
 		<description>Richieste elaborarazioni per fatturazione</description>
 		<config-path>/applications/payer/richiesteelaborazioni</config-path>

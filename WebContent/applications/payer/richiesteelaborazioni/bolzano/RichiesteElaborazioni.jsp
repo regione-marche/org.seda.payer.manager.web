@@ -264,7 +264,7 @@
 		Elenco Richieste Elaborazioni
 	</s:div>
 	<s:datagrid viewstate="" cachedrowset="listaPrenotazioni"
-		action="richiesteElaborazioni.do" border="1" usexml="true"
+		action="richiesteElaborazioni.do?vista=RichiesteElaborazioni" border="1" usexml="true"
 		rowperpage="${applicationScope.rowsPerPage}">
 
         <s:dgcolumn index="1" label="Societ&aacute;" asc="SOCA" desc="SOCD"></s:dgcolumn>
