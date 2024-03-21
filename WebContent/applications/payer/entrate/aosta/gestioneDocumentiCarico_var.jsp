@@ -1817,9 +1817,9 @@
          <c:if test="${editDocumento.update && (editDocumento.modalitaAggiornamento || editDocumento.stampaAvvisoEseguita)}">
 	        <s:button
 	          id="tx_button_save"
-	          type="button"
+	          type="submit"
 	          text="Sostituisci"
-	          onclick="showConferma();"
+	          onclick=""
 	          cssclass="btnStyle"
 	          validate="true" />
 		 </c:if>
