@@ -78,9 +78,9 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 
 				setParamCodiceSocieta("");
 				setParamCodiceUtente("");
-								
+				setParamCodiceEnte("");
 				loadProvinciaXml_DDL(request, session, "",true);
-				loadDDLUtente(request, session, getParamCodiceSocieta(), "",true);
+				loadDDLUtente(request, session, "", "",true);
 				loadListaGatewayXml_DDL(request, session, "", "", true);
 				break;
 				
