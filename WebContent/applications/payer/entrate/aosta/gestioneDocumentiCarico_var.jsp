@@ -635,7 +635,7 @@
 	                onchange="setFiredButton('tx_button_flagstampaavviso_changed');submitForm();"
 	                validator="required"
 	                showrequired="true"
-	                disable="${editDocumento.readonly || editDocumento.delete}">
+	                disable="${editDocumento.readonly || editDocumento.delete || editDocumento.stampaAvvisoEseguita}">
 	                <s:ddloption
 	                  text="No"
 	                  value="N" />
@@ -1818,7 +1818,7 @@
 	        <s:button
 	          id="tx_button_save"
 	          type="submit"
-	          text="Sostituisci"
+	          text="Aggiorna"
 	          onclick=""
 	          cssclass="btnStyle"
 	          validate="true" />
