@@ -203,6 +203,7 @@ public enum PropertiesPath {
 	, allowElementsOWASP
 	, skipTarget
 	, paramTotemTipologiaImposta
+	, csvFatturazionePath
 	;
 	
 	private static ResourceBundle rb;
