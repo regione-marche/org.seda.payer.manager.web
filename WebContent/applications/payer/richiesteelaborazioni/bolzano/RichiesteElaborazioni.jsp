@@ -274,9 +274,14 @@
 		<s:dgcolumn index="5" label="Periodo richiesto" css="text_align_left"></s:dgcolumn>
 		<s:dgcolumn index="6" label="Stato" css="text_align_right" asc="FLAGA" desc="FLAGD"></s:dgcolumn>
         <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
-			<s:hyperlink href="richiesteElaborazioni.do"
-			    imagesrc="../applications/templates/riconciliazionenn/img/download.png"
-				alt="Download" text="" cssclass="hlStyle" />
+        	<s:if right="{6}" control="eq" left="In elaborazione">
+        	    <s:then>
+        	        <s:hyperlink href="richiesteElaborazioni.do" imagesrc="../applications/templates/richiesteelaborazioni/img/circle_red.png" alt="no download" text="" cssclass="hlStyle" />
+            	</s:then>
+                <s:else>
+                    <s:hyperlink href="scaricaFatturazione.do?" imagesrc="../applications/templates/richiesteelaborazioni/img/download.png" alt="Download" text="" cssclass="hlStyle" />
+                </s:else>
+            </s:if>
 		</s:dgcolumn>
 	</s:datagrid>
 </c:if>
