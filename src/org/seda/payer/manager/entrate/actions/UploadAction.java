@@ -100,13 +100,13 @@ public class UploadAction extends HtmlAction implements Filter {
 										file.renameTo(oldFile);
 										oldFile.delete();
 										item.write(file);
-										messaggio = "File giï¿½ esistente. Il file ï¿½ stato sovrascritto";
+										messaggio = "File già esistente. Il file è stato sovrascritto";
 									} else {
-										messaggio = "File giï¿½ esistente.";
+										messaggio = "File già esistente.";
 									}
 								}
 							} else {
-								messaggio = "Estensione errata: Il file non ï¿½ un CSV";
+								messaggio = "Estensione errata: Il file non è un CSV";
 							}
 						}
 					}
