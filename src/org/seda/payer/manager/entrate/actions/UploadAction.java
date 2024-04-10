@@ -1,12 +1,9 @@
 package org.seda.payer.manager.entrate.actions;  
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -24,7 +21,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.PropertiesPath;
-import org.seda.payer.manager.ws.WSCache;
 
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.j2ee5.maf.core.action.ActionException;
@@ -32,9 +28,6 @@ import com.seda.j2ee5.maf.core.action.HtmlAction;
 import com.seda.j2ee5.maf.core.security.SignOnKeys;
 import com.seda.j2ee5.maf.util.MAFAttributes;
 import com.seda.j2ee5.maf.util.MAFRequest;
-import com.seda.payer.pgec.webservice.commons.dati.ConfigPagamento;
-import com.seda.payer.pgec.webservice.ente.dati.EnteDetailRequest;
-import com.seda.payer.pgec.webservice.ente.dati.EnteDetailResponse;
 
 public class UploadAction extends HtmlAction implements Filter {
 	
@@ -46,6 +39,8 @@ public class UploadAction extends HtmlAction implements Filter {
 		String messaggio = "", rootPathCSV = null;
 		String utenteEnte = request.getParameter("tx_UtenteEnte");
 		int fileCaricati = 0;	
+
+		String MAX_FILE_SIZE = "5000000"; // 5MB
 		
 		ServletContext context = request.getSession(false).getServletContext();
 		PropertiesTree configuration = (PropertiesTree) context.getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE);
@@ -79,6 +74,20 @@ public class UploadAction extends HtmlAction implements Filter {
 							if (item.getName().length() > 54) {
 								throw new Exception("Lunghezza nome file CSV errata: superiore a 50 caratteri"); 
 							}
+							// controlla la dimensione del file
+							long maxFileSize = Optional.of(configuration)
+								.map(p -> {
+									try {
+										return p.getProperty(PropertiesPath.maxSizeCSV.format(templateName), MAX_FILE_SIZE);
+									} catch (Exception e) {
+										return MAX_FILE_SIZE;
+									}
+								})
+								.map(s -> new Long(s))
+								.get().longValue();
+							if (item.getSize() > maxFileSize ) {
+								throw new Exception(String.format("Dimensione del file superiore a %s MB", Math.abs(maxFileSize/1000000) ));
+							}
 							fileCaricati++;
 							if(getEstensioneFile(item.getName()).equals("csv")) {
 								File file = new File(folderCSV, item.getName());
@@ -91,13 +100,13 @@ public class UploadAction extends HtmlAction implements Filter {
 										file.renameTo(oldFile);
 										oldFile.delete();
 										item.write(file);
-										messaggio = "File già esistente. Il file è stato sovrascritto";
+										messaggio = "File giï¿½ esistente. Il file ï¿½ stato sovrascritto";
 									} else {
-										messaggio = "File già esistente.";
+										messaggio = "File giï¿½ esistente.";
 									}
 								}
 							} else {
-								messaggio = "Estensione errata: Il file non è un CSV";
+								messaggio = "Estensione errata: Il file non ï¿½ un CSV";
 							}
 						}
 					}
