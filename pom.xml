@@ -902,12 +902,12 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-                        </webResources>  
-							<webResource>
-								<directory>${project.basedir}/profili/roseto</directory>
-								<targetPath>/WEB-INF/classes</targetPath>
-								<include>log4j2.xml</include>
-							</webResource>
+							  <webResource>
+								  <directory>${project.basedir}/profili/roseto</directory>
+								  <targetPath>/WEB-INF/classes</targetPath>
+								  <include>log4j2.xml</include>
+							  </webResource>
+                        </webResources>
                         </configuration>
                     </plugin>
                    </plugins>
