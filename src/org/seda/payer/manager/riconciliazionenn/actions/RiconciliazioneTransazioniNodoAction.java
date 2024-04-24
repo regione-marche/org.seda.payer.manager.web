@@ -2,7 +2,9 @@ package org.seda.payer.manager.riconciliazionenn.actions;
 
 import java.rmi.RemoteException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import com.seda.payer.core.bean.PrenotazioneFatturazione;
 import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
 import com.seda.payer.core.exception.DaoException;
 import com.seda.payer.core.wallet.bean.EsitoRisposte;
+import org.joda.time.format.DateTimeFormat;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.ws.WSCache;
@@ -337,22 +340,34 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         	dataFlussoA = Calendar.getInstance();        
         if (!sDataFlussoDaIsNullOrEmpty && dataFlussoDa.after(dataFlussoA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
-        if(!sDataFlussoDaIsNullOrEmpty) {
-	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
-	        if (dataFlussoDa.before(dataFlussoA))
-	        	return "Il massimo range di giorni consentito è di 360 giorni";
-        }
-        
+
         if(!sDataCreaDaIsNullOrEmpty && sDataCreaAIsNullOrEmpty)
         	dataCreaA = Calendar.getInstance();                 
         if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
-        if(!sDataCreaDaIsNullOrEmpty) {
-	        dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
-	        if (dataCreaDa.before(dataCreaA))
-	        	return "Il massimo range di giorni consentito è di 360 giorni";
-	     }
-        
+
+		if(getFiredButton(request).equals(FiredButton.TX_BUTTON_ESPORTADATI) && !sDataFlussoDaIsNullOrEmpty){
+			// controlli aggiuntivi
+			int yearDa = dataFlussoDa.get(Calendar.YEAR);
+			if(yearDa != dataFlussoA.get(Calendar.YEAR)){
+				return "Data Flusso da e Data Flusso a devono far riferimento allo stesso anno";
+			}
+
+			if(LocalDate.parse(sDataFlussoDa).isAfter(LocalDate.parse(yearDa + "-01-01"))){
+				return "Data Flusso da deve essere 01/01 per fatturazioni del I e II semestre";
+			}
+		}
+
+		if(!sDataFlussoDaIsNullOrEmpty) {
+			dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
+			if (dataFlussoDa.before(dataFlussoA))
+				return "Il massimo range di giorni consentito è di 360 giorni";
+		}
+		if(!sDataCreaDaIsNullOrEmpty) {
+			dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
+			if (dataCreaDa.before(dataCreaA))
+				return "Il massimo range di giorni consentito è di 360 giorni";
+		}
         return null;
         
 	}

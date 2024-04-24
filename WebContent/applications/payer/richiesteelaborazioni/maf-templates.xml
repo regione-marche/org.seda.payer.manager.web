@@ -22,5 +22,5 @@
     <parameter key="main" value="/applications/payer/richiesteelaborazioni/include/RichiesteElaborazioni.jsp" />
   	<parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
   </screen>
-  
+
 </templates>

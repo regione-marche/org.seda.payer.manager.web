@@ -28,7 +28,6 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 	protected String chiaveEnte="";
 	protected String payerDbSchema = null;
 	protected DataSource payerDataSource = null;
-	protected WebRowSetImpl webRowSetImpl = null;
 
 	public Object service(HttpServletRequest request) throws ActionException {
 		super.service(request);

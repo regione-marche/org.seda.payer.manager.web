@@ -23,5 +23,10 @@
     <parameter key="footer" value="/applications/templates/shared/bolzano/footer.jsp"/>
   </screen>
 
-  
+  <screen name="scaricafatturazione" template="default">
+    <parameter key="pagetitle" value="Download csv prova" direct="true"/>
+    <parameter key="header" value="/applications/templates/shared/header.jsp"/>
+    <parameter key="footer" value="/applications/templates/shared/footer.jsp"/>
+  </screen>
+
 </templates>

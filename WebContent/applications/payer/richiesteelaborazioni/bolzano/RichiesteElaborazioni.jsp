@@ -279,7 +279,13 @@
         	        <s:hyperlink href="richiesteElaborazioni.do" imagesrc="../applications/templates/richiesteelaborazioni/img/circle_red.png" alt="no download" text="" cssclass="hlStyle" />
             	</s:then>
                 <s:else>
-                    <s:hyperlink href="scaricaFatturazione.do?" imagesrc="../applications/templates/richiesteelaborazioni/img/download.png" alt="Download" text="" cssclass="hlStyle" />
+                </s:else>
+            </s:if>
+             <s:if right="{7}" control="ne" left="FLUSSO FITTIZIO CREATO DA PROCEDURA" operator="and" secondright="{6}" secondcontrol="ne" secondleft="In elaborazione">
+                <s:then>
+                     <s:hyperlink href="scaricaFatturazione.do?fatturazioneFileName={7}" imagesrc="../applications/templates/richiesteelaborazioni/img/download.png" alt="Download prenotazione" text="" cssclass="hlStyle" />
+                </s:then>
+                <s:else>
                 </s:else>
             </s:if>
 		</s:dgcolumn>
