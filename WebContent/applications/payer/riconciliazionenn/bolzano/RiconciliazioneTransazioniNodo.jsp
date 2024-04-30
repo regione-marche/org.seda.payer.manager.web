@@ -628,6 +628,9 @@
 				<s:button id="tx_button_reset" type="submit" text="Reset" onclick=""
 					cssclass="btnStyle" />
 
+                <s:button id="tx_button_esportadati" type="submit" text="Esporta Dati" onclick=""
+                    cssclass="btnStyle" disable="${!esportaDatiEnabled}"/>
+
 				<%--
 				<c:if test="${!empty listaMovimenti}">
 					<s:button id="tx_button_stampa" type="submit" text="Stampa"
