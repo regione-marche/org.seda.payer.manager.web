@@ -59,8 +59,7 @@
 		</plugins>
 	</build>
 
-	<dependencies>
-	
+	<dependencies>	
 		<dependency>
 			<groupId>com.seda.payer.core</groupId>
 			<artifactId>com.seda.payer.core</artifactId>
