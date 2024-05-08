@@ -356,20 +356,19 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 			if(LocalDate.parse(sDataFlussoDa).isAfter(LocalDate.parse(yearDa + "-01-01"))){
 				return "Data Flusso da deve essere 01/01 per fatturazioni del I e II semestre";
 			}
-		}
-
-		if(!sDataFlussoDaIsNullOrEmpty) {
-			dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
-			if (dataFlussoDa.before(dataFlussoA))
-				return "Il massimo range di giorni consentito è di 360 giorni";
-		}
-		if(!sDataCreaDaIsNullOrEmpty) {
-			dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
-			if (dataCreaDa.before(dataCreaA))
-				return "Il massimo range di giorni consentito è di 360 giorni";
+		} else {
+			if(!sDataFlussoDaIsNullOrEmpty) {
+				dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
+				if (dataFlussoDa.before(dataFlussoA))
+					return "Il massimo range di giorni consentito è di 360 giorni";
+			}
+			if(!sDataCreaDaIsNullOrEmpty) {
+				dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
+				if (dataCreaDa.before(dataCreaA))
+					return "Il massimo range di giorni consentito è di 360 giorni";
+			}
 		}
         return null;
-        
 	}
 
 	// inizio SR PGNTMGR-56
