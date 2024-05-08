@@ -75,12 +75,20 @@ public class BaseFatturazioneAction extends BaseManagerAction {
 			case TX_BUTTON_RESET:
 				resetParametri(request);
 
+				request.setAttribute("dtFlusso_da", null);
+				request.setAttribute("dtFlusso_a", null);
+				request.setAttribute("dtPeriodo_da", null);
+				request.setAttribute("dtPeriodo_a", null);
+
+				codiceSocieta = "";
+				codiceProvincia = "";
+				codiceUtente = "";
 				setParamCodiceSocieta("");
 				setParamCodiceUtente("");
-				setParamCodiceEnte("");
-				loadProvinciaXml_DDL(request, session, "",true);
-				loadDDLUtente(request, session, "", "",true);
-				loadListaGatewayXml_DDL(request, session, "", "", true);
+
+				loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),true);
+				loadDDLUtente(request, session, getParamCodiceSocieta(), codiceProvincia,true);
+				loadListaGatewayXml_DDL(request, session, getParamCodiceSocieta(), getParamCodiceUtente(), true);
 				break;
 				
 			default:
