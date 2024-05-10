@@ -4,7 +4,10 @@ import java.rmi.RemoteException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
+import com.seda.j2ee5.maf.components.servicelocator.ServiceLocator;
+import com.seda.j2ee5.maf.components.servicelocator.ServiceLocatorException;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.ManagerKeys;
@@ -24,12 +27,14 @@ import com.seda.payer.pgec.webservice.commons.srv.FaultType;
 
 public class BaseRiconciliazioneNodoAction extends BaseManagerAction {
 
+	protected String payerDbSchema = null;
+	protected DataSource payerDataSource = null;
 	private static final long serialVersionUID = 1L;
 
 	protected String codiceSocieta="";
 	protected String codiceProvincia="";
 	protected String codiceUtente="";
-	
+
 	public void setProfile(HttpServletRequest request)  
 	{
 		super.setProfile(request);
@@ -180,6 +185,16 @@ public class BaseRiconciliazioneNodoAction extends BaseManagerAction {
 			loadDDLProvincia(request, session, codiceSocieta,true);
 		}
 		*/
+
+		PropertiesTree configuration = (PropertiesTree) (request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
+		String dbSchemaCodSocieta = (String) request.getSession().getAttribute(ManagerKeys.DBSCHEMA_CODSOCIETA);
+		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
+		this.payerDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
+		try {
+			this.payerDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(dataSourceName));
+		} catch (ServiceLocatorException e) {
+			throw new ActionException("ServiceLocator error " + e.getMessage(),e);
+		}
 		return null;
 	}
 

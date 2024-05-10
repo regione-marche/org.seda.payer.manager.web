@@ -131,6 +131,7 @@ public enum Messages {
 	INVIO_MAIL_NON_CONSENTITO,
 	INVIO_FTP_OBBLIGATORIO
 	,INVIO_WS_NON_CONSENTITO //PG180010
+	, TX_NO_PRENOTAZIONI
 	; 
 	
     private static ResourceBundle rb;

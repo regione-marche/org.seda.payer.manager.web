@@ -1,11 +1,19 @@
 package org.seda.payer.manager.riconciliazionenn.actions;
 
 import java.rmi.RemoteException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.payer.core.bean.PrenotazioneFatturazione;
+import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
+import com.seda.payer.core.exception.DaoException;
+import com.seda.payer.core.wallet.bean.EsitoRisposte;
+import org.joda.time.format.DateTimeFormat;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.ws.WSCache;
@@ -32,7 +40,7 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 
 	public Object service(HttpServletRequest request) throws ActionException {
 		HttpSession session = request.getSession();
-		
+
 		tx_SalvaStato(request);
 
 		super.service(request);
@@ -94,18 +102,31 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
 					impostaFiltri(request, session);
 					//ricerca(request, session);
 				}; break;
+
+			// inizio SR PGNTMGR-56
+			case TX_BUTTON_ESPORTADATI: {
+				salvaFiltri(request, session);
+				try {
+					EsitoRisposte esito = inserisciPrenotazione(request);
+					if(esito.getCodiceMessaggio() != null && esito.getCodiceMessaggio().equals("OK")) {
+						setFormMessage("riconciliazioneTransazioniNodoForm", Messages.INS_OK.format(), request);
+					}
+				} catch (DaoException e) {
+					e.printStackTrace();
+					setFormMessage("riconciliazioneTransazioniNodoForm", "Errore nell'inserimento della prenotazione.", request);
+				}
+            } break;
+			// fine SR PGNTMGR-56
         }	
 
 		return null;
 	}
-     
-	
-	
+
 	private String getListaMovimentiPdf(HttpServletRequest request) throws FaultType, RemoteException {
 		StampaMovimentiPdfResponse stampaMovimentiPdfResponse;
 		StampaMovimentiPdfRequest  stampaMovimentiPdfRequest = new StampaMovimentiPdfRequest();
 
-// stampa singolo gateway o multigateway	0 no	1 si
+		// stampa singolo gateway o multigateway	0 no	1 si
 		String multiGTW = request.getAttribute("multiGTW")!=null?(String)request.getAttribute("multiGTW"):"0";
 		
 		
@@ -319,23 +340,62 @@ public class RiconciliazioneTransazioniNodoAction extends BaseRiconciliazioneNod
         	dataFlussoA = Calendar.getInstance();        
         if (!sDataFlussoDaIsNullOrEmpty && dataFlussoDa.after(dataFlussoA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
-        if(!sDataFlussoDaIsNullOrEmpty) {
-	        dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
-	        if (dataFlussoDa.before(dataFlussoA))
-	        	return "Il massimo range di giorni consentito è di 360 giorni";
-        }
-        
+
         if(!sDataCreaDaIsNullOrEmpty && sDataCreaAIsNullOrEmpty)
         	dataCreaA = Calendar.getInstance();                 
-        if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))      
+        if (!sDataCreaDaIsNullOrEmpty && dataCreaDa.after(dataCreaA))
         	return "La Data Flusso da deve essere antecedente o uguale alla Data Flusso a";
-        if(!sDataCreaDaIsNullOrEmpty) {
-	        dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
-	        if (dataCreaDa.before(dataCreaA))
-	        	return "Il massimo range di giorni consentito è di 360 giorni";
-	     }
-        
+
+		if(getFiredButton(request).equals(FiredButton.TX_BUTTON_ESPORTADATI) && !sDataFlussoDaIsNullOrEmpty){
+			// controlli aggiuntivi
+			int yearDa = dataFlussoDa.get(Calendar.YEAR);
+			if(yearDa != dataFlussoA.get(Calendar.YEAR)){
+				return "Data Flusso da e Data Flusso a devono far riferimento allo stesso anno";
+			}
+
+			if(LocalDate.parse(sDataFlussoDa).isAfter(LocalDate.parse(yearDa + "-01-01"))){
+				return "Data Flusso da deve essere 01/01 per fatturazioni del I e II semestre";
+			}
+		} else {
+			if(!sDataFlussoDaIsNullOrEmpty) {
+				dataFlussoDa.add(Calendar.DAY_OF_MONTH, 360);
+				if (dataFlussoDa.before(dataFlussoA))
+					return "Il massimo range di giorni consentito è di 360 giorni";
+			}
+			if(!sDataCreaDaIsNullOrEmpty) {
+				dataCreaDa.add(Calendar.DAY_OF_MONTH, 360);
+				if (dataCreaDa.before(dataCreaA))
+					return "Il massimo range di giorni consentito è di 360 giorni";
+			}
+		}
         return null;
-        
 	}
+
+	// inizio SR PGNTMGR-56
+	private EsitoRisposte inserisciPrenotazione(HttpServletRequest request) throws DaoException {
+		EsitoRisposte esitoRisposte = new EsitoRisposte();
+		String messageDate = controlloDate(request);
+		if(messageDate != null) {
+			esitoRisposte.setCodiceMessaggio("KO");
+			esitoRisposte.setDescrizioneMessaggio(messageDate);
+			setFormMessage("riconciliazioneTransazioniNodoForm", messageDate , request);
+		} else {
+			try (Connection conn = payerDataSource.getConnection()) {
+				PrenotazioneFatturazioneDao dao = new PrenotazioneFatturazioneDao(conn, payerDbSchema);
+				PrenotazioneFatturazione prenotazione = new PrenotazioneFatturazione();
+				prenotazione.setCodiceSocieta(getParamCodiceSocieta() != null ? getParamCodiceSocieta() : "");
+				prenotazione.setCodiceUtente(getParamCodiceUtente() != null ? getParamCodiceUtente() : "");
+				prenotazione.setCodiceEnte(getParamCodiceEnte() != null ? getParamCodiceEnte() : "");
+				prenotazione.setDataRichiestaDa(getDataByPrefix("dtFlusso_da", request) != null ? getDataByPrefix("dtFlusso_da", request) : "");
+				prenotazione.setDataRichiestaA(getDataByPrefix("dtFlusso_a", request) != null ? getDataByPrefix("dtFlusso_a", request) : "" );
+
+				esitoRisposte = dao.inserisciPrenotazione(prenotazione, userBean.getCodiceFiscale() != null ? userBean.getCodiceFiscale() : "");
+			} catch (SQLException e) {
+				setErrorMessage(e.getMessage());
+				throw new RuntimeException(e);
+			}
+        }
+		return esitoRisposte;
+	}
+	// fine SR PGNTMGR-56
 }

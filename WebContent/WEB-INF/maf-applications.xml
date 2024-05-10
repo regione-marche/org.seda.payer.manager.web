@@ -1402,11 +1402,7 @@
 		<welcome>ioitalia.do</welcome>
 		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
 	</application>
-	
 
-	
-	
-	
 	<application name="integrazioneflussi" protected="true" activate="true">
 		<profile-collection>
 			<profile>AMMI</profile>
@@ -1424,6 +1420,21 @@
 		<welcome>integrazioneflussi.do</welcome>
 		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
 	</application>
-	
+
+	<application name="richiesteelaborazioni" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMEN</profile>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Richieste elaborarazioni per fatturazione</description>
+		<config-path>/applications/payer/richiesteelaborazioni</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="bolzano">maf-templates-bolzano.xml</template>
+		</template-collection>
+		<subcontext>/richiesteelaborazioni</subcontext>
+		<welcome>richiesteElaborazioni.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
 
 </applications-mapping>
