@@ -293,6 +293,7 @@ public class EnteAction extends DispatchHtmlAction {
 			request.setAttribute("ente_directoryFtpFlussiRimbEcc", response.getEnte().getDirFtpFlussiRimbEcc());
 			request.setAttribute("ente_directoryFtpFlussiCbi", response.getEnte().getDirFtpFlussiCbi());
 			request.setAttribute("ente_codIpaEnte", response.getEnte().getCodIpaEnte());
+			request.setAttribute("ente_integrazioneJPPA", response.getEnte().getFlagIntegrazioneJPPA());
 			//inizio LP PG200060
 			String template = getTemplateCurrentApplication(request, request.getSession());
 			if(!template.equalsIgnoreCase("regmarche")) {
@@ -516,6 +517,7 @@ public class EnteAction extends DispatchHtmlAction {
 								//inizio LP PG210040
 								 , viewState.getCodiceGruppo()
 								//fine LP PG210040
+									, viewState.getFlagIntegrazioneJPPA()
 						          );
 			
 			/*viewState.getNumeroContoCorrente(), 
