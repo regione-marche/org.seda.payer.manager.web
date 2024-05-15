@@ -371,9 +371,9 @@
 								cssclass="tbddlMax floatleft"
 								cssclasslabel="label85 bold textright" label="Tipo Vista:"
 								valueselected="${tx_scelta_query}">
-								<s:ddloption value="A" text="Tutte" />
-								<s:ddloption value="C" text="Lista Transazioni" />
-								<s:ddloption value="B" text="Report Riepilogo" />
+								<s:ddloption value="C" text="Lista" />
+								<s:ddloption value="B" text="Riepilogo" />
+								<s:ddloption value="A" text="Completa" />
 							</s:dropdownlist>
 					</s:div>
 
