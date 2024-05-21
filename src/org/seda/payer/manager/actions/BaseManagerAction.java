@@ -166,7 +166,9 @@ public class BaseManagerAction extends HtmlAction {
 	protected String paramCodiceEnte = null;
 	protected String userProfile = null;
 
+	private boolean esportaDatiEnabled = false;
 
+	private boolean richiesteElaborazioniEnabled = false;
 
 	public static enum FiredButton {
 		TX_BUTTON_DEFAULT, TX_BUTTON_EDIT, TX_BUTTON_EDIT_END, TX_BUTTON_EDIT_OPERATORE, TX_BUTTON_CERCA, TX_BUTTON_RESET,
@@ -201,6 +203,8 @@ public class BaseManagerAction extends HtmlAction {
 		,TX_BUTTON_UPLOAD
 		,TX_BUTTON_CREATE1 // PG210160 KD
 		,TX_BUTTON_CREATE2
+		,TX_BUTTON_ESPORTADATI
+		,TX_BUTTON_CERCA_PRENOTAZIONE
 	}
 
 	public static enum ProfiloUtente {
@@ -352,6 +356,11 @@ public class BaseManagerAction extends HtmlAction {
 		areaInvioRendicontazioneEnabled = userBean.getDownloadFlussiRendicontazioneEnabled() || userBean.getInvioFlussiRendicontazioneViaFtpEnabled() || userBean.getInvioFlussiRendicontazioneViaEmailEnabled() || userBean.getInvioFlussiRendicontazioneViaWsEnabled();
 		request.setAttribute("areaInvioRendicontazioneEnabled",areaInvioRendicontazioneEnabled);
 
+		esportaDatiEnabled = userBean.getFlagPrenotazioneFatturazioneEnabled() || userProfile.equals("AMEN") || userProfile.equals("AMMI");
+		request.setAttribute("esportaDatiEnabled", esportaDatiEnabled);
+
+		richiesteElaborazioniEnabled = userBean.getFlagRichiesteElaborazioniEnabled() || userProfile.equals("AMEN") || userProfile.equals("AMMI");
+		request.setAttribute("richiesteElaborazioniEnabled", richiesteElaborazioniEnabled);
 
 		String tx_societa = "";
 		String tx_utente = "";
@@ -816,7 +825,13 @@ public class BaseManagerAction extends HtmlAction {
 		//inizio LP PG210160
 		if(request.getAttribute("tx_button_upload") != null)
 			return FiredButton.TX_BUTTON_UPLOAD;
-		
+
+		if (request.getAttribute("tx_button_esportadati") != null)
+			return FiredButton.TX_BUTTON_ESPORTADATI;
+
+		if (request.getAttribute("tx_button_cerca_prenotazione") != null)
+			return FiredButton.TX_BUTTON_CERCA_PRENOTAZIONE;
+
 		return FiredButton.TX_BUTTON_NULL;
 
 	}
@@ -1024,6 +1039,22 @@ public class BaseManagerAction extends HtmlAction {
 
 	public void setDdlUtenteDisabled(boolean ddlUtenteDisabled) {
 		this.ddlUtenteDisabled = ddlUtenteDisabled;
+	}
+
+	public boolean isEsportaDatiEnabled() {
+		return esportaDatiEnabled;
+	}
+
+	public void setEsportaDatiEnabled(boolean esportaDatiEnabled) {
+		this.esportaDatiEnabled = esportaDatiEnabled;
+	}
+
+	public boolean isRichiesteElaborazioniEnabled() {
+		return richiesteElaborazioniEnabled;
+	}
+
+	public void setRichiesteElaborazioniEnabled(boolean richiesteElaborazioniEnabled) {
+		this.richiesteElaborazioniEnabled = richiesteElaborazioniEnabled;
 	}
 
 	/**

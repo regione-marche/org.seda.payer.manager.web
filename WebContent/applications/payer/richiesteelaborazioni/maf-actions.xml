@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<action url="richiesteElaborazioni.do" screen="richiesteelaborazioni.screen">
+		<action-class>org.seda.payer.manager.richiesteelaborazioni.actions.RichiesteElaborazioniAction</action-class>
+    </action>
+
+	<action url="scaricaFatturazione.do" writer="true">
+		<action-class>org.seda.payer.manager.richiesteelaborazioni.actions.ScaricaFatturazioneAction</action-class>
+		<writer id="pathFatturazione" content-type="plain/txt" inScope="false" attach="fileNameFatturazione"/>
+	</action>
+
+</actions-mapping>

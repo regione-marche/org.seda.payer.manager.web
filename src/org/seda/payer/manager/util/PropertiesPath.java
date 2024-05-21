@@ -134,6 +134,7 @@ public enum PropertiesPath {
 	directoryGDC,
 	
 	directoryCSV, 				//SVILUPPO_001_LP_26.08.2019
+	maxSizeCSV, 				
 	flagResponsive,				//Modifiche Responsive
 	quadraturaPSPInputPath,		//PG190190
 	quadraturaPSPOutputPath		//PG190190
@@ -203,7 +204,7 @@ public enum PropertiesPath {
 	, allowElementsOWASP
 	, skipTarget
 	, paramTotemTipologiaImposta
-	
+	, csvFatturazionePath
 	;
 	
 	private static ResourceBundle rb;
