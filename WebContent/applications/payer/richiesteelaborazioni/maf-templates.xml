@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xmlns="http://template.core.maf.j2ee5.seda.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ./../WEB-INF/xsd/maf-templates.xsd">
+	xsi:schemaLocation="http://template.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-templates.xsd">
 
   <default>/applications/templates/default/default.jsp</default>
   

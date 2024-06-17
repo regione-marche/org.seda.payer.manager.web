@@ -204,6 +204,13 @@
 						text="WIS Configurazione" value="Y" />
 					</s:div>
 
+					<s:div name="divElement204" cssclass="divRicMetadatiSingleRow">
+						<s:list bradio="false" bchecked="${chk_inviaufficio}" validator="ignore"
+								cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${inviaUfficioDisabled}"
+								name="inviaufficio" groupname="inviaufficio"
+								text="Invia Comunicazioni Ufficio" value="Y" />
+					</s:div>
+
 				</s:div>
 
 				

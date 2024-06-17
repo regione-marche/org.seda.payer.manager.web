@@ -192,6 +192,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 	protected String richiesteelaborazioni = null;
 	// fine SR PGNTMGR-56
 
+	protected String inviaufficio=null;
+
 	/**
 	 * Recupera la lista delle Tipologie di Servizio (codice, descrizione) ---
 	 * Le cerca in sessione e, se non ci sono le carica tramite il WS e poi le
@@ -595,6 +597,10 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 		richiesteelaborazioni =  "Y";
 		listaApplicazioni.add("richiesteelaborazioni");
+
+		inviaufficio="Y";
+		listaApplicazioni.add("inviaufficio");
+
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			serviziattivi = "Y";
@@ -775,6 +781,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		richiesteelaborazioni = sValue;
 		//dom R
 		mailContogestione = sValue;
+		inviaufficio=sValue;
 		
 		configurazione = sValue;
 		adminusers =  sValue;
@@ -937,6 +944,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 			//FINE PG200120
 			listaApplicazioni.add("richiesteelaborazioni");
+			listaApplicazioni.add("inviaufficio");
 		}
 			
 		if (session != null)
@@ -1144,6 +1152,9 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 			richiesteelaborazioni =  ( request.getParameter("richiesteelaborazioni") == null ? "N" : "Y" );
 			if (richiesteelaborazioni.equals("Y")) listaApplicazioni.add("richiesteelaborazioni");
+
+			inviaufficio = ( request.getParameter("inviaufficio")== null ? "N" : "Y");
+			if(inviaufficio.equals("Y")) listaApplicazioni.add("inviaufficio");
 
 			request.setAttribute("userIsAMMI", false);
 		}
@@ -1721,6 +1732,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			request.setAttribute("chk_prenotazionefatturazione",  prenotazioneFatturazione.equals("Y"));
 			request.setAttribute("chk_richiesteelaborazioni",  richiesteelaborazioni.equals("Y"));
 			// fine SR PGNTMGR-56
+			request.setAttribute("chk_inviaufficio",inviaufficio.equals("Y"));
 		}
 	}
 
@@ -1857,6 +1869,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		request.setAttribute("chk_prenotazioneFatturazione",  prenotazioneFatturazione.equals("Y"));
 		request.setAttribute("chk_richiesteelaborazioni",  richiesteelaborazioni.equals("Y"));
 		// fine SR PGNTMGR-56
+		request.setAttribute("chk_inviaufficio",inviaufficio.equals("Y"));
 	}
 
 	protected void setDisableForm2Flags(HttpServletRequest request)
@@ -1973,6 +1986,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 
 		if (session.getAttribute("userAdd_richiesteelaborazioni") != null) session.removeAttribute("userAdd_richiesteelaborazioni");
 
+		if (session.getAttribute("userAdd_inviaufficio") != null) session.removeAttribute("userAdd_inviaufficio");
+
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			if (session.getAttribute("userAdd_serviziattivi") != null) session.removeAttribute("userAdd_serviziattivi");
@@ -2070,6 +2085,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		session.setAttribute("userAdd_adminusers", adminusers);
 		session.setAttribute("userAdd_ecmanager", ecmanager);
 		session.setAttribute("userAdd_richiesteelaborazioni", richiesteelaborazioni);
+		session.setAttribute("userAdd_inviaufficio",inviaufficio);
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			session.setAttribute("userAdd_serviziattivi", serviziattivi);
@@ -2275,6 +2291,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 		ecmanager = (String)session.getAttribute("userAdd_ecmanager" );
 
 		richiesteelaborazioni = (String)session.getAttribute("userAdd_richiesteelaborazioni");
+		inviaufficio = (String)session.getAttribute("userAdd_inviaufficio");
 		//inizio LP PG200360
 		if(serviziAttiviOn(request)) {
 			serviziattivi = (String) session.getAttribute("userAdd_serviziattivi");
@@ -2491,6 +2508,8 @@ public class BaseAdminusersAction extends BaseManagerAction{
 			//fine LP PG200060
 
 			request.setAttribute("chk_richiesteelaborazioni",  listaApplicazioni.contains("richiesteelaborazioni"));
+
+			request.setAttribute("chk_inviaufficio",  listaApplicazioni.contains("inviaufficio"));
 		}
 	}
 
@@ -2622,6 +2641,7 @@ public class BaseAdminusersAction extends BaseManagerAction{
 					//FINE PG200120
 
 					request.setAttribute("chk_richiesteelaborazioni",  listaApplicazioni.contains("richiesteelaborazioni"));
+					request.setAttribute("chk_inviaufficio",  listaApplicazioni.contains("inviaufficio"));
 				}
 			}
 			else
