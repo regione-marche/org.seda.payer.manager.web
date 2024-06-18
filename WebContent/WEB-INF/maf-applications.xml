@@ -1437,4 +1437,20 @@
 		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
 	</application>
 
+	<application name="inviaufficio" protected="true" activate="true">
+		<profile-collection>
+			<profile>AMEN</profile>
+			<profile>AMMI</profile>
+		</profile-collection>
+		<description>Invia Comunicazioni di Ufficio</description>
+		<config-path>/applications/payer/inviaUfficio</config-path>
+		<template-collection>
+			<template name="default">maf-templates.xml</template>
+			<template name="trentrisc">maf-templates-trentrisc.xml</template>
+		</template-collection>
+		<subcontext>/inviaUfficio</subcontext>
+		<welcome>inviaufficio.do</welcome>
+		<binder-class>org.seda.payer.manager.components.config.Binder</binder-class>
+	</application>
+
 </applications-mapping>

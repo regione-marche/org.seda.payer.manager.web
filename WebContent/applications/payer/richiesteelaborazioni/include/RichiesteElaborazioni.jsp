@@ -520,7 +520,7 @@
                  	</s:then>
                      <s:else>
                      </s:else>
-                 </s:if>
+				 </s:if>
                   <s:if right="{7}" control="ne" left="FLUSSO FITTIZIO CREATO DA PROCEDURA" operator="and" secondright="{6}" secondcontrol="ne" secondleft="In elaborazione">
                      <s:then>
                           <s:hyperlink href="scaricaFatturazione.do?fatturazioneFileName={7}" imagesrc="../applications/templates/richiesteelaborazioni/img/download.png" alt="Download prenotazione" text="" cssclass="hlStyle" />

@@ -14,7 +14,7 @@
       <artifactId>pagonet-base</artifactId>
       <version>1.2.0</version>
       <relativePath/>
-   </parent>
+    </parent>
 	
 		
 	<properties>
@@ -50,7 +50,7 @@
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<archive>
 						<manifestEntries>
-							<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
+						<Logging-Profile>org.seda.payer.manager.web</Logging-Profile>
 							<Dependencies></Dependencies>
 						</manifestEntries>
 					</archive>
@@ -169,7 +169,7 @@
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>jaxrs-api</artifactId>
 		</dependency>
-
+	
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -186,8 +186,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-csv</artifactId>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-csv</artifactId>
 		</dependency>
 
 		<dependency>
@@ -209,12 +209,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>org.reactivestreams</groupId>
-			<artifactId>reactive-streams</artifactId>
+		    <groupId>org.reactivestreams</groupId>
+		    <artifactId>reactive-streams</artifactId>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
@@ -233,7 +233,7 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-all</artifactId>
-			<type>pom</type>
+	        <type>pom</type>
 		</dependency>
 
 		<dependency>
@@ -286,7 +286,7 @@
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
-			<type>pom</type>
+	        <type>pom</type>
 		</dependency>
 
 		<dependency>
@@ -548,7 +548,8 @@
         <artifactId>commons-configuration</artifactId>
         <version>1.10</version>
     </dependency>
-        
+
+
 	</dependencies>
 
 	<profiles>
@@ -895,12 +896,12 @@
 	                            <targetPath>/WEB-INF</targetPath>
 	                            <include>**/*</include>
 	                          </webResource>
-							  <webResource>
-								  <directory>${project.basedir}/profili/roseto</directory>
-								  <targetPath>/WEB-INF/classes</targetPath>
-								  <include>log4j2.xml</include>
-							  </webResource>
-                        </webResources>
+                        </webResources>  
+							<webResource>
+								<directory>${project.basedir}/profili/roseto</directory>
+								<targetPath>/WEB-INF/classes</targetPath>
+								<include>log4j2.xml</include>
+							</webResource>
                         </configuration>
                     </plugin>
                    </plugins>
@@ -1182,5 +1183,5 @@
     </profile>
     
 	</profiles>
-
+	
 </project>

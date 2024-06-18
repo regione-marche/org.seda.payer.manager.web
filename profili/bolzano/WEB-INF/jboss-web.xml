@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web>
     <context-root>managerAAR</context-root>
-   
+    
+    
     <resource-ref>
         <res-ref-name>payerDataSourceP6</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -19,7 +20,9 @@
         <res-ref-name>easybridgeDataSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <jndi-name>java:/easybridgeDataSource</jndi-name>
-    </resource-ref>
+    </resource-ref>  
+    
+    
     
       <session-config>
           <cookie-config>

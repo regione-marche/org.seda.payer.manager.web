@@ -246,6 +246,7 @@
                         name="richiesteelaborazioni" groupname="richiesteelaborazioni"
                         text="Richieste Elaborazioni" value="Y" />
                     </s:div>
+
 					<%-- <s:div name="divElement61" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_entrate}" validator="ignore" 
 						 cssclasslabel="bold checklabel label220" cssclass="checkleft" onclick="toggleEntrate()"
