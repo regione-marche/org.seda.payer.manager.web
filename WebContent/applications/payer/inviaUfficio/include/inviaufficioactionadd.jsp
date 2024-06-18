@@ -140,35 +140,50 @@
         </s:dropdownlist>
     </s:div>
 
-    <s:div name="divElement200" cssclass="divRicMetadatiRight">
-    <s:div name="divElement180a" cssclass="labelData">
-        <s:label name="label_data"
-                 cssclass="seda-ui-label label85 bold textright"
-                 text="Parametri" />
-    </s:div>
 
-        <s:div name="divElement12b" cssclass="divRicMetadatiCenter">
-            <s:div name="dtscadenza" cssclass="divDataDa">
-                <s:date label="Data Scadenza:" cssclasslabel="labelsmall"
-                        cssclass="dateman" prefix="dtFlusso_da"
-                        yearbegin="${ddlDateAnnoDa}" yearend="${ddlDateAnnoA}"
-                        locale="IT-it" descriptivemonth="false" separator="/"
-                        calendar="${dtFlusso_da}">
-                </s:date>
-                <input type="hidden" id="dtFlusso_da_hidden" value="" />
-            </s:div>
 
-            <s:div name="dtconferma" cssclass="divDataA">
-                <s:date label="Data Conferma:" cssclasslabel="labelsmall" cssclass="dateman"
-                        prefix="dtFlusso_a" yearbegin="${ddlDateAnnoDa}"
-                        yearend="${ddlDateAnnoA}" locale="IT-it"
-                        descriptivemonth="false" separator="/"
-                        calendar="${dtFlusso_a}">
-                </s:date>
-                <input type="hidden" id="dtFlusso_a_hidden" value="" />
+
+
+    <s:div name="divRicercaMetadatiCenter" cssclass="divRicMetadatiCenter">
+        <s:div name="divElement5" cssclass="divRicMetadatiSingleRow">
+            <s:div name="divElement5a" cssclass="labelData">
+
             </s:div>
         </s:div>
     </s:div>
+
+
+
+
+
+        <s:div name="divRicercaMetadatiRight" cssclass="divRicMetadatiRight">
+            <s:div name="divElement6" cssclass="divRicMetadatiSingleRow">
+                <s:div name="divElement6a" cssclass="labelData">
+                    <s:label name="label_dataCreazione" cssclass="seda-ui-label label85 bold textright"
+                             text="Parametri Batch" />
+                </s:div>
+                <s:div name="divElement6b" cssclass="floatleft">
+                    <s:div name="div_dataCreazioneDa" cssclass="divDataDa">
+                        <s:date label="Da:" prefix="dataCreazioneDa" yearbegin="${ddlDateAnnoDa}"
+                                cssclasslabel="labelsmall"
+                                cssclass="dateman"
+                                yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
+                                separator="/" calendar="${dataCreazioneDa}"></s:date>
+                        <input type="hidden" id="dataCreazioneDa_hidden" value="" />
+                    </s:div>
+                    <s:div name="div_dataCreazioneA" cssclass="divDataA">
+                        <s:date label="A:" prefix="dataCreazioneA" yearbegin="${ddlDateAnnoDa}"
+                                cssclasslabel="labelsmall"
+                                cssclass="dateman"
+                                yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
+                                separator="/" calendar="${dataCreazioneA}"></s:date>
+                        <input type="hidden" id="dataCreazioneA_hidden" value="" />
+                    </s:div>
+                </s:div>
+            </s:div>
+        </s:div>
+
+
     <br/>
     <s:div name="divRicercaBottoni" cssclass="divRicBottoni">
         <s:button id="tx_button_aggiungi" onclick="" text="Aggiungi" type="submit" cssclass="btnStyle" />

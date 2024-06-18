@@ -73,22 +73,35 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
 
         switch (firedButton) {
             case TX_BUTTON_RESET:
-                resetParametri(request);
+                request.setAttribute("dataCreazioneDa", null);
+                request.setAttribute("dataCreazioneA", null);
+                request.setAttribute("flagSubentro", null);
+                request.setAttribute("codop","init");
                 break;
 
             case TX_BUTTON_AGGIUNGI:
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                 order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+                EsitoRisposte esito = new EsitoRisposte();
                 try {
-                    aggiungiConfigurazione(request);
+                     esito = aggiungiConfigurazione(request);
                 }catch(Throwable e){
                     logger.info(e.getMessage());
                     logger.error(e.toString());
                     e.printStackTrace();
-                    request.setAttribute("tx_error_message","errore aggiunta configurazione");
+                    setFormMessage("inviaufficioactionaddForm", "errore inserimento configurazione", request);
+
+                    if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
+                            (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
+                        request.setAttribute("tx_error_message", "valorizzare entrambe le date");
+                        setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
+                    }
+
                 }
-                request.setAttribute("tx_message","configurazione aggiunta correttamente");
+                if(esito.getCodiceMessaggio()!=null && esito.getCodiceMessaggio().equals("OK")) {
+                    setFormMessage("inviaufficioactionaddForm", "configurazione aggiunta correttamente", request);
+                }
                 break;
 
             case TX_BUTTON_NULL:
@@ -97,10 +110,9 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
         }
     }
 
-    private boolean aggiungiConfigurazione(HttpServletRequest request) throws Exception {
+    private EsitoRisposte aggiungiConfigurazione(HttpServletRequest request) throws Exception {
         createConnection(request);
-        addConfiguration(request);
-        return true;
+        return addConfiguration(request);
     }
 
     private Connection createConnection(HttpServletRequest request) throws ActionException, SQLException {
@@ -129,6 +141,7 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
         if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
                 (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
             request.setAttribute("tx_error_message","valorizzare entrambe le date");
+            setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
             throw new Exception();
         }
 
@@ -145,13 +158,14 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                     "",
                     "",
                     "1",
-                    getDataByPrefix("dtFlusso_da", request),
-                    getDataByPrefix("dtFlusso_a", request),
+                    getDataByPrefix("dataCreazioneDa", request),
+                    getDataByPrefix("dataCreazioneA", request),
                     (String) request.getAttribute("flagSubentro")
             );
            return dao.inserisciPrenotazione(prenotazione,userBean.getUserName());
         } catch (DaoException e) {
             request.setAttribute("tx_error_message","errore inserimento nel database");
+            setFormMessage("inviaufficioactionaddForm", "errore aggiunta configurazione", request);
             throw new RuntimeException(e);
         }
     }

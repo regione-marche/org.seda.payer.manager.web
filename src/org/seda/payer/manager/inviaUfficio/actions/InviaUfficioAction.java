@@ -68,7 +68,10 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
          */
         switch (firedButton) {
             case TX_BUTTON_RESET:
-                resetParametri(request);
+                request.setAttribute("statoElaborazione", null);
+                request.setAttribute("dtFlusso_da", null);
+                request.setAttribute("dtFlusso_a", null);
+                request.setAttribute("codop","ritorna");
                 break;
 
             case TX_BUTTON_CERCA:
@@ -81,6 +84,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     getConfigurazioni(request);
                 }catch (Throwable e) {
                     e.printStackTrace();
+                    setFormMessage("inviaufficio", "errore visualizzazione lista", request);
                 }
                 break;
 
@@ -171,14 +175,14 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         request.setAttribute("listaInputUfficio.pageInfo", pageInfo);
                     } else {
                         request.setAttribute("listaInputUfficio", null);
-                        setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
+                        setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
                     }
                 } else {
                     request.setAttribute("listaInputUfficio", null);
-                    setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
+                    setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
                 }
             } else {
-                setFormMessage("inviaufficioForm", "Errore generico - Impossibile recuperare i dati", request);
+                setFormMessage("inviaufficio", "Errore generico - Impossibile recuperare i dati", request);
                 request.setAttribute("tx_error_message","lista vuota");
             }
         }
