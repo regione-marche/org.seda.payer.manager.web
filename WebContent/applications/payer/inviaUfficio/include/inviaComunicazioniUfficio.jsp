@@ -436,8 +436,8 @@
                                         cssclasslabel="label85 bold floatleft textright" disable="false"
                                         label="Stato elaborazione:" valueselected="${statoElaborazione}">
                             <s:ddloption value="" text="Tutte le prenotazioni" />
-                            <s:ddloption value="0" text="elaborate" />
-                            <s:ddloption value="1" text="in attesa" />
+                            <s:ddloption value="0" text="Elaborata" />
+                            <s:ddloption value="1" text="Da elaborare" />
                         </s:dropdownlist>
                     </s:div>
                 </s:div>
@@ -482,8 +482,17 @@ ${tx_error_message}
         <s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>
         <s:dgcolumn index="3" label="Ente"></s:dgcolumn>
         <s:dgcolumn index="4" label="Data Richiesta" format="dd/MM/yyyy"></s:dgcolumn>
-        <s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
         <s:dgcolumn index="8" label="Data scadenza" css="text_align_right"></s:dgcolumn>
         <s:dgcolumn index="9" label="Data da Impostare" css="text_align_right"></s:dgcolumn>
+        <s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
+        <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+        <s:if right="{6}" control="eq" left="Da elaborare">
+            <s:then>
+                <s:hyperlink href="inviaufficio.do&tx_button_cerca=DELETE&stato={6}&dataimp={9}&datascad={8}&dataric={4}&ente={3}&utente={2}&chiave={11}" imagesrc="../applications/templates/shared/img/cancel.png" alt="cancella" text="" cssclass="hlStyle" />
+            </s:then>
+            <s:else>
+            </s:else>
+        </s:if>
+        </s:dgcolumn>
     </s:datagrid>
 </c:if>

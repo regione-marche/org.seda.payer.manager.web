@@ -1,5 +1,7 @@
 package org.seda.payer.manager.inviaUfficio.actions;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
 import com.seda.data.spi.PageInfo;
@@ -30,6 +32,7 @@ import java.sql.Connection;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -43,6 +46,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private int rowsPerPage;
     private int pageNumber;
     private String order;
+    protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
 
     //fine LP PG1800XX_016
 
@@ -56,6 +60,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         templateName = userBean.getTemplate(applicationName);
 
         aggiornamentoCombo(request, session);
+        loadSocietaXml_DDL(request);
         loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
         LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), "", getParamCodiceEnte(), getParamCodiceUtente(), false);
 
@@ -75,6 +80,16 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_CERCA:
+
+                if(request.getParameterMap()!=null) {
+                    try {
+                        deleteRow(request.getParameterMap(), request);
+                    }catch(Throwable e){
+                        logger.info(e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                 order = request.getParameter("order")  == null ? "" : request.getParameter("order");
@@ -103,6 +118,18 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         }
 
         return null;
+    }
+
+    private void deleteRow(Map parameterMap,HttpServletRequest request) throws ActionException, SQLException {
+        createConnection(request);
+        deleteRowMethod(parameterMap,request);
+    }
+
+    private void deleteRowMethod(Map parameterMap, HttpServletRequest request) throws SQLException {
+
+        Connection connection = payerDataSource.getConnection();
+        PrenotazioneFatturazioneDao prenotazioneFatturazioneDao = new PrenotazioneFatturazioneDao(connection,payerDbSchema);
+        prenotazioneFatturazioneDao.cancellaPrenotazione(parameterMap.get("chiave").toString());
     }
 
     private boolean getConfigurazioni(HttpServletRequest request) throws ActionException, ParseException, SQLException {
@@ -223,7 +250,9 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     }
 
                     String stato = crsListaOriginale.getString(6);
-                    rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Terminata");
+                    rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Elaborata");
+
+                    String chiavePrenotazione = crsListaOriginale.getString(11);
                     rowSetNew.insertRow();
 
                 }

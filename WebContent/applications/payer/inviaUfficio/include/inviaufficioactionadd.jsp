@@ -27,8 +27,8 @@
 
     $(function() {
         $.datepicker.setDefaults($.datepicker.regional["it"]);
-        $("#tx_data_da_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
-        $("#tx_data_da_hidden").datepicker( {
+        $("#dataCreazioneDa_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
+        $("#dataCreazioneDa_hidden").datepicker( {
             minDate: new Date(annoDa, 0, 1),
             maxDate: new Date(annoA, 11, 31),
             yearRange: annoDa + ":" + annoA,
@@ -36,20 +36,20 @@
             buttonImage : "../applications/templates/shared/img/calendar.gif",
             buttonImageOnly : true,
             onSelect : function(dateText, inst) {
-                $("#tx_data_da_day_id").val(dateText.substr(0, 2));
-                $("#tx_data_da_month_id").val(dateText.substr(3, 2));
-                $("#tx_data_da_year_id").val(dateText.substr(6, 4));
+                $("#dataCreazioneDa_day_id").val(dateText.substr(0, 2));
+                $("#dataCreazioneDa_month_id").val(dateText.substr(3, 2));
+                $("#dataCreazioneDa_year_id").val(dateText.substr(6, 4));
             },
             beforeShow: function(input, inst) {
                 //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-                updateValoreDatePickerFromDdl("tx_data_da_day_id",
-                    "tx_data_da_month_id",
-                    "tx_data_da_year_id",
-                    "tx_data_da_hidden");
+                updateValoreDatePickerFromDdl("dataCreazioneDa_day_id",
+                    "dataCreazioneDa_month_id",
+                    "dataCreazioneDa_year_id",
+                    "dataCreazioneDa_hidden");
             }
         });
-        $("#tx_data_a_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
-        $("#tx_data_a_hidden").datepicker( {
+        $("#dataCreazioneA_hidden").datepicker("option", "dateFormat", "dd/mm/yyyy");
+        $("#dataCreazioneA_hidden").datepicker( {
             minDate: new Date(annoDa, 0, 1),
             maxDate: new Date(annoA, 11, 31),
             yearRange: annoDa + ":" + annoA,
@@ -57,16 +57,16 @@
             buttonImage : "../applications/templates/shared/img/calendar.gif",
             buttonImageOnly : true,
             onSelect : function(dateText, inst) {
-                $("#tx_data_a_day_id").val(dateText.substr(0, 2));
-                $("#tx_data_a_month_id").val(dateText.substr(3, 2));
-                $("#tx_data_a_year_id").val(dateText.substr(6, 4));
+                $("#dataCreazioneA_day_id").val(dateText.substr(0, 2));
+                $("#dataCreazioneA_month_id").val(dateText.substr(3, 2));
+                $("#dataCreazioneA_year_id").val(dateText.substr(6, 4));
             },
             beforeShow: function(input, inst) {
                 //imposta il valore del calendario in base a quanto impostato nelle 3 dropdownlist
-                updateValoreDatePickerFromDdl("tx_data_a_day_id",
-                    "tx_data_a_month_id",
-                    "tx_data_a_year_id",
-                    "tx_data_a_hidden");
+                updateValoreDatePickerFromDdl("dataCreazioneA_day_id",
+                    "dataCreazioneA_month_id",
+                    "dataCreazioneA_year_id",
+                    "dataCreazioneA_hidden");
             }
         });
 
@@ -164,7 +164,7 @@
                 </s:div>
                 <s:div name="divElement6b" cssclass="floatleft">
                     <s:div name="div_dataCreazioneDa" cssclass="divDataDa">
-                        <s:date label="Da:" prefix="dataCreazioneDa" yearbegin="${ddlDateAnnoDa}"
+                        <s:date label="Data Scadenza:" prefix="dataCreazioneDa" yearbegin="${ddlDateAnnoDa}"
                                 cssclasslabel="labelsmall"
                                 cssclass="dateman"
                                 yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
@@ -172,7 +172,7 @@
                         <input type="hidden" id="dataCreazioneDa_hidden" value="" />
                     </s:div>
                     <s:div name="div_dataCreazioneA" cssclass="divDataA">
-                        <s:date label="A:" prefix="dataCreazioneA" yearbegin="${ddlDateAnnoDa}"
+                        <s:date label="Data da Impostare:" prefix="dataCreazioneA" yearbegin="${ddlDateAnnoDa}"
                                 cssclasslabel="labelsmall"
                                 cssclass="dateman"
                                 yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"

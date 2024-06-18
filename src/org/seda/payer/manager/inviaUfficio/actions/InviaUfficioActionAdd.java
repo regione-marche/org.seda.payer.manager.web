@@ -49,6 +49,7 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
     private int rowsPerPage;
     private int pageNumber;
     private String order;
+    private String messaggio = "";
 
     public Object service(HttpServletRequest request) throws PayerCommandException, ActionException {
 
@@ -65,6 +66,8 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
         request.setAttribute("tx_error_message","");
 
         request.setAttribute("tx_message","");
+
+        messaggio="";
 
         return null;
     }
@@ -92,15 +95,11 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                     e.printStackTrace();
                     setFormMessage("inviaufficioactionaddForm", "errore inserimento configurazione", request);
 
-                    if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
-                            (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
-                        request.setAttribute("tx_error_message", "valorizzare entrambe le date");
-                        setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
-                    }
-
                 }
                 if(esito.getCodiceMessaggio()!=null && esito.getCodiceMessaggio().equals("OK")) {
                     setFormMessage("inviaufficioactionaddForm", "configurazione aggiunta correttamente", request);
+                }else {
+                    setFormMessage("inviaufficioactionaddForm", messaggio, request);
                 }
                 break;
 
@@ -138,11 +137,12 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
 
     private EsitoRisposte addConfiguration(HttpServletRequest request) throws Exception {
 
-        if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
-                (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
+        if((getDataByPrefix("dataCreazioneDa", request)==null || getDataByPrefix("dataCreazioneDa", request).isEmpty()) ||
+                (getDataByPrefix("dataCreazioneA", request)==null || getDataByPrefix("dataCreazioneA", request).isEmpty())) {
             request.setAttribute("tx_error_message","valorizzare entrambe le date");
             setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
-            throw new Exception();
+            messaggio="inserire entrambe le date";
+            return new EsitoRisposte();
         }
 
         try {
