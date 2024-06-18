@@ -1033,12 +1033,17 @@ public class EcNotificheListaAction extends AnaBollettinoManagerBaseManagerActio
 			//fine LP PG21XX04 Leak
 			rowSetFull = Convert.stringToWebRowSet(ecNotificheListXml);
 			while (rowSetFull.next()) {
-				//
-				String[] data = rowSetFull.getString(13).toString().split("-");
-				rowSetFull.updateString(13, data[2]+"/"+data[1]+"/"+data[0]);
-				//
-				data = rowSetFull.getString(14).toString().split("-");
-				rowSetFull.updateString(14, data[2]+"/"+data[1]+"/"+data[0]);
+
+				if(rowSetFull.getMetaData().getColumnCount() >= 13 && rowSetFull.getString(13) != null){
+					String[] data = rowSetFull.getString(13).split("-");
+					rowSetFull.updateString(13, data.length == 3 ? data[2]+"/"+data[1]+"/"+data[0] : "");
+				}
+
+				if(rowSetFull.getMetaData().getColumnCount() >= 14 && rowSetFull.getString(14) != null){
+					String[] data = rowSetFull.getString(14).split("-");
+					rowSetFull.updateString(14, data.length == 3 ? data[2]+"/"+data[1]+"/"+data[0] : "");
+				}
+
 			}
 			return Convert.webRowSetToString(rowSetFull);
 		} catch (SQLException e) {

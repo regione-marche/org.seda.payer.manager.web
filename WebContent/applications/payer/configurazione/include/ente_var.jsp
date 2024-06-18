@@ -323,8 +323,19 @@
 									cssclasslabel="label85 bold floatleft textright"
 									cssclass="textareaman" />
 							</s:div>
-								
 							<!--fine CD pago-580 -->
+
+							<s:div name="divElement711_c" cssclass="divRicMetadatiSingleRow">
+                            	<s:dropdownlist label="Integrazione JPPA:"
+                            	cssclasslabel="label85 bold textright" cssclass="textareaman"
+                            	name="ente_integrazioneJPPA" disable="false"
+                            	validator="required" showrequired="true"
+                            	valueselected="${requestScope.ente_integrazioneJPPA}">
+                            		<s:ddloption text="Selezionare uno degli elementi" value="" />
+                            		<s:ddloption value="Y" text="Si"/>
+                            		<s:ddloption value="N" text="No"/>
+                            		</s:dropdownlist>
+                            </s:div>
 							
 							<s:div name="divElement712" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
@@ -770,6 +781,18 @@
 							</s:div>
 								
 							<!--fine CD pago-580 -->
+
+							<s:div name="divElement736_c" cssclass="divRicMetadatiSingleRow">
+                                                        	<s:dropdownlist label="Integrazione JPPA:"
+                                                        	cssclasslabel="label85 bold textright" cssclass="textareaman"
+                                                        	name="ente_integrazioneJPPA" disable="false"
+                                                        	validator="required" showrequired="true"
+                                                        	valueselected="${requestScope.ente_integrazioneJPPA}">
+                                                        		<s:ddloption text="Selezionare uno degli elementi" value="" />
+                                                        		<s:ddloption value="Y" text="Si"/>
+                                                        		<s:ddloption value="N" text="No"/>
+                                                        		</s:dropdownlist>
+                                                        </s:div>
 							
 							<s:div name="divElement737" cssclass="divRicMetadatiSingleRow">
 								<s:textbox bmodify="true"
