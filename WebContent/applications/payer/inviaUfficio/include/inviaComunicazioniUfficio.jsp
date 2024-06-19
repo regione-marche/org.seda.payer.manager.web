@@ -360,49 +360,7 @@
 
             <s:div name="divRicercaTitleName" cssclass="divRicTitle bold">Ricerca - Richieste Elaborazioni</s:div>
             <s:div name="divRicMetadati" cssclass="divRicMetadati">
-                <s:div name="divRicMetadatiTop" cssclass="divRicMetadatiTop">
-                    <s:div name="divElement1" cssclass="divRicMetadatiTopLeft">
-                        <s:dropdownlist name="tx_societa"
-                                        disable="${societaDdlDisabled}" cssclass="tbddl floatleft"
-                                        label="Societ&aacute;:"
-                                        cssclasslabel="label85 bold floatleft textright"
-                                        cachedrowset="listaSocieta" usexml="true"
-                                        onchange="setFiredButton('tx_button_societa_changed');this.form.submit();"
-                                        valueselected="${tx_societa}">
-                            <s:ddloption text="Tutte le Societ&agrave;" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                        <noscript><s:button id="tx_button_societa_changed" type="submit" disable="${societaDdlDisabled}" text="" onclick=""
-                                            cssclass="btnimgStyle" title="Aggiorna" validate="false"/>
-                        </noscript>
-                    </s:div>
 
-                    <s:div name="divElement2" cssclass="divRicMetadatiTopCenter">
-                        <s:dropdownlist name="tx_provincia"
-                                        disable="${provinciaDdlDisabled}" cssclass="tbddl floatleft"
-                                        label="Provincia:"
-                                        cssclasslabel="label65 bold floatleft textright"
-                                        cachedrowset="listaProvince" usexml="true"
-                                        onchange="setFiredButton('tx_button_provincia_changed');this.form.submit();"
-                                        valueselected="${tx_provincia}">
-                            <s:ddloption text="Tutte le Province" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                        <noscript><s:button id="tx_button_provincia_changed"
-                                            type="submit" text="" onclick="" cssclass="btnimgStyle"
-                                            title="Aggiorna" validate="false" /></noscript>
-                    </s:div>
-                    <s:div name="divElement3" cssclass="divRicMetadatiTopRight">
-                        <s:dropdownlist name="tx_UtenteEnte"
-                                        disable="${ddlUtenteEnteDisabled}" cssclass="tbddlMax floatleft"
-                                        label="Ente:" cssclasslabel="label65 bold textright"
-                                        cachedrowset="listaUtentiEnti" usexml="true"
-                                        valueselected="${tx_UtenteEnte}">
-                            <s:ddloption text="Tutti gli Enti" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                    </s:div>
-                </s:div>
 
                 <s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">
 
