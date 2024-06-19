@@ -443,9 +443,6 @@ ${tx_error_message}
         Elenco Richieste Elaborazioni
     </s:div>
     <s:datagrid viewstate="" cachedrowset="listaInputUfficio" action="" border="1" usexml="true">
-        <s:dgcolumn index="1" label="Societ&aacute;"></s:dgcolumn>
-        <s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>
-        <s:dgcolumn index="3" label="Ente"></s:dgcolumn>
         <s:dgcolumn index="4" label="Data Richiesta" format="dd/MM/yyyy"></s:dgcolumn>
         <s:dgcolumn index="8" label="Data scadenza" css="text_align_right"></s:dgcolumn>
         <s:dgcolumn index="9" label="Data da Impostare" css="text_align_right"></s:dgcolumn>
