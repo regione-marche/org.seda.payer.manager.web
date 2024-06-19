@@ -13,6 +13,13 @@
         type="text/javascript"></script>
 
 <script type="text/javascript">
+
+    function setFiredButton(buttonName) {
+        var buttonFired = document.getElementById('fired_button_hidden');
+        if (buttonFired != null)
+            buttonFired.value = buttonName;
+    }
+
     var annoDa = ${ddlDateAnnoDa};
     var annoA = ${ddlDateAnnoA};
     var today = new Date();
@@ -488,7 +495,7 @@ ${tx_error_message}
         <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
         <s:if right="{6}" control="eq" left="Da elaborare">
             <s:then>
-                <s:hyperlink href="inviaufficio.do&tx_button_cerca=DELETE&stato={6}&dataimp={9}&datascad={8}&dataric={4}&ente={3}&utente={2}&chiave={11}" imagesrc="../applications/templates/shared/img/cancel.png" alt="cancella" text="" cssclass="hlStyle" />
+                <s:hyperlink href="inviaufficio.do${formParameters}&button_elimina=DELETE&stato={6}&dataimp={9}&datascad={8}&dataric={4}&ente={3}&utente={2}&chiave={11}" imagesrc="../applications/templates/shared/img/cancel.png" alt="cancella" text="" cssclass="hlStyle" />
             </s:then>
             <s:else>
             </s:else>

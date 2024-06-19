@@ -16,6 +16,7 @@
 			<result value="add" screen="inviaufficioactionadd.do" />
 			<result value="ritorna" screen="inviaufficio.screen" />
 			<result value="search" screen="inviaufficio.screen" />
+			<result value="delete" screen="inviaUfficio_delete.screen" />
 		</flow>
     </action>
 

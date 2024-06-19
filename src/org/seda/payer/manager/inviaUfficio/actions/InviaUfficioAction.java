@@ -20,6 +20,8 @@ import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
 import com.seda.payer.core.exception.DaoException;
 import com.sun.rowset.WebRowSetImpl;
 import org.seda.payer.manager.components.security.UserBean;
+import org.seda.payer.manager.entrate.actions.GestioneDocumentiCaricoAction;
+import org.seda.payer.manager.entrate.actions.util.EntrateFilteredWs;
 import org.seda.payer.manager.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +49,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private int pageNumber;
     private String order;
     protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
+    private String screen="";
 
     //fine LP PG1800XX_016
 
@@ -68,6 +71,17 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         request.setAttribute("tx_message","");
 
         FiredButton firedButton = getFiredButton(request);
+
+        if (screen==null || screen.isEmpty()) {
+            screen = Screen.SEARCH; // default
+        }
+
+        if (screen == GestioneDocumentiCaricoAction.Screen.SEARCH) {
+            onGestioneDocumentiScreen(request);
+            if(screen.equals(Screen.DELETE)) {
+                onDeleteDocumentoScreen(request);
+            }
+        }
         /*
          * Eseguo le azioni
          */
@@ -80,16 +94,6 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_CERCA:
-
-                if(request.getParameterMap()!=null) {
-                    try {
-                        deleteRow(request.getParameterMap(), request);
-                    }catch(Throwable e){
-                        logger.info(e.getMessage());
-                        e.printStackTrace();
-                    }
-                }
-
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                 order = request.getParameter("order")  == null ? "" : request.getParameter("order");
@@ -119,6 +123,49 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
 
         return null;
     }
+
+
+    /** Mi trovo nello screen di CONFERMA CANCELAZIONE documento */
+    private void onDeleteDocumentoScreen(HttpServletRequest request) {
+
+        try {
+            EntrateFilteredWs.loadListaProvince(request);
+
+            if (isFiredButton(request, "button_elimina")) {
+                onDeleteDocumentCommit(request);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+
+    private void onDeleteDocumentCommit(HttpServletRequest request) {
+        try {
+            deleteRow(request.getParameterMap(), request);
+        }catch(Throwable e){
+            logger.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void onGestioneDocumentiScreen(HttpServletRequest request) {
+        if (isFiredButton(request, "button_elimina")) {
+            onDeleteDocumentRequest(request);
+        }
+    }
+
+    private void onDeleteDocumentRequest(HttpServletRequest request) {
+        screen = Screen.DELETE;
+    }
+
+
+    /** button cliccato direttamente o simulato da javascript su DDL changed */
+    static boolean isFiredButton(HttpServletRequest request, String buttonName) {
+        return request.getParameter(buttonName) != null
+                || buttonName.equals(request.getParameter("fired_button_hidden"));
+    }
+
 
     private void deleteRow(Map parameterMap,HttpServletRequest request) throws ActionException, SQLException {
         createConnection(request);
@@ -299,5 +346,24 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         return getInput;
 
     }
+
+    static public class Screen {
+        static public final String DELETE = "delete";
+        static public final String SEARCH = "search";
+
+        /** ristorna una costante utilizzabile con == */
+        static public final String fromString(String s) {
+            if (s == null)
+                return null;
+
+            for (String screen : new String[] {DELETE,SEARCH}) {
+                if (screen.equals(s)) {
+                    return screen;
+                }
+            }
+            throw new IllegalArgumentException("screen=" + s);
+        }
+    };
+
 
 }
