@@ -399,11 +399,11 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         if(Objects.equals(i,5)) {
                             date = crsListaOriginale.getObject(i).toString().split("-");
                             String[]dataScad = date[0].split("/");
-                            date[0] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
+                            date[0] = dataScad[0]+"/"+dataScad[1]+"/"+dataScad[2];
                             logger.info("date " + date[0]);
                             rowSetNew.updateObject(8, date[0]);
                             dataScad = date[1].split("/");
-                            date[1] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
+                            date[1] = dataScad[0]+"/"+dataScad[1]+"/"+dataScad[2];
                             logger.info("date " + date[1]);
                             rowSetNew.updateObject(9, date[1]);
                         }
