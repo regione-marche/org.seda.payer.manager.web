@@ -99,15 +99,16 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                 if(esito.getCodiceMessaggio()!=null && esito.getCodiceMessaggio().equals("OK")) {
                     setFormMessage("inviaufficioactionaddForm", "prenotazione di elaborazione aggiunta correttamente", request);
                     setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    request.setAttribute("tx_button_indietro","tx_button_indietro");
+                    getFiredButton(request);
+                    request.setAttribute("codop","ritorna");
+                    InviaUfficioAction invUff = new InviaUfficioAction();
+                    session.setAttribute("aggiuntaPrenotazione",true);
+                    invUff.service(request);
                 }else {
                     setFormMessage("inviaufficioactionaddForm", messaggio, request);
                 }
-                request.setAttribute("tx_button_indietro","tx_button_indietro");
-                getFiredButton(request);
-                request.setAttribute("codop","ritorna");
-                InviaUfficioAction invUff = new InviaUfficioAction();
-                session.setAttribute("aggiuntaPrenotazione",true);
-                invUff.service(request);
+
                 break;
 
 
