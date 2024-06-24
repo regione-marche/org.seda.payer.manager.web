@@ -167,8 +167,8 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                     "",
                     "",
                     "1",
-                    getDataByPrefix("dataCreazioneDa", request),
-                    getDataByPrefix("dataCreazioneA", request),
+                    getDataByPrefixReverse("dataCreazioneDa", request),
+                    getDataByPrefixReverse("dataCreazioneA", request),
                     (String) request.getAttribute("flagSubentro")
             );
            return dao.inserisciPrenotazione(prenotazione,userBean.getUserName());

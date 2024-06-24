@@ -399,16 +399,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     rowSetNew.moveToInsertRow();
                     // inserisco i valori delle vecchie colonne della riga attuale
                     for (int i=1; i<=iCols; i++) {
-                        if(Objects.equals(i,5)) {
-                            date = crsListaOriginale.getObject(i).toString().split("-");
-                            String[]dataScad = date[0].split("/");
-                            date[0] = dataScad[0]+"/"+dataScad[1]+"/"+dataScad[2];
-                            logger.info("date " + date[0]);
-                            rowSetNew.updateObject(8, date[0]);
-                            dataScad = date[1].split("/");
-                            date[1] = dataScad[0]+"/"+dataScad[1]+"/"+dataScad[2];
-                            logger.info("date " + date[1]);
-                            rowSetNew.updateObject(9, date[1]);
+                        if(Objects.equals(i,8)) {
+                            logger.info("data 8 " + crsListaOriginale.getObject(i).toString());
+                            rowSetNew.updateObject(8, crsListaOriginale.getObject(i).toString().replace("-","/"));
+                        }
+                        if(Objects.equals(i,9)) {
+                            logger.info("data 9 " + crsListaOriginale.getObject(i).toString());
+                            rowSetNew.updateObject(9, crsListaOriginale.getObject(i).toString().replace("-","/"));
                         }
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
                     }

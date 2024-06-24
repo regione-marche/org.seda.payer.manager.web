@@ -1083,6 +1083,24 @@ public class BaseManagerAction extends HtmlAction {
 		return yyyymmdd;
 	}
 
+
+	protected String getDataByPrefixReverse(String prefix, HttpServletRequest request) {
+		String ddmmyyyy = "";
+		//String dd = request.getParameter(prefix + "_day");
+		String dd = isNull(request.getAttribute(prefix + "_day"));
+		//String mm = request.getParameter(prefix + "_month");
+		String mm = isNull(request.getAttribute(prefix + "_month"));
+		//String yyyy = request.getParameter(prefix + "_year");
+		String yyyy = isNull(request.getAttribute(prefix + "_year"));
+		if ((dd != null) && (!dd.equals("")) && (mm != null)
+				&& (!mm.equals("")) && (yyyy != null) && (!yyyy.equals(""))) {
+			mm = ("0" + mm).substring(mm.length() - 1);
+			dd = ("0" + dd).substring(dd.length() - 1);
+			ddmmyyyy = dd + "-" + mm + "-" + yyyy;
+		}
+		return ddmmyyyy;
+	}
+
 	
 	protected String isNull(Object object){
 		if(object!=null)
