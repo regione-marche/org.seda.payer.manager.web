@@ -352,7 +352,7 @@
 
 <s:div name="divSelezione1" cssclass="divSelezione">
     <s:div name="divRicercaTopName" cssclass="divRicercaTop">
-        <s:form name="inviaufficio"
+        <s:form name="inviaufficioForm"
                 action="inviaufficio.do" method="post"
                 hasbtn1="false" hasbtn2="false" hasbtn3="false">
             <s:textbox name="DDLChanged" label="DDLChanged" bmodify="true" text="" cssclass="display_none" cssclasslabel="display_none" />

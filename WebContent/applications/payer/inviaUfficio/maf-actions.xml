@@ -30,7 +30,7 @@
 		<action-class>org.seda.payer.manager.inviaUfficio.actions.InviaUfficioActionAdd</action-class>
 		<flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
 			<result value="add" screen="inviaufficioactionadd.screen" />
-			<result value="ritorna" screen="inviaufficio.do" />
+			<result value="ritorna" screen="inviaufficio.screen" />
 			<result value="init" screen="inviaufficioactionadd.screen" />
 		</flow>
 	</action>

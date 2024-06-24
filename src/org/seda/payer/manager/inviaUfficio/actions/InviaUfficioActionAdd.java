@@ -61,7 +61,7 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
 
         FiredButton firedButton = getFiredButton(request);
 
-        gestisciAzioni(firedButton,request);
+        gestisciAzioni(firedButton,request,session);
 
         request.setAttribute("tx_error_message","");
 
@@ -72,7 +72,7 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
         return null;
     }
 
-    private void gestisciAzioni(FiredButton firedButton,HttpServletRequest request) {
+    private void gestisciAzioni(FiredButton firedButton,HttpServletRequest request,HttpSession session) {
 
         switch (firedButton) {
             case TX_BUTTON_RESET:
@@ -93,15 +93,23 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                     logger.info(e.getMessage());
                     logger.error(e.toString());
                     e.printStackTrace();
-                    setFormMessage("inviaufficioactionaddForm", "errore inserimento configurazione", request);
+                    setFormMessage("inviaufficioactionaddForm", "errore inserimento prenotazione di elaborazione", request);
 
                 }
                 if(esito.getCodiceMessaggio()!=null && esito.getCodiceMessaggio().equals("OK")) {
-                    setFormMessage("inviaufficioactionaddForm", "configurazione aggiunta correttamente", request);
+                    setFormMessage("inviaufficioactionaddForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
                 }else {
                     setFormMessage("inviaufficioactionaddForm", messaggio, request);
                 }
+                request.setAttribute("tx_button_indietro","tx_button_indietro");
+                getFiredButton(request);
+                request.setAttribute("codop","ritorna");
+                InviaUfficioAction invUff = new InviaUfficioAction();
+                session.setAttribute("aggiuntaPrenotazione",true);
+                invUff.service(request);
                 break;
+
 
             case TX_BUTTON_NULL:
                 request.setAttribute("codop","ritorna");

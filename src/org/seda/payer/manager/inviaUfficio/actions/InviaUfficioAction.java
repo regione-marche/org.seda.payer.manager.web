@@ -18,6 +18,7 @@ import com.seda.payer.core.bean.PrenotazioneFatturazionePagelist;
 import com.seda.payer.core.dao.InserisciUfficioDao;
 import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
 import com.seda.payer.core.exception.DaoException;
+import com.seda.payer.pgec.webservice.commons.srv.FaultType;
 import com.sun.rowset.WebRowSetImpl;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.entrate.actions.GestioneDocumentiCaricoAction;
@@ -61,6 +62,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         String applicationName = (String) mafReq.getAttribute(MAFAttributes.CURRENT_APPLICATION);
         UserBean userBean = (UserBean) session.getAttribute(SignOnKeys.USER_BEAN);
         templateName = userBean.getTemplate(applicationName);
+        boolean passatoCancella=false;
+
 
         aggiornamentoCombo(request, session);
         loadSocietaXml_DDL(request);
@@ -76,10 +79,28 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             screen = Screen.SEARCH; // default
         }
 
-        if (screen == GestioneDocumentiCaricoAction.Screen.SEARCH) {
+        if (screen.equals(GestioneDocumentiCaricoAction.Screen.SEARCH)) {
+            boolean ok = true;
             onGestioneDocumentiScreen(request);
             if(screen.equals(Screen.DELETE)) {
-                onDeleteDocumentoScreen(request);
+                try {
+                    onDeleteDocumentoScreen(request);
+                }catch(Throwable e) {
+                    ok=false;
+                    logger.info(e.getMessage());
+                }
+                if(ok) {
+                    setFormMessage("inviaufficioForm", "prenotazione cancellata", request);
+                    try{
+                        request.setAttribute("tx_button_cerca","tx_button_cerca");
+                        passatoCancella=true;
+                    }catch (Throwable e) {
+                        e.printStackTrace();
+                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                    }
+                }else{
+                    setFormMessage("inviaufficioForm", "errore rimozione prenotazione", request);
+                }
             }
         }
         /*
@@ -99,12 +120,21 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 order = request.getParameter("order")  == null ? "" : request.getParameter("order");
                 request.setAttribute("do_command_name","inviaufficio.do");
                 request.setAttribute("codop","search");
+                boolean okConf = false;
                 try{
-                    getConfigurazioni(request);
+                    okConf = getConfigurazioni(request);
                 }catch (Throwable e) {
                     e.printStackTrace();
                     setFormMessage("inviaufficio", "errore visualizzazione lista", request);
                 }
+                if(okConf && session.getAttribute("aggiuntaPrenotazione")!=null && (boolean)session.getAttribute("aggiuntaPrenotazione")) {
+                    setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                }
+
+                if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                    session.setAttribute("aggiuntaPrenotazione",false);
+                }
+
                 break;
 
             case TX_BUTTON_NUOVO:
@@ -113,11 +143,52 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_NULL:
-                request.setAttribute("codop","ritorna");
+                if(!passatoCancella) {
+                    request.setAttribute("codop", "ritorna");
+                }else{
+                    rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                    pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                    order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+                    request.setAttribute("do_command_name","inviaufficio.do");
+                    request.setAttribute("codop","search");
+                    try{
+                        request.setAttribute("statoElaborazione","");
+                        request.setAttribute("dtFlusso_da", "");
+                        request.setAttribute("dtFlusso_a", "");
+                        getConfigurazioni(request);
+                    }catch (Throwable e) {
+                        e.printStackTrace();
+                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                    }
+                }
                 break;
 
             case TX_BUTTON_INDIETRO:
-                request.setAttribute("vista", "");
+                if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                    rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                    pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                    order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+                    request.setAttribute("do_command_name","inviaufficio.do");
+                    request.setAttribute("codop","search");
+                    boolean okConfInd = false;
+                    try{
+                        okConfInd = getConfigurazioni(request);
+                    }catch (Throwable e) {
+                        e.printStackTrace();
+                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                    }
+                    if(okConfInd && session.getAttribute("aggiuntaPrenotazione")!=null && (boolean)session.getAttribute("aggiuntaPrenotazione")) {
+                        setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    }
+
+                    if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                        session.setAttribute("aggiuntaPrenotazione",false);
+                    }
+
+                    break;
+                }else {
+                    request.setAttribute("vista", "");
+                }
                 break;
         }
 
@@ -134,7 +205,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             if (isFiredButton(request, "button_elimina")) {
                 onDeleteDocumentCommit(request);
             }
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw new RuntimeException(ex);
         }
 
@@ -143,6 +214,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private void onDeleteDocumentCommit(HttpServletRequest request) {
         try {
             deleteRow(request.getParameterMap(), request);
+            screen=Screen.SEARCH;
         }catch(Throwable e){
             logger.info(e.getMessage());
             e.printStackTrace();
@@ -177,6 +249,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         Connection connection = payerDataSource.getConnection();
         PrenotazioneFatturazioneDao prenotazioneFatturazioneDao = new PrenotazioneFatturazioneDao(connection,payerDbSchema);
         prenotazioneFatturazioneDao.cancellaPrenotazione(parameterMap.get("chiave").toString());
+
     }
 
     private boolean getConfigurazioni(HttpServletRequest request) throws ActionException, ParseException, SQLException {
@@ -290,7 +363,11 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     for (int i=1; i<=iCols; i++) {
                         if(Objects.equals(i,5)) {
                             date = crsListaOriginale.getObject(i).toString().split("-");
+                            String[]dataScad = date[0].split("/");
+                            date[0] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
                             rowSetNew.updateObject(8, date[0]);
+                            dataScad = date[1].split("/");
+                            date[1] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
                             rowSetNew.updateObject(9, date[1]);
                         }
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
@@ -299,7 +376,6 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     String stato = crsListaOriginale.getString(6);
                     rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Elaborata");
 
-                    String chiavePrenotazione = crsListaOriginale.getString(11);
                     rowSetNew.insertRow();
 
                 }
@@ -308,6 +384,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             rowSetNew.moveToCurrentRow();
             return Convert.webRowSetToString(rowSetNew);
         } catch (Exception e)  {
+            logger.info(e.getMessage());
             setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
             request.setAttribute("tx_error_message","errore generico");
             e.printStackTrace();
@@ -315,6 +392,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             try {
                 if(crsListaOriginale != null)  crsListaOriginale.close();
             } catch (SQLException e) {
+                logger.info(e.getMessage());
                 setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
                 request.setAttribute("tx_error_message","errore generico");
                 e.printStackTrace();
@@ -322,6 +400,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             try {
                 if(rowSetNew != null)  rowSetNew.close();
             } catch (SQLException e) {
+                logger.info(e.getMessage());
                 setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
                 request.setAttribute("tx_error_message","errore generico");
                 e.printStackTrace();
@@ -351,7 +430,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         static public final String DELETE = "delete";
         static public final String SEARCH = "search";
 
-        /** ristorna una costante utilizzabile con == */
+        /** ritorna una costante utilizzabile con == */
         static public final String fromString(String s) {
             if (s == null)
                 return null;

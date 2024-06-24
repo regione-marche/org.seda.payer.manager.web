@@ -631,6 +631,9 @@ public class BaseManagerAction extends HtmlAction {
 						.getAttribute("fired_button_hidden")))
 			return FiredButton.TX_BUTTON_TIPO_SERVIZIO_CHANGED;
 
+		if (request.getAttribute("tx_button_indietro") != null)
+			return FiredButton.TX_BUTTON_INDIETRO;
+
 		if (request.getAttribute("tx_button_aggiungi") != null)
 			return FiredButton.TX_BUTTON_AGGIUNGI;
 
@@ -681,9 +684,6 @@ public class BaseManagerAction extends HtmlAction {
 
 		if (request.getAttribute("tx_button_movimento_changed_no_js") != null)
 			return FiredButton.TX_BUTTON_MOVIMENTO_CHANGED_NO_JS;
-
-		if (request.getAttribute("tx_button_indietro") != null)
-			return FiredButton.TX_BUTTON_INDIETRO;
 
 		if (request.getAttribute("tx_button_nuovo") != null)
 			return FiredButton.TX_BUTTON_NUOVO;

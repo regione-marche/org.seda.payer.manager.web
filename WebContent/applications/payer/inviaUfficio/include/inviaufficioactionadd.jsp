@@ -156,32 +156,37 @@
 
 
 
-        <s:div name="divRicercaMetadatiRight" cssclass="divRicMetadatiRight">
-            <s:div name="divElement6" cssclass="divRicMetadatiSingleRow">
-                <s:div name="divElement6a" cssclass="labelData">
-                    <s:label name="label_dataCreazione" cssclass="seda-ui-label label85 bold textright"
-                             text="Parametri Batch" />
+    <s:div name="divRicercaMetadatiRight" cssclass="divRicMetadatiRight">
+        <s:div name="divElement6" cssclass="divRicMetadatiSingleRow">
+            <s:div name="divElement6a" cssclass="labelData">
+                <s:label name="label_dataCreazione" cssclass="seda-ui-label label85 bold textright"
+                         text="" />
+            </s:div>
+            <s:div name="divElement6b" cssclass="floatleft">
+                <s:div name="div_dataCreazioneDa" cssclass="divDataDa">
+                    <s:date label="Data Scadenza:" prefix="dataCreazioneDa" yearbegin="${ddlDateAnnoDa}"
+                            cssclasslabel="labelsmall"
+                            cssclass="dateman"
+                            yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
+                            separator="/" calendar="${dataCreazioneDa}"></s:date>
+                    <input type="hidden" id="dataCreazioneDa_hidden" value="" />
                 </s:div>
-                <s:div name="divElement6b" cssclass="floatleft">
-                    <s:div name="div_dataCreazioneDa" cssclass="divDataDa">
-                        <s:date label="Data Scadenza:" prefix="dataCreazioneDa" yearbegin="${ddlDateAnnoDa}"
-                                cssclasslabel="labelsmall"
-                                cssclass="dateman"
-                                yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
-                                separator="/" calendar="${dataCreazioneDa}"></s:date>
-                        <input type="hidden" id="dataCreazioneDa_hidden" value="" />
-                    </s:div>
-                    <s:div name="div_dataCreazioneA" cssclass="divDataA">
-                        <s:date label="Data da Impostare:" prefix="dataCreazioneA" yearbegin="${ddlDateAnnoDa}"
-                                cssclasslabel="labelsmall"
-                                cssclass="dateman"
-                                yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
-                                separator="/" calendar="${dataCreazioneA}"></s:date>
-                        <input type="hidden" id="dataCreazioneA_hidden" value="" />
-                    </s:div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <s:div name="div_dataCreazioneA" cssclass="divDataA">
+                    <s:date label="Data da Impostare:" prefix="dataCreazioneA" yearbegin="${ddlDateAnnoDa}"
+                            cssclasslabel="labelsmall"
+                            cssclass="dateman"
+                            yearend="${ddlDateAnnoA}" locale="IT-it" descriptivemonth="false"
+                            separator="/" calendar="${dataCreazioneA}"></s:date>
+                    <input type="hidden" id="dataCreazioneA_hidden" value="" />
                 </s:div>
             </s:div>
         </s:div>
+    </s:div>
+
 
 
     <br/>
