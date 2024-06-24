@@ -64,6 +64,9 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         templateName = userBean.getTemplate(applicationName);
         boolean passatoCancella=false;
 
+        if(session.getAttribute("aggiuntaPrenotazione")==null) {
+            session.setAttribute("aggiuntaPrenotazione",false);
+        }
 
         aggiornamentoCombo(request, session);
         loadSocietaXml_DDL(request);
