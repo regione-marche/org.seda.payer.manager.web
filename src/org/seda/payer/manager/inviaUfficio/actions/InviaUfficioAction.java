@@ -123,9 +123,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 request.setAttribute("codop", "search");
                 boolean find = false;
                 try {
-                    request.setAttribute("statoElaborazione", "");
-                    request.setAttribute("dtFlusso_da", "");
-                    request.setAttribute("dtFlusso_a", "");
+                    if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                        request.setAttribute("statoElaborazione", "");
+                        request.setAttribute("dtFlusso_da", "");
+                        request.setAttribute("dtFlusso_a", "");
+                    }
                     find = getConfigurazioni(request);
                     logger.info("stato conf " + find);
                 } catch (Throwable e) {
@@ -159,9 +163,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         request.setAttribute("codop", "search");
                         boolean okConfInd = false;
                         try {
-                            request.setAttribute("statoElaborazione", "");
-                            request.setAttribute("dtFlusso_da", "");
-                            request.setAttribute("dtFlusso_a", "");
+                            if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                                request.setAttribute("statoElaborazione", "");
+                                request.setAttribute("dtFlusso_da", "");
+                                request.setAttribute("dtFlusso_a", "");
+                            }
                             okConfInd = getConfigurazioni(request);
                             logger.info("stato conf " + okConfInd);
                         } catch (Throwable e) {
@@ -190,9 +198,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     request.setAttribute("codop","search");
                     boolean okConfInd = false;
                     try{
-                        request.setAttribute("statoElaborazione","");
-                        request.setAttribute("dtFlusso_da", "");
-                        request.setAttribute("dtFlusso_a", "");
+                        if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                                &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                                &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                            request.setAttribute("statoElaborazione", "");
+                            request.setAttribute("dtFlusso_da", "");
+                            request.setAttribute("dtFlusso_a", "");
+                        }
                         okConfInd = getConfigurazioni(request);
                     }catch (Throwable e) {
                         e.printStackTrace();
@@ -276,6 +288,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private boolean getConfigurazioni(HttpServletRequest request) throws ActionException, ParseException, SQLException {
         Connection connection = createConnection(request);
         PrenotazioneFatturazionePagelist listaufficio = getConfigurations(request);
+        logger.info("listaUfficio " + listaufficio.toString());
         gestisciLista(listaufficio,request);
         return true;
     }
@@ -338,6 +351,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             if (pageInfo != null) {
                 if (pageInfo.getNumRows() > 0) {
                     String listaInputUfficio = elaboraXmlList(listaufficio.getPrenotazioneFatturazioneListXml(), request);
+                    logger.info("listaInputUfficio " + listaInputUfficio);
                     if(!listaInputUfficio.isEmpty()) {
                         request.setAttribute("listaInputUfficio", listaInputUfficio);
                         request.setAttribute("listaInputUfficio.pageInfo", pageInfo);
@@ -386,9 +400,11 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                             date = crsListaOriginale.getObject(i).toString().split("-");
                             String[]dataScad = date[0].split("/");
                             date[0] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
+                            logger.info("date " + date[0]);
                             rowSetNew.updateObject(8, date[0]);
                             dataScad = date[1].split("/");
                             date[1] = dataScad[1]+"/"+dataScad[0]+"/"+dataScad[2];
+                            logger.info("date " + date[1]);
                             rowSetNew.updateObject(9, date[1]);
                         }
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
