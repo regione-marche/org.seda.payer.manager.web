@@ -145,20 +145,32 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             case TX_BUTTON_NULL:
                 if(!passatoCancella) {
                     request.setAttribute("codop", "ritorna");
-                }else{
-                    rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
-                    pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
-                    order = request.getParameter("order")  == null ? "" : request.getParameter("order");
-                    request.setAttribute("do_command_name","inviaufficio.do");
-                    request.setAttribute("codop","search");
-                    try{
-                        request.setAttribute("statoElaborazione","");
-                        request.setAttribute("dtFlusso_da", "");
-                        request.setAttribute("dtFlusso_a", "");
-                        getConfigurazioni(request);
-                    }catch (Throwable e) {
-                        e.printStackTrace();
-                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                }else {
+                    if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                        rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                        pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                        order = request.getParameter("order") == null ? "" : request.getParameter("order");
+                        request.setAttribute("do_command_name", "inviaufficio.do");
+                        request.setAttribute("codop", "search");
+                        boolean okConfInd = false;
+                        try {
+                            request.setAttribute("statoElaborazione", "");
+                            request.setAttribute("dtFlusso_da", "");
+                            request.setAttribute("dtFlusso_a", "");
+                            okConfInd = getConfigurazioni(request);
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                            setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                        }
+                        if (okConfInd && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                            setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                        }
+
+                        if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                            session.setAttribute("aggiuntaPrenotazione", false);
+                        }
+                    } else {
+                        request.setAttribute("vista", "");
                     }
                 }
                 break;
@@ -172,6 +184,9 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     request.setAttribute("codop","search");
                     boolean okConfInd = false;
                     try{
+                        request.setAttribute("statoElaborazione","");
+                        request.setAttribute("dtFlusso_da", "");
+                        request.setAttribute("dtFlusso_a", "");
                         okConfInd = getConfigurazioni(request);
                     }catch (Throwable e) {
                         e.printStackTrace();
