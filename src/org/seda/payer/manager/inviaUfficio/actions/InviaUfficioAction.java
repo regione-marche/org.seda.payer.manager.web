@@ -93,6 +93,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     setFormMessage("inviaufficioForm", "prenotazione cancellata", request);
                     try{
                         request.setAttribute("tx_button_cerca","tx_button_cerca");
+                        logger.info("clicco cerca da codice");
                         passatoCancella=true;
                     }catch (Throwable e) {
                         e.printStackTrace();
@@ -117,22 +118,26 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             case TX_BUTTON_CERCA:
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
-                order = request.getParameter("order")  == null ? "" : request.getParameter("order");
-                request.setAttribute("do_command_name","inviaufficio.do");
-                request.setAttribute("codop","search");
-                boolean okConf = false;
-                try{
-                    okConf = getConfigurazioni(request);
-                }catch (Throwable e) {
+                order = request.getParameter("order") == null ? "" : request.getParameter("order");
+                request.setAttribute("do_command_name", "inviaufficio.do");
+                request.setAttribute("codop", "search");
+                boolean okConfInd = false;
+                try {
+                    request.setAttribute("statoElaborazione", "");
+                    request.setAttribute("dtFlusso_da", "");
+                    request.setAttribute("dtFlusso_a", "");
+                    okConfInd = getConfigurazioni(request);
+                    logger.info("stato conf " + okConfInd);
+                } catch (Throwable e) {
                     e.printStackTrace();
-                    setFormMessage("inviaufficio", "errore visualizzazione lista", request);
+                    setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
                 }
-                if(okConf && session.getAttribute("aggiuntaPrenotazione")!=null && (boolean)session.getAttribute("aggiuntaPrenotazione")) {
+                if (okConfInd && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
                     setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
                 }
 
-                if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
-                    session.setAttribute("aggiuntaPrenotazione",false);
+                if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                    session.setAttribute("aggiuntaPrenotazione", false);
                 }
 
                 break;
@@ -158,6 +163,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                             request.setAttribute("dtFlusso_da", "");
                             request.setAttribute("dtFlusso_a", "");
                             okConfInd = getConfigurazioni(request);
+                            logger.info("stato conf " + okConfInd);
                         } catch (Throwable e) {
                             e.printStackTrace();
                             setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
