@@ -135,15 +135,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 boolean okCon = false;
                 try {
                     logger.info("entro try cerca");
-                    if((request.getAttribute("statoElaborazione")!=null)
-                            &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
-                            &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                        okCon = getConfigurazioni(request,session);
-                    }else {
-                        request.setAttribute("statoElaborazione", "");
-                        request.setAttribute("dtFlusso_da", "");
-                        request.setAttribute("dtFlusso_a", "");
-                    }
+
                     okCon = getConfigurazioni(request,session);
                     logger.info("stato conf " + okCon);
                 } catch (Throwable e) {
@@ -179,15 +171,6 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         request.setAttribute("codop", "search");
                         boolean okConfInd = false;
                         try {
-                            if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
-                                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
-                                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                                okConfInd = getConfigurazioni(request,session);
-                            }else {
-                                request.setAttribute("statoElaborazione", "");
-                                request.setAttribute("dtFlusso_da", "");
-                                request.setAttribute("dtFlusso_a", "");
-                            }
                             okConfInd = getConfigurazioni(request,session);
                             logger.info("stato conf " + okConfInd);
                         } catch (Throwable e) {
@@ -217,15 +200,6 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     request.setAttribute("codop","search");
                     boolean okConfInd = false;
                     try{
-                        if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
-                                &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
-                                &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                            okConfInd = getConfigurazioni(request,session);
-                        }else {
-                            request.setAttribute("statoElaborazione", "");
-                            request.setAttribute("dtFlusso_da", "");
-                            request.setAttribute("dtFlusso_a", "");
-                        }
                         okConfInd = getConfigurazioni(request,session);
                     }catch (Throwable e) {
                         e.printStackTrace();
@@ -252,12 +226,21 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
 
     private void mantieniFiltriRicerca(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(request.getAttribute("statoElaborazione")!=null)
+        if(request.getAttribute("statoElaborazione")!=null) {
             session.setAttribute("statoElaborazione", request.getAttribute("statoElaborazione"));
-        if(request.getAttribute("dtFlusso_da")!=null)
+        }else{
+            request.setAttribute("statoElaborazione", "");
+        }
+        if(request.getAttribute("dtFlusso_da")!=null) {
             session.setAttribute("dtFlusso_da", request.getAttribute("dtFlusso_da"));
-        if(request.getAttribute("dtFlusso_a")!=null)
+        }else{
+            request.setAttribute("dtFlusso_da", "");
+        }
+        if(request.getAttribute("dtFlusso_a")!=null) {
             session.setAttribute("dtFlusso_a", request.getAttribute("dtFlusso_a"));
+        }else{
+            request.setAttribute("dtFlusso_a", "");
+        }
     }
 
 
