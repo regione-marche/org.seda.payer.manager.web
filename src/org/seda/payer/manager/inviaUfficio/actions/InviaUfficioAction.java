@@ -402,6 +402,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     rowSetNew.moveToInsertRow();
                     // inserisco i valori delle vecchie colonne della riga attuale
                     for (int i=1; i<=iCols; i++) {
+                        /*
                         if(Objects.equals(i,8)) {
                             logger.info("data 8 " + crsListaOriginale.getObject(i).toString());
                             rowSetNew.updateObject(8,convertDate(crsListaOriginale.getObject(i).toString()));
@@ -410,6 +411,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                             logger.info("data 9 " + crsListaOriginale.getObject(i).toString());
                             rowSetNew.updateObject(9,convertDate(crsListaOriginale.getObject(i).toString()));
                         }
+                        */
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
                     }
 
