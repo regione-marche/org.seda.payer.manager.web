@@ -132,13 +132,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                             &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                             &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                        okCon = getConfigurazioni(request);
+                        okCon = getConfigurazioni(request,session);
                     }else {
                         request.setAttribute("statoElaborazione", "");
                         request.setAttribute("dtFlusso_da", "");
                         request.setAttribute("dtFlusso_a", "");
                     }
-                    okCon = getConfigurazioni(request);
+                    okCon = getConfigurazioni(request,session);
                     logger.info("stato conf " + okCon);
                 } catch (Throwable e) {
                     e.printStackTrace();
@@ -174,13 +174,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                             if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                                     &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                                     &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                                okConfInd = getConfigurazioni(request);
+                                okConfInd = getConfigurazioni(request,session);
                             }else {
                                 request.setAttribute("statoElaborazione", "");
                                 request.setAttribute("dtFlusso_da", "");
                                 request.setAttribute("dtFlusso_a", "");
                             }
-                            okConfInd = getConfigurazioni(request);
+                            okConfInd = getConfigurazioni(request,session);
                             logger.info("stato conf " + okConfInd);
                         } catch (Throwable e) {
                             e.printStackTrace();
@@ -211,13 +211,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                                 &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                                 &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
-                            okConfInd = getConfigurazioni(request);
+                            okConfInd = getConfigurazioni(request,session);
                         }else {
                             request.setAttribute("statoElaborazione", "");
                             request.setAttribute("dtFlusso_da", "");
                             request.setAttribute("dtFlusso_a", "");
                         }
-                        okConfInd = getConfigurazioni(request);
+                        okConfInd = getConfigurazioni(request,session);
                     }catch (Throwable e) {
                         e.printStackTrace();
                         setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
@@ -297,11 +297,11 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
 
     }
 
-    private boolean getConfigurazioni(HttpServletRequest request) throws ActionException, ParseException, SQLException {
+    private boolean getConfigurazioni(HttpServletRequest request,HttpSession session) throws ActionException, ParseException, SQLException {
         Connection connection = createConnection(request);
         PrenotazioneFatturazionePagelist listaufficio = getConfigurations(request);
         logger.info("listaUfficio " + listaufficio.toString());
-        gestisciLista(listaufficio,request);
+        gestisciLista(listaufficio,request,session);
         return true;
     }
 
@@ -353,7 +353,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         return prenotazioneFatturazionePagelist;
     }
 
-    private void gestisciLista(PrenotazioneFatturazionePagelist listaufficio, HttpServletRequest request) {
+    private void gestisciLista(PrenotazioneFatturazionePagelist listaufficio, HttpServletRequest request,HttpSession session) {
 
         PageInfo pageInfo = listaufficio.getPageInfo();
         if(!Objects.equals(listaufficio.getRetCode(), "00")) {
@@ -366,6 +366,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     logger.info("listaInputUfficio " + listaInputUfficio);
                     if(!listaInputUfficio.isEmpty()) {
                         request.setAttribute("listaInputUfficio", listaInputUfficio);
+                        session.setAttribute("listaInputUfficio", listaInputUfficio);
                         request.setAttribute("listaInputUfficio.pageInfo", pageInfo);
                     } else {
                         request.setAttribute("listaInputUfficio", null);
