@@ -98,7 +98,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 if(ok) {
                     setFormMessage("inviaufficioForm", "prenotazione cancellata", request);
                     try{
-                        request.setAttribute("tx_button_cerca","tx_button_cerca");
+                        //request.setAttribute("tx_button_cerca","tx_button_cerca");
+                        cercaDacodice(request,session);
                         logger.info("clicco cerca da codice");
                         passatoCancella=true;
                     }catch (Throwable e) {
@@ -241,6 +242,42 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         }
 
         return null;
+    }
+
+    private void cercaDacodice(HttpServletRequest request,HttpSession session) {
+        logger.info("entro cercaDacodice");
+        rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+        pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+        order = request.getParameter("order") == null ? "" : request.getParameter("order");
+        request.setAttribute("do_command_name", "inviaufficio.do");
+        request.setAttribute("codop", "search");
+        boolean okCon = false;
+        try {
+            logger.info("entro try cercaDacodice");
+            if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                okCon = getConfigurazioni(request,session);
+            }else {
+                request.setAttribute("statoElaborazione", "");
+                request.setAttribute("dtFlusso_da", "");
+                request.setAttribute("dtFlusso_a", "");
+            }
+            okCon = getConfigurazioni(request,session);
+            logger.info("stato conf " + okCon);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+        }
+        if (okCon && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+            setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+        }
+
+        if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+            session.setAttribute("aggiuntaPrenotazione", false);
+        }
+
+        logger.info("prima break cercaDacodice");
     }
 
 
