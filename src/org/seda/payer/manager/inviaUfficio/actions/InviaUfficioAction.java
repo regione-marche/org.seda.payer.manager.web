@@ -85,6 +85,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             screen = Screen.SEARCH; // default
         }
 
+        mantieniFiltriRicerca(request);
+
         if (screen.equals(GestioneDocumentiCaricoAction.Screen.SEARCH)) {
             boolean ok = true;
             onGestioneDocumentiScreen(request);
