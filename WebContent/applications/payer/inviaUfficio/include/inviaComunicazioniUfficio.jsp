@@ -437,7 +437,7 @@ ${tx_error_message}
     </c:if>
 </s:div>
 
-<c:if test="${!empty listaInputUfficio}">
+<c:if test="${!empty listaInputUfficio || sessionScope.aggiuntaPrenotazione}">
     <fmt:setLocale value="it_IT" />
     <s:div name="divRicercaFillName" cssclass="divRicercaFill bold">
         Elenco Richieste Elaborazioni
