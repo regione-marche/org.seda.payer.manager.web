@@ -123,6 +123,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_CERCA:
+                mantieniFiltriRicerca(request);
                 logger.info("entro cerca");
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
@@ -132,7 +133,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 boolean okCon = false;
                 try {
                     logger.info("entro try cerca");
-                    if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                    if((request.getAttribute("statoElaborazione")!=null)
                             &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                             &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
                         okCon = getConfigurazioni(request,session);
@@ -168,6 +169,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     request.setAttribute("codop", "ritorna");
                 }else {
                     if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                        mantieniFiltriRicerca(request);
                         rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                         pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                         order = request.getParameter("order") == null ? "" : request.getParameter("order");
@@ -205,6 +207,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
 
             case TX_BUTTON_INDIETRO:
                 if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                    mantieniFiltriRicerca(request);
                     rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                     pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                     order = request.getParameter("order")  == null ? "" : request.getParameter("order");
@@ -243,6 +246,18 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
 
         return null;
     }
+
+
+    private void mantieniFiltriRicerca(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if(request.getAttribute("statoElaborazione")!=null)
+            session.setAttribute("statoElaborazione", request.getAttribute("statoElaborazione"));
+        if(request.getAttribute("dtFlusso_da")!=null)
+            session.setAttribute("dtFlusso_da", request.getAttribute("dtFlusso_da"));
+        if(request.getAttribute("dtFlusso_a")!=null)
+            session.setAttribute("dtFlusso_a", request.getAttribute("dtFlusso_a"));
+    }
+
 
     private void cercaDacodice(HttpServletRequest request,HttpSession session) {
         logger.info("entro cercaDacodice");
