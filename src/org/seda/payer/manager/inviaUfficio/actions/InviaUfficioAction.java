@@ -421,6 +421,9 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
                     }
 
+                    rowSetNew.updateObject(8,convertDate(crsListaOriginale.getObject(8).toString()));
+                    rowSetNew.updateObject(9,convertDate(crsListaOriginale.getObject(9).toString()));
+
                     String stato = crsListaOriginale.getString(6);
                     rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Elaborata");
 
@@ -458,7 +461,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     }
 
 
-    private static String convertDate(String dateString) {
+    private String convertDate(String dateString) {
+        logger.info("dateString " + dateString);
         DateTimeFormatter fIn = DateTimeFormatter.ofPattern( "MM/dd/yyyy" , Locale.ITALIAN );
         LocalDate ld = LocalDate.parse( dateString,fIn);
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
