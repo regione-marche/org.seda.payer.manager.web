@@ -35,6 +35,8 @@ import java.sql.Connection;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Objects;
 
@@ -401,11 +403,11 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     for (int i=1; i<=iCols; i++) {
                         if(Objects.equals(i,8)) {
                             logger.info("data 8 " + crsListaOriginale.getObject(i).toString());
-                            rowSetNew.updateObject(8, crsListaOriginale.getObject(i).toString().replace("-","/"));
+                            rowSetNew.updateObject(8,convertDate(crsListaOriginale.getObject(i).toString()));
                         }
                         if(Objects.equals(i,9)) {
                             logger.info("data 9 " + crsListaOriginale.getObject(i).toString());
-                            rowSetNew.updateObject(9, crsListaOriginale.getObject(i).toString().replace("-","/"));
+                            rowSetNew.updateObject(9,convertDate(crsListaOriginale.getObject(i).toString()));
                         }
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
                     }
@@ -445,6 +447,15 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         }
         return "";
     }
+
+
+        private static String convertDate(String dateString) {
+            LocalDate date = LocalDate.parse(dateString);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String formattedDate = date.format(formatter);
+            return formattedDate;
+        }
+
 
     private ComunicazioneUfficio creaOgettoRequest(HttpServletRequest request) throws ParseException {
 
