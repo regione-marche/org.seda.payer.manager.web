@@ -370,6 +370,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private PrenotazioneFatturazionePagelist getConfigurations(HttpServletRequest request) throws SQLException {
         PrenotazioneFatturazionePagelist prenotazioneFatturazionePagelist = null;
         try {
+            logger.info("statoElaborazione " + request.getAttribute("statoElaborazione").toString());
+            logger.info(getDataByPrefix("dtFlusso_da", request));
+            logger.info(getDataByPrefix("dtFlusso_a", request));
+        }catch(Throwable e) {
+            logger.info(e.getMessage());
+        }
+        try {
             Connection connection =  payerDataSource.getConnection();
             PrenotazioneFatturazioneDao dao = new PrenotazioneFatturazioneDao(connection, payerDbSchema);
             PrenotazioneFatturazione prenotazione = new PrenotazioneFatturazione(
