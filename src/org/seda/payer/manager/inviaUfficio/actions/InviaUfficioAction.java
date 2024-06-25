@@ -37,6 +37,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -449,12 +450,32 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     }
 
 
-        private static String convertDate(String dateString) {
-            LocalDate date = LocalDate.parse(dateString);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String formattedDate = date.format(formatter);
-            return formattedDate;
+    private static String convertDate(String dateString) {
+        DateTimeFormatter fIn = DateTimeFormatter.ofPattern( "MM/dd/yyyy" , Locale.ITALIAN );
+        LocalDate ld = LocalDate.parse( dateString,fIn);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // Formattazione della data al nuovo formato
+        String formattedDate = ld.format(outputFormatter);
+        return formattedDate;
+    }
+
+        /*
+        * try {
+
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            LocalDate date = LocalDate.parse(dateString, inputFormatter);
+
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            String formattedDate = date.format(outputFormatter);
+
+            System.out.println(formattedDate);
+        } catch (DateTimeParseException e) {
+            System.out.println("Errore nel parsing della data: " + e.getMessage());
         }
+        *
+        * */
 
 
     private ComunicazioneUfficio creaOgettoRequest(HttpServletRequest request) throws ParseException {
