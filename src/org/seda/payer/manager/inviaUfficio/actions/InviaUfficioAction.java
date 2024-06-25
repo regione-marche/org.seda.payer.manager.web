@@ -127,22 +127,24 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 order = request.getParameter("order") == null ? "" : request.getParameter("order");
                 request.setAttribute("do_command_name", "inviaufficio.do");
                 request.setAttribute("codop", "search");
-                boolean find = false;
+                boolean okCon = false;
                 try {
                     if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
-                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
-                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                            &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                            &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                        okCon = getConfigurazioni(request);
+                    }else {
                         request.setAttribute("statoElaborazione", "");
                         request.setAttribute("dtFlusso_da", "");
                         request.setAttribute("dtFlusso_a", "");
                     }
-                    find = getConfigurazioni(request);
-                    logger.info("stato conf " + find);
+                    okCon = getConfigurazioni(request);
+                    logger.info("stato conf " + okCon);
                 } catch (Throwable e) {
                     e.printStackTrace();
                     setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
                 }
-                if (find && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                if (okCon && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
                     setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
                 }
 
@@ -172,6 +174,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                             if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                                     &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                                     &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                                okConfInd = getConfigurazioni(request);
+                            }else {
                                 request.setAttribute("statoElaborazione", "");
                                 request.setAttribute("dtFlusso_da", "");
                                 request.setAttribute("dtFlusso_a", "");
@@ -207,6 +211,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                                 &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                                 &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                            okConfInd = getConfigurazioni(request);
+                        }else {
                             request.setAttribute("statoElaborazione", "");
                             request.setAttribute("dtFlusso_da", "");
                             request.setAttribute("dtFlusso_a", "");
