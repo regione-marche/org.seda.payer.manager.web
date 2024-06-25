@@ -122,6 +122,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_CERCA:
+                logger.info("entro cerca");
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
                 order = request.getParameter("order") == null ? "" : request.getParameter("order");
@@ -129,6 +130,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 request.setAttribute("codop", "search");
                 boolean okCon = false;
                 try {
+                    logger.info("entro try cerca");
                     if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
                             &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
                             &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
@@ -152,6 +154,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     session.setAttribute("aggiuntaPrenotazione", false);
                 }
 
+                logger.info("prima break cerca");
                 break;
 
             case TX_BUTTON_NUOVO:
@@ -370,14 +373,14 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                         request.setAttribute("listaInputUfficio.pageInfo", pageInfo);
                     } else {
                         request.setAttribute("listaInputUfficio", null);
-                        setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
+                        setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
                     }
                 } else {
                     request.setAttribute("listaInputUfficio", null);
-                    setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
+                    setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
                 }
             } else {
-                setFormMessage("inviaufficio", "Errore generico - Impossibile recuperare i dati", request);
+                setFormMessage("inviaufficioForm", "Errore generico - Impossibile recuperare i dati", request);
                 request.setAttribute("tx_error_message","lista vuota");
             }
         }
