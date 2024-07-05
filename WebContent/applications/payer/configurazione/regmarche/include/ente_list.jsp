@@ -33,7 +33,7 @@
     			</seda:if> 
     		</seda:dgcolumn>
     		
-    		<seda:dgcolumn index="10" label="Cod Ente Ipa" />   <!-- cd pago-580 -->
+    		<seda:dgcolumn index="11" label="Cod Ente Ipa" />   <!-- cd pago-580 -->
     		
 			<seda:dgcolumn label="Azioni">
 			

@@ -42,6 +42,8 @@ public class WisManager extends BaseManagerAction {
 		String applicationName = (String)mafReq.getAttribute(MAFAttributes.CURRENT_APPLICATION);
 		UserBean userBean = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);
 		String templateName = userBean.getTemplate(applicationName);
+
+		session.setAttribute("isManager",userBean.getUserProfile());
 		
 		if (templateName.equals("trentrisc"))
 			request.setAttribute("ddlProvincia", "TN");

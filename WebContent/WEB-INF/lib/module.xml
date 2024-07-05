@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module name="org.eclipse.birt.runtime" xmlns="urn:jboss:module:1.1">
+	<resources>
+		<resource-root path="chartengineapi.jar" />
+		<resource-root path="chartitemapi.jar" />
+		<resource-root path="com.ibm.icu_4.0.1.v20090822.jar" />
+		<resource-root path="commons-cli-1.0.jar" />
+		<resource-root path="coreapi.jar" />
+		<resource-root path="crosstabcoreapi.jar" />
+		<resource-root path="dataadapterapi.jar" />
+		<resource-root path="dataaggregationapi.jar" />
+		<resource-root path="dataextraction.jar" />
+		<resource-root path="dteapi.jar" />
+		<resource-root path="emitterconfig.jar" />
+		<resource-root path="engineapi.jar" />
+		<resource-root path="flute.jar" />
+		<resource-root path="js.jar" />
+		<resource-root path="modelapi.jar" />
+		<resource-root path="modelodaapi.jar" />
+		<resource-root path="odadesignapi.jar" />
+		<resource-root path="org.apache.commons.codec_1.3.0.v20080530-1600.jar" />
+		<resource-root path="org.eclipse.emf.common_2.5.0.v200906151043.jar" />
+		<resource-root path="org.eclipse.emf.ecore_2.5.0.v200906151043.jar" />
+		<resource-root path="org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar" />
+		<resource-root path="org.w3c.css.sac_1.3.0.v200805290154.jar" />
+		<resource-root path="scriptapi.jar" />
+	</resources>
+
+	<dependencies>
+	</dependencies>
+</module>

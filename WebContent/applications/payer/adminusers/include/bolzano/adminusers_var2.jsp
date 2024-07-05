@@ -48,7 +48,11 @@
 			associazioneProvvisoria.disabled = !riconciliazionemt.checked;
 			associazioneDefinitiva.disabled = !riconciliazionemt.checked;
 		}
-
+        function toggleFatturazione() {
+            var riconciliazionenn = document.getElementById('riconciliazionenn');
+            var prenotazioneFatturazione = document.getElementById('prenotazioneFatturazione');
+            prenotazioneFatturazione.disabled = !riconciliazionenn.checked;
+        }
 	</script>
 </c:if>
 <c:if test="${userIsAMMI}">
@@ -59,6 +63,7 @@
 		function toggleRiversamento() {}
 		function toggleContogestione() {}
 		function toggleRiconciliazionemt() {}
+		function toggleFatturazione() {}
 	</script>
 </c:if>
 <s:div name="div_selezione" cssclass="div_align_center divSelezione">
@@ -106,7 +111,7 @@
 					<%-- fine LP PG21X007 --%>
 					<s:div name="divElement93" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_ecmanager}" validator="ignore" 
-						 cssclasslabel="bold checklabel label220" cssclass="checkleft"   disable="${ecmanagerDisabled}" 
+						 cssclasslabel="bold checklabel label220" cssclass="checkleft"   disable="${ecmanagerDisabled}"
 						name="ecmanager" groupname="ecmanager" 
 						text="Estratto Conto Manager" value="Y" />
 					</s:div>
@@ -220,6 +225,7 @@
 						name="riconciliazionemt" groupname="riconciliazionemt"   disable="${riconciliazionemtDisabled}" 
 						text="Riconciliazione Movimenti Tesoreria" value="Y" />
 					</s:div>
+
 					<!-- "SE000SV"."PYUSRTB"."USR_FUSRRICO" -->
 					<s:div name="divElement201" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_associazioniDefinitiveRiconciliazionemt}" validator="ignore" 
@@ -233,6 +239,13 @@
 						name="chk_associazioniProvvisorieRiconciliazionemt" groupname="associazioniProvvisorieRiconciliazionemt" 
 						text="Associazioni Provvisorie Transazioni e Flussi" value="Y" />
 					</s:div>
+
+                    <s:div name="divElement203" cssclass="divRicMetadatiSingleRow">
+                        <s:list bradio="false" bchecked="${chk_richiesteelaborazioni}" validator="ignore"
+                         cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${richiesteelaborazioniDisabled}"
+                        name="richiesteelaborazioni" groupname="richiesteelaborazioni"
+                        text="Richieste Elaborazioni" value="Y" />
+                    </s:div>
 
 					<%-- <s:div name="divElement61" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_entrate}" validator="ignore" 
@@ -314,11 +327,20 @@
 					</s:div>
 					<s:div name="divElement593" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_riconciliazionenn}" validator="ignore" 
-						 cssclasslabel="bold checklabel label220" cssclass="checkleft"   disable="${riconciliazionennDisabled}" 
+						 cssclasslabel="bold checklabel label220" cssclass="checkleft" onclick="toggleFatturazione()" disable="${riconciliazionennDisabled}"
 						name="riconciliazionenn" groupname="riconciliazionenn" 
 						text="Riconciliazione movimenti Nodo Nazionale" value="Y" />
 					</s:div>
 					<!-- PG150180_001 GG - fine -->
+					<!-- SR PGNTMGR-56 INIZO -->
+					<!-- PYUSRTB.USR_FUSRPRFT" -->
+                        <s:div name="divElement594" cssclass="divRicMetadatiSingleRow">
+                            <s:list bradio="false" bchecked="${chk_prenotazioneFatturazione}" validator="ignore"
+                             cssclasslabel="bold checklabel label220" cssclass="checkleftindent" disable="${riconciliazionennDisabled}"
+                            name="prenotazioneFatturazione" groupname="prenotazioneFatturazione"
+                            text="Dati per fatturazione" value="Y" />
+                        </s:div>
+					<!-- SR PGNTMGR-56 FINE	-->
 					<%-- <s:div name="divElement198" cssclass="divRicMetadatiSingleRow">
 						<s:list bradio="false" bchecked="${chk_monitoraggiowis}" validator="ignore" 
 						 cssclasslabel="bold checklabel label220" cssclass="checkleft" disable="${monitoraggiowisDisabled}" 
@@ -422,6 +444,7 @@
 		toggleRiversamento();
 		toggleContogestione();
 		toggleRiconciliazionemt();
+		toggleFatturazione();
 	</script>
 	
 </s:div>

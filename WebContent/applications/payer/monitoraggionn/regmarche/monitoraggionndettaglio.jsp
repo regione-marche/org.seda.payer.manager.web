@@ -38,7 +38,7 @@
 				<s:hyperlink
 					href="downloadXml.do?idtrans={1}&source=MIP&type=paymentrequest&form=frmMonitoraggioNnDetails"
 					cssclass="blacklink hlStyle"
-					text="{22}"
+					text="{24}"
 					alt="Download RPTRequest" />
 					<!-- attenzione indice ricalcolato post SP BaseMonitoraggioNnAction.java riga 113-114 -->
 			</s:dgcolumn>
@@ -47,7 +47,7 @@
 				<s:hyperlink
 					href="downloadXml.do?idtrans={1}&source=MIP&type=paymentdata&form=frmMonitoraggioNnDetails"
 					cssclass="blacklink hlStyle"
-					text="{23}"
+					text="{25}"
 					alt="Download RPTData" />
 					<!-- attenzione indice ricalcolato post SP BaseMonitoraggioNnAction.java riga 113-114 -->
 			</s:dgcolumn>
@@ -106,14 +106,7 @@
 					text="<xmp class='xmpXmlInTag'>{19}</xmp>"
 					alt="Download SendRT" />
 			</s:dgcolumn>
-		
-			<%-- <s:dgcolumn label="XML SendRT">
-				<div class="divXmlInTag">
-					<xmp class="xmpXmlInTag">{19}</xmp>
-				 	<span><xmp class="xmpXmlOutTag">{18}</xmp></span>
-				 </div>			 
-			 </s:dgcolumn> --%>
- 
+
 		</s:datagrid>
 	</s:div>
 </c:if>

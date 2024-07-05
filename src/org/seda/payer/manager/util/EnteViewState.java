@@ -200,6 +200,10 @@ public class EnteViewState implements Serializable {
 		return request.getParameter(paramPrefix + "_" + "codiceGruppo");
 	}
 	//inizio LP PG210040
+
+	public String getFlagIntegrazioneJPPA() {
+		return request.getParameter(paramPrefix + "_" + "integrazioneJPPA");
+	}
 	
 	
 	public void prepareData(String scope) {

@@ -10,3 +10,6 @@
 /Logs/
 /target/
 .vscode/
+/.apt_generated/
+.idea/
+*.iml

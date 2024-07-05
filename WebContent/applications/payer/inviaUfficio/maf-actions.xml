@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actions-mapping xmlns="http://action.core.maf.j2ee5.seda.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://action.core.maf.j2ee5.seda.com ../../../WEB-INF/xsd/maf-actions.xsd">
+
+	<action url="inviaufficio.do" screen="inviaufficio.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.inviaUfficio.actions.InviaUfficioAction</action-class>
+		<flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+			<result value="add" screen="inviaufficioactionadd.do" />
+			<result value="ritorna" screen="inviaufficio.screen" />
+			<result value="search" screen="inviaufficio.screen" />
+		</flow>
+    </action>
+
+	<action url="inviaufficioactionadd.do" screen="inviaufficioactionadd.screen" flow="true">
+		<role-collection>
+			<role>AMMI</role>
+			<role>AMSO</role>
+			<role>AMUT</role>
+			<role>AMEN</role>
+		</role-collection>
+		<action-class>org.seda.payer.manager.inviaUfficio.actions.InviaUfficioActionAdd</action-class>
+		<flow class="org.seda.payer.manager.configurazione.actions.ConfigurazioneFlowAction">
+			<result value="add" screen="inviaufficioactionadd.screen" />
+			<result value="ritorna" screen="inviaufficio.do" />
+			<result value="init" screen="inviaufficioactionadd.screen" />
+		</flow>
+	</action>
+
+</actions-mapping>
