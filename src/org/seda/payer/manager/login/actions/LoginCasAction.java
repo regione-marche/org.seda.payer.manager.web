@@ -198,10 +198,12 @@ public class LoginCasAction  implements Filter{
 			//5. Redirect verso pagonet manager
 				
 			session.setAttribute("urlPortale", portaleUrl);
-			request.setAttribute(MAFAttributes.ACTIONS,"default.do");
-			request.setAttribute(MAFAttributes.CURRENT_APPLICATION,"default");
-			RequestDispatcher rd = request.getRequestDispatcher("../default/default.do");
-			rd.forward(request, response);
+//			request.setAttribute(MAFAttributes.ACTIONS,"default.do");
+//			request.setAttribute(MAFAttributes.CURRENT_APPLICATION,"default");
+//			RequestDispatcher rd = request.getRequestDispatcher("../default/default.do");
+//			rd.forward(request, response);
+
+			response.sendRedirect("../default/default.do");
 			
 		}catch(Exception e){
 			response.sendError(403);
