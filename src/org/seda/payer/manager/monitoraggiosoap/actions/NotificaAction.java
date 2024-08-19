@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.util.LoggerUtil;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.ws.WSCache;
@@ -53,7 +54,7 @@ public class NotificaAction extends BaseMonitoraggioSoapAction {
 			String chiaveTransazione = (String)request.getAttribute("notificaChiaveTransazione");
 			String chiaveDettaglioTransazione = (String)request.getAttribute("notificaChiaveDettaglioTransazione");
 			
-			try (Connection conn = payerDataSource.getConnection()) {
+			try (Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true)) {
 
 				NotificheSoap notificheSoap= new NotificheSoap(conn, payerDbSchema);
 				NotificaSoap detailNotificaSoap = new NotificaSoap();
@@ -415,7 +416,7 @@ public class NotificaAction extends BaseMonitoraggioSoapAction {
 			
 			if ( codiceEnte != null && codiceEnte != "" && codiceEnte.length() == 10) {
 
-				try (Connection conn = payerDataSource.getConnection()) {
+				try (Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true)) {
 					callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYANESP_SEL");
 					callableStatement.setString(1, codiceEnte);
 					

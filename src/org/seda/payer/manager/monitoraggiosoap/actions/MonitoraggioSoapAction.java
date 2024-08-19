@@ -107,7 +107,7 @@ public class MonitoraggioSoapAction extends BaseMonitoraggioSoapAction {
 
 
 				try  {
-					Connection conn =  new JndiProxy().getSqlConnection(null, dataSourceName, true);
+					Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 
 					if(dataDa != "" && dataA != "" && Integer.parseInt(dataDa.replace("-","")) > Integer.parseInt(dataA.replace("-",""))) {
 							throw new Exception("'data pagamento Da' non puo' essere maggiore di 'data pagamento A'"); 
