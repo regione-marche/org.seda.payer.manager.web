@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.Messages;
 
@@ -103,11 +104,10 @@ public class MonitoraggioSoapAction extends BaseMonitoraggioSoapAction {
 				System.out.println("MonitoraggioSoapAction - dataA: " + dataA);
 				System.out.println("MonitoraggioSoapAction - dataNotificaDa: " + dataNotificaDa);
 				System.out.println("MonitoraggioSoapAction - dataNotificaA: " + dataNotificaA);
-				
-			
-				
-						
-				try (Connection conn = payerDataSource.getConnection()) {
+
+
+				try  {
+					Connection conn =  new JndiProxy().getSqlConnection(null, dataSourceName, true);
 
 					if(dataDa != "" && dataA != "" && Integer.parseInt(dataDa.replace("-","")) > Integer.parseInt(dataA.replace("-",""))) {
 							throw new Exception("'data pagamento Da' non puo' essere maggiore di 'data pagamento A'"); 
