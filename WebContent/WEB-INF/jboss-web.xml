@@ -16,9 +16,9 @@
 	</resource-ref>
 
 	<resource-ref>
-		<res-ref-name>securityDataSourcePostgres</res-ref-name>
+		<res-ref-name>securityDataSource</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
-		<jndi-name>java:/securityDataSourcePostgres</jndi-name>
+		<jndi-name>java:/securityDataSource</jndi-name>
 	</resource-ref>	
 	<!-- fine LP PG200060 -->
 
