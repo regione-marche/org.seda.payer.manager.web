@@ -23,6 +23,7 @@ public class WalletBaseManagerAction extends BaseManagerAction  {
 	private String dbSchemaCodSocieta;
 	private String walletDbSchema;
 	private String sepaDbSchema;
+	protected String dataSourceName = "";
 	protected DataSource getWalletDataSource(){return this.walletDataSource;}
 	protected String getWalletDbSchema(){return this.walletDbSchema;}
 	protected DataSource getSepaDataSource(){return this.sepaDataSource;}
@@ -35,7 +36,7 @@ public class WalletBaseManagerAction extends BaseManagerAction  {
 		
 		PropertiesTree configuration; 
 		configuration = (PropertiesTree)(request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
-		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		String dataSourceNameSepa =  configuration.getProperty(PropertiesPath.dataSourceSepa.format(dbSchemaCodSocieta));
 		this.walletDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
 		this.sepaDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaSepa.format(dbSchemaCodSocieta));

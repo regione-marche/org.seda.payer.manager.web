@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.sql.rowset.WebRowSet;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.omg.CORBA.Request;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.components.security.UserBean;
@@ -63,12 +65,9 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 	private String cutecute="";
 	private String chiaveEnte="";
 	private String walletListCsv;
+
 	public Object service(HttpServletRequest request) throws ActionException {
 		super.service(request);
-		
-		
-		//
-		
 		HttpSession session = request.getSession();
 		/*
 		 * Gestione del viewstate per le azioni nei datagrid senza l'utilizzo dei parameter.
@@ -114,9 +113,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		UserBean user = (UserBean)session.getAttribute(SignOnKeys.USER_BEAN);
 		operatore = user.getUserName();
 		
-		if ((String) session.getAttribute("recordInsert") != null) 
-		{
-			
+		if ((String) session.getAttribute("recordInsert") != null) {
 			if(session.getAttribute("recordInsert").toString().equals("OK"))
 				setFormMessage("form_selezione", Messages.INS_OK.format(), request);
 			else
@@ -125,9 +122,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			session.removeAttribute("recordInsert");
 		}
 		
-		if ((String) session.getAttribute("recordUpdate") != null) 
-		{
-			
+		if (session.getAttribute("recordUpdate") != null) {
 			if(session.getAttribute("recordUpdate").toString().equals("OK"))
 				setFormMessage("form_selezione", Messages.UPDT_OK.format(), request);
 			else
@@ -135,9 +130,8 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			
 			session.removeAttribute("recordUpdate");
 		}
-		if ((String) session.getAttribute("recordDelete") != null) 
-		{
-			
+
+		if (session.getAttribute("recordDelete") != null) {
 			if(session.getAttribute("recordDelete").toString().equals("OK"))
 				setFormMessage("form_selezione", Messages.CANC_OK.format(), request);
 			else
@@ -146,15 +140,12 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			session.removeAttribute("recordDelete");
 		}
 		if (request.getAttribute("tx_daanacont") != null) {
-			
-			
 			if (request.getAttribute("tx_daanacont").equals("Y")) {
 				firedButton = FiredButton.TX_BUTTON_CERCA;
 			}
 		}
 		
-		switch(firedButton)
-		{	
+		switch(firedButton) {
 			case TX_BUTTON_CERCA: 
 				try {
 					dividiSocUtenteEnte(request);
@@ -171,10 +162,8 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 					if (walletPageListlist.getRetCode()!="00") {
 						setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 					} else {
-						if(pageInfo != null)
-						{
-							if(pageInfo.getNumRows() > 0)
-							{
+						if(pageInfo != null) {
+							if(pageInfo.getNumRows() > 0) {
 								session.setAttribute("numRows",pageInfo.getNumRows()); 
 //								String walletRiepilogoListXml = walletRiepilogoList(request);
 								String walletRiepilogoListXml = walletPageListlist.getWalletListXmlRiep();
@@ -313,27 +302,15 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 						}
 					}
 					//Tk 2017033088000055 20170406 - fine
-					
-					
-					
 				} else {
 					setFormMessage("form_selezione", Messages.SUPERATO_MAXRIGHE.format(), request);
 					request.setAttribute("download", "N");
 					break;
 				}
-				
-				
-				
 				break;
-			
-			
 		}
 		return null;
 	}
- 
-
-
-
 
 	@SuppressWarnings("unchecked")
 	private void getServiziDDL(HttpServletRequest request, HttpSession session) {
@@ -385,7 +362,6 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		WalletDAO walletDAO;
 		Wallet wallet = new Wallet();  
 
-
 		wallet.setCodiceSocieta(codiceSocieta);
 		wallet.setCuteCute(cutecute);
 		wallet.setChiaveEnte(chiaveEnte);
@@ -393,13 +369,11 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		wallet.setCodiceFiscaleGenitore(((String)request.getAttribute("tx_codicefiscalegenitore") == null) ? "" : (String)request.getAttribute("tx_codicefiscalegenitore"));
 		String dataDa = "1900-01-01";
 		String dataA = "01-01-2100";
-		if(request.getAttribute("tx_periodo_da") !="")
-		{
+		if(request.getAttribute("tx_periodo_da") !="") {
 			dataDa = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_da"), "yyyy-MM-dd");
 		}
 			
-		if(request.getAttribute("tx_periodo_a") !="")
-		{
+		if(request.getAttribute("tx_periodo_a") !="") {
 			dataA = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_a"), "yyyy-MM-dd");
 		}
 		
@@ -410,8 +384,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		String flagrendicontato = ((String)request.getAttribute("tx_flagrendicontato") == null) ? "" : (String)request.getAttribute("tx_flagrendicontato");
 		String presenzaOneri = ((String)request.getAttribute("tx_presenzaoneri") == null) ? "" : (String)request.getAttribute("tx_presenzaoneri");
 		String FlagEsclusioneSMSCortesia = (String)request.getAttribute("flagEsclusioneSMSCortesia");
-		if (FlagEsclusioneSMSCortesia!= null )
-		{
+		if (FlagEsclusioneSMSCortesia!= null ) {
 			if (FlagEsclusioneSMSCortesia.equals("Y"))
 				wallet.setFlagEsclusioneSMSCortesia(true);
 			else	 {
@@ -424,8 +397,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		}
 		
 		String FlagEsclusioneSMSSollecito = (String)request.getAttribute("flagEsclusioneSMSSollecito");
-		if (FlagEsclusioneSMSSollecito!= null )
-		{
+		if (FlagEsclusioneSMSSollecito!= null ) {
 			if (FlagEsclusioneSMSSollecito.equals("Y"))
 			wallet.setFlagEsclusioneSMSSollecito(true);
 			else {
@@ -439,8 +411,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			
 		
 		String FlagEsclusioneSollecitoCartaceo = (String)request.getAttribute("flagEsclusioneSollecitoCartaceo");
-		if(FlagEsclusioneSollecitoCartaceo != null)
-		{
+		if(FlagEsclusioneSollecitoCartaceo != null) {
 			if ( FlagEsclusioneSollecitoCartaceo.equals("Y"))
 				wallet.setFlagEsclusioneSollecitoCartaceo(true);
 			else {
@@ -453,8 +424,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		}
 		
 		String FlagEsclusioneEvoluzioneIntimazione = (String)request.getAttribute("flagEsclusioneEvoluzioneIntimazione");
-		if (FlagEsclusioneEvoluzioneIntimazione != null)
-		{
+		if (FlagEsclusioneEvoluzioneIntimazione != null) {
 			if (FlagEsclusioneEvoluzioneIntimazione != null && FlagEsclusioneEvoluzioneIntimazione.equals("Y"))
 				wallet.setFlagEsclusioneEvoluzioneIntimazione(true);
 			else {
@@ -505,14 +475,12 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		wallet.setCodiceFiscaleGenitore(((String)request.getAttribute("tx_codicefiscalegenitore") == null) ? "" : (String)request.getAttribute("tx_codicefiscalegenitore"));
 		String dataDa = "1900-01-01";
 		String dataA = "01-01-2100";
-		if(request.getAttribute("tx_periodo_da") !="")
-		{
+		if(request.getAttribute("tx_periodo_da") !="") {
 			dataDa = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_da"), "yyyy-MM-dd");
 			request.setAttribute("data_carico_da", dataDa);		//Tk 2017033088000055
 		}
 			
-		if(request.getAttribute("tx_periodo_a") !="")
-		{
+		if(request.getAttribute("tx_periodo_a") !="") {
 			dataA = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_a"), "yyyy-MM-dd");
 			request.setAttribute("data_carico_a", dataA);		//Tk 2017033088000055
 		}
@@ -526,8 +494,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		String presenzaOneri = ((String)request.getAttribute("tx_presenzaoneri") == null) ? "" : (String)request.getAttribute("tx_presenzaoneri");
 		
 		String FlagEsclusioneSMSCortesia = (String)request.getAttribute("flagEsclusioneSMSCortesia");
-		if (FlagEsclusioneSMSCortesia!= null )
-		{
+		if (FlagEsclusioneSMSCortesia!= null ) {
 			if (FlagEsclusioneSMSCortesia.equals("Y"))
 				wallet.setFlagEsclusioneSMSCortesia(true);
 			else	 {
@@ -540,8 +507,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		}
 		
 		String FlagEsclusioneSMSSollecito = (String)request.getAttribute("flagEsclusioneSMSSollecito");
-		if (FlagEsclusioneSMSSollecito!= null )
-		{
+		if (FlagEsclusioneSMSSollecito!= null ) {
 			if (FlagEsclusioneSMSSollecito.equals("Y"))
 			wallet.setFlagEsclusioneSMSSollecito(true);
 			else {
@@ -555,8 +521,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			
 		
 		String FlagEsclusioneSollecitoCartaceo = (String)request.getAttribute("flagEsclusioneSollecitoCartaceo");
-		if(FlagEsclusioneSollecitoCartaceo != null)
-		{
+		if(FlagEsclusioneSollecitoCartaceo != null) {
 			if ( FlagEsclusioneSollecitoCartaceo.equals("Y"))
 				wallet.setFlagEsclusioneSollecitoCartaceo(true);
 			else {
@@ -569,8 +534,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		}
 		
 		String FlagEsclusioneEvoluzioneIntimazione = (String)request.getAttribute("flagEsclusioneEvoluzioneIntimazione");
-		if (FlagEsclusioneEvoluzioneIntimazione != null)
-		{
+		if (FlagEsclusioneEvoluzioneIntimazione != null) {
 			if (FlagEsclusioneEvoluzioneIntimazione != null && FlagEsclusioneEvoluzioneIntimazione.equals("Y"))
 				wallet.setFlagEsclusioneEvoluzioneIntimazione(true);
 			else {
@@ -586,23 +550,19 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 		int rowsPerPage = ((String)request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String)request.getAttribute("rowsPerPage"));
 		int pageNumber = ((String)request.getAttribute("pageNumber") == null) || (((String)request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String)request.getAttribute("pageNumber"));
 		String order = ((String)request.getAttribute("order") == null) ? "" : (String)request.getAttribute("order");
-		
-		
+
 		WalletPageList walletPageList = new WalletPageList();
 		//inizio LP PG21XX04 Leak
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			//inizio LP PG21XX04 Leak
-			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
-			if (download) 
-			{
+			if (download) {
 				walletListCsv = walletDAO.walletListCsv2(wallet, tipoServizio, tipoSollecito, flagrendicontato, presenzaOneri, 0, 0, order).toString();
-				
 			} else {
 				walletPageList = walletDAO.walletList(wallet, tipoServizio, tipoSollecito, flagrendicontato, presenzaOneri, rowsPerPage, pageNumber, order);
 			}
@@ -610,7 +570,7 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -627,11 +587,9 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 	
 	private void dividiSocUtenteEnte(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		if(request.getAttribute("ddlSocietaUtenteEnte")!=null)
-		{
+		if(request.getAttribute("ddlSocietaUtenteEnte")!=null) {
 			String ddlSocietaUtenteEnte = (String)request.getAttribute("ddlSocietaUtenteEnte");
-			if (!ddlSocietaUtenteEnte.equals(""))
-			{
+			if (!ddlSocietaUtenteEnte.equals("")) {
 				String[] codici = ddlSocietaUtenteEnte.split("\\|");
 				codiceSocieta = codici[0];
 				cutecute = codici[1];
@@ -640,7 +598,6 @@ public class WalletMonitoraggio extends WalletBaseManagerAction {
 				//request.setAttribute("tx_utente", chiaveEnte);
 				//request.setAttribute("tx_ente", chiaveEnte);
 			}
-		
 		}
 	}
 	
