@@ -8,6 +8,8 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.GenericsDateNumbers;
 import org.seda.payer.manager.util.Messages;
@@ -162,7 +164,7 @@ public class WalletServizioEditAction extends WalletBaseManagerAction{
 		//wallet = walletDAO.select(wallet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			wallet = walletDAO.select(wallet);
 		} catch (Exception e) {
@@ -205,7 +207,7 @@ public class WalletServizioEditAction extends WalletBaseManagerAction{
 		//return walletSrvDett;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			walletSrvDett = walletDAO.selectDetSrv(idWallet,codServ,tributo,amcar);
 			request.setAttribute("lista_dettaglio_servizi", walletSrvDett);
@@ -240,7 +242,7 @@ public class WalletServizioEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList = walletDAO.ListaServiziWalletManager(wallet, null);	//Tk 2017033088000055
@@ -249,7 +251,7 @@ public class WalletServizioEditAction extends WalletBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -325,7 +327,7 @@ public class WalletServizioEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			int aggiornati = walletDAO.updateFlagEsclusione(wallet);
 			return aggiornati;

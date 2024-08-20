@@ -3,6 +3,8 @@ package org.seda.payer.manager.walletmanager.actions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.components.security.UserBean;
 //import org.seda.payer.manager.util.Generics;
@@ -242,7 +244,7 @@ import org.seda.payer.manager.util.Messages;
 			try {
 				//inizio LP PG21XX04 Leak
 				//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-				conn = getWalletDataSource().getConnection();
+				conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 				servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 				//fine LP PG21XX04 Leak
 				listaServizi = servizioDAO.listServizi();
@@ -258,7 +260,7 @@ import org.seda.payer.manager.util.Messages;
 				e1.printStackTrace();
 			}
 			//inizio LP PG21XX04 Leak
-			catch (SQLException e1) {
+			catch (JndiProxyException e1) {
 				e1.printStackTrace();
 			} finally {
 				if (conn != null) {
@@ -312,7 +314,7 @@ import org.seda.payer.manager.util.Messages;
 			try {
 				//inizio LP PG21XX04 Leak
 				//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-				conn = getWalletDataSource().getConnection();
+				conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 				walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 				//fine LP PG21XX04 Leak
 				if (download) {
@@ -330,7 +332,7 @@ import org.seda.payer.manager.util.Messages;
 				e1.printStackTrace();
 			}
 			//inizio LP PG21XX04 Leak
-			catch (SQLException e1) {
+			catch (JndiProxyException e1) {
 				e1.printStackTrace();
 			} finally {
 				if (conn != null) {
@@ -355,10 +357,10 @@ import org.seda.payer.manager.util.Messages;
 				{
 					String[] codici = ddlSocietaUtenteEnte.split("\\|");
 					codiceSocieta = codici[0];
-					chiaveEnte = codici[1];
+					cutecute = codici[1];
 					chiaveEnte = codici[2];
 					request.setAttribute("tx_societa", codiceSocieta);
-					request.setAttribute("tx_utente", chiaveEnte);
+					request.setAttribute("tx_utente", cutecute);
 					request.setAttribute("tx_ente", chiaveEnte);
 				}
 			
