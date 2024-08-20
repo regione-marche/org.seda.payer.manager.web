@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import com.seda.data.spi.PageInfo;
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.exception.DaoException;
 import com.seda.payer.core.wallet.bean.Servizio;
@@ -219,7 +221,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
@@ -236,7 +238,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -263,7 +265,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//tributoDAO = WalletDAOFactory.getTributoDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			tributoDAO = WalletDAOFactory.getTributoDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
@@ -282,7 +284,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -334,7 +336,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
@@ -344,7 +346,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -428,7 +430,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
@@ -449,7 +451,7 @@ public class WalletSollecitoDiscaricoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {

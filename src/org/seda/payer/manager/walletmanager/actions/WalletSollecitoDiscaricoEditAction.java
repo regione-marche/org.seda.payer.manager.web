@@ -20,6 +20,8 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction.FiredButton;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.GenericsDateNumbers;
@@ -148,8 +150,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			insertRowDiscaricoPresenze(request);	
 			}
 			break;
-		
-		
 		}
 		switch(firedButton)
 		{ 
@@ -184,8 +184,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 					e.printStackTrace();
 					setFormMessage("form_selezione", Messages.GENERIC_ERROR.format(), request);
 				}
-
-				
 			}
 			
 			//se l'azione è sollecito
@@ -244,10 +242,10 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			break;
 		
 		case TX_BUTTON_CERCA:
-			if(action.trim().equals("presenze")){
-			request.setAttribute("flagPresenzeCalendario", false);
-			request.setAttribute("tx_button_presenze","tx_button_presenze");
-			loadListCalendarioDatagrid(request);
+			if(action.trim().equals("presenze")) {
+				request.setAttribute("flagPresenzeCalendario", false);
+				request.setAttribute("tx_button_presenze","tx_button_presenze");
+				loadListCalendarioDatagrid(request);
 			}
 			break;
 			
@@ -262,9 +260,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			session.setAttribute("recordUpdate", "OK");
 			//setFormMessage("form_selezione", Messages.UPDT_OK.format(), request);
 			break;
-		
-		
-			
+
 		case TX_BUTTON_INDIETRO:
 			//request.setAttribute("tx_button_cerca", "Search");	
 			break;
@@ -277,14 +273,10 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			request.setAttribute("tx_button_calendario","tx_button_calendario");
 			loadListCalendarioDatagrid(request);
 			break;
-		
 		}
-		if (!firedButton.equals(FiredButton.TX_BUTTON_INDIETRO))
-		{
-			
+
+		if (!firedButton.equals(FiredButton.TX_BUTTON_INDIETRO)) {
 			loadSocietaUtenteEnteXml_DDL(request, session);
-			
-			
 		}
 		/*
 		 * Setto l'action della form ed il tipo di operazione
@@ -294,20 +286,17 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 	}
 
 	private void dividiSocUtenteEnte(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		if(request.getAttribute("ddlSocietaUtenteEnte")!=null)
-		{
-		String ddlSocietaUtenteEnte = (String)request.getAttribute("ddlSocietaUtenteEnte");
-		if (!ddlSocietaUtenteEnte.equals(""))
-		{
-			String[] codici = ddlSocietaUtenteEnte.split("\\|");
-			codiceSocieta = codici[0];
-			codiceUtente = codici[1];
-			chiaveEnte = codici[2];
-			request.getSession().setAttribute("tx_societa", codiceSocieta);
-			request.getSession().setAttribute("tx_utente", codiceUtente);
-			request.getSession().setAttribute("tx_ente", chiaveEnte);
-		}
+		if(request.getAttribute("ddlSocietaUtenteEnte")!=null) {
+			String ddlSocietaUtenteEnte = (String)request.getAttribute("ddlSocietaUtenteEnte");
+			if (!ddlSocietaUtenteEnte.equals("")) {
+				String[] codici = ddlSocietaUtenteEnte.split("\\|");
+				codiceSocieta = codici[0];
+				codiceUtente = codici[1];
+				chiaveEnte = codici[2];
+				request.getSession().setAttribute("tx_societa", codiceSocieta);
+				request.getSession().setAttribute("tx_utente", codiceUtente);
+				request.getSession().setAttribute("tx_ente", chiaveEnte);
+			}
 		}
 	}
 
@@ -323,7 +312,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		//wallet = walletDAO.select(wallet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			wallet = walletDAO.select(wallet);
 		} catch (Exception e) {
@@ -351,13 +340,10 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		{
 			request.setAttribute("lista_servizi_wallet", walletPageListServiziWallet.getWalletListXml());
 		}
-		
 		return wallet;
-		
 	}
 	
-	private void listaDettSollecito(HttpServletRequest request, String idWallet) throws DaoException { 
-		
+	private void listaDettSollecito(HttpServletRequest request, String idWallet) throws DaoException {
 		WalletDAO walletDAO;
 		WalletPageList  walletRicaricheDett ;
 		//inizio LP PG21XX04 Leak
@@ -370,30 +356,26 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		String dataA = "";
 		String dataDisDa = "";
 		String dataDisA = "";
-		if(request.getAttribute("data_da") !=null)
-		{
+		if(request.getAttribute("data_da") !=null) {
 			if(request.getAttribute("data_da") !=""){
 			wallet.setAttribute("PGBDATA_PAGAMENTO_DA" , request.getAttribute("data_da").toString());
 			}
 		}
 			
-		if(request.getAttribute("data_a") !=null)
-		{
+		if(request.getAttribute("data_a") !=null) {
 			if(request.getAttribute("data_a") !=""){
 			wallet.setAttribute("PGBDATA_PAGAMENTO_A" , request.getAttribute("data_a").toString());
 			}
 		}
-		if(request.getAttribute("dataDis_da") !=null)
-		{
+		if(request.getAttribute("dataDis_da") !=null) {
 			if(request.getAttribute("dataDis_da") !=""){
 			wallet.setAttribute("PGBDATADIS_PAGAMENTO_DA" , request.getAttribute("dataDis_da").toString());
 			}
 		}
 			
-		if(request.getAttribute("dataDis_a") !=null)
-		{
+		if(request.getAttribute("dataDis_a") !=null) {
 			if(request.getAttribute("dataDis_a") !=""){
-			wallet.setAttribute("PGBDATADis_PAGAMENTO_A" , request.getAttribute("dataDis_a").toString());
+				wallet.setAttribute("PGBDATADis_PAGAMENTO_A" , request.getAttribute("dataDis_a").toString());
 			}
 		}
 		
@@ -402,7 +384,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		//resultArr = walletDAO.arraySollecitiList(wallet, 1, 15, "");
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			resultArr = walletDAO.arraySollecitiList(wallet, 1, 15, "");
 		} catch (Exception e) {
@@ -434,8 +416,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		wallet.setCuteCute(codiceUtente);
 		wallet.setChiaveEnte(chiaveEnte);
 		wallet.setIdWallet(IdWallet);
-		
-		
+
 		WalletPageList walletPageList = new WalletPageList();
 		//inizio LP PG21XX04 Leak
 		Connection conn = null;
@@ -443,7 +424,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList = walletDAO.ListaServiziWalletManager(wallet,null);	//TK 2017033088000055
@@ -452,7 +433,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-	    catch (SQLException e1) {
+	    catch (JndiProxyException e1) {
 	    	e1.printStackTrace();
 	    }
 		finally {
@@ -465,9 +446,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			}
 		}
 		//fine LP PG21XX04 Leak
-		
 		return walletPageList;
-		
 	}
 	
 	
@@ -489,36 +468,29 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		wallet.setFlagEsclusioneSMSSollecito(false);
 		wallet.setFlagEsclusioneSollecitoCartaceo(false);
 		wallet.setFlagEsclusioneEvoluzioneIntimazione(false);
-		if (FlagEsclusioneSMSCortesia!= null )
-		{
+		if (FlagEsclusioneSMSCortesia!= null ) {
 			if (FlagEsclusioneSMSCortesia.equals("Y"))
 				wallet.setFlagEsclusioneSMSCortesia(true);
 			
 		}
 		
 		String FlagEsclusioneSMSSollecito = (String)request.getAttribute("FlagEsclusioneSMSSollecito");
-		if (FlagEsclusioneSMSSollecito!= null )
-		{
+		if (FlagEsclusioneSMSSollecito!= null ) {
 			if (FlagEsclusioneSMSSollecito.equals("Y"))
-			wallet.setFlagEsclusioneSMSSollecito(true);
-			
+				wallet.setFlagEsclusioneSMSSollecito(true);
 		}
 			
 		
 		String FlagEsclusioneSollecitoCartaceo = (String)request.getAttribute("FlagEsclusioneSollecitoCartaceo");
-		if(FlagEsclusioneSollecitoCartaceo != null)
-		{
-			if ( FlagEsclusioneSollecitoCartaceo.equals("Y"))
+		if(FlagEsclusioneSollecitoCartaceo != null) {
+			if (FlagEsclusioneSollecitoCartaceo.equals("Y"))
 				wallet.setFlagEsclusioneSollecitoCartaceo(true);
-			
 		}
 		
 		String FlagEsclusioneEvoluzioneIntimazione = (String)request.getAttribute("FlagEsclusioneEvoluzioneIntimazione");
-		if (FlagEsclusioneEvoluzioneIntimazione != null)
-		{
+		if (FlagEsclusioneEvoluzioneIntimazione != null) {
 			if (FlagEsclusioneEvoluzioneIntimazione != null && FlagEsclusioneEvoluzioneIntimazione.equals("Y"))
 				wallet.setFlagEsclusioneEvoluzioneIntimazione(true);
-			
 		}
 		
 		wallet.setOperatore(operatore);
@@ -529,7 +501,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			int aggiornati = walletDAO.updateFlagEsclusione(wallet);
 			return aggiornati;
@@ -562,8 +534,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		wallet.setAttribute("PGBDATA_PAGAMENTO_A" , "");
 		wallet.setAttribute("PGBDATADIS_PAGAMENTO_DA" ,"");
 		wallet.setAttribute("PGBDATADIS_PAGAMENTO_A" , "");
-		if(request.getAttribute("data_da") !=null)
-		{    
+		if(request.getAttribute("data_da") !=null) {
 			///data_da
 			String data_da=(String) request.getAttribute("data_da");
 			try {
@@ -580,8 +551,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			}
 		}
 			
-		if(request.getAttribute("data_a") !=null)
-		{  
+		if(request.getAttribute("data_a") !=null) {
 			String data_a=(String) request.getAttribute("data_a");
 			try{
 			if(data_a.contains("/")){
@@ -597,9 +567,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			}
 		}
 		
-		
-		if(request.getAttribute("dataDis_da") !=null)
-		{    
+		if(request.getAttribute("dataDis_da") !=null) {
 			///data_da
 			String data_da=(String) request.getAttribute("dataDis_da");
 			try {
@@ -608,11 +576,10 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 				data_da=sdf2.format(temp);
 				}
 			}catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 			}
 			if(request.getAttribute("dataDis_da") !=""){
-			wallet.setAttribute("PGBDATADIS_PAGAMENTO_DA" , data_da);
+				wallet.setAttribute("PGBDATADIS_PAGAMENTO_DA" , data_da);
 			}
 		}
 			
@@ -625,11 +592,10 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 				data_a=sdf2.format(temp);
 				}
 			}catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 			}
 			if(request.getAttribute("dataDis_a") !=""){
-			wallet.setAttribute("PGBDATADIS_PAGAMENTO_A" , data_a);
+				wallet.setAttribute("PGBDATADIS_PAGAMENTO_A" , data_a);
 			}
 		}
 
@@ -640,7 +606,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		//return walletListaSolleciti;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			walletListaSolleciti = walletDAO.listSolleciti(wallet,-1);
 			request.setAttribute("lista_dettaglio_solleciti", walletListaSolleciti);
@@ -678,7 +644,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			data = sdf.parse(dataSollecito);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		SimpleDateFormat sdfnew = new SimpleDateFormat("yyyy-MM-dd");
@@ -695,7 +660,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletSelectSolleciti = walletDAO.listSolleciti(wallet,prog);
@@ -704,7 +669,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			setFormMessage("frmIndietro", Messages.GENERIC_ERROR.format(), request);
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			e.printStackTrace();
 			setFormMessage("frmIndietro", Messages.GENERIC_ERROR.format(), request);
 		}
@@ -719,7 +684,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		}
 		//fine LP PG21XX04 Leak
 		request.setAttribute("select_chosen_sollecito", walletSelectSolleciti);
-				
+
 		return walletSelectSolleciti;
 	}
 	
@@ -731,7 +696,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		request.setAttribute("vista","data_sollecito");
 		request.setAttribute("Show_Action_Discarico",true);
 		request.setAttribute("Show_Action_Annullamento",false);
-		
 	}
 	
 	public void annullaSollecito(HttpServletRequest request){
@@ -742,7 +706,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		request.setAttribute("vista","data_sollecito");
 		request.setAttribute("Show_Action_Discarico",false);
 		request.setAttribute("Show_Action_Annullamento",true);
-		
 	}
 	
 	protected FiredButtonSollecito getFiredButtonSollecito(HttpServletRequest request) {
@@ -786,17 +749,15 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		wallet.setIdWallet((String)request.getAttribute("IdwalletInfo"));
 		String caricoEnteSoris=((String)request.getAttribute("tx_flagDiscaricoSollecito"));
 		int prog=Integer.valueOf((String)request.getAttribute("prog_sollecito"));
-		if(request.getAttribute("data_sollecito") !=null)
-		{
+		if(request.getAttribute("data_sollecito") !=null) {
 			if(request.getAttribute("data_sollecito") !=""){
-			wallet.setAttribute("PGBDATA_PAGAMENTO_DA" , request.getAttribute("data_sollecito").toString());
+				wallet.setAttribute("PGBDATA_PAGAMENTO_DA" , request.getAttribute("data_sollecito").toString());
 			}
 		}
 			
-		if(request.getAttribute("data_sollecito") !=null)
-		{
+		if(request.getAttribute("data_sollecito") !=null) {
 			if(request.getAttribute("data_sollecito") !=""){
-			wallet.setAttribute("PGBDATA_PAGAMENTO_A" , request.getAttribute("data_sollecito").toString());
+				wallet.setAttribute("PGBDATA_PAGAMENTO_A" , request.getAttribute("data_sollecito").toString());
 			}
 		}
 		
@@ -821,7 +782,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			List<String> sollecitoAsList=walletDAO.getSollecitoAsList(wallet);
@@ -833,7 +794,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			request.setAttribute("SollecitoInsertEsito",true);
 			
 			//11052021 GG Reimposto la connessione in quanto precedentemente chiusa 
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			
 			walletDAO.insertRowAnnullamento(sollecitoAsList,prog);
@@ -843,7 +804,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			request.setAttribute("SollecitoInsertEsito",false);
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			e.printStackTrace();
 			setFormMessage("delete_form", Messages.GENERIC_ERROR.format(), request);
 			request.setAttribute("SollecitoInsertEsito",false);
@@ -871,15 +832,13 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		wallet.setIdWallet((String)request.getAttribute("IdwalletInfo"));
 		String caricoEnteSoris=((String)request.getAttribute("tx_flagDiscaricoSollecito"));
 		int prog=Integer.valueOf((String)request.getAttribute("prog_sollecito"));
-		if(request.getAttribute("data_sollecito") !=null)
-		{
+		if(request.getAttribute("data_sollecito") !=null) {
 			if(request.getAttribute("data_sollecito") !=""){
-			wallet.setAttribute("PGBDATA_PAGAMENTO_DA" , request.getAttribute("data_sollecito").toString());
+				wallet.setAttribute("PGBDATA_PAGAMENTO_DA" , request.getAttribute("data_sollecito").toString());
 			}
 		}
 			
-		if(request.getAttribute("data_sollecito") !=null)
-		{
+		if(request.getAttribute("data_sollecito") !=null) {
 			if(request.getAttribute("data_sollecito") !=""){
 			wallet.setAttribute("PGBDATA_PAGAMENTO_A" , request.getAttribute("data_sollecito").toString());
 			}
@@ -906,7 +865,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			List<String> sollecitoAsList=walletDAO.getSollecitoAsList(wallet);
@@ -918,7 +877,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			sollecitoAsList.set(23, operatore.toUpperCase());
 			
 			//11052021 GG Reimposto la connessione in quanto precedentemente chiusa
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			
 			walletDAO.insertRowDiscarico(sollecitoAsList,prog);
@@ -929,7 +888,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			request.setAttribute("SollecitoInsertEsito",false);
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			e.printStackTrace();
 			setFormMessage("delete_form", Messages.GENERIC_ERROR.format(), request);
 			request.setAttribute("SollecitoInsertEsito",false);
@@ -988,7 +947,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//presenzeGiornaliereDAO = WalletDAOFactory.getPresenzeGiornaliereDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			presenzeGiornaliereDAO = WalletDAOFactory.getPresenzeGiornaliereDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			presenzeGiornaliere=presenzeGiornaliereDAO.insertDiscarico(presenzeGiornaliere);
@@ -1027,10 +986,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		}
 		//fine LP PG21XX04 Leak		
 	}
-	
-	
-	
-	
+
 	private String getCurrentAction(HttpServletRequest request){
 		String action=request.getParameter("tx_presenze_action");
 		if(action==null){
@@ -1083,7 +1039,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//anagraficaFiglioMenseDao = WalletDAOFactory.getAnagraficaFiglioMenseDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			anagraficaFiglioMenseDao = WalletDAOFactory.getAnagraficaFiglioMenseDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 		
@@ -1093,7 +1049,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			e.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -1125,16 +1081,13 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 				setFormMessage("frmIndietro", "Errore generico - Impossibile recuperare i dati", request);
 			}
 		}
-		
-		
 	}
 	
 	private void loadListCalendarioDatagrid(HttpServletRequest request){
 		setCalendarioRequestParameters(request);
 		loadPresenzeMensili(request);
 	}
-	
-	
+
 	private void setCalendarioRequestParameters(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		session.setAttribute("tx_idwallet_h", request.getParameter("IdwalletInfo")!=null?request.getParameter("IdwalletInfo"):session.getAttribute("tx_idwallet_h"));
@@ -1146,13 +1099,11 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		session.setAttribute("codiceSocieta", request.getParameter("codiceSocieta")!=null?request.getParameter("codiceSocieta"):session.getAttribute("codiceSocieta"));
 		session.setAttribute("codiceUtente", request.getParameter("codiceUtente")!=null?request.getParameter("codiceUtente"):session.getAttribute("codiceUtente"));
 		session.setAttribute("chiaveEnte", request.getParameter("chiaveEnte")!=null?request.getParameter("chiaveEnte"):session.getAttribute("chiaveEnte"));
-		
 		session.setAttribute("anno", request.getAttribute("anno")!=null?request.getParameter("anno"):session.getAttribute("anno"));
 		session.setAttribute("codice_anagrafica_figlio", request.getAttribute("codice_anagrafica_figlio")!=null?request.getParameter("codice_anagrafica_figlio"):session.getAttribute("codice_anagrafica_figlio"));
 		session.setAttribute("codice_scuola", request.getAttribute("codice_scuola")!=null?request.getParameter("codice_scuola"):session.getAttribute("codice_scuola"));
 		session.setAttribute("importo_tariffa", request.getAttribute("importo_tariffa")!=null?request.getParameter("importo_tariffa"):session.getAttribute("importo_tariffa"));
-		
-		
+
 		request.setAttribute("tx_idwallet_h", request.getParameter("IdwalletInfo")!=null?request.getParameter("IdwalletInfo"):session.getAttribute("tx_idwallet_h"));
 		request.setAttribute("IdwalletInfo", request.getParameter("IdwalletInfo")!=null?request.getParameter("IdwalletInfo"):session.getAttribute("IdwalletInfo"));
 		request.setAttribute("codiceFiscaleFiglio", request.getParameter("codice_fiscale_figlio")!=null?request.getParameter("codice_fiscale_figlio"):session.getAttribute("codiceFiscaleFiglio"));
@@ -1162,7 +1113,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		request.setAttribute("codiceSocieta", request.getParameter("codiceSocieta")!=null?request.getParameter("codiceSocieta"):session.getAttribute("codiceSocieta"));
 		request.setAttribute("codiceUtente", request.getParameter("codiceUtente")!=null?request.getParameter("codiceUtente"):session.getAttribute("codiceUtente"));
 		request.setAttribute("chiaveEnte", request.getParameter("chiaveEnte")!=null?request.getParameter("chiaveEnte"):session.getAttribute("chiaveEnte"));
-		
 		request.setAttribute("anno", request.getAttribute("anno")!=null?request.getParameter("anno"):session.getAttribute("anno"));
 		request.setAttribute("codice_anagrafica_figlio", request.getAttribute("codice_anagrafica_figlio")!=null?request.getParameter("codice_anagrafica_figlio"):session.getAttribute("codice_anagrafica_figlio"));
 		request.setAttribute("codice_scuola", request.getAttribute("codice_scuola")!=null?request.getParameter("codice_scuola"):session.getAttribute("codice_scuola"));
@@ -1197,7 +1147,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//presenzeGiornaliereDAO = WalletDAOFactory.getPresenzeGiornaliereDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			presenzeGiornaliereDAO = WalletDAOFactory.getPresenzeGiornaliereDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			calendarCausale=presenzeGiornaliereDAO.listCausalePresenzeAbilitazione(idWallet, anno, mese, codAnaFiglio, codScuola, importoTariffa);
@@ -1220,7 +1170,7 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 			e.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -1233,17 +1183,13 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		}
 		//fine LP PG21XX04 Leak
 		Collections.sort(listPresenze,new Comparator<PresenzeAbilitate>(){
-
 			public int compare(PresenzeAbilitate p1, PresenzeAbilitate p2) {
 				return p1.getDataPresenzaComparator().compareTo(p2.getDataPresenzaComparator());
 			}
-			
 		});
 		request.setAttribute("listaPresenzeMensili", listPresenze);
-		
 	}
-	
-	
+
 	private void saveConfermaParameters(HttpServletRequest request){
 		request.setAttribute("IdwalletInfo", request.getParameter("IdwalletInfo")!=null?request.getParameter("IdwalletInfo"):request.getAttribute("IdwalletInfo"));
 		request.setAttribute("causale", request.getParameter("causale")!=null?request.getParameter("causale"):request.getAttribute("causale"));
@@ -1252,7 +1198,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 		request.setAttribute("tx_presenze_action", request.getParameter("tx_presenze_action")!=null?request.getParameter("tx_presenze_action"):request.getAttribute("tx_presenze_action"));
 		request.setAttribute("walletricaricheborsellinoedit", request.getParameter("tx_presenze_action")!=null?request.getParameter("tx_presenze_action"):request.getAttribute("tx_presenze_action"));
 	}
-	
 	
 	private String setCausale(String causale){
 		String out="";
@@ -1267,7 +1212,6 @@ public class WalletSollecitoDiscaricoEditAction extends WalletBaseManagerAction{
 	    }
 		return out;
 	}
-	
 	
 	private void gestisciParametriDatagrid(HttpServletRequest request){
 		if(request.getParameter("rowsPerPage")!=null&&!((String)request.getParameter("rowsPerPage")).equals("")){
