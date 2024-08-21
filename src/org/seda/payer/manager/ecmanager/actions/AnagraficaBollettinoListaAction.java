@@ -15,6 +15,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.util.GenericsDateNumbers;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
@@ -244,7 +246,8 @@ private static final long serialVersionUID = 1L;
 		try {
 			//inizio LP PG21XX04 Leak
 			//controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(getAnagraficaDataSource(), getAnagraficaDbSchema());
-			connection = getAnagraficaDataSource().getConnection();
+			connection =  new JndiProxy().getSqlConnection(null, dataSourceName, true);
+
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			//fine LP PG21XX04 Leak
 			if (download) {
@@ -325,7 +328,7 @@ private static final long serialVersionUID = 1L;
 		e1.printStackTrace();
 		//inizio LP PG21XX04 Leak
 		//}
-		} catch (SQLException e) {
+		} catch (JndiProxyException e) {
 			e.printStackTrace();
 		} finally {
 			if(connection != null) {
@@ -423,12 +426,10 @@ private static final long serialVersionUID = 1L;
 		//res = controller.doDetail(codiceSocieta,cutecute,chiaveEnte,CodiceFicale);
 		Connection connection = null;
 		try {
-			connection = getAnagraficaDataSource().getConnection();
+			connection =  new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			res = controller.doDetail(codiceSocieta,cutecute,chiaveEnte,CodiceFicale);
-		} catch (DaoException e) {
-			throw new DaoException(e);
-		} catch (SQLException e) {
+		} catch (DaoException | JndiProxyException e) {
 			throw new DaoException(e);
 		} finally {
 			if(connection != null) {

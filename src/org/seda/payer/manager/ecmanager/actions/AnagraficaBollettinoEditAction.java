@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.sql.rowset.WebRowSet;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.PropertiesPath;
@@ -120,7 +122,7 @@ private static String codop = "init";
 					if(template.equalsIgnoreCase("soris")||template.equalsIgnoreCase("newsoris")) {
 						//inizio LP PG21XX04 Leak
 						//CodiceAttivazioneDao cod = new CodiceAttivazioneDao(getAnagraficaDataSource().getConnection(), getAnagraficaDbSchema());
-						connection = getAnagraficaDataSource().getConnection();
+						connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 						CodiceAttivazioneDao cod = new CodiceAttivazioneDao(connection, getAnagraficaDbSchema());
 						//fine LP PG21XX04 Leak
 						Object[] vettoreCodici = cod.doList(ana.getCodiceSocieta(), ana.getCodiceUtente(), ana.getChiaveEnte(), ana.getCodiceFiscale());
@@ -132,7 +134,7 @@ private static String codop = "init";
 					e.printStackTrace();
 					session.setAttribute("tx_error_message", "Errore: " + e.getLocalizedMessage());
 				//inizio LP PG200130
-				} catch (SQLException e) {
+				} catch (JndiProxyException e) {
 					e.printStackTrace();
 					session.setAttribute("tx_error_message", "Errore: " + e.getLocalizedMessage());
 				//fine LP PG200130
@@ -190,13 +192,14 @@ private static String codop = "init";
 			try {
 				//inizio LP PG21XX04 Leak
 				//CodiceAttivazioneDao cod = new CodiceAttivazioneDao(getAnagraficaDataSource().getConnection(), getAnagraficaDbSchema());
-				connection = getAnagraficaDataSource().getConnection();
+				connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 				CodiceAttivazioneDao cod = new CodiceAttivazioneDao(connection, getAnagraficaDbSchema());
 				//fine LP PG21XX04 Leak
 				cod.doSave(codiceAttivazione);
 				AnagraficaBollettino ana = null;
 				ana = select(request, codiceFiscale);
 				request.setAttribute("anagrafica", ana);
+				cod = new CodiceAttivazioneDao(new JndiProxy().getSqlConnection(null, dataSourceName, true), getAnagraficaDbSchema());
 				//Carico il vettore dei codici di attivazione
 				Object[] vettoreCodici = cod.doList(ana.getCodiceSocieta(), ana.getCodiceUtente(), ana.getChiaveEnte(), ana.getCodiceFiscale());
 				request.setAttribute("vettoreCodici", vettoreCodici);
@@ -204,7 +207,7 @@ private static String codop = "init";
 			} catch (DaoException e) {
 				session.setAttribute("tx_error_message", "Errore: " + e.getLocalizedMessage());
 				e.printStackTrace();
-			} catch (SQLException e) {
+			} catch (JndiProxyException e) {
 				session.setAttribute("tx_error_message", "Errore: " + e.getLocalizedMessage());
 				e.printStackTrace();
 			}
@@ -267,12 +270,12 @@ private static String codop = "init";
 		//controller.updateAnaBollettino(ana);	
 		Connection connection = null;
 		try {
-			connection = getAnagraficaDataSource().getConnection();
+			connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			controller.updateAnaBollettino(ana, operatore);	
 		} catch (DaoException e) {
 			throw new DaoException(e);
-		} catch (SQLException e) {
+		} catch (JndiProxyException e) {
 			throw new DaoException(e);
 		} finally {
 			if(connection != null) {
@@ -326,12 +329,12 @@ private static String codop = "init";
 		//res = controller.doDetail(codiceSocieta,codiceUtente,chiaveEnte,CodiceFicale);
 		Connection connection = null;
 		try {
-			connection = getAnagraficaDataSource().getConnection();
+			connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			res = controller.doDetail(codiceSocieta,codiceUtente,chiaveEnte,CodiceFicale);
 		} catch (DaoException e) {
 			throw new DaoException(e);
-		} catch (SQLException e) {
+		} catch (JndiProxyException e) {
 			throw new DaoException(e);
 		} finally {
 			if(connection != null) {

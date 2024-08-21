@@ -22,6 +22,7 @@ public class AnaBollettinoManagerBaseManagerAction extends BaseManagerAction  {
 	private String dbSchemaCodSocieta;
 	private String anagraficaDbSchema;
 	private String sepaDbSchema;
+	protected String dataSourceName;
 	protected DataSource getAnagraficaDataSource(){return this.anagraficaDataSource;}
 	protected String getAnagraficaDbSchema(){return this.anagraficaDbSchema;}
 	protected DataSource getSepaDataSource(){return this.sepaDataSource;}
@@ -57,7 +58,7 @@ public class AnaBollettinoManagerBaseManagerAction extends BaseManagerAction  {
 		PropertiesTree configuration; 
 		configuration = (PropertiesTree)(request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
 		System.out.println("AnaBollettinoManagerBaseManagerAction - configuration : " + configuration!=null?configuration.getProterties():"null");
-		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		System.out.println("AnaBollettinoManagerBaseManagerAction - dataSourceName : " + dataSourceName);
 		String dataSourceNameSepa =  configuration.getProperty(PropertiesPath.dataSourceSepa.format(dbSchemaCodSocieta));
 		System.out.println("AnaBollettinoManagerBaseManagerAction - dataSourceNameSepa : " + dataSourceNameSepa);
