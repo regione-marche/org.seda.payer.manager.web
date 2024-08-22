@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.util.Messages;
 
 import com.seda.data.spi.PageInfo;
@@ -221,7 +224,7 @@ public class GruppoAgenziaSearchAction extends GruppoAgenziaBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//gruppoAgenziaDAO = GruppoAgenziaDAOFactory.getGruppoAgenzia(getGruppoAgenziaDataSource(), getGruppoAgenziaDbSchema());
-			conn = getGruppoAgenziaDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			gruppoAgenziaDAO = GruppoAgenziaDAOFactory.getGruppoAgenzia(conn, getGruppoAgenziaDbSchema());
 			//fine LP PG21XX04 Leak
 			gruppoAgenziaPageList = gruppoAgenziaDAO.gruppoAgenziaList(gruppoAgenzia, rowsPerPage, pageNumber,"");
@@ -229,7 +232,7 @@ public class GruppoAgenziaSearchAction extends GruppoAgenziaBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {

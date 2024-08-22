@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.util.Messages;
 
 import com.seda.j2ee5.maf.core.action.ActionException;
@@ -168,7 +169,7 @@ public class GruppoAgenziaEditAction  extends GruppoAgenziaBaseManagerAction {
 		//gruppoAgenzia = gruppoAgenziaDAO.select(codiceGruppoAgenzia);
 		Connection conn = null;
 		try {
-			conn = getGruppoAgenziaDataSource().getConnection();
+			conn =new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			gruppoAgenziaDAO = GruppoAgenziaDAOFactory.getGruppoAgenzia(conn, getGruppoAgenziaDbSchema());
 			gruppoAgenzia = gruppoAgenziaDAO.select(codiceGruppoAgenzia);
 		} catch (Exception e) {

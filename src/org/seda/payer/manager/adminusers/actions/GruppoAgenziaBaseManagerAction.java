@@ -23,7 +23,8 @@ public class GruppoAgenziaBaseManagerAction extends BaseManagerAction  {
 	private String gruppoAgenziaDbSchema;
 	public DataSource getGruppoAgenziaDataSource(){return this.gruppoAgenziaDataSource;}
 	public String getGruppoAgenziaDbSchema(){return this.gruppoAgenziaDbSchema;}
-	
+	protected String dataSourceName = "";
+
 	public Object service(HttpServletRequest request) throws ActionException {
 		super.service(request);
 		HttpSession session = request.getSession();
@@ -32,11 +33,11 @@ public class GruppoAgenziaBaseManagerAction extends BaseManagerAction  {
 		PropertiesTree configuration; 
 		configuration = (PropertiesTree)(request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
 		//PG180080 TODO Verificare se va bene usare dataSourceWallet e dataSourceSchemaWallet oppure è meglio creare nuove voci dataSourceConfigurazioneModello3 che però si connette sempre al payerDataSource
-		String gruppoAgenziaDataSource =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta)); 
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		this.gruppoAgenziaDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
 		
 		try {	
-			this.gruppoAgenziaDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(gruppoAgenziaDataSource));
+			this.gruppoAgenziaDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(dataSourceName));
 			
 		} catch (ServiceLocatorException e) {
 			throw new ActionException("ServiceLocator error " + e.getMessage(),e);
