@@ -8,6 +8,8 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.util.GenericsDateNumbers;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
@@ -194,7 +196,7 @@ public class AnaBollECUsersReports extends AnaBollECUsersReportsBaseAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(getAnagraficaDataSource(), getAnagraficaDbSchema());
-			connection = getAnagraficaDataSource().getConnection();
+			connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			//fine LP PG21XX04 Leak
 			res = controller.doLogReportsList(codiceSocieta, cutecute, chiaveEnte, codiceFiscale, Denominazione,Servizio,dataDa,dataA, rowsPerPage, pageNumber, order);
@@ -203,7 +205,7 @@ public class AnaBollECUsersReports extends AnaBollECUsersReportsBaseAction {
 			e1.printStackTrace();
 		//inizio LP PG21XX04 Leak
 		//}
-		} catch (SQLException e) {
+		} catch (JndiProxyException e) {
 			e.printStackTrace();
 		}
 		finally {
@@ -249,7 +251,7 @@ public class AnaBollECUsersReports extends AnaBollECUsersReportsBaseAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(getAnagraficaDataSource(), getAnagraficaDbSchema());
-			connection = getAnagraficaDataSource().getConnection();
+			connection = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			controller = AnagraficaBollettinoDAOFactory.getAnagraficaBollettinoDAO(connection, getAnagraficaDbSchema());
 			//fine LP PG21XX04 Leak
 			res = controller.doReportECABRS(codiceSocieta, cutecute, chiaveEnte,codiceFiscale, Denominazione,Servizio,dataDa,dataA);
@@ -261,7 +263,7 @@ public class AnaBollECUsersReports extends AnaBollECUsersReportsBaseAction {
 			this.setErrorMessage("Errore nel recupero dei dati!");
 		//inizio LP PG21XX04 Leak
 		//}
-		} catch (SQLException e) {
+		} catch (JndiProxyException e) {
 			e.printStackTrace();
 			this.setErrorMessage("Errore nel recupero dei dati!");
 		} finally {
