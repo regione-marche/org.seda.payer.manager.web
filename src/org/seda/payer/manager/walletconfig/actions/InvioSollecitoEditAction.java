@@ -13,6 +13,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -294,7 +295,7 @@ public class InvioSollecitoEditAction extends WalletBaseManagerAction{
 		//configurazioneSolleciti = configurazioneSollecitiDAO.select(configurazioneSolleciti);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneSollecitiDAO = WalletDAOFactory.getConfigurazioneSollecitiDAO(conn, getWalletDbSchema());
 			configurazioneSolleciti = configurazioneSollecitiDAO.select(configurazioneSolleciti);
 		} catch (Exception e) {
@@ -428,7 +429,7 @@ public class InvioSollecitoEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneSollecitiDAO = WalletDAOFactory.getConfigurazioneSollecitiDAO(conn, getWalletDbSchema());
 			int aggiornati = configurazioneSollecitiDAO.update(configurazioneSolleciti);
 			
@@ -563,7 +564,7 @@ public class InvioSollecitoEditAction extends WalletBaseManagerAction{
 		//return configurazioneSollecitiDAO.insert(configurazioneSolleciti);			
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneSollecitiDAO = WalletDAOFactory.getConfigurazioneSollecitiDAO(conn, getWalletDbSchema());
 			return configurazioneSollecitiDAO.insert(configurazioneSolleciti);			
 		} catch (Exception e) {
@@ -611,7 +612,7 @@ public class InvioSollecitoEditAction extends WalletBaseManagerAction{
 		//return configurazioneSollecitiDAO.delete(configurazioneSolleciti);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneSollecitiDAO = WalletDAOFactory.getConfigurazioneSollecitiDAO(conn, getWalletDbSchema());
 			return configurazioneSollecitiDAO.delete(configurazioneSolleciti);
 		} catch (Exception e) {
