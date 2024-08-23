@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction.FiredButton;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -126,7 +128,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//tributoDAO = WalletDAOFactory.getTributoDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			tributoDAO = WalletDAOFactory.getTributoDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			if(!societa.trim().equals("")||!utente.trim().equals("")||!ente.trim().equals("")){
@@ -147,7 +149,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 			e1.printStackTrace();
 		} finally {
@@ -244,7 +246,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
     	try {
 			//inizio LP PG21XX04 Leak
 			//abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			es=abilitazioneDiscaricoDAO.insertAbilitazione(abilitazioneDiscaricoFilter);
@@ -258,7 +260,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}	
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			setFormMessage("form_selezione", e.getMessage(), request);
 			e.printStackTrace();
 		} finally {
@@ -284,7 +286,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
     	try {
 			//inizio LP PG21XX04 Leak
 			//abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			recordAggiornati=abilitazioneDiscaricoDAO.updateAbilitazione(abilitazioneDiscaricoFilter);
@@ -301,7 +303,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}	
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			setFormMessage("form_selezione", e.getMessage(), request);
 			session.setAttribute("updateEsito", "KO");
 			e.printStackTrace();
@@ -329,7 +331,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
     	try {
 			//inizio LP PG21XX04 Leak
 			//abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			esito=abilitazioneDiscaricoDAO.deleteAbilitazione(abilitazioneDiscaricoFilter);
@@ -353,7 +355,7 @@ public class AbilitazioneDiscarichiEditAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}	
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			session.setAttribute("recordDelete", "KO");
 			session.setAttribute("messaggio.recordDelete", e.getMessage());
 			e.printStackTrace();

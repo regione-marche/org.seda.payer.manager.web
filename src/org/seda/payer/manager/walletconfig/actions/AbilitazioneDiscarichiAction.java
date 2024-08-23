@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction.FiredButton;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -263,7 +265,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//tributoDAO = WalletDAOFactory.getTributoDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			tributoDAO = WalletDAOFactory.getTributoDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			if(!societa.trim().equals("")||!utente.trim().equals("")||!ente.trim().equals("")){
@@ -284,7 +286,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 			e1.printStackTrace();
 		} finally {
@@ -324,7 +326,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			listaServizi = servizioDAO.listServizi();
@@ -341,7 +343,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 			e1.printStackTrace();
 		} finally {
@@ -415,7 +417,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
     	try {
 			//inizio LP PG21XX04 Leak
 			//abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			abilitazioneDiscaricoDAO = WalletDAOFactory.getAbilitazioneDiscarico(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList=abilitazioneDiscaricoDAO.abilitazioneList(abilitazioneDiscaricoFilter, rowsPerPage, pageNumber, "");
@@ -424,7 +426,7 @@ public class AbilitazioneDiscarichiAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 			e1.printStackTrace();
 		} finally {

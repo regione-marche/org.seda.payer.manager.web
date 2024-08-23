@@ -16,6 +16,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -217,7 +219,7 @@ public class PagamentoPerServizioEditAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//configurazionePagamentoServizioDAO = WalletDAOFactory.getPagamentoPerservizio(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazionePagamentoServizioDAO = WalletDAOFactory.getPagamentoPerservizio(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			configurazionePagamentoServizio = configurazionePagamentoServizioDAO.select(configurazionePagamentoServizio);
@@ -268,7 +270,7 @@ public class PagamentoPerServizioEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazionePagamentoServizioDAO = WalletDAOFactory.getPagamentoPerservizio(conn, getWalletDbSchema());
 			int aggiornati = configurazionePagamentoServizioDAO.update(configurazionePagamentoServizio);
 			return aggiornati;
@@ -313,7 +315,7 @@ private EsitoRisposte inserisciPagamentoperServizio(HttpServletRequest request) 
 		//return configurazionePagamentoServizioDAO.insert(configurazionePagamentoServizio);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazionePagamentoServizioDAO = WalletDAOFactory.getPagamentoPerservizio(conn, getWalletDbSchema());
 			return configurazionePagamentoServizioDAO.insert(configurazionePagamentoServizio);
 		} catch (Exception e) {
@@ -350,7 +352,7 @@ private EsitoRisposte deletePagamentoPerServizio(HttpServletRequest request) thr
 	//return configurazionePagamentoServizioDAO.delete(configurazionePagamentoServizio);
 	Connection conn = null;
 	try {
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		configurazionePagamentoServizioDAO = WalletDAOFactory.getPagamentoPerservizio(conn, getWalletDbSchema());
 		return configurazionePagamentoServizioDAO.delete(configurazionePagamentoServizio);
 	} catch (Exception e) {
@@ -379,7 +381,7 @@ private EsitoRisposte deletePagamentoPerServizio(HttpServletRequest request) thr
 	try {
 		//inizio LP PG21XX04 Leak
 		//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 		//fine LP PG21XX04 Leak
 		listaServizi = servizioDAO.listServizi();
@@ -395,7 +397,7 @@ private EsitoRisposte deletePagamentoPerServizio(HttpServletRequest request) thr
 		e1.printStackTrace();
 	}
 	//inizio LP PG21XX04 Leak
-	catch (SQLException e1) {
+	catch (JndiProxyException e1) {
 		e1.printStackTrace();
 	} finally {
 		if (conn != null) {

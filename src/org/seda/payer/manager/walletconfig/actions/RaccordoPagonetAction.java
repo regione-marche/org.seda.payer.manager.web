@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.components.security.UserBean;
 
@@ -191,7 +193,7 @@ public class RaccordoPagonetAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList = configurazioneRaccordoPagonetDAO.ListConfigurazioneRaccordoPagonet(configurazioneRaccordoPagonet, rowsPerPage, pageNumber, "");
@@ -200,7 +202,7 @@ public class RaccordoPagonetAction extends WalletBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -228,7 +230,7 @@ public class RaccordoPagonetAction extends WalletBaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			listaServizi = servizioDAO.listServizi();
@@ -244,7 +246,7 @@ public class RaccordoPagonetAction extends WalletBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
