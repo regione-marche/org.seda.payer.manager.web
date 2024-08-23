@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -218,7 +220,7 @@ public class GestioneAvvisiEditAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//gestioneAvvisiDAO=WalletDAOFactory.getGestioneAvvisi(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			gestioneAvvisiDAO=WalletDAOFactory.getGestioneAvvisi(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			recordAggiornati=gestioneAvvisiDAO.updateAvviso(avviso);
@@ -235,7 +237,7 @@ public class GestioneAvvisiEditAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			setFormMessage("form_selezione", e.getMessage(), request);
 			session.setAttribute("updateEsito", "KO");
 			e.printStackTrace();
@@ -264,7 +266,7 @@ public class GestioneAvvisiEditAction extends WalletBaseManagerAction {
 		try {
 			//inizio LP PG21XX04 Leak
 			//abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			abilitazioneDiscaricoDAO=WalletDAOFactory.getAbilitazioneDiscarico(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			esito=abilitazioneDiscaricoDAO.deleteAbilitazione(abilitazioneDiscaricoFilter);
@@ -288,7 +290,7 @@ public class GestioneAvvisiEditAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}	
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			session.setAttribute("recordDelete", "KO");
 			session.setAttribute("messaggio.recordDelete", e.getMessage());;
 			e.printStackTrace();
