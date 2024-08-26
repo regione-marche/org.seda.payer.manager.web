@@ -197,7 +197,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			pspList = giornaleDiCassaDAO.ListPsp(gdc);	
@@ -205,7 +205,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -236,7 +236,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			mdc = giornaleDiCassaDAO.dettaglioMovimentoDiCassa(idMovimentoDiCassa);
@@ -244,7 +244,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -395,7 +395,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			numdocList = giornaleDiCassaDAO.ListNumeroDocumento(gdc);	
@@ -403,7 +403,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
