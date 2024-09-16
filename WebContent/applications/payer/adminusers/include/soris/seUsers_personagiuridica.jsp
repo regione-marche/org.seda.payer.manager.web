@@ -103,7 +103,7 @@
 						cssclass="btnAggiornaImgStyle floatleft_adminusers" title="Seleziona Dettaglio Classificazione Merceologica" />
 				
 			</s:div>
-			<%--Visualizzo il codice autorizzazione solo per le imprese di categoria ALLOGGIO (cod.55) --%>
+			<%--Visualizzo il codice autorizzazione solo per le imprese di categoria ALLOGGIO (cod.55)
 			<c:if test="${requestScope.reg_profilo.classificazioneMerceologica == '55'}">
 				<s:div name="divBottomGenerali1" cssclass="divSectionBottom">
 					<s:textbox label="Num. Autoriz." name="txtNumeroAutorizzazione" maxlenght="100"
@@ -113,6 +113,7 @@
 						message="[accept=Num. Autoriz.: ${msg_configurazione_descrizione_regex}]"/>
 				</s:div>
 			</c:if>
+			--%>
 		</s:div>
 		
 		<s:div name="divSedeLegale" cssclass="divSectionBorder">
