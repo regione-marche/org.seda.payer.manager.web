@@ -49,6 +49,7 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
     private int rowsPerPage;
     private int pageNumber;
     private String order;
+    private String messaggio = "";
 
     public Object service(HttpServletRequest request) throws PayerCommandException, ActionException {
 
@@ -60,16 +61,18 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
 
         FiredButton firedButton = getFiredButton(request);
 
-        gestisciAzioni(firedButton,request);
+        gestisciAzioni(firedButton,request,session);
 
         request.setAttribute("tx_error_message","");
 
         request.setAttribute("tx_message","");
 
+        messaggio="";
+
         return null;
     }
 
-    private void gestisciAzioni(FiredButton firedButton,HttpServletRequest request) {
+    private void gestisciAzioni(FiredButton firedButton,HttpServletRequest request,HttpSession session) {
 
         switch (firedButton) {
             case TX_BUTTON_RESET:
@@ -90,19 +93,24 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
                     logger.info(e.getMessage());
                     logger.error(e.toString());
                     e.printStackTrace();
-                    setFormMessage("inviaufficioactionaddForm", "errore inserimento configurazione", request);
-
-                    if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
-                            (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
-                        request.setAttribute("tx_error_message", "valorizzare entrambe le date");
-                        setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
-                    }
+                    setFormMessage("inviaufficioactionaddForm", "errore inserimento prenotazione di elaborazione", request);
 
                 }
                 if(esito.getCodiceMessaggio()!=null && esito.getCodiceMessaggio().equals("OK")) {
-                    setFormMessage("inviaufficioactionaddForm", "configurazione aggiunta correttamente", request);
+                    setFormMessage("inviaufficioactionaddForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    request.setAttribute("tx_button_indietro","tx_button_indietro");
+                    getFiredButton(request);
+                    request.setAttribute("codop","ritorna");
+                    InviaUfficioAction invUff = new InviaUfficioAction();
+                    session.setAttribute("aggiuntaPrenotazione",true);
+                    invUff.service(request);
+                }else {
+                    setFormMessage("inviaufficioactionaddForm", messaggio, request);
                 }
+
                 break;
+
 
             case TX_BUTTON_NULL:
                 request.setAttribute("codop","ritorna");
@@ -138,11 +146,12 @@ public class InviaUfficioActionAdd extends BaseManagerAction {
 
     private EsitoRisposte addConfiguration(HttpServletRequest request) throws Exception {
 
-        if((getDataByPrefix("dtFlusso_da", request)==null || getDataByPrefix("dtFlusso_da", request).isEmpty()) ||
-                (getDataByPrefix("dtFlusso_a", request)==null || getDataByPrefix("dtFlusso_a", request).isEmpty())) {
+        if((getDataByPrefix("dataCreazioneDa", request)==null || getDataByPrefix("dataCreazioneDa", request).isEmpty()) ||
+                (getDataByPrefix("dataCreazioneA", request)==null || getDataByPrefix("dataCreazioneA", request).isEmpty())) {
             request.setAttribute("tx_error_message","valorizzare entrambe le date");
             setFormMessage("inviaufficioactionaddForm", "inserire entrambe le date", request);
-            throw new Exception();
+            messaggio="inserire entrambe le date";
+            return new EsitoRisposte();
         }
 
         try {

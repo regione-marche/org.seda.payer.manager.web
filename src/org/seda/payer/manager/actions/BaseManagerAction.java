@@ -631,6 +631,9 @@ public class BaseManagerAction extends HtmlAction {
 						.getAttribute("fired_button_hidden")))
 			return FiredButton.TX_BUTTON_TIPO_SERVIZIO_CHANGED;
 
+		if (request.getAttribute("tx_button_indietro") != null)
+			return FiredButton.TX_BUTTON_INDIETRO;
+
 		if (request.getAttribute("tx_button_aggiungi") != null)
 			return FiredButton.TX_BUTTON_AGGIUNGI;
 
@@ -681,9 +684,6 @@ public class BaseManagerAction extends HtmlAction {
 
 		if (request.getAttribute("tx_button_movimento_changed_no_js") != null)
 			return FiredButton.TX_BUTTON_MOVIMENTO_CHANGED_NO_JS;
-
-		if (request.getAttribute("tx_button_indietro") != null)
-			return FiredButton.TX_BUTTON_INDIETRO;
 
 		if (request.getAttribute("tx_button_nuovo") != null)
 			return FiredButton.TX_BUTTON_NUOVO;
@@ -1081,6 +1081,24 @@ public class BaseManagerAction extends HtmlAction {
 			yyyymmdd = yyyy + "-" + mm + "-" + dd;
 		}
 		return yyyymmdd;
+	}
+
+
+	protected String getDataByPrefixReverse(String prefix, HttpServletRequest request) {
+		String ddmmyyyy = "";
+		//String dd = request.getParameter(prefix + "_day");
+		String dd = isNull(request.getAttribute(prefix + "_day"));
+		//String mm = request.getParameter(prefix + "_month");
+		String mm = isNull(request.getAttribute(prefix + "_month"));
+		//String yyyy = request.getParameter(prefix + "_year");
+		String yyyy = isNull(request.getAttribute(prefix + "_year"));
+		if ((dd != null) && (!dd.equals("")) && (mm != null)
+				&& (!mm.equals("")) && (yyyy != null) && (!yyyy.equals(""))) {
+			mm = ("0" + mm).substring(mm.length() - 1);
+			dd = ("0" + dd).substring(dd.length() - 1);
+			ddmmyyyy = dd + "-" + mm + "-" + yyyy;
+		}
+		return ddmmyyyy;
 	}
 
 	
