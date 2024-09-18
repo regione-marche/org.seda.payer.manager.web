@@ -160,18 +160,7 @@
 							disable="false" validate="false"
 							cssclass="btnAggiornaImgStyle floatleft_adminusers" title="Seleziona Dettaglio Classificazione Merceologica" />
 					
-				</s:div>	
-				<%--Visualizzo il codice autorizzazione solo per le imprese di categoria ALLOGGIO (cod.55)
-				<c:if test="${classificazioneMerceologica == '55'}">
-					<s:div name="divBottomGenerali1" cssclass="divSectionBottom">
-						<s:textbox label="Num. Autoriz." name="txtNumeroAutorizzazione" maxlenght="100"
-							bmodify="${pageScope.bModifyNumAutoriz == 'Y'}" text="${requestScope.reg_profilo.numeroAutorizzazione}"
-							cssclass="txtRegistrazione ${pageScope.cssNumAutorizDisabled}" cssclasslabel="lblRegistrazione" tabindex="10"
-							validator="${pageScope.tbNumAutorizReq}accept=${adminusers_descrizioneRegex256}" showrequired="${pageScope.tbNumAutorizReq == 'required;'}"
-							message="[accept=Num. Autoriz.: ${msg_configurazione_descrizione_regex}]"/>
-					</s:div>
-				</c:if>
-				--%>
+				</s:div>
 			</c:if>
 		</s:div>
 		
