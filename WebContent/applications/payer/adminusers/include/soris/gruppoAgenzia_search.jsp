@@ -64,9 +64,9 @@
 				<s:button  id="tx_button_cerca" onclick="" text="Cerca" type="submit" cssclass="btnStyle" />
 				<s:button id="tx_button_reset" validate="false" onclick="" text="Reset" type="submit" cssclass="btnStyle" />
 				<s:button id="tx_button_nuovo" onclick="" text="Nuovo" type="submit" cssclass="btnStyle" />
-<!--				<c:if test="${!empty listaGruppiAgenzia}">-->
-<!--					<s:button id="tx_button_download" validate="false" onclick="" text="Download" type="submit" cssclass="btnStyle" />-->
-<!--				</c:if>-->
+<%--				<c:if test="${!empty listaGruppiAgenzia}">--%>
+<%--					<s:button id="tx_button_download" validate="false" onclick="" text="Download" type="submit" cssclass="btnStyle" />--%>
+<%--				</c:if>--%>
 			</s:div>
 	</s:form>
 
