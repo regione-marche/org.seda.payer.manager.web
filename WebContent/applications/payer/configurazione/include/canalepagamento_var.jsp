@@ -2,8 +2,10 @@
 <%@ taglib uri="/WEB-INF/tld/Seda.tld" prefix="s"%>
 <%@ taglib uri="/WEB-INF/tld/maftags.tld" prefix="m"%>
 <%@ taglib uri="/WEB-INF/tld/template.tld" prefix="template"%>
-<m:view_state id="canalepagamento" encodeAttributes="true" />
+<%@ taglib uri="/WEB-INF/tld/fmt.tld" prefix="fmt"%>
 
+<m:view_state id="canalepagamento" encodeAttributes="true" />
+<fmt:setLocale value="it_IT" />
 <jsp:useBean id="typeRequest" class="com.seda.payer.commons.bean.TypeRequest" />
 
 <script type="text/javascript">
