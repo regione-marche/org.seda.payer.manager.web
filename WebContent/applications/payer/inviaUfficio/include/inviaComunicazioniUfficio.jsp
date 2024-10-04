@@ -13,6 +13,13 @@
         type="text/javascript"></script>
 
 <script type="text/javascript">
+
+    function setFiredButton(buttonName) {
+        var buttonFired = document.getElementById('fired_button_hidden');
+        if (buttonFired != null)
+            buttonFired.value = buttonName;
+    }
+
     var annoDa = ${ddlDateAnnoDa};
     var annoA = ${ddlDateAnnoA};
     var today = new Date();
@@ -345,7 +352,7 @@
 
 <s:div name="divSelezione1" cssclass="divSelezione">
     <s:div name="divRicercaTopName" cssclass="divRicercaTop">
-        <s:form name="inviaufficio"
+        <s:form name="inviaufficioForm"
                 action="inviaufficio.do" method="post"
                 hasbtn1="false" hasbtn2="false" hasbtn3="false">
             <s:textbox name="DDLChanged" label="DDLChanged" bmodify="true" text="" cssclass="display_none" cssclasslabel="display_none" />
@@ -353,49 +360,7 @@
 
             <s:div name="divRicercaTitleName" cssclass="divRicTitle bold">Ricerca - Richieste Elaborazioni</s:div>
             <s:div name="divRicMetadati" cssclass="divRicMetadati">
-                <s:div name="divRicMetadatiTop" cssclass="divRicMetadatiTop">
-                    <s:div name="divElement1" cssclass="divRicMetadatiTopLeft">
-                        <s:dropdownlist name="tx_societa"
-                                        disable="${societaDdlDisabled}" cssclass="tbddl floatleft"
-                                        label="Societ&aacute;:"
-                                        cssclasslabel="label85 bold floatleft textright"
-                                        cachedrowset="listaSocieta" usexml="true"
-                                        onchange="setFiredButton('tx_button_societa_changed');this.form.submit();"
-                                        valueselected="${tx_societa}">
-                            <s:ddloption text="Tutte le Societ&agrave;" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                        <noscript><s:button id="tx_button_societa_changed" type="submit" disable="${societaDdlDisabled}" text="" onclick=""
-                                            cssclass="btnimgStyle" title="Aggiorna" validate="false"/>
-                        </noscript>
-                    </s:div>
 
-                    <s:div name="divElement2" cssclass="divRicMetadatiTopCenter">
-                        <s:dropdownlist name="tx_provincia"
-                                        disable="${provinciaDdlDisabled}" cssclass="tbddl floatleft"
-                                        label="Provincia:"
-                                        cssclasslabel="label65 bold floatleft textright"
-                                        cachedrowset="listaProvince" usexml="true"
-                                        onchange="setFiredButton('tx_button_provincia_changed');this.form.submit();"
-                                        valueselected="${tx_provincia}">
-                            <s:ddloption text="Tutte le Province" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                        <noscript><s:button id="tx_button_provincia_changed"
-                                            type="submit" text="" onclick="" cssclass="btnimgStyle"
-                                            title="Aggiorna" validate="false" /></noscript>
-                    </s:div>
-                    <s:div name="divElement3" cssclass="divRicMetadatiTopRight">
-                        <s:dropdownlist name="tx_UtenteEnte"
-                                        disable="${ddlUtenteEnteDisabled}" cssclass="tbddlMax floatleft"
-                                        label="Ente:" cssclasslabel="label65 bold textright"
-                                        cachedrowset="listaUtentiEnti" usexml="true"
-                                        valueselected="${tx_UtenteEnte}">
-                            <s:ddloption text="Tutti gli Enti" value="" />
-                            <s:ddloption text="{2}" value="{1}" />
-                        </s:dropdownlist>
-                    </s:div>
-                </s:div>
 
                 <s:div name="divRicercaLeft" cssclass="divRicMetadatiLeft">
 
@@ -436,8 +401,8 @@
                                         cssclasslabel="label85 bold floatleft textright" disable="false"
                                         label="Stato elaborazione:" valueselected="${statoElaborazione}">
                             <s:ddloption value="" text="Tutte le prenotazioni" />
-                            <s:ddloption value="0" text="elaborate" />
-                            <s:ddloption value="1" text="in attesa" />
+                            <s:ddloption value="0" text="Elaborata" />
+                            <s:ddloption value="1" text="Da elaborare" />
                         </s:dropdownlist>
                     </s:div>
                 </s:div>
@@ -478,12 +443,18 @@ ${tx_error_message}
         Elenco Richieste Elaborazioni
     </s:div>
     <s:datagrid viewstate="" cachedrowset="listaInputUfficio" action="" border="1" usexml="true">
-        <s:dgcolumn index="1" label="Societ&aacute;"></s:dgcolumn>
-        <s:dgcolumn index="2" label="Utente" css="text_align_left"></s:dgcolumn>
-        <s:dgcolumn index="3" label="Ente"></s:dgcolumn>
         <s:dgcolumn index="4" label="Data Richiesta" format="dd/MM/yyyy"></s:dgcolumn>
-        <s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
         <s:dgcolumn index="8" label="Data scadenza" css="text_align_right"></s:dgcolumn>
         <s:dgcolumn index="9" label="Data da Impostare" css="text_align_right"></s:dgcolumn>
+        <s:dgcolumn index="6" label="Stato" css="text_align_right"></s:dgcolumn>
+        <s:dgcolumn label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azioni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+        <s:if right="{6}" control="eq" left="Da elaborare">
+            <s:then>
+                <s:hyperlink href="inviaufficio.do${formParameters}&button_elimina=DELETE&stato={6}&dataimp={9}&datascad={8}&dataric={4}&ente={3}&utente={2}&chiave={11}" imagesrc="../applications/templates/shared/img/cancel.png" alt="cancella" text="" cssclass="hlStyle" />
+            </s:then>
+            <s:else>
+            </s:else>
+        </s:if>
+        </s:dgcolumn>
     </s:datagrid>
 </c:if>

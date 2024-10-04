@@ -37,12 +37,13 @@
 <c:set var="cssNumAutorizDisabled" value="" scope="page" />
 <c:set var="bModifyNumAutoriz" value="Y" scope="page" />
 <c:set var="tbNumAutorizReq" value="required;" scope="page" />
+<%--
 <c:if test="${requestScope.reg_profilo.classificazioneMerceologicaDettaglio == '55.20.61' or requestScope.reg_profilo.classificazioneMerceologicaDettaglio == '55.20.62'}">
 	<c:set var="bModifyNumAutoriz" value="N" scope="page" />
 	<c:set var="cssNumAutorizDisabled" value="colordisabled" scope="page" />
 	<c:set var="tbNumAutorizReq" value="ignore;" scope="page" />
 </c:if>
-
+--%>
 
 <s:div name="divRegistrazioneBody" cssclass="divRegistrazioneBody">
 	<s:form name="form_personagiuridica" action="${do_command_name}" hasbtn1="false" hasbtn2="false" hasbtn3="false" method="POST" cssclass="formRegistrazione">
@@ -101,18 +102,7 @@
 				<s:button id="btnAvantiTipologiaAlloggio" onclick="" text="" type="submit"
 						disable="false" validate="false"
 						cssclass="btnAggiornaImgStyle floatleft_adminusers" title="Seleziona Dettaglio Classificazione Merceologica" />
-				
 			</s:div>
-			<%--Visualizzo il codice autorizzazione solo per le imprese di categoria ALLOGGIO (cod.55) --%>
-			<c:if test="${requestScope.reg_profilo.classificazioneMerceologica == '55'}">
-				<s:div name="divBottomGenerali1" cssclass="divSectionBottom">
-					<s:textbox label="Num. Autoriz." name="txtNumeroAutorizzazione" maxlenght="100"
-						bmodify="${pageScope.bModifyNumAutoriz == 'Y'}" text="${requestScope.reg_profilo.numeroAutorizzazione}"
-						cssclass="txtRegistrazione ${pageScope.cssNumAutorizDisabled}" cssclasslabel="lblRegistrazione" tabindex="10"
-						validator="${pageScope.tbNumAutorizReq}accept=${adminusers_descrizioneRegex256}" showrequired="${pageScope.tbNumAutorizReq == 'required;'}"
-						message="[accept=Num. Autoriz.: ${msg_configurazione_descrizione_regex}]"/>
-				</s:div>
-			</c:if>
 		</s:div>
 		
 		<s:div name="divSedeLegale" cssclass="divSectionBorder">

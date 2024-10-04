@@ -1,5 +1,7 @@
 package org.seda.payer.manager.inviaUfficio.actions;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
 import com.seda.data.spi.PageInfo;
@@ -16,8 +18,11 @@ import com.seda.payer.core.bean.PrenotazioneFatturazionePagelist;
 import com.seda.payer.core.dao.InserisciUfficioDao;
 import com.seda.payer.core.dao.PrenotazioneFatturazioneDao;
 import com.seda.payer.core.exception.DaoException;
+import com.seda.payer.pgec.webservice.commons.srv.FaultType;
 import com.sun.rowset.WebRowSetImpl;
 import org.seda.payer.manager.components.security.UserBean;
+import org.seda.payer.manager.entrate.actions.GestioneDocumentiCaricoAction;
+import org.seda.payer.manager.entrate.actions.util.EntrateFilteredWs;
 import org.seda.payer.manager.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +35,10 @@ import java.sql.Connection;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -43,6 +52,8 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private int rowsPerPage;
     private int pageNumber;
     private String order;
+    protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
+    private String screen="";
 
     //fine LP PG1800XX_016
 
@@ -54,8 +65,14 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         String applicationName = (String) mafReq.getAttribute(MAFAttributes.CURRENT_APPLICATION);
         UserBean userBean = (UserBean) session.getAttribute(SignOnKeys.USER_BEAN);
         templateName = userBean.getTemplate(applicationName);
+        boolean passatoCancella=false;
+
+        if(session.getAttribute("aggiuntaPrenotazione")==null) {
+            session.setAttribute("aggiuntaPrenotazione",false);
+        }
 
         aggiornamentoCombo(request, session);
+        loadSocietaXml_DDL(request);
         loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),false);
         LoadListaUtentiEntiXml_DDL(request, session, getParamCodiceSocieta(), "", getParamCodiceEnte(), getParamCodiceUtente(), false);
 
@@ -63,6 +80,39 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         request.setAttribute("tx_message","");
 
         FiredButton firedButton = getFiredButton(request);
+
+        if (screen==null || screen.isEmpty()) {
+            screen = Screen.SEARCH; // default
+        }
+
+        mantieniFiltriRicerca(request);
+
+        if (screen.equals(GestioneDocumentiCaricoAction.Screen.SEARCH)) {
+            boolean ok = true;
+            onGestioneDocumentiScreen(request);
+            if(screen.equals(Screen.DELETE)) {
+                try {
+                    onDeleteDocumentoScreen(request);
+                }catch(Throwable e) {
+                    ok=false;
+                    logger.info(e.getMessage());
+                }
+                if(ok) {
+                    setFormMessage("inviaufficioForm", "prenotazione cancellata", request);
+                    try{
+                        //request.setAttribute("tx_button_cerca","tx_button_cerca");
+                        cercaDacodice(request,session);
+                        logger.info("clicco cerca da codice");
+                        passatoCancella=true;
+                    }catch (Throwable e) {
+                        e.printStackTrace();
+                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                    }
+                }else{
+                    setFormMessage("inviaufficioForm", "errore rimozione prenotazione", request);
+                }
+            }
+        }
         /*
          * Eseguo le azioni
          */
@@ -75,17 +125,32 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_CERCA:
+                mantieniFiltriRicerca(request);
+                logger.info("entro cerca");
                 rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
                 pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
-                order = request.getParameter("order")  == null ? "" : request.getParameter("order");
-                request.setAttribute("do_command_name","inviaufficio.do");
-                request.setAttribute("codop","search");
-                try{
-                    getConfigurazioni(request);
-                }catch (Throwable e) {
+                order = request.getParameter("order") == null ? "" : request.getParameter("order");
+                request.setAttribute("do_command_name", "inviaufficio.do");
+                request.setAttribute("codop", "search");
+                boolean okCon = false;
+                try {
+                    logger.info("entro try cerca");
+
+                    okCon = getConfigurazioni(request,session);
+                    logger.info("stato conf " + okCon);
+                } catch (Throwable e) {
                     e.printStackTrace();
-                    setFormMessage("inviaufficio", "errore visualizzazione lista", request);
+                    setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
                 }
+                if (okCon && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                    setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                }
+
+                if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                    session.setAttribute("aggiuntaPrenotazione", false);
+                }
+
+                logger.info("prima break cerca");
                 break;
 
             case TX_BUTTON_NUOVO:
@@ -94,21 +159,189 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                 break;
 
             case TX_BUTTON_NULL:
-                request.setAttribute("codop","ritorna");
+                if(!passatoCancella) {
+                    request.setAttribute("codop", "ritorna");
+                }else {
+                    if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                        mantieniFiltriRicerca(request);
+                        rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                        pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                        order = request.getParameter("order") == null ? "" : request.getParameter("order");
+                        request.setAttribute("do_command_name", "inviaufficio.do");
+                        request.setAttribute("codop", "search");
+                        boolean okConfInd = false;
+                        try {
+                            okConfInd = getConfigurazioni(request,session);
+                            logger.info("stato conf " + okConfInd);
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                            setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                        }
+                        if (okConfInd && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                            setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                        }
+
+                        if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+                            session.setAttribute("aggiuntaPrenotazione", false);
+                        }
+                    } else {
+                        request.setAttribute("vista", "");
+                    }
+                }
                 break;
 
             case TX_BUTTON_INDIETRO:
-                request.setAttribute("vista", "");
+                if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                    mantieniFiltriRicerca(request);
+                    rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+                    pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+                    order = request.getParameter("order")  == null ? "" : request.getParameter("order");
+                    request.setAttribute("do_command_name","inviaufficio.do");
+                    request.setAttribute("codop","search");
+                    boolean okConfInd = false;
+                    try{
+                        okConfInd = getConfigurazioni(request,session);
+                    }catch (Throwable e) {
+                        e.printStackTrace();
+                        setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+                    }
+                    if(okConfInd && session.getAttribute("aggiuntaPrenotazione")!=null && (boolean)session.getAttribute("aggiuntaPrenotazione")) {
+                        setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+                    }
+
+                    if(session.getAttribute("aggiuntaPrenotazione") !=null && (boolean)session.getAttribute("aggiuntaPrenotazione")){
+                        session.setAttribute("aggiuntaPrenotazione",false);
+                    }
+
+                    break;
+                }else {
+                    request.setAttribute("vista", "");
+                }
                 break;
         }
 
         return null;
     }
 
-    private boolean getConfigurazioni(HttpServletRequest request) throws ActionException, ParseException, SQLException {
+
+    private void mantieniFiltriRicerca(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if(request.getAttribute("statoElaborazione")!=null) {
+            session.setAttribute("statoElaborazione", request.getAttribute("statoElaborazione"));
+        }else{
+            request.setAttribute("statoElaborazione", "");
+        }
+        if(request.getAttribute("dtFlusso_da")!=null) {
+            session.setAttribute("dtFlusso_da", request.getAttribute("dtFlusso_da"));
+        }else{
+            request.setAttribute("dtFlusso_da", "");
+        }
+        if(request.getAttribute("dtFlusso_a")!=null) {
+            session.setAttribute("dtFlusso_a", request.getAttribute("dtFlusso_a"));
+        }else{
+            request.setAttribute("dtFlusso_a", "");
+        }
+    }
+
+
+    private void cercaDacodice(HttpServletRequest request,HttpSession session) {
+        logger.info("entro cercaDacodice");
+        rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String) request.getAttribute("rowsPerPage"));
+        pageNumber = (request.getAttribute("pageNumber") == null) || (((String) request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String) request.getAttribute("pageNumber"));
+        order = request.getParameter("order") == null ? "" : request.getParameter("order");
+        request.setAttribute("do_command_name", "inviaufficio.do");
+        request.setAttribute("codop", "search");
+        boolean okCon = false;
+        try {
+            logger.info("entro try cercaDacodice");
+            if((request.getAttribute("statoElaborazione")!=null && request.getAttribute("statoElaborazione")!="")
+                    &&(request.getAttribute("dtFlusso_da")!=null && request.getAttribute("dtFlusso_da")!="")
+                    &&(request.getAttribute("dtFlusso_a")!=null && request.getAttribute("dtFlusso_a")!="")) {
+                okCon = getConfigurazioni(request,session);
+            }else {
+                request.setAttribute("statoElaborazione", "");
+                request.setAttribute("dtFlusso_da", "");
+                request.setAttribute("dtFlusso_a", "");
+            }
+            okCon = getConfigurazioni(request,session);
+            logger.info("stato conf " + okCon);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            setFormMessage("inviaufficioForm", "errore visualizzazione lista", request);
+        }
+        if (okCon && session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+            setFormMessage("inviaufficioForm", "prenotazione di elaborazione aggiunta correttamente", request);
+        }
+
+        if (session.getAttribute("aggiuntaPrenotazione") != null && (boolean) session.getAttribute("aggiuntaPrenotazione")) {
+            session.setAttribute("aggiuntaPrenotazione", false);
+        }
+
+        logger.info("prima break cercaDacodice");
+    }
+
+
+    /** Mi trovo nello screen di CONFERMA CANCELAZIONE documento */
+    private void onDeleteDocumentoScreen(HttpServletRequest request) {
+
+        try {
+            EntrateFilteredWs.loadListaProvince(request);
+
+            if (isFiredButton(request, "button_elimina")) {
+                onDeleteDocumentCommit(request);
+            }
+        } catch (Throwable ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+
+    private void onDeleteDocumentCommit(HttpServletRequest request) {
+        try {
+            deleteRow(request.getParameterMap(), request);
+            screen=Screen.SEARCH;
+        }catch(Throwable e){
+            logger.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void onGestioneDocumentiScreen(HttpServletRequest request) {
+        if (isFiredButton(request, "button_elimina")) {
+            onDeleteDocumentRequest(request);
+        }
+    }
+
+    private void onDeleteDocumentRequest(HttpServletRequest request) {
+        screen = Screen.DELETE;
+    }
+
+
+    /** button cliccato direttamente o simulato da javascript su DDL changed */
+    static boolean isFiredButton(HttpServletRequest request, String buttonName) {
+        return request.getParameter(buttonName) != null
+                || buttonName.equals(request.getParameter("fired_button_hidden"));
+    }
+
+
+    private void deleteRow(Map parameterMap,HttpServletRequest request) throws ActionException, SQLException {
+        createConnection(request);
+        deleteRowMethod(parameterMap,request);
+    }
+
+    private void deleteRowMethod(Map parameterMap, HttpServletRequest request) throws SQLException {
+
+        Connection connection = payerDataSource.getConnection();
+        PrenotazioneFatturazioneDao prenotazioneFatturazioneDao = new PrenotazioneFatturazioneDao(connection,payerDbSchema);
+        prenotazioneFatturazioneDao.cancellaPrenotazione(parameterMap.get("chiave").toString());
+
+    }
+
+    private boolean getConfigurazioni(HttpServletRequest request,HttpSession session) throws ActionException, ParseException, SQLException {
         Connection connection = createConnection(request);
         PrenotazioneFatturazionePagelist listaufficio = getConfigurations(request);
-        gestisciLista(listaufficio,request);
+        logger.info("listaUfficio " + listaufficio.toString());
+        gestisciLista(listaufficio,request,session);
         return true;
     }
 
@@ -137,6 +370,13 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
     private PrenotazioneFatturazionePagelist getConfigurations(HttpServletRequest request) throws SQLException {
         PrenotazioneFatturazionePagelist prenotazioneFatturazionePagelist = null;
         try {
+            logger.info("statoElaborazione " + request.getAttribute("statoElaborazione").toString());
+            logger.info(getDataByPrefix("dtFlusso_da", request));
+            logger.info(getDataByPrefix("dtFlusso_a", request));
+        }catch(Throwable e) {
+            logger.info(e.getMessage());
+        }
+        try {
             Connection connection =  payerDataSource.getConnection();
             PrenotazioneFatturazioneDao dao = new PrenotazioneFatturazioneDao(connection, payerDbSchema);
             PrenotazioneFatturazione prenotazione = new PrenotazioneFatturazione(
@@ -160,7 +400,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         return prenotazioneFatturazionePagelist;
     }
 
-    private void gestisciLista(PrenotazioneFatturazionePagelist listaufficio, HttpServletRequest request) {
+    private void gestisciLista(PrenotazioneFatturazionePagelist listaufficio, HttpServletRequest request,HttpSession session) {
 
         PageInfo pageInfo = listaufficio.getPageInfo();
         if(!Objects.equals(listaufficio.getRetCode(), "00")) {
@@ -170,19 +410,21 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             if (pageInfo != null) {
                 if (pageInfo.getNumRows() > 0) {
                     String listaInputUfficio = elaboraXmlList(listaufficio.getPrenotazioneFatturazioneListXml(), request);
+                    logger.info("listaInputUfficio " + listaInputUfficio);
                     if(!listaInputUfficio.isEmpty()) {
                         request.setAttribute("listaInputUfficio", listaInputUfficio);
+                        session.setAttribute("listaInputUfficio", listaInputUfficio);
                         request.setAttribute("listaInputUfficio.pageInfo", pageInfo);
                     } else {
                         request.setAttribute("listaInputUfficio", null);
-                        setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
+                        setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
                     }
                 } else {
                     request.setAttribute("listaInputUfficio", null);
-                    setFormMessage("inviaufficio", Messages.NO_DATA_FOUND.format(), request);
+                    setFormMessage("inviaufficioForm", Messages.NO_DATA_FOUND.format(), request);
                 }
             } else {
-                setFormMessage("inviaufficio", "Errore generico - Impossibile recuperare i dati", request);
+                setFormMessage("inviaufficioForm", "Errore generico - Impossibile recuperare i dati", request);
                 request.setAttribute("tx_error_message","lista vuota");
             }
         }
@@ -214,16 +456,25 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
                     rowSetNew.moveToInsertRow();
                     // inserisco i valori delle vecchie colonne della riga attuale
                     for (int i=1; i<=iCols; i++) {
-                        if(Objects.equals(i,5)) {
-                            date = crsListaOriginale.getObject(i).toString().split("-");
-                            rowSetNew.updateObject(8, date[0]);
-                            rowSetNew.updateObject(9, date[1]);
+                        /*
+                        if(Objects.equals(i,8)) {
+                            logger.info("data 8 " + crsListaOriginale.getObject(i).toString());
+                            rowSetNew.updateObject(8,convertDate(crsListaOriginale.getObject(i).toString()));
                         }
+                        if(Objects.equals(i,9)) {
+                            logger.info("data 9 " + crsListaOriginale.getObject(i).toString());
+                            rowSetNew.updateObject(9,convertDate(crsListaOriginale.getObject(i).toString()));
+                        }
+                        */
                         rowSetNew.updateObject(i, crsListaOriginale.getObject(i));
                     }
 
+                    rowSetNew.updateObject(8,convertDate(crsListaOriginale.getObject(8).toString()));
+                    rowSetNew.updateObject(9,convertDate(crsListaOriginale.getObject(9).toString()));
+
                     String stato = crsListaOriginale.getString(6);
-                    rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Terminata");
+                    rowSetNew.updateString(6, stato.equals("1") ? "Da elaborare" : "Elaborata");
+
                     rowSetNew.insertRow();
 
                 }
@@ -232,6 +483,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             rowSetNew.moveToCurrentRow();
             return Convert.webRowSetToString(rowSetNew);
         } catch (Exception e)  {
+            logger.info(e.getMessage());
             setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
             request.setAttribute("tx_error_message","errore generico");
             e.printStackTrace();
@@ -239,6 +491,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             try {
                 if(crsListaOriginale != null)  crsListaOriginale.close();
             } catch (SQLException e) {
+                logger.info(e.getMessage());
                 setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
                 request.setAttribute("tx_error_message","errore generico");
                 e.printStackTrace();
@@ -246,6 +499,7 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
             try {
                 if(rowSetNew != null)  rowSetNew.close();
             } catch (SQLException e) {
+                logger.info(e.getMessage());
                 setFormMessage("richiesteElaborazioniForm", e.getMessage() , request);
                 request.setAttribute("tx_error_message","errore generico");
                 e.printStackTrace();
@@ -253,6 +507,36 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         }
         return "";
     }
+
+
+    private String convertDate(String dateString) {
+        logger.info("dateString " + dateString);
+        DateTimeFormatter fIn = DateTimeFormatter.ofPattern( "MM/dd/yyyy" , Locale.ITALIAN );
+        LocalDate ld = LocalDate.parse( dateString,fIn);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // Formattazione della data al nuovo formato
+        String formattedDate = ld.format(outputFormatter);
+        return formattedDate;
+    }
+
+        /*
+        * try {
+
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            LocalDate date = LocalDate.parse(dateString, inputFormatter);
+
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            String formattedDate = date.format(outputFormatter);
+
+            System.out.println(formattedDate);
+        } catch (DateTimeParseException e) {
+            System.out.println("Errore nel parsing della data: " + e.getMessage());
+        }
+        *
+        * */
+
 
     private ComunicazioneUfficio creaOgettoRequest(HttpServletRequest request) throws ParseException {
 
@@ -270,5 +554,24 @@ public class InviaUfficioAction extends BaseInviaUfficioAction{
         return getInput;
 
     }
+
+    static public class Screen {
+        static public final String DELETE = "delete";
+        static public final String SEARCH = "search";
+
+        /** ritorna una costante utilizzabile con == */
+        static public final String fromString(String s) {
+            if (s == null)
+                return null;
+
+            for (String screen : new String[] {DELETE,SEARCH}) {
+                if (screen.equals(s)) {
+                    return screen;
+                }
+            }
+            throw new IllegalArgumentException("screen=" + s);
+        }
+    };
+
 
 }
