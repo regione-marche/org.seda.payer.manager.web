@@ -17,6 +17,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.jaxen.function.StringFunction;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
@@ -243,7 +245,7 @@ public class EvoluzioneIntimazioneEditAction extends WalletBaseManagerAction{
 	try {
 		//inizio LP PG21XX04 Leak
 		//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 		//fine LP PG21XX04 Leak
 		listaServizi = servizioDAO.listServizi();
@@ -259,7 +261,7 @@ public class EvoluzioneIntimazioneEditAction extends WalletBaseManagerAction{
 		e1.printStackTrace();
 	}
 	//inizio LP PG21XX04 Leak
-	catch (SQLException e1) {
+	catch (JndiProxyException e1) {
 		e1.printStackTrace();
 	} finally {
 		if (conn != null) {
@@ -300,7 +302,7 @@ public class EvoluzioneIntimazioneEditAction extends WalletBaseManagerAction{
 		//configurazioneEvoIntimazioni = configurazioneEvoIntimazioniDAO.select(configurazioneEvoIntimazioni);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneEvoIntimazioniDAO = WalletDAOFactory.getConfigurazioneEvoIntimazione(conn, getWalletDbSchema());
 			configurazioneEvoIntimazioni = configurazioneEvoIntimazioniDAO.select(configurazioneEvoIntimazioni);
 		} catch (Exception e) {
@@ -377,7 +379,7 @@ public class EvoluzioneIntimazioneEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneEvoIntimazioniDAO = WalletDAOFactory.getConfigurazioneEvoIntimazione(conn, getWalletDbSchema());
 			int aggiornati = configurazioneEvoIntimazioniDAO.update(configurazioneIntimazioneEvoluzione);
 			return aggiornati;
@@ -452,7 +454,7 @@ private EsitoRisposte inserisciEvoluzioneIntimazione(HttpServletRequest request)
 		//return configurazioneEvoIntimazioniDAO.insert(configurazioneIntimazioneEvoluzione);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneEvoIntimazioniDAO = WalletDAOFactory.getConfigurazioneEvoIntimazione(conn, getWalletDbSchema());
 			EsitoRisposte esitorisposte = new EsitoRisposte();
 			return configurazioneEvoIntimazioniDAO.insert(configurazioneIntimazioneEvoluzione);
@@ -501,7 +503,7 @@ private EsitoRisposte deleteEvoluzioneIntimazione(HttpServletRequest request) th
 	//return configurazioneEvoIntimazioniDAO.delete(configurazioneIntimazioneEvoluzione);
 	Connection conn = null;
 	try {
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		configurazioneEvoIntimazioniDAO = WalletDAOFactory.getConfigurazioneEvoIntimazione(conn, getWalletDbSchema());
 		return configurazioneEvoIntimazioniDAO.delete(configurazioneIntimazioneEvoluzione);
 	} catch (Exception e) {

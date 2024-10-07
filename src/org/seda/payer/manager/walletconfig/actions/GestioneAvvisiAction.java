@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
 import org.seda.payer.manager.ws.WSCache;
@@ -255,7 +257,7 @@ public class GestioneAvvisiAction extends WalletBaseManagerAction {
     	try {
 			//inizio LP PG21XX04 Leak
 			//gestioneAvvisiDAO=WalletDAOFactory.getGestioneAvvisi(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			gestioneAvvisiDAO=WalletDAOFactory.getGestioneAvvisi(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList=gestioneAvvisiDAO.avvisiList(avviso, rowsPerPage, pageNumber, "");
@@ -264,7 +266,7 @@ public class GestioneAvvisiAction extends WalletBaseManagerAction {
 			e.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e) {
+		catch (JndiProxyException e) {
 			setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 			e.printStackTrace();
 		} finally {

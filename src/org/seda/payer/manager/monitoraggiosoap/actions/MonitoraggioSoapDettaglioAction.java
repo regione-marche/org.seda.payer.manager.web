@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.bean.NotificaSoap;
 import com.seda.payer.core.dao.NotificheSoap;
@@ -37,7 +38,7 @@ public class MonitoraggioSoapDettaglioAction extends BaseMonitoraggioSoapAction 
 //			case TX_BUTTON_CERCA:
 				
 				
-			try (Connection conn = payerDataSource.getConnection()) {
+			try (Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true)) {
 
 //				Calendar calendar = Calendar.getInstance();
 				NotificheSoap notificheSoap= new NotificheSoap(conn, payerDbSchema);

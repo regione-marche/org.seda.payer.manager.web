@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.actions.BaseManagerAction;
 import org.seda.payer.manager.util.Field;
 import org.seda.payer.manager.util.ManagerKeys;
@@ -36,44 +38,43 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected String codiceSocieta="";
-	protected String codiceProvincia="";
-	protected String codiceUtente="";
-	
+	protected String codiceSocieta = "";
+	protected String codiceProvincia = "";
+	protected String codiceUtente = "";
+	protected String dataSourceName = "";
+
 	private DataSource gdcDataSource;
-	private String dbSchemaCodSocieta;
-	private String gdcDbSchema;
-	protected DataSource getGdcDataSource(){return this.gdcDataSource;}
+    private String gdcDbSchema;
+
+	protected DataSource getGdcDataSource(){
+		return this.gdcDataSource;
+	}
 	protected String getGdcDbSchema(){return this.gdcDbSchema;}
 	
 	public void setProfile(HttpServletRequest request) {
 		super.setProfile(request);			
-		codiceProvincia = (String)request.getAttribute("tx_provincia") != null? (String)request.getAttribute("tx_provincia"): "";
-
+		codiceProvincia = request.getAttribute("tx_provincia") != null? (String)request.getAttribute("tx_provincia"): "";
 	}
 	
 	public Object service(HttpServletRequest request) throws ActionException {
 		super.service(request);
-		 
 		HttpSession session = request.getSession();
 		loadDDLStatic(request, session);
 
 	    setProfile(request);
-	    
-		dbSchemaCodSocieta = (String)session.getAttribute(ManagerKeys.DBSCHEMA_CODSOCIETA);
-		
+
+        String dbSchemaCodSocieta = (String) session.getAttribute(ManagerKeys.DBSCHEMA_CODSOCIETA);
+
 		PropertiesTree configuration; 
 		configuration = (PropertiesTree)(request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
-		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
-		//String dataSourceNameSepa =  configuration.getProperty(PropertiesPath.dataSourceSepa.format(dbSchemaCodSocieta));
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		this.gdcDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
 		
 		System.out.println("gdcDbSchema = " + this.gdcDbSchema);
 		
 		try {
 			System.out.println("istanzia gdcDataSource ");
-			this.gdcDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(dataSourceName));
-			
+			this.gdcDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(this.dataSourceName));
 		} catch (ServiceLocatorException e) {
 			System.out.println("ServiceLocator error " + e.getMessage());
 			throw new ActionException("ServiceLocator error " + e.getMessage(),e);
@@ -177,7 +178,6 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 	
 	protected void listaPsp(String societa, String ente, long idGdc, HttpServletRequest request) throws DaoException, ParseException {
 		GiornaleDiCassaDAO giornaleDiCassaDAO;
-		
 		GiornaleDiCassa gdc = new GiornaleDiCassa();
 		gdc.setCodSocieta(societa);
 		if (ente != null && !ente.equals("")) {
@@ -197,7 +197,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			pspList = giornaleDiCassaDAO.ListPsp(gdc);	
@@ -205,7 +205,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -236,7 +236,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			mdc = giornaleDiCassaDAO.dettaglioMovimentoDiCassa(idMovimentoDiCassa);
@@ -244,7 +244,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -256,8 +256,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			}
 		}
 		//fine LP PG21XX04 Leak
-		
-		
+
 		HttpSession session = request.getSession();
 		session.removeAttribute("tx_UtenteEnte");
 		session.removeAttribute("tx_provincia");
@@ -355,17 +354,14 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 	
 	protected GiornaleDiCassaPageList listaGiornaliDiCassa(HttpServletRequest request, int rowsPerPage,int pageNumber, String order) throws DaoException, ParseException {
 		GiornaleDiCassaDAO giornaleDiCassaDAO;
-
 		GiornaleDiCassa gdc = getGiornaleDiCassa(request);
-
 		GiornaleDiCassaPageList gdcPageList = new GiornaleDiCassaPageList();
 		//inizio LP PG21XX04 Leak
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
 			//inizio LP PG21XX04 Leak
-			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			gdcPageList = giornaleDiCassaDAO.ListGiornaliDiCassa(gdc, rowsPerPage, pageNumber, order);	
@@ -373,7 +369,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -391,9 +387,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 	
 	protected void listaNumeroDocumento(HttpServletRequest request) throws DaoException, ParseException {
 		GiornaleDiCassaDAO giornaleDiCassaDAO;
-		
 		GiornaleDiCassa gdc = getGiornaleDiCassa(request);
-		
 		NumeroDocumentoList numdocList = new NumeroDocumentoList();
 		//inizio LP PG21XX04 Leak
 		Connection conn = null;
@@ -401,7 +395,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		try {
 			//inizio LP PG21XX04 Leak
 			//giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
-			conn = getGdcDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(conn, getGdcDbSchema());
 			//fine LP PG21XX04 Leak
 			numdocList = giornaleDiCassaDAO.ListNumeroDocumento(gdc);	
@@ -409,7 +403,7 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -434,7 +428,6 @@ public class BaseRiconciliazioneTesoreriaAction extends BaseManagerAction{
 		request.setAttribute("gdc_esercizio", session.getAttribute("gdc_esercizio"));
 		request.setAttribute("gdc_srego", session.getAttribute("gdc_srego"));
 		request.setAttribute("gdc_srend", session.getAttribute("gdc_srend"));
-
 	}
 	
 	

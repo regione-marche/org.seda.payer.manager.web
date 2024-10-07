@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
 
@@ -131,7 +132,7 @@ public class WalletAnagraficaContribuentiEditAction extends WalletBaseManagerAct
 		//wallet = sepaDAO.selectSepa(wallet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			wallet = walletDAO.select(wallet);
 		} catch (Exception e) {
@@ -262,7 +263,7 @@ public class WalletAnagraficaContribuentiEditAction extends WalletBaseManagerAct
 		//walletDAO.updateAnagrafica(wallet);	
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			walletDAO.updateAnagrafica(wallet);	
 		} catch (Exception e) {
@@ -289,7 +290,7 @@ public class WalletAnagraficaContribuentiEditAction extends WalletBaseManagerAct
 		//return walletListaBollettini;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			walletListaBollettini = walletDAO.listBollettini(idWallet);
 			request.setAttribute("lista_dettaglio_bollettini", walletListaBollettini);

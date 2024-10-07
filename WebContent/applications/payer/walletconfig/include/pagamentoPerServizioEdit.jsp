@@ -63,7 +63,7 @@
 						
 				<s:div name="divRicercaMetadatiLeft" cssclass="divRicMetadatiLeft">
 			            <s:div name="divElement1" cssclass="divRicMetadatiSingleRow">
-				            <s:dropdownlist name="tx_tipologia_servizio" disable="${codop == 'edit'}"label="Per Servizio:"
+				            <s:dropdownlist name="tx_tipologia_servizio" disable="${codop == 'edit'}" label="Per Servizio:"
 							 multiple="false" valueselected="${tx_tipologia_servizio}" 
 							 cssclasslabel="label85 bold textright" cssclass="tbddlMax floatleft">
 							 	<s:ddloptionbinder options="${serviziDDLList}"/>

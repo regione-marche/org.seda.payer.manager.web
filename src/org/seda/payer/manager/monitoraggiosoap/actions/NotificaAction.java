@@ -10,13 +10,14 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.seda.data.procedure.reflection.MetaProcedure;
+import com.seda.j2ee5.jndi.JndiProxy;
 import org.seda.payer.manager.util.LoggerUtil;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.ws.WSCache;
 
 import com.esed.log.req.dati.LogWin;
 import com.seda.commons.properties.tree.PropertiesTree;
-import com.seda.data.helper.Helper;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.bean.NotificaSoap;
 import com.seda.payer.core.dao.NotificheSoap;
@@ -53,7 +54,7 @@ public class NotificaAction extends BaseMonitoraggioSoapAction {
 			String chiaveTransazione = (String)request.getAttribute("notificaChiaveTransazione");
 			String chiaveDettaglioTransazione = (String)request.getAttribute("notificaChiaveDettaglioTransazione");
 			
-			try (Connection conn = payerDataSource.getConnection()) {
+			try (Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true)) {
 
 				NotificheSoap notificheSoap= new NotificheSoap(conn, payerDbSchema);
 				NotificaSoap detailNotificaSoap = new NotificaSoap();
@@ -415,8 +416,8 @@ public class NotificaAction extends BaseMonitoraggioSoapAction {
 			
 			if ( codiceEnte != null && codiceEnte != "" && codiceEnte.length() == 10) {
 
-				try (Connection conn = payerDataSource.getConnection()) {
-					callableStatement = Helper.prepareCall(conn, payerDbSchema, "PYANESP_SEL");
+				try (Connection conn = new JndiProxy().getSqlConnection(null, dataSourceName, true)) {
+					callableStatement = MetaProcedure.prepareCall(conn, payerDbSchema, "PYANESP_SEL");
 					callableStatement.setString(1, codiceEnte);
 					
 					if (callableStatement.execute()) {

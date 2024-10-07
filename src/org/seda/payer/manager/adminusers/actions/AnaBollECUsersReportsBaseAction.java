@@ -22,6 +22,8 @@ private static final long serialVersionUID = 1L;
 	private String dbSchemaCodSocieta;
 	private String anagraficaDbSchema;
 	private String sepaDbSchema;
+	protected String dataSourceName = "";
+
 	protected DataSource getAnagraficaDataSource(){return this.anagraficaDataSource;}
 	protected String getAnagraficaDbSchema(){return this.anagraficaDbSchema;}
 	protected DataSource getSepaDataSource(){return this.sepaDataSource;}
@@ -34,7 +36,7 @@ private static final long serialVersionUID = 1L;
 		
 		PropertiesTree configuration; 
 		configuration = (PropertiesTree)(request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
-		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		String dataSourceNameSepa =  configuration.getProperty(PropertiesPath.dataSourceSepa.format(dbSchemaCodSocieta));
 		this.anagraficaDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
 		this.sepaDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaSepa.format(dbSchemaCodSocieta));

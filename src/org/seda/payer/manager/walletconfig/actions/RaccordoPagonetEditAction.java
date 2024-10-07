@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.walletmanager.actions.WalletBaseManagerAction;
@@ -257,7 +259,7 @@ public class RaccordoPagonetEditAction extends WalletBaseManagerAction{
 		//configurazioneRaccordoPagonet = configurazioneRaccordoPagonetDAO.select(configurazioneRaccordoPagonet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(conn, getWalletDbSchema());
 			configurazioneRaccordoPagonet = configurazioneRaccordoPagonetDAO.select(configurazioneRaccordoPagonet);
 		} catch (Exception e1) {
@@ -302,7 +304,7 @@ public class RaccordoPagonetEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(conn, getWalletDbSchema());
 			int aggiornati = configurazioneRaccordoPagonetDAO.update(configurazioneRaccordoPagonet);
 			return aggiornati;
@@ -339,7 +341,7 @@ private EsitoRisposte inserisciRaccordoPagonet(HttpServletRequest request) throw
 		//return configurazioneRaccordoPagonetDAO.insert(configurazioneRaccordoPagonet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(conn, getWalletDbSchema());
 			return configurazioneRaccordoPagonetDAO.insert(configurazioneRaccordoPagonet);
 		} catch (Exception e1) {
@@ -374,7 +376,7 @@ private EsitoRisposte deleteRaccordoPagonet(HttpServletRequest request) throws D
 	//return configurazioneRaccordoPagonetDAO.delete(configurazioneRaccordoPagonet);
 	Connection conn = null;
 	try {
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		configurazioneRaccordoPagonetDAO = WalletDAOFactory.getRaccordoPagonet(conn, getWalletDbSchema());
 		return configurazioneRaccordoPagonetDAO.delete(configurazioneRaccordoPagonet);
 	} catch (Exception e1) {
@@ -403,7 +405,7 @@ private EsitoRisposte deleteRaccordoPagonet(HttpServletRequest request) throws D
 	try {
 		//inizio LP PG21XX04 Leak
 		//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-		conn = getWalletDataSource().getConnection();
+		conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 		servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 		//fine LP PG21XX04 Leak
 		listaServizi = servizioDAO.listServizi();
@@ -419,7 +421,7 @@ private EsitoRisposte deleteRaccordoPagonet(HttpServletRequest request) throws D
 		e1.printStackTrace();
 	}
 	//inizio LP PG21XX04 Leak
-	catch (SQLException e1) {
+	catch (JndiProxyException e1) {
 		e1.printStackTrace();
 	} finally {
 		if (conn != null) {

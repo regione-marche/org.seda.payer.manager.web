@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.util.Messages;
 
@@ -141,7 +143,7 @@ public class WalletMonitoraggioEditAction extends WalletBaseManagerAction{
 		//wallet = walletDAO.select(wallet);
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			wallet = walletDAO.select(wallet);
 		} catch (Exception e) {
@@ -198,7 +200,7 @@ public class WalletMonitoraggioEditAction extends WalletBaseManagerAction{
 			//Tk 2017033088000055 20170404 - fine
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			walletPageList = walletDAO.ListaServiziWalletManager(wallet, tipologiaServizio);	//Tk 2017033088000055
@@ -207,7 +209,7 @@ public class WalletMonitoraggioEditAction extends WalletBaseManagerAction{
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -280,7 +282,7 @@ public class WalletMonitoraggioEditAction extends WalletBaseManagerAction{
 		//return aggiornati;
 		Connection conn = null;
 		try {
-			conn = getWalletDataSource().getConnection();
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			int aggiornati = walletDAO.updateFlagEsclusione(wallet);
 			return aggiornati;

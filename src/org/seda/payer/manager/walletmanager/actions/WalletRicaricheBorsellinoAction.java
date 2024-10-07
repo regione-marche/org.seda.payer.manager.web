@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import com.seda.data.spi.PageInfo;
+import com.seda.j2ee5.jndi.JndiProxy;
+import com.seda.j2ee5.jndi.JndiProxyException;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.payer.core.exception.DaoException;
 import com.seda.payer.core.wallet.bean.Servizio;
@@ -187,12 +189,6 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 						request.setAttribute("download", "N");
 						break;
 					}
-					
-					
-					
-					
-					
-					
 				} catch(Exception e) {
 					setErrorMessage(e.getMessage());
 					e.printStackTrace();
@@ -201,9 +197,6 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		}
 		return null;
 	}
- 
-		
-
 	
 	@SuppressWarnings("unchecked")
 	private void getServiziDDL(HttpServletRequest request, HttpSession session) {
@@ -215,9 +208,9 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			//inizio LP PG21XX04 Leak
 			//servizioDAO = WalletDAOFactory.getServizioDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
 			servizioDAO = WalletDAOFactory.getServizioDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			listaServizi = servizioDAO.listServizi();
@@ -233,7 +226,7 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -258,9 +251,9 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			//inizio LP PG21XX04 Leak
 			//tributoDAO = WalletDAOFactory.getTributoDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
 			tributoDAO = WalletDAOFactory.getTributoDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			listaTributi = tributoDAO.listTributo();
@@ -278,7 +271,7 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -304,13 +297,11 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		wallet.setIdWallet((String)request.getAttribute("tx_codiceborsellino"));
 		String dataDa = "1900-01-01";
 		String dataA = "01-01-2100";
-		if(request.getAttribute("tx_periodo_da") !="")
-		{
+		if(request.getAttribute("tx_periodo_da") !="") {
 			dataDa = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_da"), "yyyy-MM-dd");
 		}
 			
-		if(request.getAttribute("tx_periodo_a") !="")
-		{
+		if(request.getAttribute("tx_periodo_a") !="") {
 			dataA = GenericsDateNumbers.formatCalendarData((Calendar)request.getAttribute("tx_periodo_a"), "yyyy-MM-dd");
 		}
 		
@@ -328,9 +319,9 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			
@@ -340,7 +331,7 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -378,14 +369,11 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 			wallet.setAttribute("PGBDATA_PAGAMENTO_A" , dataA);
 			request.setAttribute("data_pagamento_a", dataA);
 		}
-		
-		
-		
-		
+
 		// paginazione ed ordinamento
-		int rowsPerPage = ((String)request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String)request.getAttribute("rowsPerPage"));
-		int pageNumber = ((String)request.getAttribute("pageNumber") == null) || (((String)request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String)request.getAttribute("pageNumber"));
-		String order = ((String)request.getAttribute("order") == null) ? "" : (String)request.getAttribute("order");
+		int rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String)request.getAttribute("rowsPerPage"));
+		int pageNumber = (request.getAttribute("pageNumber") == null) || (request.getAttribute("pageNumber").equals("")) ? 1 : Integer.parseInt((String)request.getAttribute("pageNumber"));
+		String order = (request.getAttribute("order") == null) ? "" : (String)request.getAttribute("order");
 		
 		
 		WalletPageList walletPageList = new WalletPageList();
@@ -393,9 +381,9 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		Connection conn = null;
 		//fine LP PG21XX04 Leak
 		try {
+			conn = new JndiProxy().getSqlConnection(null, dataSourceName, true);
 			//inizio LP PG21XX04 Leak
 			//walletDAO = WalletDAOFactory.getWalletDAO(getWalletDataSource(), getWalletDbSchema());
-			conn = getWalletDataSource().getConnection();
 			walletDAO = WalletDAOFactory.getWalletDAO(conn, getWalletDbSchema());
 			//fine LP PG21XX04 Leak
 			if (download) {
@@ -409,13 +397,11 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 				walletPageList = walletDAO.walletRicaricheList(wallet, rowsPerPage, pageNumber, order);
 				
 			}
-			 
-			
 		} catch (DaoException e1) {
 			e1.printStackTrace();
 		}
 		//inizio LP PG21XX04 Leak
-		catch (SQLException e1) {
+		catch (JndiProxyException e1) {
 			e1.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -428,25 +414,20 @@ public class WalletRicaricheBorsellinoAction extends WalletBaseManagerAction {
 		}
 		//fine LP PG21XX04 Leak
 		return walletPageList;
-		
 	}
 
 	private void dividiSocUtenteEnte(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		if(request.getAttribute("ddlSocietaUtenteEnte")!=null)
-		{
+		if(request.getAttribute("ddlSocietaUtenteEnte")!=null) {
 			String ddlSocietaUtenteEnte = (String)request.getAttribute("ddlSocietaUtenteEnte");
-			if (!ddlSocietaUtenteEnte.equals(""))
-			{
+			if (!ddlSocietaUtenteEnte.equals("")) {
 				String[] codici = ddlSocietaUtenteEnte.split("\\|");
 				codiceSocieta = codici[0];
 				cutecute = codici[1];
 				chiaveEnte = codici[2];
-				//request.setAttribute("tx_societa", codiceSocieta);
-				//request.setAttribute("tx_utente", chiaveEnte);
-				//request.setAttribute("tx_ente", chiaveEnte);
+				request.setAttribute("tx_societa", codiceSocieta);
+				request.setAttribute("tx_utente", cutecute);
+				request.setAttribute("tx_ente", chiaveEnte);
 			}
-		
 		}
 	}
 

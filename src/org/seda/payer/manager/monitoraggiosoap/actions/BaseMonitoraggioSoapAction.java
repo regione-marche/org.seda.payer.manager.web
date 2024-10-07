@@ -23,6 +23,7 @@ public class BaseMonitoraggioSoapAction extends BaseManagerAction {
 	private static final long serialVersionUID = 1L; 
 	protected String payerDbSchema = null;
 	protected DataSource payerDataSource = null;
+	protected String dataSourceName = null;
 	protected int rowsPerPage = 0;
 	protected int pageNumber = 0;
 	protected String order = "";
@@ -32,7 +33,7 @@ public class BaseMonitoraggioSoapAction extends BaseManagerAction {
 		
 		PropertiesTree configuration = (PropertiesTree) (request.getSession().getServletContext().getAttribute(ManagerKeys.CONTEXT_PROPERTIES_TREE));
 		String dbSchemaCodSocieta = (String) request.getSession().getAttribute(ManagerKeys.DBSCHEMA_CODSOCIETA);
-		String dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
+		this.dataSourceName =  configuration.getProperty(PropertiesPath.dataSourceWallet.format(dbSchemaCodSocieta));
 		this.payerDbSchema =  configuration.getProperty(PropertiesPath.dataSourceSchemaWallet.format(dbSchemaCodSocieta));
 		try {	
 			this.payerDataSource = ServiceLocator.getInstance().getDataSource("java:comp/env/".concat(dataSourceName));

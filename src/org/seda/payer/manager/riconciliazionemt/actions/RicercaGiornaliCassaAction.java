@@ -5,31 +5,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.portlet.PortletRequestContext;
 import org.seda.payer.manager.components.security.UserBean;
 import org.seda.payer.manager.reports.stampe.ReportsCreator;
 import org.seda.payer.manager.util.ManagerKeys;
 import org.seda.payer.manager.util.Messages;
 import org.seda.payer.manager.util.PropertiesPath;
 
-import com.seda.commons.properties.tree.PropertiesNodeException;
 import com.seda.commons.properties.tree.PropertiesTree;
-import com.seda.compatibility.SystemVariable;
 import com.seda.data.spi.PageInfo;
 import com.seda.j2ee5.maf.core.action.ActionException;
 import com.seda.j2ee5.maf.core.security.SignOnKeys;
-import com.seda.j2ee5.maf.taglibs.ViewStateManager;
 import com.seda.j2ee5.maf.util.MAFAttributes;
 import com.seda.j2ee5.maf.util.MAFRequest;
 import com.seda.payer.core.exception.DaoException;
 import com.seda.payer.core.riconciliazionemt.bean.GiornaleDiCassaPageList;
-import com.seda.payer.core.riconciliazionemt.dao.GiornaleDiCassaDAO;
-import com.seda.payer.core.riconciliazionemt.dao.GiornaleDiCassaDAOFactory;
-
 
 public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaAction {
 	
@@ -51,7 +43,7 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
         aggiornamentoCombo(request, session);
         loadProvinciaXml_DDL(request, session, getParamCodiceSocieta(),true);
         
-        String siglaProvincia = ((String)request.getAttribute("tx_provincia") == null) ? "" : (String)request.getAttribute("tx_provincia");
+        String siglaProvincia = (request.getAttribute("tx_provincia") == null) ? "" : (String)request.getAttribute("tx_provincia");
                
         try {
         	codUtenteEnte = (String)request.getAttribute("tx_UtenteEnte");
@@ -62,8 +54,8 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
 			e1.printStackTrace();
 		}
         
-        rowsPerPage = ((String)request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String)request.getAttribute("rowsPerPage"));
-		pageNumber = ((String)request.getAttribute("pageNumber") == null) || (((String)request.getAttribute("pageNumber")).equals("")) ? 1 : Integer.parseInt((String)request.getAttribute("pageNumber"));	
+        rowsPerPage = (request.getAttribute("rowsPerPage") == null) ? getDefaultListRows(request) : Integer.parseInt((String)request.getAttribute("rowsPerPage"));
+		pageNumber = (request.getAttribute("pageNumber") == null) || (request.getAttribute("pageNumber").equals("")) ? 1 : Integer.parseInt((String)request.getAttribute("pageNumber"));
 		order = request.getParameter("order");
 		
 		if (request.getAttribute("indietro") != null){
@@ -84,7 +76,7 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
 					
 					PageInfo pageInfo = gdcPageListlist.getPageInfo();
 					
-					if (gdcPageListlist.getRetCode()!="00") {
+					if (gdcPageListlist.getRetCode() != "00") {
 						setFormMessage("form_selezione", "Errore generico - Impossibile recuperare i dati", request);
 					} else {
 						if(pageInfo != null)
@@ -171,7 +163,6 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
 				//	giornaleDiCassaDAO = GiornaleDiCassaDAOFactory.getGiornaleDiCassaDAO(getGdcDataSource(), getGdcDbSchema());
 				//	connection = giornaleDiCassaDAO.getGDCConnection();
 				//} catch (DaoException e) {
-				//	// TODO Auto-generated catch block
 				//e.printStackTrace();
 				//}
 					connection = getGdcDataSource().getConnection();
@@ -218,7 +209,6 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
 		return configuration.getProperty(PropertiesPath.paramPathLogoSocieta.format(template)).trim();	
 	}
 
-	
 	//inizio LP PG21XX04 Bug configuration
 	//public void getConfiguration() throws PropertiesNodeException {
 	//	SystemVariable sv = new SystemVariable();
@@ -245,8 +235,6 @@ public class RicercaGiornaliCassaAction extends BaseRiconciliazioneTesoreriaActi
 		session.removeAttribute("dtGiornale_da");
 		session.removeAttribute("idcassa");
 		session.removeAttribute("provenienza");
-		
-		
 	}
 
 }

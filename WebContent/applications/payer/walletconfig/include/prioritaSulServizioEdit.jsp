@@ -75,7 +75,7 @@
 						
 				<s:div name="divRicercaMetadatiLeft" cssclass="divRicMetadatiLeft">
 		            <s:div name="divElement1" cssclass="divRicMetadatiSingleRow">
-			            <s:dropdownlist name="tx_tipologia_servizio" disable="${codop == 'edit'}"label="Per Servizio:"
+			            <s:dropdownlist name="tx_tipologia_servizio" disable="${codop == 'edit'}" label="Per Servizio:"
 						 multiple="false" valueselected="${tx_tipologia_servizio}" 
 						 cssclasslabel="label85 bold textright" validator="required;" cssclass="tbddlMax floatleft">
 						 	<s:ddloption text="Tutti" value="" />
@@ -119,7 +119,7 @@
 						
 						
 		            <s:div name="divElement10" cssclass="divRicMetadatiSingleRow">
-			            <s:dropdownlist name="tx_codice_tributo2" disable="false"label="Prior. Attr. 2:"
+			            <s:dropdownlist name="tx_codice_tributo2" disable="false" label="Prior. Attr. 2:"
 						 multiple="false" valueselected="${tx_codice_tributo2}" 
 						 cssclasslabel="label85 bold textright" validator="required;" cssclass="tbddlMax floatleft">
 						 	<s:ddloptionbinder options="${tributiDDLList}"/>
